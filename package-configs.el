@@ -218,15 +218,5 @@
   :config
   (global-org-modern-mode))
 
-;; (use-package mood-line
-;;   :config
-;;   (setq mood-line-format mood-line-format-default))
-;; (use-package moody
-;;   :config
-;;   ;; Other face changes:
-;;   ;; - Remove box around mode line
-;;   ;; - Set overline & underline on faces
-;;   (setq x-underline-at-descent-line t)
-;;   (moody-replace-mode-line-buffer-identification)
-;;   (moody-replace-vc-mode)
-;;   (moody-replace-eldoc-minibuffer-message-function))
+(use-package doom-modeline
+  :init (doom-modeline-mode 1))

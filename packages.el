@@ -74,6 +74,6 @@
 (straight-use-package 'catppuccin-theme)
 (straight-use-package 'solaire-mode)
 
-(straight-use-package 'moody)
+(straight-use-package 'doom-modeline)
 
 (setq straight-use-package-by-default t)
