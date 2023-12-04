@@ -78,4 +78,7 @@
 
 (straight-use-package 'embark)
 (straight-use-package 'embark-consult)
+
+(straight-use-package 'git-modes)
+(straight-use-package 'git-gutter)
 (setq straight-use-package-by-default t)

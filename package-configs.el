@@ -253,3 +253,11 @@
   :hook
   (embark-collect-mode . consult-preview-at-point-mode))
 
+(use-package git-gutter
+  :config
+  (global-git-gutter-mode 1))
+
+(use-package git-modes
+  :config
+  (add-to-list 'auto-mode-alist (cons "/.dockerignore\\'" 'gitignore-mode)))
+
