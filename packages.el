@@ -76,4 +76,6 @@
 
 (straight-use-package 'doom-modeline)
 
+(straight-use-package 'embark)
+(straight-use-package 'embark-consult)
 (setq straight-use-package-by-default t)
