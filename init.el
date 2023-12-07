@@ -12,8 +12,11 @@
 (defmacro kdz/init (path)
   `(load (expand-file-name ,path ,user-init-path)))
 
-(load  "~/.my.emacs.d/conf.d/tabbar.el")
-(load  "~/.my.emacs.d/conf.d/vertico.el")
+;; Basic load order:
+;; - First, load packages (packages.el) and initialize them (package-configs.el)
+;; - Next, load custom function definitions, etc (lib)
+;; - Lastly, apply any configurations that should happen after the environment is
+;;   basicaly up-and-running (conf.d)
 
 (kdz/init "packages.d/bootstrap.el")
 (kdz/init "packages.d/evil.el")
@@ -22,22 +25,11 @@
 (kdz/init "packages.d/org.el")
 (kdz/init "packages.d/utilities.el")
 
-(setq catppuccin-flavor 'mocha)
-(load-theme 'catppuccin t)
+(kdz/init "lib/misc-actions.el")
 
-(load "~/.my.emacs.d/lib/misc-actions.el")
-(load "~/.my.emacs.d/keybindings.el")
-(load "~/.my.emacs.d/settings.el")
-
-(global-display-line-numbers-mode)
-
-;;; Start - org-modern lifted items
-(dolist (face '(window-divider
-                window-divider-first-pixel
-                window-divider-last-pixel))
-  (face-spec-reset-face face)
-  (set-face-foreground face (face-attribute 'default :background)))
-(set-face-background 'fringe (face-attribute 'default :background))
+(kdz/init "conf.d/appearance.el")
+(kdz/init "conf.d/keybindings.el")
+(kdz/init "conf.d/settings.el")
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -45,4 +37,5 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
-   '("0527c20293f587f79fc1544a2472c8171abcc0fa767074a0d3ebac74793ab117" default)))
+   '("0527c20293f587f79fc1544a2472c8171abcc0fa767074a0d3ebac74793ab117" default))
+ '(ignored-local-variable-values '((elisp-lint-indent-specs (when-let . 1)))))
