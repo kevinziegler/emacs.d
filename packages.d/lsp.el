@@ -13,9 +13,9 @@
   :config
   (add-hook 'lsp-after-open-hook #'lsp-origami-try-enable))
 
-(use-package lsp-ui :straight t)
-(use-package lsp-treemacs :straight t)
-(use-package consult-lsp :straight t)
-(use-package lsp-docker :straight t)
-(use-package lsp-java :straight t)
-(use-package lsp-pyright :straight t)
+(use-package lsp-ui :straight t :after lsp-mode)
+(use-package lsp-treemacs :straight t :after lsp-mode)
+(use-package consult-lsp :straight t :after '(lsp-mode treemacs))
+(use-package lsp-docker :straight t :after lsp-mode)
+(use-package lsp-java :straight t :after lsp-mode)
+(use-package lsp-pyright :straight t :after lsp-mode)
