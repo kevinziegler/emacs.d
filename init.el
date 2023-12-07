@@ -9,9 +9,6 @@
 (add-to-list 'default-frame-alist '(vertical-border-width . 0))
 
 (setq user-init-path (file-name-directory user-init-file))
-(defun kdz/load-init (relative-path)
-  (load (expand-file-name relative-path user-init-path)))
-
 (defmacro kdz/init (path)
   `(load (expand-file-name ,path ,user-init-path)))
 
