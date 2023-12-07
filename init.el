@@ -15,8 +15,12 @@
 (load  "~/.my.emacs.d/conf.d/tabbar.el")
 (load  "~/.my.emacs.d/conf.d/vertico.el")
 
-(load "~/.my.emacs.d/packages.el")
-(load "~/.my.emacs.d/package-configs.el")
+(kdz/init "packages.d/bootstrap.el")
+(kdz/init "packages.d/evil.el")
+(kdz/init "packages.d/languages.el")
+(kdz/init "packages.d/lsp.el")
+(kdz/init "packages.d/org.el")
+(kdz/init "packages.d/utilities.el")
 
 (setq catppuccin-flavor 'mocha)
 (load-theme 'catppuccin t)
