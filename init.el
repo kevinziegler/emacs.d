@@ -8,9 +8,8 @@
 (add-to-list 'default-frame-alist '(internal-border-width . 0))
 (add-to-list 'default-frame-alist '(vertical-border-width . 0))
 
-(setq user-init-path (file-name-directory user-init-file))
 (defmacro kdz/init (path)
-  `(load (expand-file-name ,path ,user-init-path)))
+  `(load (expand-file-name ,path ,user-emacs-directory)))
 
 ;; Basic load order:
 ;; - First, load packages (packages.el) and initialize them (package-configs.el)
