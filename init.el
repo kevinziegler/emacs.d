@@ -26,10 +26,12 @@
 (kdz/init "packages.d/utilities.el")
 
 (kdz/init "lib/misc-actions.el")
+(kdz/init "lib/org.el")
 
 (kdz/init "conf.d/appearance.el")
 (kdz/init "conf.d/keybindings.el")
 (kdz/init "conf.d/settings.el")
+(kdz/init "conf.d/org.el")
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
