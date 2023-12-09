@@ -3,7 +3,6 @@
   :straight t)
 
 (use-package dashboard
-  :ensure t
   :init
   (setq dashboard-icon-type 'nerd-icons)
   :config
@@ -66,7 +65,6 @@
 
 (use-package treemacs
   :straight t
-  :ensure t
   :defer t
   :config
   (treemacs-hide-gitignored-files-mode 1)
@@ -81,13 +79,11 @@
 (use-package treemacs-tab-bar ;;treemacs-tab-bar if you use tab-bar-mode
   :straight t
   :after (treemacs)
-  :ensure t
   :config (treemacs-set-scope-type 'Tabs))
 
 (use-package treemacs-evil
   :straight t
-  :after (treemacs evil)
-  :ensure t)
+  :after (treemacs evil))
 
 ;; Minibuffer/completion utlities
 (use-package cape
@@ -107,8 +103,6 @@
 
 (use-package embark
   :straight t
-  :ensure t
-
   :bind
   (("C-." . embark-act)         ;; pick some comfortable binding
    ("C-;" . embark-dwim)        ;; good alternative: M-.
@@ -133,7 +127,6 @@
 
 (use-package embark-consult
   :straight t
-  :ensure t ; only need to install it, embark loads it after consult if found
   :hook
   (embark-collect-mode . consult-preview-at-point-mode))
 
@@ -149,7 +142,6 @@
 
 (use-package orderless
   :straight t
-  :ensure t
   :custom
   (completion-styles '(orderless basic))
   (completion-category-overrides '((file (styles basic partial-completion)))))
