@@ -25,6 +25,7 @@
 (kdz/init "packages.d/org.el")
 (kdz/init "packages.d/utilities.el")
 
+(kdz/init "lib/appearance.el")
 (kdz/init "lib/misc-actions.el")
 (kdz/init "lib/org.el")
 
