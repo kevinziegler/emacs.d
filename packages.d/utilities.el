@@ -58,6 +58,8 @@
 (use-package tabspaces
   :straight t
   :config
+  (setq tabspaces-session-file (expand-file-name ".local/tabsession.el"
+						 user-emacs-directory))
   (delete 'tab-bar-format-add-tab tab-bar-format)
   (tab-bar-select-tab-by-name "Home")
   (tab-bar-close-tab-by-name "*scratch*"))
