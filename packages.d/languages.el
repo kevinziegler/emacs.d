@@ -41,3 +41,8 @@
   :straight t
   :config
   (add-to-list 'auto-mode-alist '("\\.kt\\'" . kotlin-ts-mode)))
+
+(use-package markdown-mode
+  :straight t
+  :config
+  (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode)))
