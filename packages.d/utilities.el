@@ -219,6 +219,7 @@
 
 (use-package origami
   :config
+  (setq origami-fold-replacement " ... ")
   (global-origami-mode))
 
 (use-package magit
