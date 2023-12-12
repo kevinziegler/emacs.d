@@ -230,3 +230,21 @@
 
 (use-package f
   :straight t)
+
+(use-package ibuffer-project
+  :straight t
+  :config
+  (add-hook 'ibuffer-hook
+	    (lambda ()
+	      (setq ibuffer-filter-groups (ibuffer-project-generate-filter-groups))
+	      (unless (eq ibuffer-sorting-mode 'project-file-relative)
+		(ibuffer-do-sort-by-project-file-relative))))
+  (add-hook 'ibuffer-hook
+	    (lambda ()
+	      (setq ibuffer-filter-groups (ibuffer-project-generate-filter-groups)))))
+
+(use-package nerd-icons-ibuffer
+  :straight t
+  :hook (ibuffer-mode . nerd-icons-ibuffer-mode)
+  :config
+  (setq nerd-icons-ibuffer-icon t))
