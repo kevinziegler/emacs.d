@@ -248,3 +248,6 @@
   :hook (ibuffer-mode . nerd-icons-ibuffer-mode)
   :config
   (setq nerd-icons-ibuffer-icon t))
+
+(use-package list-environment
+  :straight t)
