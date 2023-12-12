@@ -2,11 +2,6 @@
 (tool-bar-mode -1)
 (tab-bar-mode)
 (set-frame-font "Berkeley Mono 12" nil t)
-(add-to-list 'default-frame-alist '(height . 60))
-(add-to-list 'default-frame-alist '(width . 235))
-(add-to-list 'default-frame-alist '(undecorated-round . t))
-(add-to-list 'default-frame-alist '(internal-border-width . 0))
-(add-to-list 'default-frame-alist '(vertical-border-width . 0))
 
 (defmacro kdz/init (path)
   `(load (expand-file-name ,path ,user-emacs-directory)))
