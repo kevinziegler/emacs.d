@@ -41,6 +41,7 @@
 
 (use-package solaire-mode
   :straight t
+  :after 'catppuccin-theme
   :config
   (solaire-global-mode +1))
 
