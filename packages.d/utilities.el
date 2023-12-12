@@ -251,3 +251,8 @@
 
 (use-package list-environment
   :straight t)
+
+(use-package undo-fu
+  :straight t
+  :config
+  (setq evil-undo-system 'undo-fu))
