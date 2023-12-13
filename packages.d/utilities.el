@@ -257,3 +257,5 @@
   :straight t
   :config
   (setq evil-undo-system 'undo-fu))
+
+(use-package vundo :straight t)
