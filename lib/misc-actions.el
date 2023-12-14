@@ -25,3 +25,9 @@
 	  (progn
 	    (f-delete this-file))
 	(message "No current file! (Buffer: %s)" (buffer-name)))))
+
+(defun kdz/create-named-tab (tab-name)
+  (interactive "sName for new tab: ")
+  (tab-bar-new-tab)
+  (switch-to-buffer dashboard-buffer-name)
+  (tab-bar-rename-tab tab-name))
