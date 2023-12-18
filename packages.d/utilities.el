@@ -189,11 +189,10 @@
          #'command-completion-default-include-p)
   (setq tab-always-indent 'complete))
 
-(use-package smartparens
-  :straight t
-  :config
-  (require 'smartparens-config)
-  (add-hook 'prog-mode-hook #'smartparens-strict-mode))
+(use-package elec-pair
+  :ensure nil
+  :hook ((prog-mode . electric-pair-mode)
+	 (ielm-mode . electric-pair-mode)))
 
 (use-package git-gutter-fringe
   :config
