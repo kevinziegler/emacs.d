@@ -6,12 +6,13 @@
   :init
   (setq dashboard-icon-type 'nerd-icons)
   :config
-  (setq dashboard-items '((projects . 5) (bookmarks . 5)))
-  (setq dashboard-center-content t)
-  (setq dashboard-set-file-icons t)
-  (setq dashboard-set-heading-icons t)
-  (setq dashboard-projects-backend 'project-el)
-  (setq dashboard-projects-switch-function #'tabspaces-open-or-create-project-and-workspace)
+  (setq dashboard-items '((projects . 5) (bookmarks . 5))
+        dashboard-center-content t
+        dashboard-set-file-icons t
+        dashboard-set-heading-icons t
+        dashboard-projects-backend 'project-el
+        dashboard-projects-switch-function
+	#'tabspaces-open-or-create-project-and-workspace)
   (dashboard-setup-startup-hook))
 
 (use-package doom-modeline
