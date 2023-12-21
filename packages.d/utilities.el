@@ -273,4 +273,6 @@
 
 (use-package vundo :straight t)
 
+(use-package perfect-margin :straight t)
+
 (use-package imenu-list :straight t)
