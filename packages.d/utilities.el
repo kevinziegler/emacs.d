@@ -232,6 +232,14 @@
 (use-package f
   :straight t)
 
+(use-package repl-toggle
+  :straight t
+  :config
+  (setq rtog/fullscreen t
+	rtog/mode-repl-alist '((emacs-lisp-mode . ielm)
+			       (python-mode . run-python)
+			       (python-ts-mode . run-python))))
+
 (use-package ibuffer-project
   :straight t
   :config
