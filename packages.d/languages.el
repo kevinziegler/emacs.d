@@ -5,7 +5,7 @@
 (use-package lua-mode
   :straight t
   :mode (("\\.lua\\'" . lua-mode))
-  :interpreter'("lua" . lua-mode)
+  :interpreter (("lua" . lua-mode))
   :config
   (autoload 'lua-mode "lua-mode" "Lua editing mode." t))
 
