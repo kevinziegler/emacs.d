@@ -138,7 +138,6 @@
   :keymaps 'override
   :prefix "SPC"
   :non-normal-prefix "M-SPC"
-  "b"   '(:keymap kdz-buffer-actions-map :which-key "Buffer")
   "u"   '(universal-argument             :which-key "Apply Universal Argument")
   ";"   '(pp-eval-expression             :which-key "Evaluate Expression")
   "SPC" '(execute-extended-command       :which-key "Execute Command"))
