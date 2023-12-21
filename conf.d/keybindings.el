@@ -143,6 +143,10 @@
   ";"   '(pp-eval-expression             :which-key "Evaluate Expression")
   "SPC" '(execute-extended-command       :which-key "Execute Command"))
 
+(general-def
+  :keymaps 'vertico-map
+  "C-j" 'next-line-or-history-element
+  "C-k" 'previous-line-or-history-element)
 
 (provide 'keybindings)
 ;;; keybindings.el ends here
