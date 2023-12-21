@@ -2,6 +2,7 @@
  
 (general-def
   :states 'normal
+  :keymaps 'override
   :prefix "SPC b"
   :non-normal-prefix "M-SPC b"
   ""  '(:ignore t                  :which-key "Buffer")
@@ -23,6 +24,7 @@
 
 (general-def
   :states 'normal 
+  :keymaps 'override
   :prefix "SPC f"
   :non-normal-prefix "M-SPC f"
   ""  '(:ignore t      :which-key "File")
@@ -31,6 +33,7 @@
 
 (general-def
   :states '(normal treemacs)
+  :keymaps 'override
   :prefix "SPC h"
   :non-normal-prefix "M-SPC h"
   ""  '(:ignore t        :which-key "Help")
@@ -61,6 +64,7 @@
 
 (general-def
   :states '(normal treemacs)
+  :keymaps 'override
   :prefix "SPC w"
   :non-normal-prefix "M-SPC w"
   ""  '(:ignore t            :which-key "Window")
@@ -75,6 +79,7 @@
 
 (general-def
   :states '(normal treemacs)
+  :keymaps 'override
   :prefix "SPC p"
   :non-normal-prefix "M-SPC p"
   ""  '(:ignore t                                      :which-key "Project")
@@ -85,6 +90,7 @@
 
 (general-def
   :states '(normal treemacs)
+  :keymaps 'override
   :prefix "SPC TAB"
   :non-normal-prefix "M-SPC TAB"
   ""    '(:ingore t                               :which-key "Workspace")
@@ -98,6 +104,7 @@
 
 (general-def
   :states '(normal treemacs)
+  :keymaps 'override
   :prefix "SPC t"
   :non-normal-prefix "M-SPC t"
   ""  '(:ignore t                                 :which-key "Toggle")
@@ -108,6 +115,7 @@
 
 (general-def
   :states 'normal
+  :keymaps 'override
   :prefix "SPC s"
   :non-normal-prefix "M-SPC s"
   ""  '(:ignore t                :which-key "Search")
