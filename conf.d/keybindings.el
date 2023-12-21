@@ -28,6 +28,7 @@
   :prefix "SPC f"
   :non-normal-prefix "M-SPC f"
   ""  '(:ignore t      :which-key "File")
+  "i" '(file-info-show :which-key "Show Info")
   "l" '(org-store-link :which-key "Store Link")
   "f" '(find-file      :which-key "Find File"))
 

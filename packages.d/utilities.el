@@ -276,3 +276,18 @@
 (use-package perfect-margin :straight t)
 
 (use-package imenu-list :straight t)
+
+(use-package file-info :straight t
+  :config
+  (setq file-info-headline-underline-symbol ?━))
+
+(use-package hydra
+  :straight t
+  :config
+  (setq hydra-hint-display-type 'posframe)
+  (setq hydra-posframe-show-params
+        `(:poshandler posframe-poshandler-frame-center
+          :internal-border-width 2
+          :internal-border-color "#61AFEF"
+          :left-fringe 16
+          :right-fringe 16)))
