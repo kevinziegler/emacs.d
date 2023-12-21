@@ -267,3 +267,5 @@
   (setq evil-undo-system 'undo-fu))
 
 (use-package vundo :straight t)
+
+(use-package imenu-list :straight t)
