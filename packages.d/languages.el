@@ -27,6 +27,7 @@
 (use-package web-mode
   :mode (("\\.html?\\'" . web-mode)
          ("\\.css\\'"   . web-mode)
+         ("\\.hbs\\'"   . web-mode)
          ("\\.jsx?\\'"  . web-mode)
          ("\\.tsx?\\'"  . web-mode)
          ("\\.json\\'"  . web-mode))
