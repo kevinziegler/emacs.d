@@ -1,5 +1,9 @@
 (require 'uniquify)
 
+(defun kdz/local (path)
+  (expand-file-name path
+                    (expand-file-name ".local" user-emacs-directory)))
+
 (setq backup-by-copying t
       frame-inhibit-implied-resize t
       pixel-scroll-precision-mode t
@@ -8,16 +12,13 @@
       appropos-do-all t
       mouse-yank-at-point t
       uniquify-buffer-name-style 'forward
-      save-place-file (expand-file-name ".local/places"
-                                        user-emacs-directory)
-      savehist-file (expand-file-name ".local/history"
-                                        user-emacs-directory)
-      custom-file (expand-file-name ".local/custom.el"
-				    user-emacs-directory))
+      save-place-file (kdz/local "places")
+      savehist-file (kdz/local "history")
+      bookmark-file (kdz/local "bookmarks")
+      custom-file (kdz/local "custom.el"))
 
 (unless backup-directory-alist
-  (setq backup-directory-alist `(("." . ,(concat user-emacs-directory
-						 ".local/backups")))))
+  (setq backup-directory-alist `(("." . ,(kdz/local "backups")))))
 
 (setq-default indent-tabs-mode nil)
 
