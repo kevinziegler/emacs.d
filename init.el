@@ -22,6 +22,7 @@
 (kdz/init "lib/appearance.el")
 (kdz/init "lib/misc-actions.el")
 (kdz/init "lib/org.el")
+(kdz/init "lib/tap.el")
 
 (kdz/init "conf.d/appearance.el")
 (kdz/init "conf.d/behaviors.el")
