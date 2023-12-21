@@ -39,4 +39,16 @@
 
 (use-package yaml-mode :straight t :mode (("\\.ya?ml\\'" . yaml-mode)))
 
-
+(use-package tree-sitter :straight t)
+(use-package tree-sitter-langs
+  :straight t
+  :after tree-sitter
+  :config
+  (require 'tree-sitter)
+  (require 'tree-sitter-langs))
+(use-package treesit-auto
+  :straight t
+  :after tree-sitter
+  :config
+  (treesit-auto-add-to-auto-mode-alist 'all)
+  (global-treesit-auto-mode))
