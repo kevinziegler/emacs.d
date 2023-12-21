@@ -54,6 +54,7 @@
 
 (general-def
   :states '(normal treemacs)
+  :keymaps 'override
   :prefix "SPC g"
   :non-normal-prefix "M-SPC g"
   ""  '(:ignore t             :which-key "Git")
