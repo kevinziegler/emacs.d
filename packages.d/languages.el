@@ -39,13 +39,17 @@
 
 (use-package yaml-mode :straight t :mode (("\\.ya?ml\\'" . yaml-mode)))
 
+(use-package jq-mode :straight t :mode (("\\.jq\\'" . jq-mode)))
+
 (use-package tree-sitter :straight t)
+
 (use-package tree-sitter-langs
   :straight t
   :after tree-sitter
   :config
   (require 'tree-sitter)
   (require 'tree-sitter-langs))
+
 (use-package treesit-auto
   :straight t
   :after tree-sitter
