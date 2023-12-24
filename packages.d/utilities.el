@@ -298,3 +298,5 @@
   (yas-global-mode))
 
 (use-package yasnippet-snippets :straight t :after 'yasnippet)
+
+(use-package consult-yasnippet :straight t :after 'yasnippet)
