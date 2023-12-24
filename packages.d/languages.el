@@ -41,6 +41,8 @@
 
 (use-package jq-mode :straight t :mode (("\\.jq\\'" . jq-mode)))
 
+(use-package restclient :straight t :mode (("\\.http\\'" . restclient-mode)))
+
 (use-package tree-sitter :straight t)
 
 (use-package tree-sitter-langs
