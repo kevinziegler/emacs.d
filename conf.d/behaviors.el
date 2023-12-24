@@ -29,6 +29,11 @@
 	       (tab-name . "System")))
 
 (add-to-list 'display-buffer-alist
+	     '("\\*lsp-install: .+\\*"
+	       display-buffer-in-tab
+	       (tab-name . "System")))
+
+(add-to-list 'display-buffer-alist
 	     '("\\*dashboard\\*"
 	       display-buffer-in-tab
 	       (tab-name . "Home")))
