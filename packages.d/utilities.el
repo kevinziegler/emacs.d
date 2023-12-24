@@ -291,3 +291,10 @@
           :internal-border-color "#61AFEF"
           :left-fringe 16
           :right-fringe 16)))
+
+(use-package yasnippet
+  :straight t
+  :config
+  (yas-global-mode))
+
+(use-package yasnippet-snippets :straight t :after 'yasnippet)
