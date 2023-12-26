@@ -46,15 +46,10 @@
   :config
   (solaire-global-mode +1))
 
+;; TODO Configure for org-mode
 (use-package svg-tag-mode
   :straight t
-  :config
-  (svg-tag-mode)
-  (let ((tab-num-regexp "\\[tab-\\([0-9]+\\)\\]" ))
-    (setq svg-tag-tags '(("\\[tab-\\([0-9]+\\)\\]"  . ((lambda (tag)
-					      (save-match-data
-						(string-match "\\[tab-\\([0-9]+\\)\\]")
-						(svg-tag-make (match-string 1 tag))))))))))
+  :hook (org-mode . svg-tag-mode))
 
 (use-package tabspaces
   :straight t
@@ -62,6 +57,12 @@
   (setq tabspaces-session-file (expand-file-name ".local/tabsession.el"
 						 user-emacs-directory))
   (delete 'tab-bar-format-add-tab tab-bar-format)
+  (add-to-list 'tabspaces-exclude-buffers dashboard-buffer-name)
+
+  (advice-add 'tabspaces-open-or-create-project-and-workspace
+              :after
+              (lambda (&rest _) (tabspaces-reset-buffer-list)))
+
   (tab-bar-select-tab-by-name "Home")
   (tab-bar-close-tab-by-name "*scratch*"))
 
