@@ -10,6 +10,7 @@
     (save-excursion
       (previous-line)
       (when (and (thing-at-point 'line)
-		 (not (kdz/org-point-is-heading-p)))
+		 (not (kdz/org-point-is-heading-p))
+                 (not (string= "\n" (thing-at-point 'line t))))
 	(goto-char (line-end-position))
 	(insert "\n")))))
