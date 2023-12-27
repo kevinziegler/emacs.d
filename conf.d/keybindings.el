@@ -150,5 +150,11 @@
   "C-j" 'next-line-or-history-element
   "C-k" 'previous-line-or-history-element)
 
+(general-def
+  :states '(normal)
+  :keymaps 'override
+  :prefix "z"
+  "=" '(jinx-correct :which-key "Correct Spelling"))
+
 (provide 'keybindings)
 ;;; keybindings.el ends here
