@@ -101,7 +101,7 @@
   "l"   '(tab-next                                :which-key "Next Workspace")
   "H"   '((lambda () (interactive) (tab-move -1)) :which-key "Move Tab Left")
   "L"   '(tab-move                                :which-key "Move Tab Right")
-  "d"   '(tabspaces-close-workspace               :which-key "Close Workspace")
+  "d"   '(tabspaces-kill-buffers-close-workspace  :which-key "Close Workspace")
   "n"   '(kdz/create-named-tab                    :which-key "Create Named Workspace"))
 
 (general-def
