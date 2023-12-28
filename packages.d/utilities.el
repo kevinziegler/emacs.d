@@ -63,6 +63,13 @@
               :after
               (lambda (&rest _) (tabspaces-reset-buffer-list)))
 
+  ;; Set this variable to skip buffers that wouldn't show up in the
+  ;; current tab per tabspaces's rules, to avoid buffers "leaking"
+  ;; into the current space from other spaces.
+  (setq switch-to-prev-buffer-skip
+        (lambda (window buffer bury-or-kill)
+          (not (tabspaces--local-buffer-p buffer))))
+
   (tab-bar-select-tab-by-name "Home")
   (tab-bar-close-tab-by-name "*scratch*"))
 
