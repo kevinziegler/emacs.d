@@ -24,10 +24,6 @@
 	doom-modeline-persp-name nil
 	doom-modeline-buffer-encoding nil))
 
-(use-package indent-bars
-  :straight (indent-bars :type git :host github :repo "jdtsmith/indent-bars")
-  :hook ((fundamental-mode) . indent-bars-mode))
-
 (use-package spacious-padding
   :straight t
   :config
