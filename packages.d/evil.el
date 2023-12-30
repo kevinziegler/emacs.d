@@ -91,10 +91,7 @@
   :init
   (global-evil-matchit-mode 1))
 
-(use-package evil-nerd-commenter
-  :straight t
-  :config
-  (evilnc-default-hotkeys t))
+(use-package evil-nerd-commenter :straight t)
 
 (use-package evil-surround
   :straight t

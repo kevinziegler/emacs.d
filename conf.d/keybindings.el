@@ -1,5 +1,3 @@
-(require 'general)
- 
 (general-def
   :states 'normal
   :keymaps 'override
@@ -15,7 +13,7 @@
   "N" '(evil-buffer-new            :which-key "New Buffer"))
 
 (general-def
-  :states 'normal 
+  :states 'normal
   :prefix "SPC c"
   :non-normal-prefix "M-SPC c"
   ""  '(:ignore t        :which-key "Code")
@@ -23,7 +21,7 @@
   "r" '(rtog/toggle-repl :which-key "Toggle REPL"))
 
 (general-def
-  :states 'normal 
+  :states 'normal
   :keymaps 'override
   :prefix "SPC f"
   :non-normal-prefix "M-SPC f"
@@ -155,6 +153,11 @@
   :keymaps 'override
   :prefix "z"
   "=" '(jinx-correct :which-key "Correct Spelling"))
+
+(general-def
+  :states '(normal visual)
+  "gc" 'evilnc-comment-operator)
+
 
 (provide 'keybindings)
 ;;; keybindings.el ends here
