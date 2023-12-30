@@ -1,4 +1,13 @@
 (setq package-enable-at-startup nil)
+(setq gc-cons-threshold 10000000)
+(setq byte-compile-warnings '(not obsolete))
+(setq warning-suppress-log-types '((comp) (bytecomp)))
+(setq native-comp-async-report-warnings-errors 'silent)
+(setq frame-resize-pixelwise t)
+
+(scroll-bar-mode -1)
+(tool-bar-mode -1)
+(set-frame-font "Berkeley Mono 12" nil t)
 
 (add-to-list 'default-frame-alist '(height . 70))
 (add-to-list 'default-frame-alist '(width . 235))

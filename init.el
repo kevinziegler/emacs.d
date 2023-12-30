@@ -1,9 +1,3 @@
-(scroll-bar-mode -1)
-(tool-bar-mode -1)
-(tab-bar-mode)
-(set-frame-font "Berkeley Mono 12" nil t)
-(setq user-full-name "Kevin Ziegler")
-
 (defmacro kdz/init (path)
   `(load (expand-file-name ,path ,user-emacs-directory)))
 
