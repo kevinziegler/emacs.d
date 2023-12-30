@@ -34,6 +34,11 @@
 	       (tab-name . "System")))
 
 (add-to-list 'display-buffer-alist
+	     '("\\*straight-process\\*"
+	       display-buffer-in-tab
+	       (tab-name . "System")))
+
+(add-to-list 'display-buffer-alist
 	     '("\\*dashboard\\*"
 	       display-buffer-in-tab
 	       (tab-name . "Home")))
