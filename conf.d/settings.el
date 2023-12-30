@@ -4,6 +4,8 @@
   (expand-file-name path
                     (expand-file-name ".local" user-emacs-directory)))
 
+(set-frame-font "Berkeley Mono 12" nil t)
+
 (setopt user-full-name "Kevin Ziegler")
 
 (setopt save-place-file (kdz/local "places")

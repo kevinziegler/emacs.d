@@ -7,7 +7,6 @@
 
 (scroll-bar-mode -1)
 (tool-bar-mode -1)
-(set-frame-font "Berkeley Mono 12" nil t)
 
 (add-to-list 'default-frame-alist '(height . 70))
 (add-to-list 'default-frame-alist '(width . 235))
