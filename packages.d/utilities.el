@@ -74,7 +74,8 @@
   :defer t
   :config
   (treemacs-hide-gitignored-files-mode 1)
-  (add-hook 'treemacs-mode-hook (lambda () (display-line-numbers-mode -1))))
+  (add-hook 'treemacs-mode-hook
+            (lambda () (display-line-numbers-mode -1))))
 
 (use-package treemacs-nerd-icons
   :straight t
@@ -82,7 +83,7 @@
   :config
   (treemacs-load-theme "nerd-icons"))
 
-(use-package treemacs-tab-bar ;;treemacs-tab-bar if you use tab-bar-mode
+(use-package treemacs-tab-bar
   :straight t
   :after (treemacs)
   :config (treemacs-set-scope-type 'Tabs))
@@ -167,11 +168,9 @@
                                       (right-fringe . 8))))
 
 ;; Miscellaneous
-(use-package helpful
-  :straight t)
+(use-package helpful :straight t)
 
-(use-package general
-  :straight t)
+(use-package general :straight t)
 
 (use-package which-key
   :straight t
@@ -199,14 +198,17 @@
 	 (ielm-mode . electric-pair-mode)))
 
 (use-package git-gutter-fringe
+  :straight t
   :config
   (global-git-gutter-mode 1))
 
 (use-package git-modes
+  :straight t
   :config
   (add-to-list 'auto-mode-alist (cons "/.dockerignore\\'" 'gitignore-mode)))
 
 (use-package hl-todo
+  :straight t
   :config
   (global-hl-todo-mode))
 
@@ -220,9 +222,10 @@
 ;;   (modern-fringes-mode)
 ;;   (modern-fringes-invert-arrows))
 
-(use-package f)
+(use-package f :straight t)
 
 (use-package origami
+  :straight t
   :config
   (setq origami-fold-replacement " ... ")
   (global-origami-mode))
@@ -281,7 +284,8 @@
 
 (use-package imenu-list :straight t)
 
-(use-package file-info :straight t
+(use-package file-info
+  :straight t
   :config
   (setq file-info-headline-underline-symbol ?━))
 
