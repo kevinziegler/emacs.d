@@ -18,7 +18,6 @@
 (kdz/init "lib/misc-actions.el")
 (kdz/init "lib/tap.el")
 
-(kdz/init "conf.d/appearance.el")
 (kdz/init "conf.d/behaviors.el")
 (kdz/init "conf.d/keybindings.el")
 (kdz/init "conf.d/settings.el")
