@@ -36,7 +36,12 @@
 (add-to-list 'display-buffer-alist
 	     '("\\*straight-process\\*"
 	       display-buffer-in-tab
-	       (tab-name . "System")))
+	       (tab-name . "Packages")))
+
+(add-to-list 'display-buffer-alist
+	     '("\\*Packages\\*"
+	       display-buffer-in-tab
+	       (tab-name . "Packages")))
 
 (add-to-list 'display-buffer-alist
 	     '("\\*dashboard\\*"
