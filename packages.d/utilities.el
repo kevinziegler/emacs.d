@@ -217,11 +217,11 @@
 (use-package browse-at-remote
   :straight t)
 
-;; (use-package modern-fringes
-;;   :config
-;;   (fringe-mode)
-;;   (modern-fringes-mode)
-;;   (modern-fringes-invert-arrows))
+(use-package modern-fringes
+  :config
+  (fringe-mode)
+  (modern-fringes-mode)
+  (modern-fringes-invert-arrows))
 
 (use-package f :straight t)
 
