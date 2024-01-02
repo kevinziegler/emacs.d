@@ -268,16 +268,16 @@
 
 (use-package list-environment
   :straight t)
+
 (use-package exec-path-from-shell
   :config
   (when (memq window-system '(mac ns x))
     (exec-path-from-shell-initialize)))
 
-
 (use-package undo-fu
   :straight t
   :config
-  (setq evil-undo-system 'undo-fu))
+  (setopt evil-undo-system 'undo-fu))
 
 (use-package vundo :straight t)
 
