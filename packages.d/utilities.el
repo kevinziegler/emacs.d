@@ -45,7 +45,8 @@
 ;; TODO Configure for org-mode
 (use-package svg-tag-mode
   :straight t
-  :hook (org-mode . svg-tag-mode))
+  :config
+  (global-svg-tag-mode))
 
 (use-package tabspaces
   :straight t
