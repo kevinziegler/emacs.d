@@ -353,3 +353,6 @@
   :straight t
   :config
   (apheleia-global-mode +1))
+
+(use-package copy-as-format
+  :straight t)
