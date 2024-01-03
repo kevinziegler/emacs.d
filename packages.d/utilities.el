@@ -195,13 +195,27 @@
 
 (use-package emacs
   :init
-  (setq completion-cycle-threshold 3)
+  (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
+  (set-charset-priority 'unicode)
+
+  (setq locale-coding-system 'utf-8
+        coding-system-for-read 'utf-8
+        coding-system-for-write 'utf-8)
+
+  (set-terminal-coding-system 'utf-8)
+  (set-keyboard-coding-system 'utf-8)
+  (set-selection-coding-system 'utf-8)
+  (prefer-coding-system 'utf-8)
+
+  (setq default-process-coding-system '(utf-8-unix . utf-8-unix))
 
   ;; Emacs 28: Hide commands in M-x which do not apply to the current mode.
   ;; Corfu commands are hidden, since they are not supposed to be used via M-x.
-  (setq read-extended-command-predicate
-         #'command-completion-default-include-p)
-  (setq tab-always-indent 'complete))
+  (setq read-extended-command-predicate #'command-completion-default-include-p
+        tab-always-indent 'complete)
+
+  ;; Use `y' and `n' prompts instead of `yes' and `no'
+  (defalias 'yes-or-no-p 'y-or-n-p))
 
 (use-package elec-pair
   :ensure nil
