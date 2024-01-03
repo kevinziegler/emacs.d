@@ -364,3 +364,7 @@
              :host github
              :repo "cfclrk/markdown-xwidget"
              :files (:defaults "resources")))
+
+(use-package abridge-diff
+  :after magit ;; optional, if you'd like to use with magit
+  :init (abridge-diff-mode 1))
