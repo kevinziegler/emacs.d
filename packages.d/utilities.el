@@ -1,6 +1,5 @@
 ;; UI-related elements, themes, etc.
-(use-package catppuccin-theme
-  :straight t)
+(use-package catppuccin-theme :straight t)
 
 (use-package dashboard
   :init
@@ -29,11 +28,11 @@
   :config
   (setq spacious-padding-widths
 	'(:internal-border-width 7
-          :header-line-width 4
-          :mode-line-width 6
-          :tab-width 4
-          :right-divider-width 7
-          :scroll-bar-width 0))
+                                 :header-line-width 4
+                                 :mode-line-width 6
+                                 :tab-width 4
+                                 :right-divider-width 7
+                                 :scroll-bar-width 0))
   (spacious-padding-mode))
 
 (use-package solaire-mode
@@ -160,6 +159,17 @@
   (vertico-mode)
   (advice-add #'vertico--format-candidate
               :around #'kdz/vertico--format-candiate-marker-advice))
+
+(use-package vertico-directory
+  :after vertico
+  :straight nil
+  ;; More convenient directory navigation commands
+  :bind (:map vertico-map
+              ("RET" . vertico-directory-enter)
+              ("DEL" . vertico-directory-delete-char)
+              ("M-DEL" . vertico-directory-delete-word))
+  ;; Tidy shadowed file names
+  :hook (rfn-eshadow-update-overlay . vertico-directory-tidy))
 
 (use-package vertico-posframe
   :straight t
