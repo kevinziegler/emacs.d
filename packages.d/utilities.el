@@ -349,3 +349,7 @@
   :straight t
   :hook ((prog-mode . ws-butler-mode)))
 
+(use-package apheleia
+  :straight t
+  :config
+  (apheleia-global-mode +1))
