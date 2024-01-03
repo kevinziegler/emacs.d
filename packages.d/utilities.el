@@ -338,3 +338,10 @@
   :straight t
   :config
   (global-jinx-mode))
+
+(use-package gcmh
+  :straight t
+  :demand
+  :config
+  (gcmh-mode 1))
+
