@@ -13,7 +13,12 @@
   :config
   (add-hook 'lsp-after-open-hook #'lsp-origami-try-enable))
 
-(use-package lsp-ui :straight t :after lsp-mode)
+(use-package lsp-ui
+  :straight t
+  :after lsp-mode
+  :init
+  (setq lsp-ui-sideline-enable nil))
+
 (use-package lsp-treemacs :straight t :after lsp-mode)
 (use-package consult-lsp :straight t :after '(lsp-mode treemacs))
 (use-package lsp-docker :straight t :after lsp-mode)
