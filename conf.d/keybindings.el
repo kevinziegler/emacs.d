@@ -109,10 +109,11 @@
   :prefix "SPC t"
   :non-normal-prefix "M-SPC t"
   ""  '(:ignore t                                 :which-key "Toggle")
+  "c" '(global-display-fill-column-indicator-mode :which-key "Show/Hide Fill Column")
   "i" '(highlight-indent-guides-mode              :which-key "Show/Hide Indent Guides")
   "l" '(display-line-numbers-mode                 :which-key "Show/Hide Line Numbers")
   "r" '(kdz/toggle-line-numbers                   :which-key "Relative/Absolute Line Numbers")
-  "c" '(global-display-fill-column-indicator-mode :which-key "Show/Hide Fill Column"))
+  "s" '(global-sideline-mode                      :which-key "Show/Hide Sideline"))
 
 (general-def
   :states 'normal

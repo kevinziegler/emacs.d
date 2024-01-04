@@ -377,3 +377,15 @@
 (use-package abridge-diff
   :after magit ;; optional, if you'd like to use with magit
   :init (abridge-diff-mode 1))
+
+(use-package sideline-blame :straight t)
+
+(use-package sideline-lsp
+  :straight t)
+
+(use-package sideline
+  :straight t
+  :init
+  (setq sideline-backends-right '((sideline-blame . down)))
+  :config
+  (global-sideline-mode 1))
