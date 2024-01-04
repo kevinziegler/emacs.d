@@ -68,6 +68,7 @@
   :prefix "SPC w"
   :non-normal-prefix "M-SPC w"
   ""  '(:ignore t            :which-key "Window")
+  "=" '(balance-windows      :which-key "Balance Windows")
   "h" '(evil-window-left     :which-key "Left")
   "j" '(evil-window-down     :which-key "Down")
   "k" '(evil-window-up       :which-key "Up")
