@@ -160,6 +160,11 @@
   :states '(normal visual)
   "gc" 'evilnc-comment-operator)
 
+(general-def
+  :states 'insert
+  :keymaps 'org-mode-map
+  "s-<return>" 'kdz/org-return-dwim)
 
 (provide 'keybindings)
 ;;; keybindings.el ends here
+
