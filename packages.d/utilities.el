@@ -393,3 +393,9 @@
   (setq sideline-backends-right '((sideline-blame . down)))
   :config
   (global-sideline-mode 1))
+
+(use-package editorconfig
+  :straight t
+  :config
+  (setopt editorconfig-trim-whitespaces-mode 'ws-butler-mode)
+  (editorconfig-mode 1))
