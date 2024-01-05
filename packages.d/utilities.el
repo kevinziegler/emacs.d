@@ -267,6 +267,10 @@
 (use-package magit
   :straight t)
 
+(use-package magit-delta
+  :straight t
+  :hook (magit-mode . magit-delta-mode))
+
 (use-package git-timemachine
   :straight t)
 
