@@ -14,6 +14,9 @@
 	#'tabspaces-open-or-create-project-and-workspace)
   (dashboard-setup-startup-hook))
 
+(use-package dashboard-project-status :straight t)
+(use-package dashboard-ls :straight t)
+
 (use-package doom-modeline
   :straight t
   :init (doom-modeline-mode 1)
@@ -399,3 +402,12 @@
   :config
   (setopt editorconfig-trim-whitespaces-mode 'ws-butler-mode)
   (editorconfig-mode 1))
+
+(use-package project
+  :config
+  (advice-add 'project-switch-project
+              :before
+              #'kdz/project-open-show-dashboard)
+  (advice-add 'project-switch-project
+              :after
+              #'kdz/project-kill-dashboard))

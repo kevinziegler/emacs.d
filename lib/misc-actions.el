@@ -21,10 +21,10 @@
   (interactive)
   (let* ((this-file (f-this-file))
 	 (options (kdz/get-delete-options-plist this-file)))
-      (if (this-file)
-	  (progn
-	    (f-delete this-file))
-	(message "No current file! (Buffer: %s)" (buffer-name)))))
+    (if (this-file)
+	(progn
+	  (f-delete this-file))
+      (message "No current file! (Buffer: %s)" (buffer-name)))))
 
 (defun kdz/create-named-tab (tab-name)
   (interactive "sName for new tab: ")
@@ -32,6 +32,30 @@
   (switch-to-buffer (generate-new-buffer (format "*scratch: %s*"
                                                  tab-name)))
   (tab-bar-rename-tab tab-name))
+
+(defun kdz/open-project-dashboard ()
+  (let* ((dashboard-context (if (project-current)
+                                (project-name (project-current))
+                              (default-directory)))
+         (dashboard-buffer-name (format "*dashboard: %s*" dashboard-context))
+         (dashboard-items '((ls-directories . 5) (ls-files . 5))))
+    (message "Would open dashboard: %s" dashboard-buffer-name)
+    (dashboard-open)))
+
+(defun kdz/project-dashboard-buffer (project-dir)
+  (format "*dashboard: %s*" project-dir))
+
+(defun kdz/project-open-show-dashboard (project-dir)
+  (message "Switching to project dir: %s" project-dir)
+  (when (and project-dir (member (list project-dir) project--list))
+    (let ((dashboard-buffer-name (kdz/project-dashboard-buffer))
+          (dashboard-items '((ls-directories . 5) (ls-files . 5))))
+      (dashboard-open))))
+
+(defun kdz/project-kill-dashboard (project-dir)
+  (let ((dashboard (kdz/project-dashboard-buffer project-dir)))
+    (when (get-buffer dashboard)
+      (kill-buffer dashboard))))
 
 (defun kdz/org-return-handle-point-at-heading ()
   "Handle <return> behavior when point is at an org heading"
