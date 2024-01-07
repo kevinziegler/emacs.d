@@ -29,7 +29,8 @@
 (defun kdz/create-named-tab (tab-name)
   (interactive "sName for new tab: ")
   (tab-bar-new-tab)
-  (switch-to-buffer dashboard-buffer-name)
+  (switch-to-buffer (generate-new-buffer (format "*scratch: %s*"
+                                                 tab-name)))
   (tab-bar-rename-tab tab-name))
 
 (defun kdz/org-return-handle-point-at-heading ()
