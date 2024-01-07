@@ -1,8 +1,8 @@
 (use-package lsp-mode
   :straight t
   :init
-  (setq gc-cons-threshold 100000000)
   (setq read-process-output-max (* 1024 1024))
+  (setq lsp-headerline-breadcrumb-icons-enable nil)
   :hook ((python-ts-mode . lsp-deferred)
 	 (lsp-mode . lsp-enable-which-key-integration))
   :commands (lsp lsp-deferred))
