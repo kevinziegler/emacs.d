@@ -36,13 +36,13 @@
   ;; bind evil-args text objects
   (define-key evil-inner-text-objects-map "a" 'evil-inner-arg)
   (define-key evil-outer-text-objects-map "a" 'evil-outer-arg)
-  
+
   ;; bind evil-forward/backward-args
   (define-key evil-normal-state-map "L" 'evil-forward-arg)
   (define-key evil-normal-state-map "H" 'evil-backward-arg)
   (define-key evil-motion-state-map "L" 'evil-forward-arg)
   (define-key evil-motion-state-map "H" 'evil-backward-arg)
-  
+
   ;; bind evil-jump-out-args
   (define-key evil-normal-state-map "K" 'evil-jump-out-args))
 
@@ -99,9 +99,16 @@
   :config
   (global-evil-surround-mode 1))
 
+;; Set up text object mappings as keybindings (see project README)
+(use-package evil-textobj-tree-sitter :straight t)
+
 ;;(straight-use-package 'evil-numbers)
 
-;; (straight-use-package 'evil-easymotion)
+;; (use-package evil-easymotion
+;;   :straight t
+;;   :config
+;;   (evilem-default-keybindings "SPC j"))
+
 ;; (straight-use-package 'evil-exchange)
 ;; (straight-use-package 'evil-indent-plus)
 ;; (straight-use-package 'evil-snipe)
