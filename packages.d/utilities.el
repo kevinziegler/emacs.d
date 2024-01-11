@@ -411,3 +411,16 @@
   (advice-add 'project-switch-project
               :after
               #'kdz/project-kill-dashboard))
+
+
+;; TODO This needs tree-sitter to work
+;; TODO This pulls from quelpa; how do I set that up with straight?
+;; (use-package turbo-log
+;;   :straight t
+;;   :config
+;;   (setq turbo-log-msg-format-template "\"KDZ-LOG: %s\""))
+
+(use-package anzu
+  :straight t
+  :config
+  (global-anzu-mode +1))

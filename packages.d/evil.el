@@ -21,7 +21,7 @@
         ;; errors will abort macros, so suppress them:
         evil-kbd-macro-suppress-motion-error t
 	evil-move-beyond-eol t)
-  :init 
+  :init
   (setq evil-want-keybinding nil)
   :config
   (evil-mode 1)
@@ -101,6 +101,8 @@
 
 ;; Set up text object mappings as keybindings (see project README)
 (use-package evil-textobj-tree-sitter :straight t)
+
+(use-package evil-anzu :straight t :after anzu)
 
 ;;(straight-use-package 'evil-numbers)
 
