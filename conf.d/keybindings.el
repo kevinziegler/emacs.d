@@ -134,8 +134,9 @@
   :non-normal-prefix "M-SPC s"
   ""  '(:ignore t                :which-key "Search")
   "p" '(consult-ripgrep          :which-key "Project")
-  "t" '(tap/consult-ripgrep-dwim :which-key "Thing-at-point (DWIM)")
-  "s" '(tap/consult-ripgrep      :which-key "Thing-at-point (Select)"))
+  "r" '(re-builder               :which-key "Regexp Builder")
+  "s" '(tap/consult-ripgrep      :which-key "Thing-at-point (Select)")
+  "t" '(tap/consult-ripgrep-dwim :which-key "Thing-at-point (DWIM)"))
 
 (general-def
   :states 'normal
