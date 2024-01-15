@@ -1,5 +1,5 @@
 (general-def
-  :states 'normal
+  :states '(normal insert emacs)
   :keymaps 'override
   :prefix "SPC b"
   :non-normal-prefix "M-SPC b"
@@ -13,7 +13,7 @@
   "N" '(evil-buffer-new            :which-key "New Buffer"))
 
 (general-def
-  :states 'normal
+  :states '(normal insert emacs)
   :prefix "SPC c"
   :non-normal-prefix "M-SPC c"
   ""  '(:ignore t        :which-key "Code")
@@ -22,7 +22,7 @@
 
 
 (general-def
-  :states '(normal visual)
+  :states '(normal visual insert emacs)
   :keymaps 'emacs-lisp-mode-map
   :prefix "SPC c e"
   :non-normal-prefix "M-SPC c e"
@@ -33,7 +33,7 @@
   "r" '(eval-region :which-key "Evaluate Region"))
 
 (general-def
-  :states 'normal
+  :states '(normal insert emacs)
   :keymaps 'override
   :prefix "SPC f"
   :non-normal-prefix "M-SPC f"
@@ -43,7 +43,7 @@
   "f" '(find-file      :which-key "Find File"))
 
 (general-def
-  :states '(normal treemacs)
+  :states '(normal insert emacs treemacs)
   :keymaps 'override
   :prefix "SPC h"
   :non-normal-prefix "M-SPC h"
@@ -55,7 +55,7 @@
   "k" '(helpful-key      :which-key "Describe Key"))
 
 (general-def
-  :states '(normal treemacs)
+  :states '(normal insert emacs treemacs)
   :prefix "SPC o"
   :non-normal-prefix "M-SPC o"
   ""  '(:ignore t  :which-key "Open")
@@ -63,7 +63,7 @@
   "t" '(treemacs   :which-key "Project File Tree"))
 
 (general-def
-  :states '(normal treemacs)
+  :states '(normal insert emacs treemacs)
   :keymaps 'override
   :prefix "SPC g"
   :non-normal-prefix "M-SPC g"
@@ -75,7 +75,7 @@
   "m" '(nil                   :which-key "Merge Conflicts"))
 
 (general-def
-  :states '(normal treemacs)
+  :states '(normal insert emacs treemacs)
   :keymaps 'override
   :prefix "SPC w"
   :non-normal-prefix "M-SPC w"
@@ -91,7 +91,7 @@
   "x" '(evil-window-exchange :which-key "Exchange Window"))
 
 (general-def
-  :states '(normal treemacs)
+  :states '(normal insert emacs treemacs)
   :keymaps 'override
   :prefix "SPC p"
   :non-normal-prefix "M-SPC p"
@@ -102,7 +102,7 @@
   "p" '(tabspaces-open-or-create-project-and-workspace :which-key "Switch To Project"))
 
 (general-def
-  :states '(normal treemacs)
+  :states '(normal insert emacs treemacs)
   :keymaps 'override
   :prefix "SPC TAB"
   :non-normal-prefix "M-SPC TAB"
@@ -116,7 +116,7 @@
   "n"   '(kdz/create-named-tab                    :which-key "Create Named Workspace"))
 
 (general-def
-  :states '(normal treemacs)
+  :states '(normal insert emacs treemacs)
   :keymaps 'override
   :prefix "SPC t"
   :non-normal-prefix "M-SPC t"
@@ -128,7 +128,7 @@
   "s" '(global-sideline-mode                      :which-key "Show/Hide Sideline"))
 
 (general-def
-  :states 'normal
+  :states '(normal insert emacs)
   :keymaps 'override
   :prefix "SPC s"
   :non-normal-prefix "M-SPC s"
@@ -180,4 +180,3 @@
 
 (provide 'keybindings)
 ;;; keybindings.el ends here
-
