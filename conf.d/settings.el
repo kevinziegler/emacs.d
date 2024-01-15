@@ -39,12 +39,16 @@
         uniquify-buffer-name-style 'forward
         x-underline-at-descent-line nil)
 
-(kdz/set-hl-todo-faces)
-(kdz/tab-bar-update-faces)
+(defvar kdz-load-theme-hook nil
+  "Hook to run actions after calling `load-theme'")
 
-;; TODO Add this as a hook for catppuccin-reload
-(advice-add 'load-theme :after #'kdz/set-hl-todo-faces)
-(advice-add 'load-theme :after #'kdz/tab-bar-update-faces)
+(advice-add 'load-theme
+            :after
+            (lambda (&rest _) (run-hooks 'kdz-load-theme-hook)))
+
+(add-hook 'kdz-load-theme-hook 'kdz/set-hl-todo-faces)
+(add-hook 'kdz-load-theme-hook 'kdz/tab-bar-update-faces)
+(add-hook 'kdz-load-theme-hook '+evil-update-cursor-color-h)
 
 (load-theme 'catppuccin t)
 

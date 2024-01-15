@@ -176,3 +176,32 @@
 
 (setq tab-bar-format '(tab-bar-format-history tab-bar-format-tabs tab-bar-separator))
 (setq tab-bar-format '(tab-bar-format-history kdz/tab-bar-format-tabs-centered tab-bar-separator))
+
+(defun kdz/tab-bar-format-project-icon ()
+  (propertize (nerd-icons-octicon "nf-oct-project")))
+
+(defun kdz/tab-bar-format-pin-icon ()
+  (propertize (nerd-icons-octicon "nf-oct-pin")))
+
+(defun +evil-update-cursor-color-h ()
+  "Update cursor colors to indicate evil state
+
+The colors are based on face colors from the current theme; this
+function is intended to run as a hook after changing Emacs' theme.
+
+NOTE This function is lifted from Doom Emacs' evil module
+"
+  (put 'cursor 'evil-emacs-color  (face-foreground 'warning))
+  (put 'cursor 'evil-normal-color (face-background 'cursor)))
+
+(defun +evil-default-cursor-fn ()
+  "Get color to use for the cursor when in evil's `normal' state
+
+NOTE This function is lifted from Doom Emacs' evil module"
+  (evil-set-cursor-color (get 'cursor 'evil-normal-color)))
+
+(defun +evil-emacs-cursor-fn ()
+  "Get color to use for the cursor when in evil's `emacs' state
+
+NOTE This function is lifted from Doom Emacs' evil module"
+  (evil-set-cursor-color (get 'cursor 'evil-emacs-color)))
