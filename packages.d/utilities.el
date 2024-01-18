@@ -229,6 +229,15 @@
 	which-key-prefix-prefix "☰ ")
   (which-key-mode))
 
+(use-package which-key-posframe
+  :straight t
+  :config
+  (setq which-key-posframe-poshandler 'kdz/posframe-offset-bottom)
+  (advice-add #'which-key-posframe--show-buffer
+              :override
+              #'kdz/fixup--which-key-posframe--show-buffer)
+  (which-key-posframe-mode 1))
+
 (use-package emacs
   :init
   (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
