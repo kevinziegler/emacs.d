@@ -10,6 +10,36 @@ The CAR should be the name of the pinned tab, and the CDR of the cell
 should contain the text to pass to `svg-tag-make' when generating the
 SVG for the pinned tab")
 
+(defvar kdz-tab-bar--svg-cache nil
+  "Cache of SVG data for tab-bar SVGs
+
+Emacs seems to be fairly eager about calling functions that would
+refresh the tab-bar.  This is good to maintain the UI, but means
+lots of calls to regenerate SVGs for the tab bar, which are expensive.
+
+This cache holds SVG data keyed by the text content of the SVG and any
+properties that might be customized on a per-svg basis.  This allows
+us to skip re-generating the SVG data if we already have a copy on
+hand, even when the displayed SVGs have changed (e.g. to swap a tab's
+SVGs between active and in-active states).")
+
+(defun kdz/tab-bar--svg-get-or-create-cached (text props)
+  "Return the SVG to represent TEXT with PROPS in the tab bar
+
+If a cached copy of the SVG is available, that cached content will be
+returned.  Otherwise, a new SVG will be created and stored in the
+cache.  Cached SVGs are kept in `kdz-tab-bar--svg-cache'."
+  (let* ((key (format "%s-%s" text props))
+         (cached (assoc key kdz-tab-bar--svg-cache))
+         (result (or (cdr cached)
+                     (apply #'svg-tag-make
+                            text
+                            (kdz/tab-bar-svg-default-props props)))))
+    (when (not cached)
+      (push (cons key result) kdz-tab-bar--svg-cache))
+
+    result))
+
 (defun kdz/tab-bar-pinned-tab-p (tab)
   "Check if TAB should be considered a pinned tab in the tab bar
 
@@ -63,9 +93,12 @@ If supplied arguments in SVG-PROPS are passed as plist arguments to
 `svg-tag-make' are generated from `kdz/tab-bar-svg-default-props'."
   (propertize fallback-text
               'display
-              (apply #'svg-tag-make
-                     svg-text
-                     (kdz/tab-bar-svg-default-props svg-props))))
+              (kdz/tab-bar--svg-get-or-create-cached svg-text
+                                                     svg-props)
+              ;; (apply #'svg-tag-make
+              ;;        svg-text
+              ;;        (kdz/tab-bar-svg-default-props svg-props))
+              ))
 
 (defun kdz/tab-bar-tab-name-format-svg (tab i)
   "Generate an SVG to represent a tab-bar TAB at position I"
