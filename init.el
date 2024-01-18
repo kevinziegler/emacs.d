@@ -16,6 +16,7 @@
 
 (kdz/init "lib/appearance.el")
 (kdz/init "lib/misc-actions.el")
+(kdz/init "lib/tab-bar.el")
 (kdz/init "lib/tap.el")
 
 (kdz/init "conf.d/behaviors.el")

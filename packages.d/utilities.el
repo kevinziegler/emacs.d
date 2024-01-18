@@ -50,14 +50,33 @@
   :config
   (global-svg-tag-mode))
 
+(use-package tab-bar
+  :straight nil
+  :config
+  ;; TODO Figure out why this isn't affecting the behavior for
+  ;;      switching tabs correctly.  Once that's done, I *should*
+  ;;      be able to use the partitioned tabs correctly.
+  ;; (advice-add tab-bar-tabs-function
+  ;;             :filter-return
+  ;;             #'kdz/tab-bar-tabs-sort-pinned-tabs-last)
+
+  (delete 'tab-bar-format-add-tab tab-bar-format)
+  (setq tab-bar-format '(tab-bar-separator
+                         kdz/tab-bar-format-project-icon
+                         tab-bar-separator
+                         kdz/tab-bar-format-unpinned-tabs
+                         tab-bar-format-align-right
+                         tab-bar-separator
+                         kdz/tab-bar-format-pinned-tabs
+                         tab-bar-separator
+                         kdz/tab-bar-format-pin-icon)))
+
 (use-package tabspaces
   :straight t
   :config
   (setq tabspaces-session-file (expand-file-name ".local/tabsession.el"
 						 user-emacs-directory))
-  (delete 'tab-bar-format-add-tab tab-bar-format)
   (add-to-list 'tabspaces-exclude-buffers dashboard-buffer-name)
-
   (advice-add 'tabspaces-open-or-create-project-and-workspace
               :after
               (lambda (&rest _) (tabspaces-reset-buffer-list)))
