@@ -14,7 +14,10 @@
 	#'tabspaces-open-or-create-project-and-workspace)
   (dashboard-setup-startup-hook))
 
-(use-package dashboard-project-status :straight t)
+(use-package dashboard-project-status
+  :after dashboard
+  :straight t)
+
 (use-package dashboard-ls :straight t)
 
 (use-package doom-modeline
@@ -165,8 +168,7 @@
 
 (use-package embark-consult
   :straight t
-  :hook
-  (embark-collect-mode . consult-preview-at-point-mode))
+  :hook ((embark-collect-mode . consult-preview-at-point-mode)))
 
 (use-package marginalia
   :straight t
@@ -200,12 +202,15 @@
               ("DEL" . vertico-directory-delete-char)
               ("M-DEL" . vertico-directory-delete-word))
   ;; Tidy shadowed file names
-  :hook (rfn-eshadow-update-overlay . vertico-directory-tidy))
+  :hook ((rfn-eshadow-update-overlay . vertico-directory-tidy)))
+
+(use-package posframe :straight t)
 
 (use-package vertico-posframe
   :straight t
   :config
   (vertico-posframe-mode 1)
+  (setq vertico-posframe-poshandler #'kdz/posframe-offset-top)
   (setq vertico-posframe-parameters '((left-fringe . 8)
                                       (right-fringe . 8))))
 
@@ -291,7 +296,7 @@
 
 (use-package magit-delta
   :straight t
-  :hook (magit-mode . magit-delta-mode))
+  :hook ((magit-mode . magit-delta-mode)))
 
 (use-package git-timemachine
   :straight t)
