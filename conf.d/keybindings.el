@@ -53,10 +53,11 @@
   :prefix "SPC c e"
   :non-normal-prefix "M-SPC c e"
   ;; TODO Gate this behind a predicate
-  ""  '(:ignore t   :which-key "Code Evaluation")
-  "b" '(eval-buffer :which-key "Evaluate Buffer")
-  "d" '(eval-defun  :which-key "Evaluate Function")
-  "r" '(eval-region :which-key "Evaluate Region"))
+  ""  '(:ignore t                         :which-key "Code Evaluation")
+  "b" '(eval-buffer                       :which-key "Evaluate Buffer")
+  "d" '(eval-defun                        :which-key "Evaluate Function")
+  "r" '(eval-region                       :which-key "Evaluate Region")
+  "s" '(eval-sexp-fu-eval-sexp-inner-list :which-key "Evaluate Region"))
 
 (general-def
   :states '(normal insert emacs)
