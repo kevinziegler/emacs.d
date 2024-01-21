@@ -11,9 +11,9 @@
         ;; we won't need superfluous indicators to do it instead.
         evil-default-cursor '+evil-default-cursor-fn
         evil-normal-state-cursor 'box
-        evil-emacs-state-cursor  '(box +evil-emacs-cursor-fn)
         evil-insert-state-cursor 'bar
         evil-visual-state-cursor 'hollow
+        evil-emacs-state-cursor  '(box +evil-emacs-cursor-fn)
         ;; Only do highlighting in selected window so that Emacs has less work
         ;; to do highlighting them all.
         evil-ex-interactive-search-highlight 'selected-window
