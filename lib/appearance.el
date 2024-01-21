@@ -11,7 +11,9 @@
   "Customize tab-bar faces against current theme"
   (set-face-attribute 'tab-bar nil
 		      :inherit 'mode-line
-		      :box `(:line-width 7 :color ,(face-background 'tab-bar)))
+                      :foreground (face-foreground 'default)
+                      :background (face-background 'default)
+		      :box `(:line-width 7 :color ,(face-background 'default)))
   (set-face-attribute 'tab-bar-tab nil
 		      :inherit 'mode-line
 		      :height 1.0
