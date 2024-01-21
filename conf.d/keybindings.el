@@ -20,6 +20,32 @@
   ;; TODO Gate this behind a predicate
   "r" '(rtog/toggle-repl :which-key "Toggle REPL"))
 
+(general-def
+  :states '(normal visual insert emacs)
+  :prefix "SPC e"
+  :non-normal-prefix "M-SPC e"
+  ""  '(:ignore t        :which-key "Edit")
+  "a" '(align-regexp     :which-key "Align by Regexp")
+  "b" '(separedit        :which-key "Edit block in separate buffer")
+  "e" '(er/expand-region :which-key "Expand Region"))
+
+(general-def
+  :states '(normal visual insert emacs)
+  :prefix "SPC e y"
+  :non-normal-prefix "M-SPC e y"
+  ""  '(:ignore t            :which-key "Copy as <format>")
+  "j" '(copy-as-format-jira  :which-key "Copy as JIRA")
+  "h" '(copy-as-format-html  :which-key "Copy as HTML")
+  "s" '(copy-as-format-slack :which-key "Copy as Slack"))
+
+(general-def
+  :states '(normal visual insert emacs)
+  :prefix "SPC e y m"
+  :non-normal-prefix "M-SPC e y m"
+  ""  '(:ignore t               :which-key "Copy as <markdown>")
+  "m" '(copy-as-format-markdown :which-key "Copy as Markdown (Plain)")
+  "g" '(copy-as-format-github   :which-key "Copy as Markdown (Github)")
+  "G" '(copy-as-format-gitlab   :which-key "Copy as Markdown (Gitlab)"))
 
 (general-def
   :states '(normal visual insert emacs)
