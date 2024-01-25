@@ -596,10 +596,3 @@ actions that would update colors in emacs (such as changing themes)"
 (use-package git-modes
   :straight t
   :mode (("/.dockerignore\\'" . gitignore-mode )))
-
-;; TODO This needs tree-sitter to work
-;; TODO This pulls from quelpa; how do I set that up with straight?
-;; (use-package turbo-log
-;;   :straight t
-;;   :config
-;;   (setq turbo-log-msg-format-template "\"KDZ-LOG: %s\""))
