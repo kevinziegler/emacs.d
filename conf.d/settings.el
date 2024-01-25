@@ -8,15 +8,13 @@
 
 (setopt user-full-name "Kevin Ziegler")
 
+;;; Set paths for generated state files
 (setopt save-place-file (kdz/local "places")
         savehist-file (kdz/local "history")
         bookmark-file (kdz/local "bookmarks")
-        custom-file (kdz/local "custom.el"))
-
-(unless backup-directory-alist
-  (setq backup-directory-alist `(("." . ,(kdz/local "backups")))))
-
-(setq-default indent-tabs-mode nil)
+        custom-file (kdz/local "custom.el")
+        backup-directory-alist (or backup-directory-alist
+                                   `(("." . ,(kdz/local "backups")))))
 
 (setopt appropos-do-all t
         auto-revert-avoid-polling t
@@ -39,6 +37,9 @@
         uniquify-buffer-name-style 'forward
         x-underline-at-descent-line nil)
 
+(setq-default indent-tabs-mode nil)
+
+;;; Supply a hook for running updates after `load-theme'
 (defvar kdz-load-theme-hook nil
   "Hook to run actions after calling `load-theme'")
 
@@ -50,8 +51,10 @@
 (add-hook 'kdz-load-theme-hook 'kdz/tab-bar-update-faces)
 (add-hook 'kdz-load-theme-hook '+evil-update-cursor-color-h)
 
-(load-theme 'catppuccin t)
+;;; Load a nice looking theme
+(load-theme 'creamsody t)
 
+;;; Global Modes
 (tab-bar-mode)
 (global-display-line-numbers-mode)
 (savehist-mode 1)
