@@ -60,6 +60,11 @@
 ;;;; Cosmetic extras, themes, etc.
 (use-package catppuccin-theme :straight t)
 (use-package creamsody-theme :straight t)
+(use-package kanagawa-theme :straight t)
+(use-package tao-theme :straight t)
+(use-package stimmung-themes :straight t
+  ;; :config (stimmung-themes-load-light)
+  )
 
 (use-package spacious-padding
   :straight t

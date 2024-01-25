@@ -47,12 +47,21 @@
             :after
             (lambda (&rest _) (run-hooks 'kdz-load-theme-hook)))
 
+(advice-add 'stimmung-themes-load-light
+            :after
+            (lambda (&rest _) (run-hooks 'kdz-load-theme-hook)))
+
+(advice-add 'stimmung-themes-load-dark
+            :after
+            (lambda (&rest _) (run-hooks 'kdz-load-theme-hook)))
+
 (add-hook 'kdz-load-theme-hook 'kdz/set-hl-todo-faces)
 (add-hook 'kdz-load-theme-hook 'kdz/tab-bar-update-faces)
 (add-hook 'kdz-load-theme-hook '+evil-update-cursor-color-h)
 
 ;;; Load a nice looking theme
-(load-theme 'creamsody t)
+;; (load-theme 'creamsody t)
+(load-theme 'tao-yang t)
 
 ;;; Global Modes
 (tab-bar-mode)
