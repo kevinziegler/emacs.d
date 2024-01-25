@@ -1,4 +1,3 @@
-
 ;;; Core Emacs Configuration
 (use-package emacs
   :init
@@ -52,6 +51,7 @@
   :straight t
   :init
   (setq sideline-backends-right '((sideline-blame . down)))
+  (setq sideline-backends-right-skip-current-line nil)
   :config
   (global-sideline-mode 1))
 
