@@ -127,6 +127,27 @@
 ;;;; Workspace/project management
 (use-package project
   :config
+  (defun kdz/project-dashboard-buffer (project-dir)
+    "Generate a project-specific name for the dashboard buffer"
+    (format "*dashboard: %s*" project-dir))
+
+  (defun kdz/project-open-show-dashboard (project-dir)
+    "Open a new dashboard buffer for the supplied PROJECT-DIR"
+    (when (and project-dir (member (list project-dir) project--list))
+      (let ((dashboard-buffer-name (kdz/project-dashboard-buffer project-dir))
+            (dashboard-item-generators dashboard-item-generators)
+            (dashboard-items '((ls-directories . 5)
+                               (ls-files . 5))))
+        (push `(project-status . ,(dashboard-project-status project-dir))
+              dashboard-item-generators)
+        (dashboard-open))))
+
+  (defun kdz/project-kill-dashboard (project-dir)
+    "Kill the dashboard buffer for the supplied PROJECT-DIR"
+    (let ((dashboard (kdz/project-dashboard-buffer project-dir)))
+      (when (get-buffer dashboard)
+        (kill-buffer dashboard))))
+
   (advice-add 'project-switch-project
               :before
               #'kdz/project-open-show-dashboard)
@@ -522,6 +543,35 @@ actions that would update colors in emacs (such as changing themes)"
              :host github
              :repo "cfclrk/markdown-xwidget"
              :files (:defaults "resources")))
+
+(use-package display-line-numbers
+  :straight nil
+  :config
+  (defun kdz/toggle-line-numbers ()
+    "Cycle between relative/absolute line numbers"
+    (interactive)
+    (if display-line-numbers
+        (setq display-line-numbers
+	      (if (eq display-line-numbers 'relative) t 'relative))
+      (message "Line numbers are currently disabled!"))))
+
+(use-package display-line-numbers
+  :straight nil
+  :config
+  (defun kdz/toggle-line-numbers ()
+    "Cycle between relative/absolute line numbers"
+    (interactive)
+    (if display-line-numbers
+        (setq display-line-numbers
+	      (if (eq display-line-numbers 'relative) t 'relative))
+      (message "Line numbers are currently disabled!"))))
+
+;; TODO This needs tree-sitter to work
+;; TODO This pulls from quelpa; how do I set that up with straight?
+;; (use-package turbo-log
+;;   :straight t
+;;   :config
+;;   (setq turbo-log-msg-format-template "\"KDZ-LOG: %s\""))
 
 ;;; Git/Version Control Tooling
 (use-package magit :straight t)
