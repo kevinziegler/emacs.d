@@ -14,10 +14,7 @@
 (kdz/init "packages.d/org.el")
 (kdz/init "packages.d/utilities.el")
 
-(kdz/init "lib/appearance.el")
 (kdz/init "lib/misc-actions.el")
-(kdz/init "lib/posframe-helpers.el")
-(kdz/init "lib/tab-bar.el")
 (kdz/init "lib/tap.el")
 
 (kdz/init "conf.d/behaviors.el")

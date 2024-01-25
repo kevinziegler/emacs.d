@@ -137,12 +137,49 @@
 (use-package tab-bar
   :straight nil
   :config
+  (kdz/init "lib/tab-bar.el")
+
   ;; TODO Figure out why this isn't affecting the behavior for
   ;;      switching tabs correctly.  Once that's done, I *should*
   ;;      be able to use the partitioned tabs correctly.
   ;; (advice-add tab-bar-tabs-function
   ;;             :filter-return
   ;;             #'kdz/tab-bar-tabs-sort-pinned-tabs-last)
+  (defun kdz/tab-bar-update-faces (&rest _)
+    "Customize tab-bar faces against current theme
+
+This is performed via a function so it can be used as a hook on
+actions that would update colors in emacs (such as changing themes)"
+    (set-face-attribute 'tab-bar nil
+		        :inherit 'mode-line
+                        :foreground (face-foreground 'default)
+                        :background (face-background 'default)
+		        :box `(:line-width 7 :color ,(face-background 'default)))
+    (set-face-attribute 'tab-bar-tab nil
+		        :inherit 'mode-line
+		        :height 1.0
+		        :underline `(:color ,(face-background 'match) :position -7)
+		        :foreground (face-foreground 'mode-line))
+    (set-face-attribute 'tab-bar-tab-inactive nil
+		        :inherit 'mode-line
+		        :height 1.0
+		        :foreground (face-foreground 'mode-line-inactive)))
+
+  (defun kdz/tab-switch-index-or-select (&optional index)
+    "Change tabs, optionally by index using a prefix argument"
+    (interactive "P")
+    (if (eq index nil)
+        (call-interactively 'tab-switch)
+      (tab-bar-select-tab index)))
+
+  (defun kdz/create-named-tab (tab-name)
+    "Create a named tab with a new scratch buffer"
+    (interactive "sName for new tab: ")
+    (tab-bar-new-tab)
+    (switch-to-buffer (generate-new-buffer (format "*scratch: %s*"
+                                                   tab-name)))
+    (tab-bar-rename-tab tab-name))
+
   (setq tab-bar-new-tab-to 'rightmost
         tab-bar-format '(tab-bar-separator
                          kdz/tab-bar-format-project-icon
@@ -255,6 +292,15 @@
   :straight t
   :init
   (vertico-mode)
+
+  (defun kdz/vertico--format-candiate-marker-advice
+      (orig cand prefix suffix index start)
+    (setq cand (funcall orig cand prefix suffix index start))
+    (concat (if (= vertico--index index)
+                (propertize "» " 'face 'vertico-current)
+              "  ")
+            cand))
+
   (advice-add #'vertico--format-candidate
               :around #'kdz/vertico--format-candiate-marker-advice))
 
@@ -309,7 +355,32 @@
 ;;; Help/Discoverability
 (use-package helpful :straight t)
 (use-package general :straight t)
-(use-package posframe :straight t)
+
+(use-package posframe
+  :straight t
+  :config
+  (defvar kdz--posframe-offset-top-percent 10)
+  (defvar kdz--posframe-offset-bottom-percent 10)
+
+  (defun kdz/posframe-center-width (info)
+    (round
+     (* 0.5 (- (plist-get info :parent-frame-width)
+               (plist-get info :posframe-width)))))
+
+  (defun kdz/posframe-offset-top (info)
+    (let ((offset-percent (/ kdz--posframe-offset-top-percent 100.0))
+          (frame-height (plist-get info :parent-frame-height)))
+      (cons (kdz/posframe-center-width info)
+            (round (* offset-percent frame-height)))))
+
+  (defun kdz/posframe-offset-bottom (info)
+    (let* ((parent-frame-height (plist-get info :parent-frame-height))
+           (posframe-height (plist-get info :posframe-height))
+           (offset-percent (/ kdz--posframe-offset-bottom-percent 100.0)))
+      (cons (kdz/posframe-center-width info)
+            (round (- parent-frame-height
+                      posframe-height
+                      (* offset-percent parent-frame-height)))))))
 
 (use-package which-key
   :straight t
@@ -324,15 +395,38 @@
 (use-package which-key-posframe
   :straight t
   :config
-  (setq which-key-posframe-poshandler 'kdz/posframe-offset-bottom)
+  ;; Stand-in until the following issue is merged:
+  ;; https://github.com/yanghaoxie/which-key-posframe/pull/21
+  ;;
+  ;; Note that my version *also* tweaks the width parameter
+  (defun kdz/fixup--which-key-posframe--show-buffer (act-popup-dim)
+    "Override which-key-posframe parameters to ensure content is visible"
+    (when (posframe-workable-p)
+      (save-window-excursion
+        (posframe-show
+         which-key--buffer
+         :font which-key-posframe-font
+         :position (point)
+         :poshandler which-key-posframe-poshandler
+         :background-color (face-attribute 'which-key-posframe :background nil t)
+         :foreground-color (face-attribute 'which-key-posframe :foreground nil t)
+         :height (ceiling (* 1.25 (car act-popup-dim)))
+         :width (ceiling (* 1.1 (cdr act-popup-dim)))
+         :internal-border-width which-key-posframe-border-width
+         :internal-border-color (face-attribute 'which-key-posframe-border
+                                                :background nil
+                                                t)
+         :override-parameters which-key-posframe-parameters))))
+
   (advice-add #'which-key-posframe--show-buffer
               :override
               #'kdz/fixup--which-key-posframe--show-buffer)
+
+  (setq which-key-posframe-poshandler 'kdz/posframe-offset-bottom)
   (which-key-posframe-mode 1))
 
 
 ;;;; In-Buffer UI Enhancments - Editing behaviors, formating, etc
-(use-package hl-todo :straight t :config (global-hl-todo-mode))
 (use-package browse-at-remote :straight t) ;; TODO Set up keybindings
 (use-package perfect-margin :straight t)
 (use-package imenu-list :straight t)
@@ -349,6 +443,22 @@
 (use-package anzu :straight t :config (global-anzu-mode +1))
 (use-package sideline-blame :straight t)
 (use-package sideline-lsp :straight t)
+
+(use-package hl-todo
+  :straight t
+  :config
+  (defun kdz/set-hl-todo-faces (&rest _)
+    "Set face colors for hl-todo keywords
+
+This is performed via a function so it can be used as a hook on
+actions that would update colors in emacs (such as changing themes)"
+    (setq hl-todo-keyword-faces
+          `(("TODO"   . ,(face-foreground 'hl-todo))
+            ("FIXME"  . ,(face-foreground 'ansi-color-red))
+            ("DEBUG"  . ,(face-foreground 'ansi-color-cyan))
+            ("NOTE"   . ,(face-foreground 'ansi-color-blue))
+            ("STUB"   . ,(face-foreground 'ansi-color-green)))))
+  (global-hl-todo-mode))
 
 (use-package hide-mode-line
   :straight t

@@ -24,6 +24,27 @@
   :init
   (setq evil-want-keybinding nil)
   :config
+  (defun +evil-update-cursor-color-h ()
+    "Update cursor colors to indicate evil state
+
+The colors are based on face colors from the current theme; this
+function is intended to run as a hook after changing Emacs' theme.
+
+NOTE This function is lifted from Doom Emacs' evil module"
+    (put 'cursor 'evil-emacs-color  (face-foreground 'warning))
+    (put 'cursor 'evil-normal-color (face-background 'cursor)))
+
+  (defun +evil-default-cursor-fn ()
+    "Get color to use for the cursor when in evil's `normal' state
+
+NOTE This function is lifted from Doom Emacs' evil module"
+    (evil-set-cursor-color (get 'cursor 'evil-normal-color)))
+
+  (defun +evil-emacs-cursor-fn ()
+    "Get color to use for the cursor when in evil's `emacs' state
+
+NOTE This function is lifted from Doom Emacs' evil module"
+    (evil-set-cursor-color (get 'cursor 'evil-emacs-color)))
   (evil-mode 1)
   (evil-select-search-module 'evil-search-module 'evil-search)
   (setq evil-visual-update-x-selection-p nil)
