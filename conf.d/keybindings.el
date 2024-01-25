@@ -57,7 +57,7 @@
   "b" '(eval-buffer                       :which-key "Evaluate Buffer")
   "d" '(eval-defun                        :which-key "Evaluate Function")
   "r" '(eval-region                       :which-key "Evaluate Region")
-  "s" '(eval-sexp-fu-eval-sexp-inner-list :which-key "Evaluate Region"))
+  "s" '(eval-sexp-fu-eval-sexp-inner-list :which-key "Evaluate S-Exp"))
 
 (general-def
   :states '(normal insert emacs)
