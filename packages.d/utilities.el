@@ -338,7 +338,7 @@ actions that would update colors in emacs (such as changing themes)"
 
 (use-package vertico-posframe
   :straight t
-  :after '(posframe vertico)
+  :after (posframe vertico)
   :config
   (vertico-posframe-mode 1)
   (setq vertico-posframe-poshandler #'kdz/posframe-offset-top)
