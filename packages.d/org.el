@@ -202,6 +202,9 @@ appropriate.  In tables, insert a new row or end the table."
 ;; TODO Figure out how to get the tree view to show up for this package
 ;; (use-package org-sidebar :straight t)
 
-(use-package org-evil :straight t :after '(evil org))
+(use-package evil-org
+  :straight t
+  :after (evil org)
+  :hook ((org-mode . evil-org-mode)))
 
 ;; (use-package ox-pandoc :straight t)
