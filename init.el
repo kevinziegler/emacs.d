@@ -2,12 +2,6 @@
   (expand-file-name path
                     (expand-file-name ".local" user-emacs-directory)))
 
-;; Basic load order:
-;; - First, load packages (packages.el) and initialize them (package-configs.el)
-;; - Next, load custom function definitions, etc (lib)
-;; - Lastly, apply any configurations that should happen after the environment is
-;;   basicaly up-and-running (conf.d)
-
 (add-to-list 'load-path
              (expand-file-name "lisp" user-emacs-directory))
 
