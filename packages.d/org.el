@@ -1,4 +1,5 @@
 (use-package org
+  :hook ((org-mode . visual-line-mode))
   :config
   (setopt org-auto-align-tags nil
           org-tags-column 0
