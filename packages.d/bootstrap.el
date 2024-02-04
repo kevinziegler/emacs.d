@@ -1,4 +1,6 @@
 (defvar bootstrap-version)
+(setq straight-base-dir (kdz/local ""))
+
 (let ((bootstrap-file
        (expand-file-name ".local/straight/repos/straight.el/bootstrap.el"
                          user-emacs-directory))
