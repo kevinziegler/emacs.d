@@ -9,17 +9,21 @@
         evil-symbol-word-search t
         ;; if the current state is obvious from the cursor's color/shape, then
         ;; we won't need superfluous indicators to do it instead.
-        evil-default-cursor '+evil-default-cursor-fn
+        ;; evil-default-cursor '+evil-default-cursor-fn
+        evil-default-cursor      'box
         evil-normal-state-cursor 'box
         evil-insert-state-cursor 'bar
         evil-visual-state-cursor 'hollow
-        evil-emacs-state-cursor  '(box +evil-emacs-cursor-fn)
+        evil-emacs-state-cursor  'box
+        ;; evil-emacs-state-cursor  '(box +evil-emacs-cursor-fn)
         ;; Only do highlighting in selected window so that Emacs has less work
         ;; to do highlighting them all.
         evil-ex-interactive-search-highlight 'selected-window
         ;; It's infuriating that innocuous "beginning of line" or "end of line"
         ;; errors will abort macros, so suppress them:
         evil-kbd-macro-suppress-motion-error t
+        evil-split-window-below t
+        evil-vsplit-window-right t
 	evil-move-beyond-eol t)
   :init
   (setq evil-want-keybinding nil)
