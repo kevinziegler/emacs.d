@@ -11,6 +11,7 @@
           org-pretty-entities t
           org-ellipsis " …"
           org-cycle-separator-lines 0
+          org-fold-core-style 'overlays
           org-edit-src-content-indentation 0)
 
   (defun kdz/org-return-handle-point-at-heading ()
