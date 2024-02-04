@@ -12,3 +12,12 @@
 	(progn
 	  (f-delete this-file))
       (message "No current file! (Buffer: %s)" (buffer-name)))))
+
+(defun kdz/coalesce-buffer-windows ()
+  "Delete windows for the current buffer that aren't the currently selected window"
+  (interactive)
+  ;; TODO Ensure selected-window is non-nil and we have a buffer to work with
+  ;; TODO Verify this equality check works
+  (dolist (window (get-buffer-window-list))
+    (when (not (eq window (selected-window)))
+      (delete window))))

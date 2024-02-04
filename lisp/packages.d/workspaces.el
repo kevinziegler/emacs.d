@@ -31,7 +31,7 @@
 (use-package tab-bar
   :straight nil
   :config
-  (kdz/init "lib/tab-bar.el")
+  (load "lib/tab-bar.el")
 
   ;; TODO Figure out why this isn't affecting the behavior for
   ;;      switching tabs correctly.  Once that's done, I *should*

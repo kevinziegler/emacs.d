@@ -305,3 +305,12 @@ Pinned tabs are defined in `kdz-tab-bar-pinned-tabs-alist'"
 Pinned tabs are defined in `kdz-tab-bar-pinned-tabs-alist'"
   (seq-filter #'kdz/tab-bar-pinned-tab-p
               tabs))
+
+(defun kdz/tab-bar-reset-formatting ()
+  (interactive)
+  (let ((format tab-bar-format))
+    (setq kdz-tab-bar--svg-cache nil)
+    (setq tab-bar-format '())
+    (tab-bar-mode -1)
+    (setq tab-bar-format format)
+    (tab-bar-mode +1)))

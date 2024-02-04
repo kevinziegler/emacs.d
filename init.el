@@ -1,6 +1,3 @@
-(defmacro kdz/init (path)
-  `(load (expand-file-name ,path ,user-emacs-directory)))
-
 (defun kdz/local (path)
   (expand-file-name path
                     (expand-file-name ".local" user-emacs-directory)))
@@ -11,28 +8,31 @@
 ;; - Lastly, apply any configurations that should happen after the environment is
 ;;   basicaly up-and-running (conf.d)
 
-(kdz/init "packages.d/emacs.el")
-(kdz/init "packages.d/bootstrap.el")
-(kdz/init "packages.d/evil.el")
-(kdz/init "packages.d/languages.el")
-(kdz/init "packages.d/org.el")
+(add-to-list 'load-path
+             (expand-file-name "lisp" user-emacs-directory))
 
-(kdz/init "packages.d/tools/dashboard.el")
-(kdz/init "packages.d/tools/minibuffer.el")
-(kdz/init "packages.d/tools/treemacs.el")
-(kdz/init "packages.d/tools/completion.el")
-(kdz/init "packages.d/tools/help.el")
-(kdz/init "packages.d/tools/git.el")
-(kdz/init "packages.d/tools/lsp.el")
+(load "packages.d/emacs.el")
+(load "packages.d/bootstrap.el")
+(load "packages.d/evil.el")
+(load "packages.d/languages.el")
+(load "packages.d/org.el")
 
-(kdz/init "packages.d/ui/base.el")
-(kdz/init "packages.d/ui/appearance.el")
-(kdz/init "packages.d/ui/buffer.el")
-(kdz/init "packages.d/workspaces.el")
+(load "packages.d/tools/dashboard.el")
+(load "packages.d/tools/minibuffer.el")
+(load "packages.d/tools/treemacs.el")
+(load "packages.d/tools/completion.el")
+(load "packages.d/tools/help.el")
+(load "packages.d/tools/git.el")
+(load "packages.d/tools/lsp.el")
 
-(kdz/init "lib/misc-actions.el")
-(kdz/init "lib/tap.el")
+(load "packages.d/ui/base.el")
+(load "packages.d/ui/appearance.el")
+(load "packages.d/ui/buffer.el")
+(load "packages.d/workspaces.el")
 
-(kdz/init "conf.d/behaviors.el")
-(kdz/init "conf.d/keybindings.el")
-(kdz/init "conf.d/settings.el")
+(load "lib/misc-actions.el")
+(load "lib/tap.el")
+
+(load "conf.d/behaviors.el")
+(load "conf.d/keybindings.el")
+(load "conf.d/settings.el")
