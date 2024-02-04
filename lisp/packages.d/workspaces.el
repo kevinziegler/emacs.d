@@ -1,5 +1,6 @@
 (use-package project
   :config
+  (setq project-list-file (kdz/local "projects"))
   (defun kdz/project-dashboard-buffer (project-dir)
     "Generate a project-specific name for the dashboard buffer"
     (format "*dashboard: %s*" project-dir))
