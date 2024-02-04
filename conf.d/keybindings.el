@@ -127,7 +127,11 @@
   "d" '(evil-window-delete   :which-key "Delete Window")
   "T" '(tear-off-window      :which-key "Tear off Window")
   "n" '(evil-window-new      :which-key "New Window")
-  "x" '(evil-window-exchange :which-key "Exchange Window"))
+  "x" '(evil-window-exchange :which-key "Exchange Window")
+  "H" '(evil-window-move-far-left :which-key "Move window left")
+  "L" '(evil-window-move-far-right :which-key "Move window right")
+  "J" '(evil-window-move-far-down :which-key "Move window down")
+  "K" '(evil-window-move-far-up :which-key "Move window up"))
 
 (general-def
   :states '(normal insert emacs treemacs)
