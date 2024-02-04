@@ -61,15 +61,10 @@
 
 (general-def
   :states '(normal visual insert emacs)
-  :keymaps 'emacs-lisp-mode-map
-  :prefix "SPC c e"
-  :non-normal-prefix "M-SPC c e"
-  ;; TODO Gate this behind a predicate
-  ""  '(:ignore t                         :which-key "Code Evaluation")
-  "b" '(eval-buffer                       :which-key "Evaluate Buffer")
-  "d" '(eval-defun                        :which-key "Evaluate Function")
-  "r" '(eval-region                       :which-key "Evaluate Region")
-  "s" '(eval-sexp-fu-eval-sexp-inner-list :which-key "Evaluate S-Exp"))
+  :keymaps 'org-mode-map
+  :prefix "SPC e"
+  :non-normal-prefix "M-SPC e"
+  "b" '(org-edit-special :which-key "Edit Org Block"))
 
 (general-def
   :states '(normal insert emacs)
