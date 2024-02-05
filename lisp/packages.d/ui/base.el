@@ -46,6 +46,12 @@
 (use-package transient
   :straight t
   :config
-  (setq transient-history-file (kdz/local "transient/history.el")
-        transient-levels-file (kdz/local "transient/levels.el")
-        transient-values-file (kdz/local "transient/values.el")))
+  (setq transient-history-file (kdz/user-directory ".local"
+                                                   "transient"
+                                                   "history.el")
+        transient-levels-file  (kdz/user-directory ".local"
+                                                   "transient"
+                                                   "levels.el")
+        transient-values-file  (kdz/user-directory ".local"
+                                                   "transient"
+                                                   "values.el")))

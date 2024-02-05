@@ -1,8 +1,3 @@
-
-(defun kdz/local (path)
-  (expand-file-name path
-                    (expand-file-name ".local" user-emacs-directory)))
-
 (set-frame-font "Berkeley Mono 12" nil t)
 
 ;;; Supply a hook for running updates after `load-theme'
@@ -26,5 +21,4 @@
 (add-hook 'kdz-load-theme-hook '+evil-update-cursor-color-h)
 
 ;;; Load a nice looking theme
-;; (load-theme 'creamsody t)
 (load-theme 'creamsody t)

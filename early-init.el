@@ -14,5 +14,10 @@
 (scroll-bar-mode -1)
 (tool-bar-mode -1)
 
-(startup-redirect-eln-cache
- (expand-file-name ".local/eln-cache" user-emacs-directory))
+(defun kdz/user-directory (&rest parts)
+  "Return the path represented by PARTS under `user-emacs-directory'"
+  (seq-reduce (lambda (base part) (expand-file-name part base))
+              parts
+              user-emacs-directory))
+
+(startup-redirect-eln-cache (kdz/user-directory ".local/eln-cache"))

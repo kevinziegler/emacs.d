@@ -1,15 +1,11 @@
-(defun kdz/local (path)
-  (expand-file-name path
-                    (expand-file-name ".local" user-emacs-directory)))
-
-(add-to-list 'load-path
-             (expand-file-name "lisp" user-emacs-directory))
+(add-to-list 'load-path (kdz/user-directory "lisp"))
 
 (load "packages.d/emacs.el")
 (load "packages.d/bootstrap.el")
 (load "packages.d/evil.el")
 (load "packages.d/languages.el")
 (load "packages.d/org.el")
+(load "packages.d/workspaces.el")
 
 (load "packages.d/tools/dashboard.el")
 (load "packages.d/tools/minibuffer.el")
@@ -22,7 +18,6 @@
 (load "packages.d/ui/base.el")
 (load "packages.d/ui/appearance.el")
 (load "packages.d/ui/buffer.el")
-(load "packages.d/workspaces.el")
 
 (load "lib/misc-actions.el")
 (load "lib/tap.el")

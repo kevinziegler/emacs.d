@@ -25,14 +25,13 @@
   (setopt user-full-name "Kevin Ziegler")
 
   ;;; Set paths for generated state files
-  (setopt save-place-file (kdz/local "places")
-          savehist-file (kdz/local "history")
-          bookmark-file (kdz/local "bookmarks")
-          custom-file (kdz/local "custom.el")
-          auto-save-list-file-prefix (kdz/local "auto-save-list/.saves-")
+  (setopt save-place-file (kdz/user-directory ".local" "places")
+          savehist-file (kdz/user-directory ".local" "history")
+          bookmark-file (kdz/user-directory ".local" "bookmarks")
+          custom-file (kdz/user-directory ".local" "custom.el")
+          auto-save-list-file-prefix (kdz/user-directory ".local" "auto-save-list/.saves-")
           backup-directory-alist (or backup-directory-alist
-                                     `(("." . ,(kdz/local "backups")))))
-
+                                     `(("." . ,(kdz/user-directory ".local" "backups")))))
   (setopt appropos-do-all t
           auto-revert-avoid-polling t
           auto-revert-check-vc-info t

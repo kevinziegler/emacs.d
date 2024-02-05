@@ -1,6 +1,6 @@
 (use-package project
   :config
-  (setq project-list-file (kdz/local "projects"))
+  (setq project-list-file (kdz/user-directory ".local" "projects"))
   (defun kdz/project-dashboard-buffer (project-dir)
     "Generate a project-specific name for the dashboard buffer"
     (format "*dashboard: %s*" project-dir))
@@ -95,8 +95,9 @@ actions that would update colors in emacs (such as changing themes)"
 (use-package tabspaces
   :straight t
   :config
-  (setq tabspaces-session-file (expand-file-name ".local/tabsession.el"
-						 user-emacs-directory))
+  (setq tabspaces-session-file (kdz/user-directory ".local"
+                                                   "tabsession.el"))
+
   (add-to-list 'tabspaces-exclude-buffers dashboard-buffer-name)
   (advice-add 'tabspaces-open-or-create-project-and-workspace
               :after
