@@ -94,6 +94,7 @@ actions that would update colors in emacs (such as changing themes)"
 
 (use-package tabspaces
   :straight t
+  :after dashboard
   :config
   (setq tabspaces-session-file (kdz/user-directory ".local"
                                                    "tabsession.el"))
