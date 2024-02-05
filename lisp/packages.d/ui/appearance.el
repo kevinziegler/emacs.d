@@ -23,7 +23,7 @@
   :config
   (solaire-global-mode +1))
 
-(use-package svg-tag-mode :straight t :config (global-svg-tag-mode))
+(use-package svg-tag-mode :straight t)
 
 (use-package nerd-icons-ibuffer
   :straight t
