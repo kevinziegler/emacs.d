@@ -1,8 +1,9 @@
 (use-package lsp-mode
   :straight t
   :init
-  (setq read-process-output-max (* 1024 1024))
-  (setq lsp-headerline-breadcrumb-icons-enable nil)
+  (setq read-process-output-max (* 1024 1024)
+        lsp-headerline-breadcrumb-icons-enable nil
+        lsp-session-file (kdz/user-directory ".local/lsp-session-v1"))
   :hook ((python-ts-mode . lsp-deferred)
 	 (lsp-mode . lsp-enable-which-key-integration))
   :commands (lsp lsp-deferred))
@@ -24,3 +25,8 @@
 (use-package lsp-docker :straight t :after lsp-mode)
 (use-package lsp-java :straight t :after lsp-mode)
 (use-package lsp-pyright :straight t :after lsp-mode)
+
+(use-package dap-mode
+  :straight t
+  :init
+  (setq dap-breakpoints-file (kdz/user-directory ".local/dap-breakpoints")))
