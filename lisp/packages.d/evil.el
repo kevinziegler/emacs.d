@@ -128,7 +128,6 @@
 ;;   :config
 ;;   (evilem-default-keybindings "SPC j"))
 
-;; (straight-use-package 'evil-exchange)
 ;; (straight-use-package 'evil-indent-plus)
 ;; (straight-use-package 'evil-snipe)
 ;; (straight-use-package '(evil-textobj-anyblock
@@ -138,8 +137,15 @@
 ;;                         :branch "fix-inner-block"))
 ;; (straight-use-package 'evil-traces)
 ;; (straight-use-package 'exato)
-;; (straight-use-package '(evil-quick-diff
-;;                         :type git
-;;                         :host github
-;;                         :repo "rgrinberg/evil-quick-diff"))
 (use-package evil-numbers :straight t)
+(use-package evil-exchange
+  :straight t
+  :config
+  (setq evil-exchange-key (kbd "zX"))
+  (evil-exchange-install))
+
+(use-package evil-quick-diff
+  :straight '(:type git :host github :repo "rgrinberg/evil-quick-diff")
+  :config
+  (setq evil-quick-diff-key (kbd "zx"))
+  (evil-quick-diff-install))
