@@ -123,21 +123,10 @@
 
 (use-package evil-anzu :straight t :after anzu)
 
-;; (use-package evil-easymotion
-;;   :straight t
-;;   :config
-;;   (evilem-default-keybindings "SPC j"))
-
-;; (straight-use-package 'evil-indent-plus)
-;; (straight-use-package 'evil-snipe)
-;; (straight-use-package '(evil-textobj-anyblock
-;;                         :type git
-;;                         :host github
-;;                         :repo "willghatch/evil-textobj-anyblock"
-;;                         :branch "fix-inner-block"))
-;; (straight-use-package 'evil-traces)
 (use-package evil-numbers :straight t)
+
 (use-package exato :straight t)
+
 (use-package evil-exchange
   :straight t
   :config
