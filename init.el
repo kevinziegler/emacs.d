@@ -2,6 +2,7 @@
 
 (load "packages.d/emacs.el")
 (load "packages.d/bootstrap.el")
+(load "packages.d/system.el")
 (load "packages.d/evil.el")
 (load "packages.d/languages.el")
 (load "packages.d/org.el")
