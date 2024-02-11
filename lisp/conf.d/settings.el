@@ -18,7 +18,6 @@
 
 (add-hook 'kdz-load-theme-hook 'kdz/set-hl-todo-faces)
 (add-hook 'kdz-load-theme-hook 'kdz/tab-bar-update-faces)
-(add-hook 'kdz-load-theme-hook '+evil-update-cursor-color-h)
 
 ;;; Load a nice looking theme
 (load-theme 'creamsody t)
