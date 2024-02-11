@@ -136,8 +136,8 @@
 ;;                         :repo "willghatch/evil-textobj-anyblock"
 ;;                         :branch "fix-inner-block"))
 ;; (straight-use-package 'evil-traces)
-;; (straight-use-package 'exato)
 (use-package evil-numbers :straight t)
+(use-package exato :straight t)
 (use-package evil-exchange
   :straight t
   :config
