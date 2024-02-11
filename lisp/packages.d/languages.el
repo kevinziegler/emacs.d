@@ -1,12 +1,11 @@
 (use-package dotenv-mode    :straight t :mode (("\\.env\\..*\\'" . dotenv-mode)))
-(use-package kotlin-ts-mode :straight t :mode (("\\.kt\\'" . kotlin-ts-mode)))
-(use-package markdown-mode  :straight t :mode (("\\.md\\'" . markdown-mode)))
-(use-package php-mode       :straight t :mode (("\\.php\\'" . php-mode)))
-(use-package scad-mode      :straight t :mode (("\\.scad\\'" . scad-mode)))
-(use-package toml-mode      :straight t :mode (("\\.toml\\'" . toml-mode)))
-(use-package yaml-mode      :straight t :mode (("\\.ya?ml\\'" . yaml-mode)))
-(use-package jq-mode        :straight t :mode (("\\.jq\\'" . jq-mode)))
-(use-package restclient     :straight t :mode (("\\.http\\'" . restclient-mode)))
+(use-package markdown-mode  :straight t :mode (("\\.md\\'"       . markdown-mode)))
+(use-package scad-mode      :straight t :mode (("\\.scad\\'"     . scad-mode)))
+(use-package restclient     :straight t :mode (("\\.http\\'"     . restclient-mode)))
+(use-package awk-ts-mode    :straight t :mode (("\\.awk\\'"      . awk-ts-mode)))
+(use-package scala-ts-mode  :straight t :mode (("\\.scala\\'"    . scala-ts-mode)))
+(use-package jq-ts-mode     :straight t :mode (("\\.jq\\'"       . jq-ts-mode)))
+(use-package kotlin-ts-mode :straight t :mode (("\\.kt\\'"       . kotlin-ts-mode)))
 
 (use-package lua-mode
   :straight t
@@ -24,30 +23,25 @@
 
 (use-package web-mode
   :mode (("\\.html?\\'" . web-mode)
-         ("\\.css\\'"   . web-mode)
-         ("\\.hbs\\'"   . web-mode)
-         ("\\.jsx?\\'"  . web-mode)
-         ("\\.tsx?\\'"  . web-mode)
-         ("\\.json\\'"  . web-mode))
+         ("\\.hbs\\'"   . web-mode))
   :config
   (setq web-mode-markup-indent-offset 2)
   (setq web-mode-css-indent-offset 2)
   (setq web-mode-code-indent-offset 2)
   (setq web-mode-content-types-alist '(("jsx" . "\\.js[x]?\\'"))))
 
-(use-package tree-sitter :straight t)
 
-(use-package tree-sitter-langs
-  :straight t
-  :after tree-sitter
-  :config
-  (require 'tree-sitter)
-  (require 'tree-sitter-langs))
-
-(use-package treesit-auto
-  :straight t
-  :after tree-sitter
-  :config
-  (setq treesit-auto-install t)
-  (treesit-auto-add-to-auto-mode-alist 'all)
-  (global-treesit-auto-mode))
+(use-package treesit
+  :straight nil
+  :mode (("Dockerfile" . dockerfile-ts-mode)
+         ("\\.[tj]sx?\\'"  . tsx-ts-mode)
+         ("\\.bash\\'" . bash-ts-mode)
+         ("\\.css\\'"   . css-ts-mode)
+         ("\\.go\\'" . go-ts-mode)
+         ("\\.java\\'" . java-ts-mode)
+         ("\\.json\\'" . json-ts-mode)
+         ("\\.php\\'" . php-ts-mode)
+         ("\\.py[iw]?\\'" . python-ts-mode)
+         ("\\.toml\\'" . toml-ts-mode)
+         ("\\.yaml\\'" . yaml-ts-mode)
+         ("\\go.mode\\'" . go-mod-ts-mode)))
