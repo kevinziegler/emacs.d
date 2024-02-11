@@ -188,6 +188,15 @@
   "l"   '(org-mac-link-get-link              :which-key "Insert Link (From Application)"))
 
 (general-def
+  :states 'normal
+  :prefix "SPC j"
+  :non-normal-prefix "M-SPC j"
+  "" '(:ignore t             :which-key "Jump to <thing>")
+  "j" '(evil-avy-goto-line   :which-key "Jump to line")
+  "c" '(evil-avy-goto-char   :which-key "Jump to character")
+  "w" '(evil-avy-goto-word-0 :which-key "Jump to word"))
+
+(general-def
   :states '(normal visual treemacs)
   :keymaps 'override
   :prefix "SPC"
