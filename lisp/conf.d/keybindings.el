@@ -239,5 +239,12 @@
   "h" 'treemacs-visit-node-ace-vertical-split
   "s" 'treemacs-visit-node-ace-vertical-split)
 
+(general-def
+  :states 'normal
+  "+" '(evil-numbers/inc-at-pt :which-key "Increment at point")
+  "=" '(evil-numbers/inc-at-pt :which-key "Increment at point")
+  "-" '(evil-numbers/dec-at-pt :which-key "Decrement at point")
+  "_" '(evil-numbers/dec-at-pt :which-key "Decrement at point"))
+
 (provide 'keybindings)
 ;;; keybindings.el ends here

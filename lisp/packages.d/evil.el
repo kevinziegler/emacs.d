@@ -123,8 +123,6 @@
 
 (use-package evil-anzu :straight t :after anzu)
 
-;;(straight-use-package 'evil-numbers)
-
 ;; (use-package evil-easymotion
 ;;   :straight t
 ;;   :config
@@ -144,3 +142,4 @@
 ;;                         :type git
 ;;                         :host github
 ;;                         :repo "rgrinberg/evil-quick-diff"))
+(use-package evil-numbers :straight t)
