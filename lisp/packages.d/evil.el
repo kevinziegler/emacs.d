@@ -105,7 +105,21 @@
   (global-evil-surround-mode 1))
 
 ;; Set up text object mappings as keybindings (see project README)
-(use-package evil-textobj-tree-sitter :straight t)
+(use-package evil-textobj-tree-sitter
+  :straight t
+  :config
+  (define-key evil-outer-text-objects-map
+              "f"
+              (evil-textobj-tree-sitter-get-textobj "function.outer"))
+  (define-key evil-inner-text-objects-map
+              "f"
+              (evil-textobj-tree-sitter-get-textobj "function.inner"))
+
+  ;; You can also bind multiple items and we will match the first one we can find
+  (define-key evil-outer-text-objects-map
+              "a"
+              (evil-textobj-tree-sitter-get-textobj
+                ("conditional.outer" "loop.outer"))))
 
 (use-package evil-anzu :straight t :after anzu)
 
