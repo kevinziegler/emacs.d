@@ -26,3 +26,9 @@
 (load "conf.d/behaviors.el")
 (load "conf.d/keybindings.el")
 (load "conf.d/settings.el")
+
+(let* ((local-config (kdz/user-directory "local.el"))
+       (local-template (concat local-config ".tpl")))
+  (when (not (file-exists-p local-config) )
+    (copy-file local-template local-config))
+  (load local-config))
