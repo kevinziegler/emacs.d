@@ -94,6 +94,7 @@
   :non-normal-prefix "M-SPC o"
   ""  '(:ignore t  :which-key "Open")
   "f" '(make-frame :which-key "New Frame")
+  "s" '(terminal-here :which-key "Terminal")
   "t" '(treemacs   :which-key "Project File Tree"))
 
 (general-def
