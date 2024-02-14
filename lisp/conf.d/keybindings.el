@@ -171,6 +171,8 @@
   :prefix "SPC s"
   :non-normal-prefix "M-SPC s"
   ""  '(:ignore t                :which-key "Search")
+  "l" '(consult-line             :which-key "Search for Line (Current Buffer)")
+  "L" '(consult-line-multi       :which-key "Search for Line (Project Buffers)")
   "p" '(consult-ripgrep          :which-key "Project")
   "r" '(re-builder               :which-key "Regexp Builder")
   "s" '(tap/consult-ripgrep      :which-key "Thing-at-point (Select)")
