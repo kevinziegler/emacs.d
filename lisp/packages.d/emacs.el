@@ -42,6 +42,7 @@
           completion-cycle-threshold 1
           completions-detailed t
           cursor-in-non-selected-windows nil
+          fill-column 80
           frame-inhibit-implied-resize t
           indicate-buffer-boundaries 'left
           mouse-yank-at-point t
