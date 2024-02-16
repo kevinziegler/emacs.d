@@ -48,7 +48,7 @@
           mouse-yank-at-point t
           pixel-scroll-precision-mode t
           save-interprogram-paste-before-kill t
-          show-trailing-whitespace t
+          ;; show-trailing-whitespace t
           uniquify-buffer-name-style 'forward
           x-underline-at-descent-line nil)
 
