@@ -102,12 +102,3 @@
               ("M-DEL" . vertico-directory-delete-word))
   ;; Tidy shadowed file names
   :hook ((rfn-eshadow-update-overlay . vertico-directory-tidy)))
-
-(use-package vertico-posframe
-  :straight t
-  :after (posframe vertico)
-  :config
-  (vertico-posframe-mode 1)
-  (setq vertico-posframe-poshandler #'kdz/posframe-offset-top)
-  (setq vertico-posframe-parameters '((left-fringe . 8)
-                                      (right-fringe . 8))))
