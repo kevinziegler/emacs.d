@@ -51,12 +51,9 @@ actions that would update colors in emacs (such as changing themes)"
                                    :color (face-background 'default)))
     (set-face-attribute 'tab-bar-tab nil
 		        :inherit 'mode-line
-		        :height 1.0
 		        :underline (list :color (face-background 'match)
                                          :position -7))
-    (set-face-attribute 'tab-bar-tab-inactive nil
-                        :inherit 'mode-line
-                        :height 1.0))
+    (set-face-attribute 'tab-bar-tab-inactive nil :inherit 'mode-line))
 
   (defun kdz/tab-switch-index-or-select (&optional index)
     "Change tabs, optionally by index using a prefix argument"
