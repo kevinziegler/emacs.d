@@ -8,6 +8,7 @@
 
 (use-package nerd-icons :straight t)
 
+(use-package pretty-hydra :straight t)
 
 (use-package transient
   :straight t

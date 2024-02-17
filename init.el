@@ -22,6 +22,7 @@
 
 (load "lib/misc-actions.el")
 (load "lib/tap.el")
+(load "lib/window-resize.el")
 
 (load "conf.d/behaviors.el")
 (load "conf.d/keybindings.el")

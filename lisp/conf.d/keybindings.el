@@ -121,6 +121,7 @@
   "k" '(evil-window-up       :which-key "Up")
   "l" '(evil-window-right    :which-key "Right")
   "d" '(evil-window-delete   :which-key "Delete Window")
+  "s" '(kdz-pretty-window-resize/body :which-key "Resize Window")
   "T" '(tear-off-window      :which-key "Tear off Window")
   "n" '(evil-window-new      :which-key "New Window")
   "x" '(evil-window-exchange :which-key "Exchange Window")
