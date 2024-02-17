@@ -1,5 +1,12 @@
 ;;; Git/Version Control Tooling
-(use-package magit :straight t)
+(use-package magit
+  :straight t
+  :config
+  (transient-append-suffix 'magit-fetch "-p"
+    '("-t" "Fetch all tags" ("-t" "--tags")))
+  (transient-append-suffix 'magit-pull "-r"
+    '("-a" "Autostash" "--autostash")))
+
 (use-package git-timemachine :straight t)
 (use-package abridge-diff :after magit :init (abridge-diff-mode 1))
 
