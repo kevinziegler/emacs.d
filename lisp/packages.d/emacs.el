@@ -50,6 +50,7 @@
           save-interprogram-paste-before-kill t
           ;; show-trailing-whitespace t
           uniquify-buffer-name-style 'forward
+          use-package-enable-imenu-support t
           x-underline-at-descent-line nil)
 
   (setq-default indent-tabs-mode nil)
