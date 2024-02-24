@@ -1,0 +1,5 @@
+# name: Bibliography File
+# key: <bib
+# --
+
+#+bibliography: ${1:`(file-name-nondirectory (buffer-file-name))`.bib}
