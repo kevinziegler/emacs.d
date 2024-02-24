@@ -2,9 +2,7 @@
   :straight t
   :defer t
   :config
-  (treemacs-hide-gitignored-files-mode 1)
-  (add-hook 'treemacs-mode-hook
-            (lambda () (display-line-numbers-mode -1))))
+  (treemacs-hide-gitignored-files-mode 1))
 
 (use-package treemacs-nerd-icons
   :straight t

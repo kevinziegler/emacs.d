@@ -96,7 +96,9 @@ actions that would update colors in emacs (such as changing themes)"
              :files (:defaults "resources")))
 
 (use-package display-line-numbers
-  :straight nil
+  :ensure nil
+  :init
+  (global-display-line-numbers-mode)
   :config
   (defun kdz/toggle-line-numbers ()
     "Cycle between relative/absolute line numbers"
@@ -104,7 +106,14 @@ actions that would update colors in emacs (such as changing themes)"
     (if display-line-numbers
         (setq display-line-numbers
 	      (if (eq display-line-numbers 'relative) t 'relative))
-      (message "Line numbers are currently disabled!"))))
+      (message "Line numbers are currently disabled!")))
+
+  (dolist (mode '(dashboard-mode-hook
+                  org-mode-hook
+                  term-mode-hook
+                  treemacs-mode-hook
+                  eshell-mode-hook))
+    (add-hook mode (lambda () (display-line-numbers-mode -1)))))
 
 (use-package scroll-on-jump
   :straight t
