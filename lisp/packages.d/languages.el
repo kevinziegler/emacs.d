@@ -6,6 +6,8 @@
 (use-package scala-ts-mode  :straight t :mode (("\\.scala\\'"    . scala-ts-mode)))
 (use-package jq-ts-mode     :straight t :mode (("\\.jq\\'"       . jq-ts-mode)))
 (use-package kotlin-ts-mode :straight t :mode (("\\.kt\\'"       . kotlin-ts-mode)))
+(use-package hcl-mode       :straight t)
+(use-package terraform-mode :straight t)
 
 (use-package lua-mode
   :straight t
@@ -22,6 +24,7 @@
   (setq plantuml-default-exec-mode 'executable))
 
 (use-package web-mode
+  :straight t
   :mode (("\\.html?\\'" . web-mode)
          ("\\.hbs\\'"   . web-mode))
   :config
@@ -29,7 +32,6 @@
   (setq web-mode-css-indent-offset 2)
   (setq web-mode-code-indent-offset 2)
   (setq web-mode-content-types-alist '(("jsx" . "\\.js[x]?\\'"))))
-
 
 (use-package treesit
   :straight nil
