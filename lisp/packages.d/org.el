@@ -108,7 +108,7 @@ appropriate.  In tables, insert a new row or end the table."
 
   (defun kdz/org-heading-fixup-new-line ()
     "Ensure an empty line between non-empty org-mode headings"
-    (when (kdz/org-point-is-heading-p)
+    (when (org-at-heading-p)
       (save-excursion
         (previous-line)
         (let ((previous (thing-at-point 'line)))
