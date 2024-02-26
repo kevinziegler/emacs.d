@@ -123,6 +123,9 @@ actions that would update colors in emacs (such as changing themes)"
                   eshell-mode-hook))
     (add-hook mode (lambda () (display-line-numbers-mode -1)))))
 
+;; TODO Need to adjust face colors to contrast properly
+(use-package highlight-indent-guides :straight t)
+
 (use-package scroll-on-jump
   :straight t
   :after evil
