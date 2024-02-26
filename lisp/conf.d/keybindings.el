@@ -160,11 +160,21 @@
   :keymaps 'override
   :prefix "SPC t"
   :non-normal-prefix "M-SPC t"
-  ""  '(:ignore t                                 :which-key "Toggle")
+  ""  '(:ignore t                          :which-key "Toggle")
+  "c" '(display-fill-column-indicator-mode :which-key "Show/Hide Fill Column")
+  "i" '(highlight-indent-guides-mode       :which-key "Show/Hide Indent Guides")
+  "l" '(display-line-numbers-mode          :which-key "Show/Hide Line Numbers")
+  "r" '(kdz/toggle-line-numbers            :which-key "Relative/Absolute Line Numbers")
+  "s" '(sideline-mode                      :which-key "Show/Hide Sideline"))
+
+(general-def
+  :states '(normal insert emacs treemacs)
+  :keymaps 'override
+  :prefix "SPC t g"
+  :non-normal-prefix "M-SPC t g"
+  ""  '(:ignore t                                 :which-key "Toggle (Global)")
   "c" '(global-display-fill-column-indicator-mode :which-key "Show/Hide Fill Column")
-  "i" '(highlight-indent-guides-mode              :which-key "Show/Hide Indent Guides")
-  "l" '(display-line-numbers-mode                 :which-key "Show/Hide Line Numbers")
-  "r" '(kdz/toggle-line-numbers                   :which-key "Relative/Absolute Line Numbers")
+  "l" '(global-display-line-numbers-mode          :which-key "Show/Hide Line Numbers")
   "s" '(global-sideline-mode                      :which-key "Show/Hide Sideline"))
 
 (general-def
