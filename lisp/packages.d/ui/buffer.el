@@ -95,6 +95,14 @@ actions that would update colors in emacs (such as changing themes)"
              :repo "cfclrk/markdown-xwidget"
              :files (:defaults "resources")))
 
+(use-package display-fill-column-indicator
+  :ensure nil
+  :init
+  (global-display-fill-column-indicator-mode)
+  :config
+  (add-to-list 'global-display-fill-column-indicator-modes '(not markdown-mode))
+  (add-to-list 'global-display-fill-column-indicator-modes '(not org-mode)))
+
 (use-package display-line-numbers
   :ensure nil
   :init
