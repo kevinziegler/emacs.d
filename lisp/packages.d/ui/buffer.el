@@ -100,8 +100,13 @@ actions that would update colors in emacs (such as changing themes)"
   :init
   (global-display-fill-column-indicator-mode)
   :config
-  (add-to-list 'global-display-fill-column-indicator-modes '(not markdown-mode))
-  (add-to-list 'global-display-fill-column-indicator-modes '(not org-mode)))
+  (dolist (mode '(dired-mode
+                  dirvish-directory-view-mode
+                  helpful-mode
+                  markdown-mode
+                  org-mode
+                  special-mode))
+    (add-to-list 'global-display-fill-column-indicator-modes `(not ,mode))))
 
 (use-package display-line-numbers
   :ensure nil
@@ -117,6 +122,8 @@ actions that would update colors in emacs (such as changing themes)"
       (message "Line numbers are currently disabled!")))
 
   (dolist (mode '(dashboard-mode-hook
+                  dired-mode
+                  dirvish-directory-view-mode
                   org-mode-hook
                   term-mode-hook
                   treemacs-mode-hook
