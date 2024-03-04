@@ -23,6 +23,44 @@ us to skip re-generating the SVG data if we already have a copy on
 hand, even when the displayed SVGs have changed (e.g. to swap a tab's
 SVGs between active and in-active states).")
 
+(defun kdz/tab-bar-update-faces (&rest _)
+  "Customize tab-bar faces against current theme
+
+This is performed via a function so it can be used as a hook on
+actions that would update colors in emacs (such as changing themes)"
+  (set-face-attribute 'tab-bar nil
+		      :inherit 'mode-line
+		      :box (list :line-width 7
+                                 :color (face-background 'default)))
+  (set-face-attribute 'tab-bar-tab nil
+		      :inherit 'mode-line
+		      :underline (list :color (face-background 'match)
+                                       :position -7))
+  (set-face-attribute 'tab-bar-tab-inactive nil :inherit 'mode-line))
+
+(defun kdz/tab-switch-index-or-select (&optional index)
+  "Change tabs, optionally by index using a prefix argument"
+  (interactive "P")
+  (if (eq index nil)
+      (call-interactively 'tab-switch)
+    (tab-bar-select-tab index)))
+
+(defun kdz/create-named-tab (tab-name)
+  "Create a named tab with a new scratch buffer"
+  (interactive "sName for new tab: ")
+  (tab-bar-new-tab)
+  (switch-to-buffer (generate-new-buffer (format "*scratch: %s*"
+                                                 tab-name)))
+  (tab-bar-rename-tab tab-name))
+
+(defun kdz/create-named-tab (tab-name)
+  "Create a named tab with a new scratch buffer"
+  (interactive "sName for new tab: ")
+  (tab-bar-new-tab)
+  (switch-to-buffer (generate-new-buffer (format "*scratch: %s*"
+                                                 tab-name)))
+  (tab-bar-rename-tab tab-name))
+
 (defun kdz/tab-bar--svg-get-or-create-cached (text props)
   "Return the SVG to represent TEXT with PROPS in the tab bar
 
@@ -314,3 +352,13 @@ Pinned tabs are defined in `kdz-tab-bar-pinned-tabs-alist'"
     (tab-bar-mode -1)
     (setq tab-bar-format format)
     (tab-bar-mode +1)))
+
+(define-minor-mode svg-tabs-mode
+  "Display tab-bar tabs using SVG images"
+  :global t
+  (if svg-tabs-mode
+      (setq tab-bar-tab-name-format-function #'kdz/tab-bar-tab-name-format-svg)
+    (progn
+      (message "svg-tabs-mode activated!"))
+    (progn
+      (message "svg-tabs-mode deactivated!"))))

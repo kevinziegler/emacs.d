@@ -30,7 +30,6 @@
               #'kdz/project-kill-dashboard))
 
 (use-package tab-bar
-  :straight nil
   :config
   (load "lib/tab-bar.el")
 
@@ -40,37 +39,6 @@
   ;; (advice-add tab-bar-tabs-function
   ;;             :filter-return
   ;;             #'kdz/tab-bar-tabs-sort-pinned-tabs-last)
-  (defun kdz/tab-bar-update-faces (&rest _)
-    "Customize tab-bar faces against current theme
-
-This is performed via a function so it can be used as a hook on
-actions that would update colors in emacs (such as changing themes)"
-    (set-face-attribute 'tab-bar nil
-		        :inherit 'mode-line
-		        :box (list :line-width 7
-                                   :color (face-background 'default)))
-    (set-face-attribute 'tab-bar-tab nil
-		        :inherit 'mode-line
-		        :underline (list :color (face-background 'match)
-                                         :position -7))
-    (set-face-attribute 'tab-bar-tab-inactive nil :inherit 'mode-line))
-
-  (defun kdz/tab-switch-index-or-select (&optional index)
-    "Change tabs, optionally by index using a prefix argument"
-    (interactive "P")
-    (if (eq index nil)
-        (call-interactively 'tab-switch)
-      (tab-bar-select-tab index)))
-
-  (defun kdz/create-named-tab (tab-name)
-    "Create a named tab with a new scratch buffer"
-    (interactive "sName for new tab: ")
-    (tab-bar-new-tab)
-    (switch-to-buffer (generate-new-buffer (format "*scratch: %s*"
-                                                   tab-name)))
-    (tab-bar-rename-tab tab-name))
-
-  (declare-function kdz/tab-bar-tab-name-format-svg "init")
 
   (setq tab-bar-close-button-show nil
         tab-bar-tab-hints t
@@ -84,8 +52,7 @@ actions that would update colors in emacs (such as changing themes)"
                          tab-bar-separator
                          kdz/tab-bar-format-pinned-tabs
                          tab-bar-separator
-                         kdz/tab-bar-format-pin-icon))
-  (tab-bar-mode))
+                         kdz/tab-bar-format-pin-icon)))
 
 (use-package tabspaces
   :straight t
@@ -113,12 +80,12 @@ actions that would update colors in emacs (such as changing themes)"
   :straight t
   :config
   (add-hook 'ibuffer-hook
-	    (lambda ()
-	      (setq ibuffer-filter-groups
+ 	    (lambda ()
+ 	      (setq ibuffer-filter-groups
                     (ibuffer-project-generate-filter-groups))
-	      (unless (eq ibuffer-sorting-mode 'project-file-relative)
-		(ibuffer-do-sort-by-project-file-relative))))
+ 	      (unless (eq ibuffer-sorting-mode 'project-file-relative)
+ 		(ibuffer-do-sort-by-project-file-relative))))
   (add-hook 'ibuffer-hook
-	    (lambda ()
-	      (setq ibuffer-filter-groups
+ 	    (lambda ()
+ 	      (setq ibuffer-filter-groups
                     (ibuffer-project-generate-filter-groups)))))
