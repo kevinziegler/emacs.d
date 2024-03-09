@@ -174,6 +174,7 @@
   :non-normal-prefix "M-SPC t g"
   ""  '(:ignore t                                 :which-key "Toggle (Global)")
   "c" '(global-display-fill-column-indicator-mode :which-key "Show/Hide Fill Column")
+  "k" '(keycast-tab-bar-mode                      :which-key "Keycast Display")
   "l" '(global-display-line-numbers-mode          :which-key "Show/Hide Line Numbers")
   "s" '(global-sideline-mode                      :which-key "Show/Hide Sideline"))
 

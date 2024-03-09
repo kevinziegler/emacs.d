@@ -12,3 +12,5 @@
 	which-key-prefix-prefix "• ")
   (setq which-key-show-prefix 'top)
   (which-key-mode))
+
+(use-package keycast :straight t)
