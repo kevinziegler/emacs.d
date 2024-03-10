@@ -89,6 +89,15 @@
   "k" '(helpful-key      :which-key "Describe Key"))
 
 (general-def
+  :states '(normal insert emacs)
+  :keymaps 'override
+  :prefix "SPC i"
+  :non-normal-prefix "M-SPC i"
+  ""  '(:ignore t :which-key "Insert")
+  "u" '(insert-char :which-key "Unicode Character")
+  "s" '(consult-yasnippet :which-key "Snippet"))
+
+(general-def
   :states '(normal insert emacs treemacs)
   :prefix "SPC o"
   :non-normal-prefix "M-SPC o"
