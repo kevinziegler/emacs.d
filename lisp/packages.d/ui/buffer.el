@@ -93,7 +93,11 @@ actions that would update colors in emacs (such as changing themes)"
              :type git
              :host github
              :repo "cfclrk/markdown-xwidget"
-             :files (:defaults "resources")))
+             :files (:defaults "resources"))
+  (setq markdown-xwidget-command "pandoc"
+        markdown-xwidget-github-theme "light"
+        markdown-xwidget-mermaid-theme "default"
+        markdown-xwidget-code-block-theme "default") )
 
 (use-package display-fill-column-indicator
   :ensure nil
