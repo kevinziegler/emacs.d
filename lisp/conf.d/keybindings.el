@@ -223,10 +223,9 @@
 (general-def
   :states 'normal
   :keymaps 'org-mode-map
-  :prefix "SPC i"
-  :non-normal-prefix "M-SPC i"
-  ""    '(:ignore t                          :which-key "Insert")
-  "SPC" '(consult-yasnippet                  :which-key "Insert Snippet")
+  :prefix "SPC i o"
+  :non-normal-prefix "M-SPC i o"
+  ""    '(:ignore t                          :which-key "Org-Mode")
   "h"   '(org-insert-heading-respect-content :which-key "Insert Heading")
   "s"   '(org-insert-subheading              :which-key "Insert Sub-heading")
   "l"   '(org-mac-link-get-link              :which-key "Insert Link (From Application)"))
