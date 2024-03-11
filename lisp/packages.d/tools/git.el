@@ -28,3 +28,17 @@
 (use-package git-modes
   :straight t
   :mode (("/.dockerignore\\'" . gitignore-mode )))
+
+(use-package git-link
+  :straight t
+  :config
+  (defun kdz/git-link-with-commit ()
+    (interactive)
+    (let ((git-link-use-commit t))
+      (call-interactively 'git-link)))
+
+  (defun kdz/git-link--tag ()
+    "Get the latest tag for constructing a git-link URL."
+    (car (git-link--exec "describe" "--tags" "HEAD")))
+
+  (advice-add #'git-link--branch :after-until #'kdz/git-link--tag))

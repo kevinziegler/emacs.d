@@ -107,7 +107,7 @@
   "t" '(treemacs   :which-key "Project File Tree"))
 
 (general-def
-  :states '(normal insert emacs treemacs)
+  :states '(normal insert visual emacs treemacs)
   :keymaps 'override
   :prefix "SPC g"
   :non-normal-prefix "M-SPC g"
@@ -117,6 +117,16 @@
   "b" '(magit-blame           :which-key "Blame File")
   "l" '(magit-log-buffer-file :which-key "Log for File")
   "m" '(nil                   :which-key "Merge Conflicts"))
+
+(general-def
+  :states '(normal insert visual emacs treemacs)
+  :keymaps 'override
+  :prefix "SPC g y"
+  :non-normal-prefix "M-SPC g y"
+  ""  '(:ignore t                :which-key "Copy Remote Link")
+  "h" '(git-link-homepage        :which-key "Repository Homepage")
+  "y" '(git-link                 :which-key "File + Line Number")
+  "Y" '(kdz/git-link-with-commit :which-key "File + Line Number (@ Commit)"))
 
 (general-def
   :states '(normal insert emacs treemacs)
