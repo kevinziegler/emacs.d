@@ -89,6 +89,16 @@
   "k" '(helpful-key      :which-key "Describe Key"))
 
 (general-def
+  :states '(normal insert emacs treemacs)
+  :keymaps 'override
+  :prefix "SPC h d"
+  :non-normal-prefix "M-SPC h d"
+  ""  '(:ignore t :which-key "Dev Docs")
+  "d" '(devdocs-search :which-key "Search in Documentation")
+  "p" '(devdocs-peruse  :which-key "Peruse Documentation")
+  "i" '(devdocs-install :which-key "Download Documentation Set"))
+
+(general-def
   :states '(normal insert emacs)
   :keymaps 'override
   :prefix "SPC i"

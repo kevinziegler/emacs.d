@@ -16,3 +16,8 @@
   (which-key-mode))
 
 (use-package keycast :straight t)
+
+(use-package devdocs
+  :straight t
+  :config
+  (setq devdocs-data-dir (kdz/user-directory ".local/devdocs-data")))
