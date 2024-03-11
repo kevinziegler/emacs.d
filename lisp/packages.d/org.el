@@ -209,4 +209,22 @@ appropriate.  In tables, insert a new row or end the table."
   :after (evil org)
   :hook ((org-mode . evil-org-mode)))
 
+(use-package ox
+  :straight t
+  :config
+  (defun kdz/ox-filter-git-file-link (data backend channel)
+    "Transform file links in DATA into git-link URLs when appropriate."
+    (let* ((beg (next-property-change 0 data))
+           (link (if beg (get-text-property beg :parent data)))
+           (type (org-element-property :type link))
+           (path (org-element-property :path link))
+           (option (org-element-property :search-option link)))
+      (when (and (equal (org-element-property :type link) "file")
+                 (eq (vc-backend path) 'Git))
+        (format "[[%s][%s]]"
+                (kdz/file-link-as-git-link path option)
+                (org-element-contents link)))))
+
+  (add-to-list 'org-export-filter-link-functions
+               #'kdz/ox-filter-git-file-link))
 ;; (use-package ox-pandoc :straight t)
