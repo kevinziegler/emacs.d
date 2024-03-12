@@ -29,6 +29,11 @@
               :after
               #'kdz/project-kill-dashboard))
 
+(use-package project-rootfile
+  :straight t
+  :config
+  (add-to-list 'project-rootfile-list ".project"))
+
 (use-package tab-bar
   :config
   (load "lib/tab-bar.el")
