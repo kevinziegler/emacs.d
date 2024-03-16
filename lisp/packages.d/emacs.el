@@ -49,7 +49,7 @@
           pixel-scroll-precision-mode t
           save-interprogram-paste-before-kill t
           ;; show-trailing-whitespace t
-          uniquify-buffer-name-style 'forward
+          uniquify-buffer-name-style 'post-forward
           use-package-enable-imenu-support t
           x-underline-at-descent-line nil)
 
