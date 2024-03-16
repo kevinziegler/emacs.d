@@ -6,6 +6,15 @@
   ;; :config (stimmung-themes-load-light)
   )
 
+(use-package kaolin-themes
+  :straight t
+  :config
+  (setq kaolin-themes-bold t
+        kaolin-themes-distinct-company-scrollbar t
+        kaolin-themes-italic t
+        kaolin-themes-italic-comments t
+        kaolin-themes-underline-wave nil))
+
 (use-package spacious-padding
   :straight t
   :config
