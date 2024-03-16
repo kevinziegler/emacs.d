@@ -83,7 +83,8 @@
   :non-normal-prefix "M-SPC h"
   ""  '(:ignore t        :which-key "Help")
   "e" '(list-environment :which-key "List Environment Variables")
-  "m" '(describe-mode    :which-key "Describe Mode")
+  "m" '(man              :which-key "Lookup Manpage")
+  "M" '(describe-mode    :which-key "Describe Mode")
   "f" '(helpful-callable :which-key "Describe Callable")
   "v" '(helpful-variable :which-key "Describe Variable")
   "k" '(helpful-key      :which-key "Describe Key"))
