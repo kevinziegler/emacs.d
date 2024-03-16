@@ -155,6 +155,7 @@
   "T" '(tear-off-window      :which-key "Tear off Window")
   "n" '(evil-window-new      :which-key "New Window")
   "x" '(evil-window-exchange :which-key "Exchange Window")
+  "w" '(ace-window           :which-key "Select Window")
   "H" '(evil-window-move-far-left :which-key "Move window left")
   "L" '(evil-window-move-far-right :which-key "Move window right")
   "J" '(evil-window-move-far-down :which-key "Move window down")
