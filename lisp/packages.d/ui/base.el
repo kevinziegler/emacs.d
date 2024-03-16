@@ -21,3 +21,8 @@
         transient-values-file  (kdz/transient-path "values.el")))
 
 (use-package avy :straight t)
+(use-package ace-window
+  :straight t
+  :config
+  (ace-window-posframe-mode)
+  (set-face-attribute 'aw-leading-char-face nil :height 3.0))
