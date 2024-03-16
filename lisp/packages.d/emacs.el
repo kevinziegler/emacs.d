@@ -49,8 +49,10 @@
           pixel-scroll-precision-mode t
           save-interprogram-paste-before-kill t
           ;; show-trailing-whitespace t
+          truncate-string-ellipsis "…"
           uniquify-buffer-name-style 'post-forward
           use-package-enable-imenu-support t
+          x-stretch-cursor t
           x-underline-at-descent-line nil)
 
   (setq-default indent-tabs-mode nil)
