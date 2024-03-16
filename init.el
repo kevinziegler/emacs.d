@@ -21,6 +21,7 @@
 (load "packages.d/ui/buffer.el")
 
 (load "lib/misc-actions.el")
+(load "lib/system.el")
 (load "lib/tap.el")
 (load "lib/window-resize.el")
 
