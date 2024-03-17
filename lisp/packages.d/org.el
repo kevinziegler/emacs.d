@@ -2,17 +2,27 @@
   :hook ((org-mode . visual-line-mode))
   :config
   (setopt org-auto-align-tags nil
-          org-tags-column 0
-          org-fold-catch-invisible-edits 'show-and-error
-          org-special-ctrl-a/e t
-          org-insert-heading-respect-content t
-          ;; Org styling, hide markup etc.
-          org-hide-emphasis-markers t
-          org-pretty-entities t
-          org-ellipsis " …"
+          org-babel-results-keyword "results"
           org-cycle-separator-lines 0
+          org-edit-src-content-indentation 0
+          org-ellipsis " ⋯"
+          org-fold-catch-invisible-edits 'show-and-error
           org-fold-core-style 'overlays
-          org-edit-src-content-indentation 0)
+          org-hidden-keywords '(title)
+          org-fontify-quote-and-verse-blocks t
+          org-hide-emphasis-markers t
+          org-html-doctype "html5"
+          org-html-html5-fancy t
+          org-insert-heading-respect-content t
+          org-list-allow-alphabetical t
+          org-list-demote-modify-bullet '(("-" . "+") ("+" . "1.") ("1." . "-"))
+          org-pretty-entities t
+          org-special-ctrl-a/e t
+          org-tags-column 0
+          org-use-property-inheritance t)
+
+  (defmacro kdz/follow-suffix-link (base-url)
+    `(lambda (suffix) (browse-url (string-join (list ,base-url suffix) "/") )))
 
   (defun kdz/org-return-handle-point-at-heading ()
     "Handle <return> behavior when point is at an org heading"
@@ -137,16 +147,33 @@ appropriate.  In tables, insert a new row or end the table."
      (sqlite . t)
      (emacs-lisp .t)))
 
-  ;; (advice-add 'org-babel-variable-assignments:plantuml
-  ;;             :override #'kdz/org-babel-variable-assignments:plantuml)
-  ;; (advice-add 'org-babel-plantuml-make-body
-  ;;             :override #'kdz/org-babel-plantuml-make-body)
+
   ;; (advice-add 'org-mks
   ;;             :override #'org-mks-pretty)
   ;; (advice-add 'org-capture-select-template
   ;;             :override #'org-capture-select-template-prettier)
 
-  )
+  (defvar gitlab-hosts-alist nil)
+  (defvar jira-host nil)
+
+  (org-link-set-parameters "gh" :follow (kdz/follow-suffix-link "https://github.com"))
+  (org-link-set-parameters "gl" :follow (kdz/follow-suffix-link "https://gitlab.com"))
+
+  (when (boundp gitlab-hosts-alist)
+    (dolist (host gitlab-hosts-alist)
+      (let ((name (car host))
+            (url (cdr host)))
+        (org-link-set-parameters (concat "gl-" name)
+                                 :follow (kdz/follow-suffix-link url)))))
+
+  (when (and (boundp 'hosted-gitlab-host) hosted-gitlab-host)
+    (org-link-set-parameters "hgl"
+                             :follow (kdz/follow-suffix-link hosted-gitlab-host)))
+
+  (when (and (boundp 'jira-host) jira-host)
+    (org-link-set-parameters "jira"
+                             :follow (kdz/follow-suffix-link (format "%s/browse"
+                                                                     jira-host)))))
 
 (use-package org-agenda
   :straight nil
@@ -170,7 +197,9 @@ appropriate.  In tables, insert a new row or end the table."
   :straight t
   :after org
   :config
-  (setopt org-appear-trigger 'manual)
+  (setopt org-appear-trigger 'manual
+          org-appear-autolinks t
+          org-appear-autokeywords t)
 
   (add-hook 'org-mode-hook 'org-appear-mode)
   (add-hook 'org-mode-hook (lambda ()
@@ -188,7 +217,7 @@ appropriate.  In tables, insert a new row or end the table."
   :after org
   :hook ((org-mode-hook . org-autolist-mode)))
 
-;; TODO Load this via org-bable-do-load-languages
+;; TODO Load this via org-babel-do-load-languages
 (use-package ob-http :straight t :after org)
 
 ;; TODO Set up keybindings
@@ -199,7 +228,15 @@ appropriate.  In tables, insert a new row or end the table."
   ;; (advice-add 'org-mac-link-finder-insert-selected
   ;;             :around #'kdz/org-mac-link-advise-evil)
   )
-;; (use-package 'org-re-reveal :straight t)
+
+(use-package org-re-reveal 
+  :straight t
+  :config
+  (setq
+   org-re-reveal-subtree-with-title-slide t
+   org-re-reveal-transition "slide"
+   org-re-reveal-title-slide "<h1>%t</h1><p>%a | %d</p>"
+   org-re-reveal-plugins '(highlight markdown notes search zoom)))
 
 ;; TODO Figure out how to get the tree view to show up for this package
 ;; (use-package org-sidebar :straight t)
@@ -210,7 +247,7 @@ appropriate.  In tables, insert a new row or end the table."
   :hook ((org-mode . evil-org-mode)))
 
 (use-package ox
-  :straight t
+  :straight nil
   :config
   (defun kdz/ox-filter-git-file-link (data backend channel)
     "Transform file links in DATA into git-link URLs when appropriate."
@@ -225,9 +262,21 @@ appropriate.  In tables, insert a new row or end the table."
                 (kdz/file-link-as-git-link path option)
                 (org-element-contents link)))))
 
-  (add-to-list 'org-export-filter-link-functions
-               #'kdz/ox-filter-git-file-link))
-;; (use-package ox-pandoc :straight t)
+  (add-to-list 'org-export-filter-link-functions #'kdz/ox-filter-git-file-link))
+
+;; TODO Figure out a good keybinding for this
+(use-package ox-clip :straight t)
+
+;; (use-package doct :straight t)
+;; (use-package ob-http :straight t)
+;; (use-package ob-mermaid :straight t)
+;; (use-package org-jira :straight t)
+;; (use-package valign :straight t)
+
+(use-package ox-pandoc
+  :straight t
+  :config
+  (add-to-list 'org-pandoc-options '(wrap . "none")))
 
 (use-package ob-async
   :straight t
