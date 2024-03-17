@@ -244,7 +244,12 @@ appropriate.  In tables, insert a new row or end the table."
 (use-package evil-org
   :straight t
   :after (evil org)
-  :hook ((org-mode . evil-org-mode)))
+  :hook ((org-mode . evil-org-mode))
+  :config
+  (add-hook 'org-mode-hook
+            (lambda () (add-hook 'evil-insert-state-exit-hook
+                                 (lambda () (when (org-at-table-p)
+                                              (org-cycle)))))))
 
 (use-package ox
   :straight nil
