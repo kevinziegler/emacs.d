@@ -248,6 +248,7 @@
   :non-normal-prefix "M-SPC"
   "u"   '(universal-argument             :which-key "Apply Universal Argument")
   ";"   '(pp-eval-expression             :which-key "Evaluate Expression")
+  "RET" '(context-menu-open              :which-key "Show Context Menu")
   "SPC" '(execute-extended-command       :which-key "Execute Command"))
 
 (general-def
