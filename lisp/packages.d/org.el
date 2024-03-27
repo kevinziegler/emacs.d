@@ -497,3 +497,26 @@ Also adds support for a `:sync' parameter to override `:async'."
   (advice-add 'ob-async-org-babel-execute-src-block
               :around
               #'kdz/+org-babel-disable-async-maybe-a))
+
+(use-package org-make-toc
+  :straight t
+  :config
+  (defvar kdz-org-make-toc-headline "Table of Contents")
+  (defun kdz/org-make-toc-dwim ()
+    (interactive)
+    (let ((toc-point (org-find-exact-headline-in-buffer kdz-org-make-toc-headline)))
+      (if toc-point
+          (save-excursion
+            (goto-char toc-point)
+            (when (not (org-entry-get (point) "TOC"))
+              (end-of-line)
+              (newline)
+              (org-make-toc-insert))
+            (org-make-toc))
+        (save-excursion
+          (goto-char (point-min))
+          (org-next-visible-heading (point-min))
+          (previous-line)
+          (org-insert-heading)
+          (insert kdz-org-make-toc-headline)
+          (kdz/org-make-toc-init))))))

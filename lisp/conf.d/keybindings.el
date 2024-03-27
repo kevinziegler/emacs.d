@@ -228,6 +228,7 @@
   :prefix "SPC i o"
   :non-normal-prefix "M-SPC i o"
   ""    '(:ignore t                          :which-key "Org-Mode")
+  "c"   '(kdz/org-make-toc-dwim              :which-key "Insert Table of Contents")
   "h"   '(org-insert-heading-respect-content :which-key "Insert Heading")
   "s"   '(org-insert-subheading              :which-key "Insert Sub-heading")
   "l"   '(org-mac-link-get-link              :which-key "Insert Link (From Application)"))
