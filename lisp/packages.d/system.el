@@ -27,3 +27,5 @@
 (use-package nerd-icons-dired
   :straight t
   :hook (dired-mode . nerd-icons-dired-mode))
+
+(use-package reveal-in-osx-finder :straight t)

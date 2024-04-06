@@ -94,8 +94,8 @@
   :keymaps 'override
   :prefix "SPC h d"
   :non-normal-prefix "M-SPC h d"
-  ""  '(:ignore t :which-key "Dev Docs")
-  "d" '(devdocs-search :which-key "Search in Documentation")
+  ""  '(:ignore t       :which-key "Dev Docs")
+  "d" '(devdocs-search  :which-key "Search in Documentation")
   "p" '(devdocs-peruse  :which-key "Peruse Documentation")
   "i" '(devdocs-install :which-key "Download Documentation Set"))
 
@@ -104,18 +104,19 @@
   :keymaps 'override
   :prefix "SPC i"
   :non-normal-prefix "M-SPC i"
-  ""  '(:ignore t :which-key "Insert")
-  "u" '(insert-char :which-key "Unicode Character")
+  ""  '(:ignore t         :which-key "Insert")
+  "u" '(insert-char       :which-key "Unicode Character")
   "s" '(consult-yasnippet :which-key "Snippet"))
 
 (general-def
   :states '(normal insert emacs treemacs)
   :prefix "SPC o"
   :non-normal-prefix "M-SPC o"
-  ""  '(:ignore t  :which-key "Open")
-  "f" '(make-frame :which-key "New Frame")
-  "s" '(terminal-here :which-key "Terminal")
-  "t" '(treemacs   :which-key "Project File Tree"))
+  ""  '(:ignore t            :which-key "Open")
+  "f" '(make-frame           :which-key "New Frame")
+  "F" '(reveal-in-osx-finder :which-key "Finder Window")
+  "s" '(terminal-here        :which-key "Terminal")
+  "t" '(treemacs             :which-key "Project File Tree"))
 
 (general-def
   :states '(normal insert visual emacs treemacs)
