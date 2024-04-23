@@ -1,5 +1,4 @@
 (use-package dotenv-mode    :straight t :mode (("\\.env\\..*\\'" . dotenv-mode)))
-(use-package markdown-mode  :straight t :mode (("\\.md\\'"       . markdown-mode)))
 (use-package scad-mode      :straight t :mode (("\\.scad\\'"     . scad-mode)))
 (use-package restclient     :straight t :mode (("\\.http\\'"     . restclient-mode)))
 (use-package awk-ts-mode    :straight t :mode (("\\.awk\\'"      . awk-ts-mode)))
@@ -15,6 +14,16 @@
   :interpreter (("lua" . lua-mode))
   :config
   (autoload 'lua-mode "lua-mode" "Lua editing mode." t))
+
+(use-package markdown-mode
+  :straight t
+  :mode (("\\.md\\'"       . markdown-mode))
+  :config
+  (setq markdown-enable-wiki-links t
+        markdown-fontify-code-blocks-natively t
+        markdown-gfm-uppercase-checkbox t
+        markdown-gfm-use-electric-backquote t
+        markdown-italic-underscore t))
 
 (use-package plantuml-mode
   :straight t
