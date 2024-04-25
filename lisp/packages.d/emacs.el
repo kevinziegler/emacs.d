@@ -52,13 +52,12 @@
           truncate-string-ellipsis "…"
           uniquify-buffer-name-style 'post-forward
           use-package-enable-imenu-support t
+          use-short-answers t
           x-stretch-cursor t
           x-underline-at-descent-line nil)
 
   (setq-default indent-tabs-mode nil)
 
-  ;; Use `y' and `n' prompts instead of `yes' and `no'
-  (defalias 'yes-or-no-p 'y-or-n-p)
 
   (savehist-mode 1)
   (save-place-mode 1)
