@@ -28,4 +28,6 @@
   :straight t
   :hook (dired-mode . nerd-icons-dired-mode))
 
+(use-package logview :straight t)
+
 (use-package reveal-in-osx-finder :straight t)
