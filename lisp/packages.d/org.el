@@ -13,6 +13,7 @@
           org-hide-emphasis-markers t
           org-html-doctype "html5"
           org-html-html5-fancy t
+          org-image-actual-width nil
           org-insert-heading-respect-content t
           org-list-allow-alphabetical t
           org-list-demote-modify-bullet '(("-" . "+") ("+" . "1.") ("1." . "-"))
