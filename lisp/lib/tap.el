@@ -100,7 +100,7 @@
       (message "Nothing to act on (type: %s)!" (car thing)))))
 
 (defun tap/act-dwim (action)
-  (let ((thing (tap/select-dwim)))
+  (let ((thing (cdr (tap/select-dwim))))
     (if thing
 	(funcall action thing)
       (message "Nothing to act on!"))))
@@ -110,6 +110,7 @@
   (tap/act (lambda (type thing) (consult-ripgrep nil thing))))
 
 (defun tap/consult-ripgrep-dwim ()
-  (consult-ripgrep nil (tap/select-dwim)))
+  (interactive)
+  (tap/act-dwim (lambda (thing) (consult-ripgrep nil thing))))
 
 (provide 'tap)
