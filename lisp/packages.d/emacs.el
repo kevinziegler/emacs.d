@@ -28,10 +28,18 @@
   (setopt save-place-file (kdz/user-directory ".local" "places")
           savehist-file (kdz/user-directory ".local" "history")
           bookmark-file (kdz/user-directory ".local" "bookmarks")
-          custom-file (kdz/user-directory ".local" "custom.el")
-          auto-save-list-file-prefix (kdz/user-directory ".local" "auto-save-list/.saves-")
-          backup-directory-alist (or backup-directory-alist
-                                     `(("." . ,(kdz/user-directory ".local" "backups")))))
+          custom-file (kdz/user-directory ".local" "custom.el"))
+
+  (let ((auto-save-dir (kdz/user-directory ".local" "auto-save"))
+        (backup-dir (kdz/user-directory ".local" "backups")))
+    (make-directory auto-save-dir t)
+    (make-directory backup-dir t)
+    (setf auto-save-list-file-prefix auto-save-dir
+          auto-save-file-name-transforms
+          `((".*" ,auto-save-dir t)))
+    (make-directory backup-dir t)
+    (setf backup-directory-alist
+          `((".*" . ,backup-dir))))
   (setopt appropos-do-all t
           auto-revert-avoid-polling t
           auto-revert-check-vc-info t
