@@ -1,11 +1,5 @@
 (use-package hydra :straight t)
 
-(use-package sideline
-  :straight t
-  :init
-  (setq sideline-backends-right '((sideline-blame . down)))
-  (setq sideline-backends-right-skip-current-line nil))
-
 (use-package nerd-icons :straight t)
 
 (use-package pretty-hydra :straight t)

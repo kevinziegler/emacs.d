@@ -13,8 +13,23 @@
 (use-package vundo :straight t)
 (use-package eval-sexp-fu :straight t)
 (use-package anzu :straight t :config (global-anzu-mode +1))
-(use-package sideline-blame :straight t)
-(use-package sideline-lsp :straight t)
+(use-package flycheck :straight t)
+(use-package sideline :straight t)
+
+(use-package sideline-blame
+  :straight t
+  :after 'sideline
+  :config (add-to-list 'sideline-backends-right sideline-blame))
+
+(use-package sideline-flycheck
+  :straight t
+  :after '(sideline flycheck)
+  :config (add-to-list 'sideline-backends-right sideline-flycheck))
+
+(use-package sideline-lsp
+  :straight t
+  :after '(sideline lsp)
+  :config (add-to-list 'sideline-backends-right sideline-lsp))
 
 (use-package hl-todo
   :straight t
