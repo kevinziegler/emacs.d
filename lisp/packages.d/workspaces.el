@@ -66,6 +66,7 @@
   (setq tabspaces-session-file (kdz/user-directory ".local"
                                                    "tabsession.el"))
 
+  (tabspaces-mode)
   (add-to-list 'tabspaces-exclude-buffers dashboard-buffer-name)
   (advice-add 'tabspaces-open-or-create-project-and-workspace
               :after
