@@ -65,4 +65,5 @@
   (pixel-scroll-precision-mode)
   (global-auto-revert-mode)
   (global-hl-line-mode)
+  (global-so-long-mode)
   (when (display-graphic-p) (context-menu-mode)))
