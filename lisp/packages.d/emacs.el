@@ -40,19 +40,28 @@
     (make-directory backup-dir t)
     (setf backup-directory-alist
           `((".*" . ,backup-dir))))
+
   (setopt appropos-do-all t
           auto-revert-avoid-polling t
           auto-revert-check-vc-info t
           auto-revert-interval 5
           backup-by-copying t
+          version-control t
+          delete-old-versions t
+          delete-by-moving-to-trash t
+          kept-new-versions 5
+          kept-old-versions 3
+          echo-keystrokes 0.25
           catppuccin-flavor 'mocha
           column-number-mode t
+          comint-prompt-read-only t
           completion-cycle-threshold 1
           completions-detailed t
           cursor-in-non-selected-windows nil
           fill-column 80
           frame-inhibit-implied-resize t
           indicate-buffer-boundaries 'left
+          inhibit-compacting-font-caches t
           mouse-yank-at-point t
           pixel-scroll-precision-mode t
           save-interprogram-paste-before-kill t
@@ -66,6 +75,8 @@
 
   (setq-default indent-tabs-mode nil)
 
+  (setq-default history-length 1000
+                prescient-history-length 1000)
 
   (savehist-mode 1)
   (save-place-mode 1)
