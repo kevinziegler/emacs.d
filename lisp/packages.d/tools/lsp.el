@@ -18,7 +18,11 @@
   :straight t
   :after lsp-mode
   :init
-  (setq lsp-ui-sideline-enable nil))
+  (setq lsp-ui-doc-alignment 'window
+        lsp-ui-doc-position 'bottom
+        lsp-ui-doc-header t
+        lsp-ui-doc-show-with-cursor t
+        lsp-ui-sideline-enable nil))
 
 (use-package lsp-treemacs :straight t :after lsp-mode)
 (use-package consult-lsp :straight t :after '(lsp-mode treemacs))
