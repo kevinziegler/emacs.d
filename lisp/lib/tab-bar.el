@@ -47,19 +47,11 @@ actions that would update colors in emacs (such as changing themes)"
 
 (defun kdz/create-named-tab (tab-name)
   "Create a named tab with a new scratch buffer"
-  (interactive "sName for new tab: ")
-  (tab-bar-new-tab)
+  (interactive "sName for new workspace: ")
   (switch-to-buffer (generate-new-buffer (format "*scratch: %s*"
                                                  tab-name)))
-  (tab-bar-rename-tab tab-name))
+  (tabspaces-switch-or-create-workspace tab-name))
 
-(defun kdz/create-named-tab (tab-name)
-  "Create a named tab with a new scratch buffer"
-  (interactive "sName for new tab: ")
-  (tab-bar-new-tab)
-  (switch-to-buffer (generate-new-buffer (format "*scratch: %s*"
-                                                 tab-name)))
-  (tab-bar-rename-tab tab-name))
 
 (defun kdz/tab-bar--svg-get-or-create-cached (text props)
   "Return the SVG to represent TEXT with PROPS in the tab bar
