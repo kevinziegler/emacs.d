@@ -187,3 +187,6 @@ actions that would update colors in emacs (such as changing themes)"
 ;;   :straight t
 ;;   :config
 ;;   (setq turbo-log-msg-format-template "\"KDZ-LOG: %s\""))
+
+(use-package lorem-ipsum :straight t)
+(use-package uuidgen :straight t)
