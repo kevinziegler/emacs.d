@@ -1,11 +1,14 @@
 ;;; Git/Version Control Tooling
 (use-package magit
   :straight t
+  :after 'kdz/system
   :config
   (transient-append-suffix 'magit-fetch "-p"
     '("-t" "Fetch all tags" ("-t" "--tags")))
   (transient-append-suffix 'magit-pull "-r"
-    '("-a" "Autostash" "--autostash")))
+    '("-a" "Autostash" "--autostash"))
+  (setq magit-git-executable (brew-bin "git")
+        magit-repository-directories '(("~/dev" . 2) ("~/.dotfiles" . 0))))
 
 (use-package git-timemachine :straight t)
 (use-package abridge-diff :after magit :init (abridge-diff-mode 1))
