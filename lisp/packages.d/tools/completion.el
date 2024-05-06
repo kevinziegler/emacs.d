@@ -24,3 +24,5 @@
   :after corfu
   :config
   (add-to-list 'corfu-margin-formatters #'nerd-icons-corfu-formatter))
+
+(provide 'packages.d/tools/completion)

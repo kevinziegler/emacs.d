@@ -56,3 +56,5 @@
          ("\\.toml\\'" . toml-ts-mode)
          ("\\.yaml\\'" . yaml-ts-mode)
          ("\\go.mode\\'" . go-mod-ts-mode)))
+
+(provide 'packages.d/languages)

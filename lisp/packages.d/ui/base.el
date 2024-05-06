@@ -20,3 +20,5 @@
   :config
   (ace-window-posframe-mode)
   (set-face-attribute 'aw-leading-char-face nil :height 3.0))
+
+(provide 'packages.d/ui/base)

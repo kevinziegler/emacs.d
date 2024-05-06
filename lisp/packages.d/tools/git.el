@@ -1,7 +1,7 @@
 ;;; Git/Version Control Tooling
 (use-package magit
   :straight t
-  :after 'kdz/system
+  :after 'lib/system
   :config
   (transient-append-suffix 'magit-fetch "-p"
     '("-t" "Fetch all tags" ("-t" "--tags")))
@@ -45,3 +45,5 @@
     (car (git-link--exec "describe" "--tags" "HEAD")))
 
   (advice-add #'git-link--branch :after-until #'kdz/git-link--tag))
+
+(provide 'packages.d/tools/git)

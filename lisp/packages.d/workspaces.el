@@ -95,3 +95,5 @@
  	    (lambda ()
  	      (setq ibuffer-filter-groups
                     (ibuffer-project-generate-filter-groups)))))
+
+(provide 'packages.d/workspaces)

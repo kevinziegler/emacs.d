@@ -86,3 +86,5 @@
   (global-hl-line-mode)
   (global-so-long-mode)
   (when (display-graphic-p) (context-menu-mode)))
+
+(provide 'packages.d/emacs)

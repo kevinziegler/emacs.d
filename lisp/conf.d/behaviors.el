@@ -47,3 +47,5 @@
 	     '("\\*dashboard\\*"
 	       display-buffer-in-tab
 	       (tab-name . "Home")))
+
+(provide 'conf.d/behaviors)

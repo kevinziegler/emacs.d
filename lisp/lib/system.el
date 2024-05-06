@@ -31,4 +31,4 @@
 (defun kdz/config-resource (name)
   (expand-file-name name (expand-file-name "resources" doom-user-dir)))
 
-(provide 'kdz/system)
+(provide 'lib/system)

@@ -105,3 +105,5 @@
               ("M-DEL" . vertico-directory-delete-word))
   ;; Tidy shadowed file names
   :hook ((rfn-eshadow-update-overlay . vertico-directory-tidy)))
+
+(provide 'packages.d/tools/minibuffer)

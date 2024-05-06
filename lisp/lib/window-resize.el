@@ -84,3 +84,5 @@
     ("+" kdz/window-step-size-inc           "Increase Step Size")
     ("_" kdz/window-step-size-dec           "Decrease Step Size")
     ("-" kdz/window-step-size-dec           "Decrease Step Size"))))
+
+(provide 'lib/window-resize)

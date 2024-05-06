@@ -138,3 +138,5 @@
   :config
   (setq evil-quick-diff-key (kbd "zx"))
   (evil-quick-diff-install))
+
+(provide 'packages.d/evil)

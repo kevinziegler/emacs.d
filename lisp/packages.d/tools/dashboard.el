@@ -24,3 +24,5 @@
                '(ls-files . "nf-oct-file")))
 
 (use-package dashboard-project-status :after dashboard :straight t)
+
+(provide 'packages.d/tools/dashboard)

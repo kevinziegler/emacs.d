@@ -294,5 +294,5 @@
   "-" '(evil-numbers/dec-at-pt :which-key "Decrement at point")
   "_" '(evil-numbers/dec-at-pt :which-key "Decrement at point"))
 
-(provide 'keybindings)
+(provide 'conf.d/keybindings)
 ;;; keybindings.el ends here

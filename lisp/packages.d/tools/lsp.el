@@ -34,3 +34,5 @@
   :straight t
   :init
   (setq dap-breakpoints-file (kdz/user-directory ".local/dap-breakpoints")))
+
+(provide 'packages.d/tools/lsp)

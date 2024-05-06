@@ -21,3 +21,5 @@
   (dolist (window (get-buffer-window-list))
     (when (not (eq window (selected-window)))
       (delete window))))
+
+(provide 'lib/misc-actions)

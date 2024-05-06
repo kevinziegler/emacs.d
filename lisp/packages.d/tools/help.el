@@ -23,3 +23,5 @@
   (setq devdocs-data-dir (kdz/user-directory ".local/devdocs-data")))
 
 (use-package eldoc-box :straight t)
+
+(provide 'packages.d/tools/help)

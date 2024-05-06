@@ -31,3 +31,5 @@
 (use-package logview :straight t)
 
 (use-package reveal-in-osx-finder :straight t)
+
+(provide 'packages.d/system)

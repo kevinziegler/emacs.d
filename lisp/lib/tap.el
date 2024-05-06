@@ -115,4 +115,4 @@
   (interactive)
   (tap/act-dwim (lambda (thing) (consult-ripgrep nil thing))))
 
-(provide 'tap)
+(provide 'lib/tap)

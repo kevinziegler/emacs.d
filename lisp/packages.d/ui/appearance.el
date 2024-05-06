@@ -48,3 +48,5 @@
 	doom-modeline-persp-icon nil
 	doom-modeline-persp-name nil
 	doom-modeline-buffer-encoding nil))
+
+(provide 'packages.d/ui/appearance)

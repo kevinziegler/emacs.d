@@ -20,3 +20,5 @@
   :config (treemacs-set-scope-type 'Tabs))
 
 (use-package treemacs-evil :straight t :after (treemacs evil))
+
+(provide 'packages.d/tools/treemacs)
