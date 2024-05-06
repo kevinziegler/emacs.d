@@ -139,4 +139,9 @@
   (setq evil-quick-diff-key (kbd "zx"))
   (evil-quick-diff-install))
 
+(use-package evil-visualstar
+  :straight t
+  :config
+  (global-evil-visualstar-mode))
+
 (provide 'packages.d/evil)
