@@ -21,6 +21,7 @@
   (setq lsp-ui-doc-alignment 'window
         lsp-ui-doc-position 'bottom
         lsp-ui-doc-header t
+        lsp-ui-doc-max-height 25
         lsp-ui-doc-show-with-cursor t
         lsp-ui-sideline-enable nil))
 
