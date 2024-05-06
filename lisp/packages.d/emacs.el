@@ -87,4 +87,8 @@
   (global-so-long-mode)
   (when (display-graphic-p) (context-menu-mode)))
 
+(use-package eshell
+  :init
+  (setq eshell-directory-name (kdz/user-directory ".local" "eshell")))
+
 (provide 'packages.d/emacs)
