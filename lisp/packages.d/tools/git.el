@@ -17,6 +17,11 @@
   :straight t
   :hook ((magit-mode . magit-delta-mode)))
 
+(use-package magit-file-icons
+  :straight t
+  :after magit
+  :init (magit-file-icons-mode 1))
+
 (use-package difftastic
   :straight t
   :bind (:map magit-blame-read-only-mode-map
