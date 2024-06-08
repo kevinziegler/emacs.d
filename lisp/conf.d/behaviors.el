@@ -54,4 +54,11 @@
                display-buffer-in-tab
                (tab-name . "Home")))
 
+(add-to-list 'display-buffer-alist
+             '("\\*Embark Collect: .+\\*"
+               display-buffer-in-side-window
+               (side . bottom)
+               (slot . 99)
+               (dedicated . t)))
+
 (provide 'conf.d/behaviors)
