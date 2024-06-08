@@ -14,6 +14,10 @@
                (dedicated . t)))
 
 (add-to-list 'display-buffer-alist
+             '("\\*Help\\*"
+               display-buffer-in-side-window
+               (side . right)
+               (dedicated . t)))
 
 (add-to-list 'display-buffer-alist
              '("\\*Ibuffer\\*"
