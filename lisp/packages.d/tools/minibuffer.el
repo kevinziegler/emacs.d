@@ -6,9 +6,10 @@
 (use-package embark
   :straight t
   :bind
-  (("C-." . embark-act)         ;; pick some comfortable binding
-   ("C-;" . embark-dwim)        ;; good alternative: M-.
-   ("C-h B" . embark-bindings)) ;; alternative for `describe-bindings'
+  (("C-." . embark-act)             ;; pick some comfortable binding
+   ("C-;" . embark-dwim)            ;; good alternative: M-.
+   ("C-h B" . embark-bindings)      ;; alternative for `describe-bindings'
+   ("s-<return>" . embark-collect)) ;; 90% of what I want to do is persist results
 
   :init
   ;; Optionally replace the key help with a completing-read interface
