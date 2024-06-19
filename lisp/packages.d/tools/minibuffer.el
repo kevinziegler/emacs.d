@@ -156,4 +156,6 @@
   ;; Tidy shadowed file names
   :hook ((rfn-eshadow-update-overlay . vertico-directory-tidy)))
 
+(use-package consult-todo :straight t)
+
 (provide 'packages.d/tools/minibuffer)
