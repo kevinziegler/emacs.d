@@ -1,7 +1,7 @@
 (setq switch-to-buffer-obey-display-actions t)
 
 (add-to-list 'display-buffer-alist
-             '("\\*ielm\\*"
+             `(,(rx "*" (or "ielm" "Python" "ruby" "nodejs") "*")
                display-buffer-in-side-window
                (side . bottom)
                (slot . 99)
