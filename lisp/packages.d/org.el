@@ -18,6 +18,7 @@
           org-list-allow-alphabetical t
           org-list-demote-modify-bullet '(("-" . "+") ("+" . "1.") ("1." . "-"))
           org-pretty-entities t
+          org-return-follows-link t
           org-special-ctrl-a/e t
           org-tags-column 0
           org-use-property-inheritance t)
