@@ -1,6 +1,12 @@
 (use-package hydra :straight t)
 
-(use-package nerd-icons :straight t)
+(use-package nerd-icons
+  :straight t
+  :config
+  (defun kdz/propertize-nerd-icon (name face-function)
+    (propertize (nerd-icons-mdicon name)
+                'face `(:family ,(funcall face-function) :height 1.2)
+                'display '(raise 0)) ))
 
 (use-package pretty-hydra :straight t)
 

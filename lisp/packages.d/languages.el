@@ -57,4 +57,14 @@
          ("\\.yaml\\'" . yaml-ts-mode)
          ("\\go.mode\\'" . go-mod-ts-mode)))
 
+(use-package ielm
+  :after nerd-icons
+  :config
+  (defun kdz/ielm-prompt ()
+    (kdz/propertize-nerd-icon "nf-md-chevron_right_box"
+                              'nerd-icons-mdicon-family))
+  (when (not (s-suffix? "\n" ielm-header ))
+    (setq ielm-header (concat ielm-header "\n")))
+  (setq ielm-prompt (concat "(elisp) " (kdz/ielm-prompt) " ")))
+
 (provide 'packages.d/languages)
