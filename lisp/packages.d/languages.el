@@ -68,4 +68,6 @@
   (setq ielm-prompt (concat "(elisp) " (kdz/ielm-prompt) " ")))
 
 (use-package inf-ruby :straight t)
+(use-package nodejs-repl :straight t)
+
 (provide 'packages.d/languages)
