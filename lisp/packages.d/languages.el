@@ -67,4 +67,5 @@
     (setq ielm-header (concat ielm-header "\n")))
   (setq ielm-prompt (concat "(elisp) " (kdz/ielm-prompt) " ")))
 
+(use-package inf-ruby :straight t)
 (provide 'packages.d/languages)
