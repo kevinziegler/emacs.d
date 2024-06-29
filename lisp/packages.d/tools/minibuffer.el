@@ -1,7 +1,13 @@
 (use-package consult
   :straight t
   :config
-  (setq consult-narrow-key "<"))
+  (setq consult-narrow-key "<")
+
+  (defun kdz/consult-ripgrep-selected (start end)
+    (interactive "r")
+    (let ((initial (when (use-region-p)
+                     (buffer-substring start end))))
+      (consult-ripgrep nil initial))))
 
 (use-package embark
   :straight t

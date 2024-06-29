@@ -145,22 +145,22 @@
   :keymaps 'override
   :prefix "SPC w"
   :non-normal-prefix "M-SPC w"
-  ""  '(:ignore t            :which-key "Window")
-  "=" '(balance-windows      :which-key "Balance Windows")
-  "h" '(evil-window-left     :which-key "Left")
-  "j" '(evil-window-down     :which-key "Down")
-  "k" '(evil-window-up       :which-key "Up")
-  "l" '(evil-window-right    :which-key "Right")
-  "d" '(evil-window-delete   :which-key "Delete Window")
+  ""  '(:ignore t                     :which-key "Window")
+  "=" '(balance-windows               :which-key "Balance Windows")
+  "h" '(kdz/window-left-dwim          :which-key "Left")
+  "j" '(evil-window-down              :which-key "Down")
+  "k" '(evil-window-up                :which-key "Up")
+  "l" '(kdz/window-right-dwim         :which-key "Right")
+  "d" '(evil-window-delete            :which-key "Delete Window")
   "s" '(kdz-pretty-window-resize/body :which-key "Resize Window")
-  "T" '(tear-off-window      :which-key "Tear off Window")
-  "n" '(evil-window-new      :which-key "New Window")
-  "x" '(evil-window-exchange :which-key "Exchange Window")
-  "w" '(ace-window           :which-key "Select Window")
-  "H" '(evil-window-move-far-left :which-key "Move window left")
-  "L" '(evil-window-move-far-right :which-key "Move window right")
-  "J" '(evil-window-move-far-down :which-key "Move window down")
-  "K" '(evil-window-move-far-up :which-key "Move window up"))
+  "T" '(tear-off-window               :which-key "Tear off Window")
+  "n" '(evil-window-new               :which-key "New Window")
+  "x" '(evil-window-exchange          :which-key "Exchange Window")
+  "w" '(ace-window                    :which-key "Select Window")
+  "H" '(evil-window-move-far-left     :which-key "Move window left")
+  "L" '(evil-window-move-far-right    :which-key "Move window right")
+  "J" '(evil-window-move-far-down     :which-key "Move window down")
+  "K" '(evil-window-move-far-up       :which-key "Move window up"))
 
 (general-def
   :states '(normal insert emacs treemacs)
@@ -215,13 +215,14 @@
   :keymaps 'override
   :prefix "SPC s"
   :non-normal-prefix "M-SPC s"
-  ""  '(:ignore t                :which-key "Search")
-  "l" '(consult-line             :which-key "Search for Line (Current Buffer)")
-  "L" '(consult-line-multi       :which-key "Search for Line (Project Buffers)")
-  "p" '(consult-ripgrep          :which-key "Project")
-  "r" '(re-builder               :which-key "Regexp Builder")
-  "s" '(tap/consult-ripgrep      :which-key "Thing-at-point (Select)")
-  "t" '(tap/consult-ripgrep-dwim :which-key "Thing-at-point (DWIM)"))
+  ""  '(:ignore t                    :which-key "Search")
+  "*" '(kdz/consult-ripgrep-selected :which-key "Search for selection")
+  "l" '(consult-line                 :which-key "Search for Line (Current Buffer)")
+  "L" '(consult-line-multi           :which-key "Search for Line (Project Buffers)")
+  "p" '(consult-ripgrep              :which-key "Project")
+  "r" '(re-builder                   :which-key "Regexp Builder")
+  "s" '(tap/consult-ripgrep          :which-key "Thing-at-point (Select)")
+  "t" '(tap/consult-ripgrep-dwim     :which-key "Thing-at-point (DWIM)"))
 
 (general-def
   :states 'normal
