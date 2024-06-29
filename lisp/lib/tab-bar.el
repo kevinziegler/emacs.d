@@ -29,14 +29,9 @@ SVGs between active and in-active states).")
 This is performed via a function so it can be used as a hook on
 actions that would update colors in emacs (such as changing themes)"
   (set-face-attribute 'tab-bar nil
-		      :inherit 'mode-line
-		      :box (list :line-width 7
-                                 :color (face-background 'default)))
-  (set-face-attribute 'tab-bar-tab nil
-		      :inherit 'mode-line
-		      :underline (list :color (face-background 'match)
-                                       :position -7))
-  (set-face-attribute 'tab-bar-tab-inactive nil :inherit 'mode-line))
+                      :inherit 'mode-line
+                      :box (list :line-width 7
+                                 :color (face-background 'default))))
 
 (defun kdz/tab-switch-index-or-select (&optional index)
   "Change tabs, optionally by index using a prefix argument"
@@ -51,7 +46,6 @@ actions that would update colors in emacs (such as changing themes)"
   (switch-to-buffer (generate-new-buffer (format "*scratch: %s*"
                                                  tab-name)))
   (tabspaces-switch-or-create-workspace tab-name))
-
 
 (defun kdz/tab-bar--svg-get-or-create-cached (text props)
   "Return the SVG to represent TEXT with PROPS in the tab bar
