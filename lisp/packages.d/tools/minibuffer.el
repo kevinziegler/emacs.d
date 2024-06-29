@@ -17,9 +17,6 @@
 
   ;; Show the Embark target at point via Eldoc.  You may adjust the Eldoc
   ;; strategy, if you want to see the documentation from multiple providers.
-  ;; TODO This hook seems to cause segmentation faults when opening certain
-  ;;      types of files.  I'm still not sure why, but taking this out seems
-  ;;      make emacs happy again.
   (add-hook 'eldoc-documentation-functions #'embark-eldoc-first-target)
   (setq eldoc-documentation-strategy #'eldoc-documentation-compose-eagerly)
 
