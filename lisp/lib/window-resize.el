@@ -50,11 +50,13 @@
 (defun kdz/window-fit-to-buffer-width ()
   (interactive)
   (evil-window-set-width (+ (kdz/buffer-max-width)
+                            (line-number-display-width)
                             kdz-window-resize-fit-buffer-margin)))
 
 (defun kdz/window-fit-to-buffer-fill ()
   (interactive)
   (evil-window-set-width (+ fill-column
+                            (line-number-display-width)
                             kdz-window-resize-fill-column-margin)))
 
 (pretty-hydra-define
