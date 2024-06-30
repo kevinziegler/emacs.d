@@ -1,20 +1,18 @@
 (setq switch-to-buffer-obey-display-actions t)
 
 (add-to-list 'display-buffer-alist
-             `(,(rx "*" (or "ielm" "Python" "ruby" "nodejs") "*")
+             `(,(lambda (buffer _)
+                  (with-current-buffer buffer
+                    (derived-mode-p 'comint-mode)))
                display-buffer-in-side-window
                (side . bottom)
                (slot . 99)
                (dedicated . t)))
 
 (add-to-list 'display-buffer-alist
-             '("\\*helpful [a-z]+: .+\\*"
-               display-buffer-in-side-window
-               (side . right)
-               (dedicated . t)))
-
-(add-to-list 'display-buffer-alist
-             '("\\*Help\\*"
+             `(,(lambda (buffer _)
+                  (with-current-buffer buffer
+                    (derived-mode-p 'help-mode 'helpful-mode)))
                display-buffer-in-side-window
                (side . right)
                (dedicated . t)))
