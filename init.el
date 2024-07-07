@@ -19,6 +19,7 @@
 (require 'packages.d/ui/base)
 (require 'packages.d/ui/appearance)
 (require 'packages.d/ui/buffer)
+(require 'packages.d/ui/tabs)
 
 (require 'lib/misc-actions)
 (require 'lib/system)

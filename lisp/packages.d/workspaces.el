@@ -34,31 +34,6 @@
   :config
   (add-to-list 'project-rootfile-list ".project"))
 
-(use-package tab-bar
-  :config
-  (load "lib/tab-bar.el")
-
-  ;; TODO Figure out why this isn't affecting the behavior for
-  ;;      switching tabs correctly.  Once that's done, I *should*
-  ;;      be able to use the partitioned tabs correctly.
-  ;; (advice-add tab-bar-tabs-function
-  ;;             :filter-return
-  ;;             #'kdz/tab-bar-tabs-sort-pinned-tabs-last)
-
-  (setq tab-bar-close-button-show nil
-        tab-bar-tab-hints t
-        tab-bar-tab-name-format-function #'kdz/tab-bar-tab-name-format-svg
-        tab-bar-new-tab-to 'rightmost
-        tab-bar-format '(tab-bar-separator
-                         kdz/tab-bar-format-project-icon
-                         tab-bar-separator
-                         kdz/tab-bar-format-unpinned-tabs
-                         tab-bar-format-align-right
-                         tab-bar-separator
-                         kdz/tab-bar-format-pinned-tabs
-                         tab-bar-separator
-                         kdz/tab-bar-format-pin-icon)))
-
 (use-package tabspaces
   :straight t
   :after dashboard
@@ -78,6 +53,13 @@
   (setq switch-to-prev-buffer-skip
         (lambda (window buffer bury-or-kill)
           (not (tabspaces--local-buffer-p buffer))))
+
+  (defun kdz/create-named-tab (tab-name)
+    "Create a named tab with a new scratch buffer"
+    (interactive "sName for new workspace: ")
+    (switch-to-buffer (generate-new-buffer (format "*scratch: %s*"
+                                                   tab-name)))
+    (tabspaces-switch-or-create-workspace tab-name))
 
   (tab-bar-select-tab-by-name "Home")
   (tab-bar-close-tab-by-name "*scratch*"))
