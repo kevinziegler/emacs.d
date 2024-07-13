@@ -58,7 +58,7 @@
          ("\\go.mode\\'" . go-mod-ts-mode)))
 
 (use-package ielm
-  :after nerd-icons
+  :after 'nerd-icons
   :config
   (defun kdz/ielm-prompt ()
     (kdz/propertize-nerd-icon "nf-md-chevron_right_box"

@@ -6,6 +6,7 @@
   (defun kdz/propertize-nerd-icon (name face-function)
     (propertize (nerd-icons-mdicon name)
                 'face `(:family ,(funcall face-function) :height 1.2)
+                'font-lock-face `(:family ,(funcall face-function) :height 1.2)
                 'display '(raise 0)) ))
 
 (use-package pretty-hydra :straight t)
