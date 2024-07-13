@@ -76,3 +76,5 @@
                       :internal-border-color "#61AFEF"
                       :left-fringe 16
                       :right-fringe 16)))
+
+(provide 'packages.d/ui/posframe)

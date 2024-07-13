@@ -42,3 +42,5 @@
                                               :background nil
                                               t)
        :override-parameters which-key-posframe-parameters))))
+
+(provide 'lib/posframe-helpers)
