@@ -18,5 +18,6 @@
 
 (add-hook 'kdz-load-theme-hook 'kdz/set-hl-todo-faces)
 (add-hook 'kdz-load-theme-hook 'kdz/tab-bar-update-faces)
+(add-hook 'kdz-load-theme-hook 'kdz/tab-line-update-faces)
 
 (provide 'conf.d/settings)
