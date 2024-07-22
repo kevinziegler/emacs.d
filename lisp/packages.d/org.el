@@ -225,13 +225,22 @@ appropriate.  In tables, insert a new row or end the table."
 ;; TODO Set up keybindings
 (use-package org-mac-link :straight t
   :config
-  ;; (advice-add 'org-mac-link-firefox-insert-frontmost-url
-  ;;             :around #'kdz/org-mac-link-advise-evil)
-  ;; (advice-add 'org-mac-link-finder-insert-selected
-  ;;             :around #'kdz/org-mac-link-advise-evil)
+  (defun kdz/org-mac-link-advise-evil (org-mac-link-fn &rest orig-args)
+    "Advice to org-mac-link functions to handle insertion with evil-mode"
+    (interactive)
+    (let ((char-at-insert (thing-at-point 'char)))
+      (evil-save-state
+        (evil-append 1)
+        (when (not (string-match-p "[[:space:]]" char-at-insert))
+          (insert " "))
+        (apply org-mac-link-fn orig-args))))
+  (advice-add 'org-mac-link-firefox-insert-frontmost-url
+              :around #'kdz/org-mac-link-advise-evil)
+  (advice-add 'org-mac-link-finder-insert-selected
+              :around #'kdz/org-mac-link-advise-evil)
   )
 
-(use-package org-re-reveal 
+(use-package org-re-reveal
   :straight t
   :config
   (setq
