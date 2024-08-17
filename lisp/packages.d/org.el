@@ -85,11 +85,24 @@
                       always (equal (org-element-property :contents-begin cell)
                                     (org-element-property :contents-end cell))
                       while (re-search-forward "|" end t)))
+
            ;; Empty row: end the table.
            (delete-region (line-beginning-position) (line-end-position))
            (org-return t))
+
           ;; Non-empty row: call `org-return-indent'.
-          (t (org-return t))))
+          (t (progn
+               (let ((at-first-table-line (save-excursion
+                                            (previous-line)
+                                            (beginning-of-line)
+                                            (not (org-at-table-p)))))
+                 (if at-first-table-line
+                     (progn
+                       (org-return t)
+                       (beginning-of-line)
+                       (forward-char)
+                       (insert "-")))
+                 (org-return t))))))
 
 ;;;###autoload
   (defun kdz/org-return-dwim (&optional default)
