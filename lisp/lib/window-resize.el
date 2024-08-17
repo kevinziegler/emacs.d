@@ -49,15 +49,23 @@
 
 (defun kdz/window-fit-to-buffer-width ()
   (interactive)
+  (setq-local kdz-original-window-width (window-width))
   (evil-window-set-width (+ (kdz/buffer-max-width)
                             (line-number-display-width)
                             kdz-window-resize-fit-buffer-margin)))
 
 (defun kdz/window-fit-to-buffer-fill ()
   (interactive)
+  (setq-local kdz-original-window-width (window-width))
   (evil-window-set-width (+ fill-column
                             (line-number-display-width)
                             kdz-window-resize-fill-column-margin)))
+
+(defun kdz/window-restore-original-width ()
+  (interactive)
+  (when (boundp 'kdz-original-window-width)
+    (evil-window-set-width kdz-original-window-width)
+    (makunbound 'kdz-original-window-width)))
 
 (pretty-hydra-define
   kdz-pretty-window-resize
@@ -74,7 +82,8 @@
     ("l" kdz/window-inc-width               "Increase Width"))
    "Fit Window"
    (("w" kdz/window-fit-to-buffer-width     "Fit to buffer width")
-    ("f" kdz/window-fit-to-buffer-fill      "Fit to buffer fill-column"))
+    ("f" kdz/window-fit-to-buffer-fill      "Fit to buffer fill-column")
+    ("R" kdz/window-restore-original-width  "Restore to original width"))
    "Select Window"
    (("J" evil-window-down                   "Select window down")
     ("K" evil-window-up                     "Select window down")
