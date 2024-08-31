@@ -36,16 +36,16 @@
   (setq kdz-window-resize-step--current kdz-window-resize-step-default))
 
 (defun kdz/buffer-max-width ()
-  (save-excursion)
-  (let ((max-width 0))
-    (beginning-of-buffer)
-    (end-of-line)
-    (while (not (eobp))
-      (setq max-width (max max-width
-                           (length (thing-at-point 'line))))
-      (next-line)
-      (end-of-line))
-    max-width))
+  (save-excursion
+    (let ((max-width 0))
+      (beginning-of-buffer)
+      (end-of-line)
+      (while (not (eobp))
+        (setq max-width (max max-width
+                             (length (thing-at-point 'line))))
+        (next-line)
+        (end-of-line))
+      max-width)))
 
 (defun kdz/window-fit-to-buffer-width ()
   (interactive)
