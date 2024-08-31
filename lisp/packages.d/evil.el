@@ -144,4 +144,15 @@
   :config
   (global-evil-visualstar-mode))
 
+(use-package evil-owl
+  :straight t
+  :config
+  (setq evil-owl-max-string-length 500)
+  (add-to-list 'display-buffer-alist foo
+               '("*evil-owl*"
+                 (display-buffer-in-side-window)
+                 (side . bottom)
+                 (window-height . 0.3)))
+  (evil-owl-mode))
+
 (provide 'packages.d/evil)
