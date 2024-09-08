@@ -616,4 +616,9 @@ Also adds support for a `:sync' parameter to override `:async'."
   (defalias 'org-toggle-inline-images #'org-sliced-images-toggle-inline-images)
   (defalias 'org-display-inline-images #'org-sliced-images-display-inline-images))
 
+(use-package org-tidy
+  :straight t
+  :hook
+  (org-mode . org-tidy-mode))
+
 (provide 'packages.d/org)
