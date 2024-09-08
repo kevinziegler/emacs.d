@@ -148,7 +148,7 @@
   :straight t
   :config
   (setq evil-owl-max-string-length 500)
-  (add-to-list 'display-buffer-alist foo
+  (add-to-list 'display-buffer-alist
                '("*evil-owl*"
                  (display-buffer-in-side-window)
                  (side . bottom)
