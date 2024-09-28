@@ -1,45 +1,71 @@
 (use-package tab-bar
   :config
-  (load "lib/tab-bar.el")
-  (load "lib/svg-tabs.el")
+  (defvar kdz-tab-bar-tab-icons '(("Home"   . "nf-md-home")
+                                  ("System" . "nf-md-cog"))
+    "Tabs that should be kept together and in order in tab list")
 
-  ;; TODO Figure out why this isn't affecting the behavior for
-  ;;      switching tabs correctly.  Once that's done, I *should*
-  ;;      be able to use the partitioned tabs correctly.
-  ;; (advice-add tab-bar-tabs-function
-  ;;             :filter-return
-  ;;             #'kdz/tab-bar-tabs-sort-pinned-tabs-last)
+  (defun kdz/tab-bar-pinned-tab-p (tab)
+    "Check if TAB should be considered a pinned tab in the tab bar
 
-  (setq tab-bar-close-button-show nil
-        tab-bar-tab-hints t
-        tab-bar-tab-name-format-function #'kdz/tab-bar-tab-name-format-svg
-        tab-bar-new-tab-to 'rightmost
-        tab-bar-format '(tab-bar-separator
-                         kdz/tab-bar-format-project-icon
-                         tab-bar-separator
-                         kdz/tab-bar-format-unpinned-tabs
-                         tab-bar-format-align-right
-                         tab-bar-separator
-                         kdz/tab-bar-format-pinned-tabs
-                         tab-bar-separator
-                         kdz/tab-bar-format-pin-icon))
+A pinned tab is one whose name corresponds to an entry in
+`kdz-tab-bar-tab-icons'."
+    (assoc (alist-get 'name tab) kdz-tab-bar-tab-icons))
+
+  (defun kdz/tab-bar-tab-name-format (tab i)
+    (let* ((name (alist-get 'name tab))
+           (icon (cdr (assoc (alist-get 'name tab) kdz-tab-bar-tab-icons)))
+           (tab-face (funcall tab-bar-tab-face-function tab)))
+      (concat (propertize (concat "["
+                                  (when tab-bar-tab-hints (format "%d " i)))
+                          'face tab-face)
+              (if icon (nerd-icons-mdicon icon) (propertize name 'face tab-face))
+              (propertize "]" 'face tab-face))))
+
+  (defun kdz/index-for-tab (tab)
+    (1+ (seq-position (tab-bar-tabs) tab)))
+
+  (defun kdz/tab-bar-render-pinned-tabs ()
+    (let* ((all-tabs (funcall tab-bar-tabs-function)))
+      (mapcan (lambda (tab) (tab-bar--format-tab tab (kdz/index-for-tab tab)))
+              (seq-filter #'kdz/tab-bar-pinned-tab-p all-tabs))))
+
+  (defun kdz/tab-bar-render-workspaces ()
+    (let* ((all-tabs (funcall tab-bar-tabs-function)))
+      (mapcan (lambda (tab) (tab-bar--format-tab tab (kdz/index-for-tab tab)))
+              (seq-remove #'kdz/tab-bar-pinned-tab-p all-tabs))))
 
   (defun kdz/tab-bar-update-faces (&rest _)
     "Customize tab-bar faces against current theme
 
-This is performed via a function so it can be used as a hook on
-actions that would update colors in emacs (such as changing themes)"
-    (set-face-attribute 'tab-bar nil
-                        :inherit 'mode-line
-                        :box (list :line-width 7
-                                   :color (face-background 'default))))
+  This is performed via a function so it can be used as a hook on
+  actions that would update colors in emacs (such as changing themes)"
+    (let ((box-width 7))
+      (set-face-attribute 'tab-bar nil
+                          :box (list :line-width box-width
+                                     :color (face-background 'tab-bar nil t)
+                                     :style 'flat)
+                          :underline (list :color 'foreground-color
+                                           :style 'line
+                                           :position (* -1 box-width)))))
 
   (defun kdz/tab-switch-index-or-select (&optional index)
     "Change tabs, optionally by index using a prefix argument"
     (interactive "P")
     (if (eq index nil)
         (call-interactively 'tab-switch)
-      (tab-bar-select-tab index))))
+      (tab-bar-select-tab index)))
+
+  (setq tab-bar-auto-width nil
+        tab-bar-close-button-show nil
+        tab-bar-tab-hints t
+        tab-bar-tab-name-format-function #'kdz/tab-bar-tab-name-format
+        tab-bar-new-tab-to 'rightmost
+        tab-bar-format '(tab-bar-separator
+                         tab-bar-separator
+                         kdz/tab-bar-render-workspaces
+                         tab-bar-format-align-right
+                         kdz/tab-bar-render-pinned-tabs
+                         tab-bar-separator)))
 
 (use-package tab-line
   :config
