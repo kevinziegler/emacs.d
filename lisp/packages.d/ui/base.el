@@ -28,4 +28,8 @@
   (ace-window-posframe-mode)
   (set-face-attribute 'aw-leading-char-face nil :height 3.0))
 
+(use-package casual-calc :straight t)
+(use-package casual-info :straight t)
+(use-package casual-re-builder :straight t)
+
 (provide 'packages.d/ui/base)
