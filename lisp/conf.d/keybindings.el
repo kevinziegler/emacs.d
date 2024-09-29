@@ -50,13 +50,7 @@
   ""  '(:ignore t            :which-key "Copy as <format>")
   "j" '(copy-as-format-jira  :which-key "Copy as JIRA")
   "h" '(copy-as-format-html  :which-key "Copy as HTML")
-  "s" '(copy-as-format-slack :which-key "Copy as Slack"))
-
-(general-def
-  :states '(normal visual insert emacs)
-  :prefix "SPC e y m"
-  :non-normal-prefix "M-SPC e y m"
-  ""  '(:ignore t               :which-key "Copy as <markdown>")
+  "s" '(copy-as-format-slack :which-key "Copy as Slack")
   "m" '(copy-as-format-markdown :which-key "Copy as Markdown (Plain)")
   "g" '(copy-as-format-github   :which-key "Copy as Markdown (Github)")
   "G" '(copy-as-format-gitlab   :which-key "Copy as Markdown (Gitlab)"))
