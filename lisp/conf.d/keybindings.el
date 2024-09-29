@@ -3,15 +3,16 @@
   :keymaps 'override
   :prefix "SPC b"
   :non-normal-prefix "M-SPC b"
-  ""  '(:ignore t                          :which-key "Buffer")
-  "b" '(tabspaces-switch-to-buffer         :which-key "Switch to Buffer (Workspace)")
-  "B" '(switch-to-buffer                   :which-key "Switch to Buffer (Global)")
-  "d" '(kill-current-buffer                :which-key "Kill Buffer")
-  "h" '(vundo                              :which-key "Undo History")
-  "n" '(next-buffer                        :which-key "Next Buffer")
-  "p" '(previous-buffer                    :which-key "Previous Buffer")
-  "N" '(evil-buffer-new                    :which-key "New Buffer")
-  "s" '(kdz/consult-embark-ripgrep-results :which-key "Search Results"))
+  ""  '(:ignore t                           :which-key "Buffer")
+  "b" '(tabspaces-switch-to-buffer          :which-key "Switch to Buffer (Workspace)")
+  "B" '(switch-to-buffer                    :which-key "Switch to Buffer (Global)")
+  "c" '(kdz/switch-to-buffer-current-window :which-key "Switch to Buffer (Force current window)")
+  "d" '(kill-current-buffer                 :which-key "Kill Buffer")
+  "h" '(vundo                               :which-key "Undo History")
+  "n" '(next-buffer                         :which-key "Next Buffer")
+  "p" '(previous-buffer                     :which-key "Previous Buffer")
+  "N" '(evil-buffer-new                     :which-key "New Buffer")
+  "s" '(kdz/consult-embark-ripgrep-results  :which-key "Search Results"))
 
 (general-def
   :states '(normal insert emacs)
