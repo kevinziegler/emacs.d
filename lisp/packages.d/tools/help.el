@@ -22,6 +22,17 @@
   :config
   (setq devdocs-data-dir (kdz/user-directory ".local/devdocs-data")))
 
-(use-package eldoc-box :straight t)
+(use-package eldoc-box
+  :straight t
+  :config
+  (setq eldoc-box-only-multi-line t)
+
+  ;; TODO Make box display in the bottom right of the frame
+  (setq eldoc-box-position-function #'eldoc-box--default-at-point-position-function)
+
+  ;; TODO Run this as a hook when changing themes
+  (defun kdz/eldoc-box-update-faces ()
+    (let ((body-fg (face-foreground 'default)))
+      (set-face-attribute 'eldoc-box-border nil :background body-fg))))
 
 (provide 'packages.d/tools/help)
