@@ -18,20 +18,38 @@ A pinned tab is one whose name corresponds to an entry in
       (concat (propertize (concat "["
                                   (when tab-bar-tab-hints (format "%d " i)))
                           'face tab-face)
-              (if icon (nerd-icons-mdicon icon) (propertize name 'face tab-face))
+              (if icon
+                  (nerd-icons-mdicon icon)
+                (propertize name 'face tab-face))
               (propertize "]" 'face tab-face))))
 
-  (defun kdz/index-for-tab (tab)
-    (1+ (seq-position (tab-bar-tabs) tab)))
+  (defun kdz/tab-bar-map-tabs-to-relative-index ()
+    (let ((unpinned-index 1)
+          (pinned-index 9))
+      (mapcar (lambda (tab)
+                (if (kdz/tab-bar-pinned-tab-p tab)
+                    (let ((index pinned-index))
+                      (setq pinned-index (1- pinned-index))
+                      (cons tab index))
+                  (let ((index unpinned-index))
+                    (setq unpinned-index (1+ unpinned-index))
+                    (cons tab index))))
+              (tab-bar-tabs))))
+
+  (defun kdz/tab-bar-map-relative-index-to-tabs ()
+    (mapcar (lambda (tab-to-index) (cons (cdr tab-to-index) (car tab-to-index)))
+            (kdz/tab-bar-map-tabs-to-relative-index)))
 
   (defun kdz/tab-bar-render-pinned-tabs ()
-    (let* ((all-tabs (funcall tab-bar-tabs-function)))
-      (mapcan (lambda (tab) (tab-bar--format-tab tab (kdz/index-for-tab tab)))
+    (let* ((all-tabs (funcall tab-bar-tabs-function))
+           (relative-index (kdz/tab-bar-map-tabs-to-relative-index)))
+      (mapcan (lambda (tab) (tab-bar--format-tab tab (alist-get tab relative-index)))
               (seq-filter #'kdz/tab-bar-pinned-tab-p all-tabs))))
 
   (defun kdz/tab-bar-render-workspaces ()
-    (let* ((all-tabs (funcall tab-bar-tabs-function)))
-      (mapcan (lambda (tab) (tab-bar--format-tab tab (kdz/index-for-tab tab)))
+    (let* ((all-tabs (funcall tab-bar-tabs-function))
+           (relative-index (kdz/tab-bar-map-tabs-to-relative-index)))
+      (mapcan (lambda (tab) (tab-bar--format-tab tab (alist-get tab relative-index)))
               (seq-remove #'kdz/tab-bar-pinned-tab-p all-tabs))))
 
   (defun kdz/tab-bar-update-faces (&rest _)
@@ -48,12 +66,16 @@ A pinned tab is one whose name corresponds to an entry in
                                            :style 'line
                                            :position (* -1 box-width)))))
 
+  (defun kdz/tab-bar-select-by-relative-index (&optional index)
+    (let ((tab (alist-get index (kdz/tab-bar-map-relative-index-to-tabs))))
+      (when tab (tab-bar-select-tab (1+ (seq-position (tab-bar-tabs) tab))))))
+
   (defun kdz/tab-switch-index-or-select (&optional index)
     "Change tabs, optionally by index using a prefix argument"
-    (interactive "P")
+    (interactive "N")
     (if (eq index nil)
         (call-interactively 'tab-switch)
-      (tab-bar-select-tab index)))
+      (kdz/tab-bar-select-by-relative-index index)))
 
   (setq tab-bar-auto-width nil
         tab-bar-close-button-show nil
