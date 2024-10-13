@@ -4,7 +4,9 @@
   :init
   (setq dashboard-icon-type 'nerd-icons)
   :config
-  (setq dashboard-items '((projects . 5) (bookmarks . 5))
+  (setq dashboard-banner-official-png (expand-file-name "logo.png"
+                                                        user-emacs-directory)
+        dashboard-items '((projects . 5) (bookmarks . 5))
         dashboard-center-content t
         dashboard-set-file-icons t
         dashboard-set-heading-icons t
