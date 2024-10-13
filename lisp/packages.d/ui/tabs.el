@@ -66,16 +66,18 @@ A pinned tab is one whose name corresponds to an entry in
                                            :style 'line
                                            :position (* -1 box-width)))))
 
-  (defun kdz/tab-bar-select-by-relative-index (&optional index)
-    (let ((tab (alist-get index (kdz/tab-bar-map-relative-index-to-tabs))))
-      (when tab (tab-bar-select-tab (1+ (seq-position (tab-bar-tabs) tab))))))
-
   (defun kdz/tab-switch-index-or-select (&optional index)
-    "Change tabs, optionally by index using a prefix argument"
+    "Change tabs, optionally by INDEX using a prefix argument.
+
+The INDEX refers to the value displayed in the tab-bar's tab hint, and is then
+mapped to the correct sequential index in tab-bar-tabs"
     (interactive "N")
     (if (eq index nil)
         (call-interactively 'tab-switch)
-      (kdz/tab-bar-select-by-relative-index index)))
+      (let ((tab (alist-get index (kdz/tab-bar-map-relative-index-to-tabs))))
+        (if tab
+            (tab-bar-select-tab (1+ (seq-position (tab-bar-tabs) tab)))
+          (message "No tab found at position [%d]" index)))))
 
   (setq tab-bar-auto-width nil
         tab-bar-close-button-show nil
