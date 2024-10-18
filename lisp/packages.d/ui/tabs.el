@@ -58,12 +58,16 @@ A pinned tab is one whose name corresponds to an entry in
   This is performed via a function so it can be used as a hook on
   actions that would update colors in emacs (such as changing themes)"
     (let ((box-width 7))
-      (set-face-attribute 'tab-bar nil
+      (set-face-attribute 'tab-bar
+                          nil
                           :box (list :line-width box-width
                                      :color (face-background 'tab-bar nil t)
                                      :style 'flat)
                           :underline (list :color 'foreground-color
-                                           :style 'line
+                                           :position (* -1 box-width)))
+      (set-face-attribute 'tab-bar-tab
+                          nil
+                          :underline (list :color (face-foreground 'tab-bar)
                                            :position (* -1 box-width)))))
 
   (defun kdz/tab-switch-index-or-select (&optional index)
