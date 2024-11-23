@@ -1,6 +1,5 @@
 (use-package emacs
   :init
-  (require 'uniquify)
 
   (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
   (set-charset-priority 'unicode)
@@ -91,5 +90,7 @@
 (use-package eshell
   :init
   (setq eshell-directory-name (kdz/user-directory ".local" "eshell")))
+
+(use-package uniquify)
 
 (provide 'packages.d/emacs)
