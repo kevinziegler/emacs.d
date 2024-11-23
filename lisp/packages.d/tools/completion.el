@@ -25,4 +25,8 @@
   :config
   (add-to-list 'corfu-margin-formatters #'nerd-icons-corfu-formatter))
 
+(use-package hotfuzz :straight t
+  :config
+  (add-to-list 'completion-styles 'hotfuzz))
+
 (provide 'packages.d/tools/completion)
