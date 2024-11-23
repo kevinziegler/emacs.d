@@ -15,13 +15,13 @@ A pinned tab is one whose name corresponds to an entry in
     (let* ((name (alist-get 'name tab))
            (icon (cdr (assoc (alist-get 'name tab) kdz-tab-bar-tab-icons)))
            (tab-face (funcall tab-bar-tab-face-function tab)))
-      (concat (propertize (concat "["
+      (concat (propertize (concat "[ "
                                   (when tab-bar-tab-hints (format "%d " i)))
                           'face tab-face)
               (if icon
                   (nerd-icons-mdicon icon)
                 (propertize name 'face tab-face))
-              (propertize "]" 'face tab-face))))
+              (propertize " ]" 'face tab-face))))
 
   (defun kdz/tab-bar-map-tabs-to-relative-index ()
     (let ((unpinned-index 1)
@@ -65,8 +65,10 @@ A pinned tab is one whose name corresponds to an entry in
                                      :style 'flat)
                           :underline (list :color 'foreground-color
                                            :position (* -1 box-width)))
+      (set-face-attribute 'tab-bar-tab-inactive nil :weight 'normal)
       (set-face-attribute 'tab-bar-tab
                           nil
+                          :weight 'bold
                           :underline (list :color (face-foreground 'tab-bar)
                                            :position (* -1 box-width)))))
 
@@ -142,31 +144,14 @@ mapped to the correct sequential index in tab-bar-tabs"
 
   (add-hook 'window-state-change-hook #'kdz/ensure-bottom-tab-line)
 
-  (defun kdz/tab-line-update-faces (&rest _)
-    "Customize tab-bar faces against current theme
+  (defun kdz/tab-line-tab-name (buffer &optional _buffers)
+    (let* ((comint-mode-p (with-current-buffer buffer
+                            (derived-mode-p 'comint-mode)))
+           (icon (when comint-mode-p
+                   `(" " ,(nerd-icons-devicon "nf-dev-terminal"))))
+           (parts `(" [ " ,(buffer-name buffer) ,icon " ] ")))
+      (apply 'concat (flatten-list parts))))
 
-This is performed via a function so it can be used as a hook on
-actions that would update colors in emacs (such as changing themes)"
-    (set-face-attribute 'tab-line nil
-                        :inherit 'tab-bar
-                        :box (list :line-width 7
-                                   :color (face-background 'tab-line nil t)
-                                   :style 'flat)
-                        :underline (list :color 'foreground-color
-                                         :style 'line
-                                         :position -7))
-    (set-face-attribute 'tab-line-tab nil :inherit 'tab-line
-                        :box (list :line-width 7
-                                   :color (face-background 'tab-line nil t)
-                                   :style 'flat))
-    (set-face-attribute 'tab-line-tab-current nil
-                        :inherit 'tab-line-tab
-                        :inverse-video t
-                        :box (list :line-width 7
-                                   :color (face-foreground 'tab-line-tab nil t)
-                                   :style 'flat)
-                        :underline (list :color (face-foreground 'tab-line nil t)
-                                         :style 'line
-                                         :position -7))))
+  (setq tab-line-tab-name-function #'kdz/tab-line-tab-name))
 
 (provide 'packages.d/ui/tabs)
