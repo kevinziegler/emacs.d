@@ -67,10 +67,13 @@
   :keymaps 'override
   :prefix "SPC f"
   :non-normal-prefix "M-SPC f"
-  ""  '(:ignore t      :which-key "File")
-  "i" '(file-info-show :which-key "Show Info")
-  "l" '(org-store-link :which-key "Store Link")
-  "f" '(find-file      :which-key "Find File"))
+  ""  '(:ignore t                          :which-key "File")
+  "i" '(file-info-show                     :which-key "Show Info")
+  "l" '(org-store-link                     :which-key "Store Link")
+  "f" '(find-file                          :which-key "Find File")
+  "r" '(crux-rename-file-and-buffer        :which-key "Rename File")
+  "D" '(crux-delete-file-and-buffer        :which-key "Delete File")
+  "c" '(crux-copy-file-preserve-attributes :which-key "Copy File"))
 
 (general-def
   :states '(normal insert emacs treemacs)

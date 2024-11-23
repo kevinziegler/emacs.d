@@ -32,4 +32,6 @@
 
 (use-package reveal-in-osx-finder :straight t)
 
+(use-package crux :straight t)
+
 (provide 'packages.d/system)
