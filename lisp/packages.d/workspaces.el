@@ -34,36 +34,6 @@
   :config
   (add-to-list 'project-rootfile-list ".project"))
 
-(use-package tabspaces
-  :straight t
-  :after dashboard
-  :config
-  (setq tabspaces-session-file (kdz/user-directory ".local"
-                                                   "tabsession.el"))
-
-  (tabspaces-mode)
-  (add-to-list 'tabspaces-exclude-buffers dashboard-buffer-name)
-  (advice-add 'tabspaces-open-or-create-project-and-workspace
-              :after
-              (lambda (&rest _) (tabspaces-reset-buffer-list)))
-
-  ;; Set this variable to skip buffers that wouldn't show up in the
-  ;; current tab per tabspaces's rules, to avoid buffers "leaking"
-  ;; into the current space from other spaces.
-  (setq switch-to-prev-buffer-skip
-        (lambda (window buffer bury-or-kill)
-          (not (tabspaces--local-buffer-p buffer))))
-
-  (defun kdz/create-named-tab (tab-name)
-    "Create a named tab with a new scratch buffer"
-    (interactive "sName for new workspace: ")
-    (switch-to-buffer (generate-new-buffer (format "*scratch: %s*"
-                                                   tab-name)))
-    (tabspaces-switch-or-create-workspace tab-name))
-
-  (tab-bar-select-tab-by-name "Home")
-  (tab-bar-close-tab-by-name "*scratch*"))
-
 (use-package ibuffer-project
   :straight t
   :config
@@ -77,5 +47,13 @@
  	    (lambda ()
  	      (setq ibuffer-filter-groups
                     (ibuffer-project-generate-filter-groups)))))
+(use-package otpp
+  :straight t
+  :after project
+  :init
+  (defalias 'one-tab-per-project-mode 'otpp-mode)
+  (defalias 'one-tab-per-project-override-mode 'otpp-override-mode)
+  (otpp-mode 1)
+  (otpp-override-mode 1))
 
 (provide 'packages.d/workspaces)

@@ -11,8 +11,7 @@
         dashboard-set-file-icons t
         dashboard-set-heading-icons t
         dashboard-projects-backend 'project-el
-        dashboard-projects-switch-function
-	#'tabspaces-open-or-create-project-and-workspace)
+        dashboard-projects-switch-function #'project-switch-project)
 
   (dashboard-setup-startup-hook))
 

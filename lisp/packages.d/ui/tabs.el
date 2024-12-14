@@ -95,7 +95,9 @@ mapped to the correct sequential index in tab-bar-tabs"
                          kdz/tab-bar-render-workspaces
                          tab-bar-format-align-right
                          kdz/tab-bar-render-pinned-tabs
-                         tab-bar-separator)))
+                         tab-bar-separator))
+  (tab-bar-select-tab-by-name "Home")
+  (tab-bar-close-tab-by-name "*scratch*"))
 
 (use-package tab-line
   :config

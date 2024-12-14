@@ -4,7 +4,7 @@
   :prefix "SPC b"
   :non-normal-prefix "M-SPC b"
   ""  '(:ignore t                           :which-key "Buffer")
-  "b" '(tabspaces-switch-to-buffer          :which-key "Switch to Buffer (Workspace)")
+  "b" '(project-switch-to-buffer            :which-key "Switch to Buffer (Workspace)")
   "B" '(switch-to-buffer                    :which-key "Switch to Buffer (Global)")
   "c" '(kdz/switch-to-buffer-current-window :which-key "Switch to Buffer (Force current window)")
   "d" '(kill-current-buffer                 :which-key "Kill Buffer")
@@ -169,11 +169,11 @@
   :keymaps 'override
   :prefix "SPC p"
   :non-normal-prefix "M-SPC p"
-  ""  '(:ignore t                                      :which-key "Project")
-  "a" '(project-remember-projects-under                :which-key "Add Projects")
-  "D" '(project-forget-project                         :which-key "Remove Project")
-  "f" '(project-find-file                              :which-key "Open Project File")
-  "p" '(tabspaces-open-or-create-project-and-workspace :which-key "Switch To Project"))
+  ""  '(:ignore t                       :which-key "Project")
+  "a" '(project-remember-projects-under :which-key "Add Projects")
+  "D" '(project-forget-project          :which-key "Remove Project")
+  "f" '(project-find-file               :which-key "Open Project File")
+  "p" '(project-switch-project          :which-key "Switch To Project"))
 
 (general-def
   :states '(normal insert emacs treemacs)
@@ -186,7 +186,7 @@
   "l"   '(tab-next                                :which-key "Next Workspace")
   "H"   '((lambda () (interactive) (tab-move -1)) :which-key "Move Tab Left")
   "L"   '(tab-move                                :which-key "Move Tab Right")
-  "d"   '(tabspaces-kill-buffers-close-workspace  :which-key "Close Workspace")
+  "d"   '(tab-bar-close-tab  :which-key "Close Workspace")
   "n"   '(kdz/create-named-tab                    :which-key "Create Named Workspace"))
 
 (general-def
