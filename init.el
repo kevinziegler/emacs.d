@@ -27,7 +27,6 @@
 (require 'lib/tap)
 (require 'lib/window-resize)
 
-(require 'conf.d/behaviors)
 (require 'conf.d/keybindings)
 (require 'conf.d/settings)
 
