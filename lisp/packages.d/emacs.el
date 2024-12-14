@@ -94,7 +94,6 @@
 (use-package uniquify)
 
 (use-package window
-  :straight nil
   :config
   (setq switch-to-buffer-obey-display-actions t)
   (add-to-list 'display-buffer-alist
