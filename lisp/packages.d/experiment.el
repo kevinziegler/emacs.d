@@ -176,3 +176,5 @@
 (use-package bifocal
   :straight t
   :hook (js-comint-mode . bifocal-mode))
+
+(use-package ztree :straight t)
