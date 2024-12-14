@@ -1,6 +1,7 @@
 (use-package tab-bar
   :config
   (defvar kdz-tab-bar-tab-icons '(("Home"   . "nf-md-home")
+                                  ("Scratchpad" . "nf-md-note")
                                   ("System" . "nf-md-cog"))
     "Tabs that should be kept together and in order in tab list")
 
