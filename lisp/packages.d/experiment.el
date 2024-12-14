@@ -178,3 +178,7 @@
   :hook (js-comint-mode . bifocal-mode))
 
 (use-package ztree :straight t)
+
+(use-package nerd-icons-multimodal
+  :straight (:host github :repo "abougouffa/nerd-icons-multimodal")
+  :hook ((archive-mode tar-mode dired-mode) . nerd-icons-multimodal-mode))
