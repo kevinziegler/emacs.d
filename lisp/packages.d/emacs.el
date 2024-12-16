@@ -65,6 +65,7 @@
           inhibit-compacting-font-caches t
           mouse-yank-at-point t
           pixel-scroll-precision-mode t
+          pixel-scroll-precision-use-momentum t
           save-interprogram-paste-before-kill t
           ;; show-trailing-whitespace t
           truncate-string-ellipsis "…"
