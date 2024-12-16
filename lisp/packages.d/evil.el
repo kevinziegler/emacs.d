@@ -60,13 +60,11 @@
 (use-package evil-collection
   :straight t
   :after evil
-  :ensure t
   :config
   (evil-collection-init))
 
 (use-package evil-embrace
   :straight t
-  :ensure t
   :config
   (add-hook 'org-mode-hook 'embrace-org-mode-hook)
   (evil-embrace-enable-evil-surround-integration))
@@ -87,7 +85,6 @@
 
 (use-package evil-lion
   :straight t
-  :ensure t
   :config
   (evil-lion-mode))
 
@@ -100,7 +97,6 @@
 
 (use-package evil-surround
   :straight t
-  :ensure t
   :config
   (global-evil-surround-mode 1))
 
