@@ -1,5 +1,6 @@
 (use-package org
-  :hook ((org-mode . visual-line-mode))
+  :hook ((org-mode . visual-line-mode)
+         (org-mode . visual-wrap-prefix-mode))
   :config
   (setopt org-auto-align-tags nil
           org-babel-results-keyword "results"
