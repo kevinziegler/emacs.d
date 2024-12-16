@@ -23,6 +23,15 @@
   "r" '(rtog/toggle-repl :which-key "Toggle REPL"))
 
 (general-def
+  :states '(normal insert emacs)
+  :prefix "SPC c l"
+  :non-normal-prefix "M-SPC c l"
+  ""  '(:ignore t             :which-key "Lookup Symbols")
+  "l" '(lsp-treemacs-symbols  :which-key "Symbols List")
+  "d" '(xref-find-definitions :which-key "Lookup Definition")
+  "r" '(xref-find-references  :which-key "Lookup References"))
+
+(general-def
   :states '(normal visual insert emacs)
   :keymaps 'emacs-lisp-mode-map
   :prefix "SPC c e"
@@ -113,8 +122,8 @@
   :non-normal-prefix "M-SPC o"
   ""  '(:ignore t            :which-key "Open")
   "f" '(make-frame           :which-key "New Frame")
-  "F" '(reveal-in-osx-finder :which-key "Finder Window")
-  "s" '(terminal-here        :which-key "Terminal")
+  "F" '(reveal-in-osx-finder :which-key "Finder Window (Current Directory)")
+  "s" '(terminal-here        :which-key "Terminal (Current Directory)")
   "t" '(treemacs             :which-key "Project File Tree"))
 
 (general-def
@@ -172,6 +181,7 @@
   ""  '(:ignore t                       :which-key "Project")
   "a" '(project-remember-projects-under :which-key "Add Projects")
   "D" '(project-forget-project          :which-key "Remove Project")
+  "e" '(lsp-treemacs-errors-list        :which-key "Project Errors")
   "f" '(project-find-file               :which-key "Open Project File")
   "p" '(project-switch-project          :which-key "Switch To Project"))
 
