@@ -10,9 +10,8 @@
 
 (use-package lsp-origami
   :straight t
-  :after '(lsp-mode origiami)
-  :config
-  (add-hook 'lsp-after-open-hook #'lsp-origami-try-enable))
+  :after (lsp-mode origiami)
+  :hook (lsp-after-open . #'lsp-origami-try-enable))
 
 (use-package lsp-ui
   :straight t
@@ -26,7 +25,7 @@
         lsp-ui-sideline-enable nil))
 
 (use-package lsp-treemacs :straight t :after lsp-mode)
-(use-package consult-lsp :straight t :after '(lsp-mode treemacs))
+(use-package consult-lsp :straight t :after (lsp-mode treemacs))
 (use-package lsp-docker :straight t :after lsp-mode)
 (use-package lsp-java :straight t :after lsp-mode)
 (use-package lsp-pyright :straight t :after lsp-mode)
