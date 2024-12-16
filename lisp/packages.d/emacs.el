@@ -101,7 +101,7 @@
   (add-to-list 'display-buffer-alist
                `(,(lambda (buffer _)
                     (with-current-buffer buffer
-                      (derived-mode-p 'comint-mode)))
+                      (derived-mode-p 'comint-mode 'xref--xref-buffer-mode)))
                  display-buffer-in-side-window
                  (side . bottom)
                  (slot . 99)
