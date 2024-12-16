@@ -51,6 +51,7 @@
           kept-new-versions 5
           kept-old-versions 3
           echo-keystrokes 0.25
+          ring-bell-function 'ignore
           catppuccin-flavor 'mocha
           column-number-mode t
           comint-prompt-read-only t
