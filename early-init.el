@@ -5,6 +5,8 @@
 (setq gc-cons-threshold 10000000)
 (setq frame-resize-pixelwise t)
 
+(setenv "LSP_USE_PLISTS" "true")
+
 (add-to-list 'default-frame-alist '(height . 70))
 (add-to-list 'default-frame-alist '(width . 235))
 (add-to-list 'default-frame-alist '(undecorated-round . t))
