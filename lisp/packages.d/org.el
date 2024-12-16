@@ -625,4 +625,12 @@ Also adds support for a `:sync' parameter to override `:async'."
   :hook
   (org-mode . org-tidy-mode))
 
+(use-package org-ql :straight t)
+(use-package om-dash
+  :straight (list :type git
+                  :host github
+                  :repo "gavv/om-dash"
+                  :branch "main"
+                  :files ("om-dash.el")))
+
 (provide 'packages.d/org)
