@@ -84,7 +84,7 @@
   (save-place-mode 1)
   (blink-cursor-mode -1)
   (pixel-scroll-precision-mode)
-  (global-auto-revert-mode)
+  (global-auto-revert-mode 1)
   (global-hl-line-mode)
   (global-so-long-mode)
   (when (display-graphic-p) (context-menu-mode)))
