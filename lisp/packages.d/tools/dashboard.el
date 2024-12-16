@@ -26,4 +26,14 @@
 
 (use-package dashboard-project-status :after dashboard :straight t)
 
+(use-package elfeed
+  :config
+  (setq elfeed-search-feed-face ":foreground #ffffff :weight bold"
+        elfeed-feeds (quote
+                      (("https://www.reddit.com/r/commandline.rss" reddit commandline)
+                       ("https://www.reddit.com/r/distrotube.rss" reddit distrotube)
+                       ("https://www.reddit.com/r/emacs.rss" reddit emacs)
+                       ("https://hackaday.com/blog/feed/" hackaday linux)
+                       ("https://news.ycombinator.com/rss" hackernews)))))
+
 (provide 'packages.d/tools/dashboard)
