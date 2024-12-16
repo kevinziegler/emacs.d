@@ -59,6 +59,10 @@
          ("\\.yaml\\'" . yaml-ts-mode)
          ("\\go.mode\\'" . go-mod-ts-mode)))
 
+(use-package treesit-auto
+  :straight t
+  :config (global-treesit-auto-mode))
+
 (use-package ielm
   :after 'nerd-icons
   :config
