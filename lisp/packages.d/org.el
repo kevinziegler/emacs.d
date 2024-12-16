@@ -205,8 +205,12 @@ appropriate.  In tables, insert a new row or end the table."
 
 (use-package org-modern
   :straight t
-  :after org
+  :after (org nerd-icons)
   :config
+  (setq org-modern-star 'replace
+        org-modern-checkbox `((?X  . ,(nerd-icons-mdicon "nf-md-checkbox_marked"))
+                              (?-  . ,(nerd-icons-mdicon "nf-md-checkbox_intermediate"))
+                              (?\s . ,(nerd-icons-mdicon "nf-md-checkbox_blank_outline"))))
   (global-org-modern-mode))
 
 (use-package org-appear
@@ -251,8 +255,7 @@ appropriate.  In tables, insert a new row or end the table."
   (advice-add 'org-mac-link-firefox-insert-frontmost-url
               :around #'kdz/org-mac-link-advise-evil)
   (advice-add 'org-mac-link-finder-insert-selected
-              :around #'kdz/org-mac-link-advise-evil)
-  )
+              :around #'kdz/org-mac-link-advise-evil))
 
 (use-package org-re-reveal
   :straight t
