@@ -75,5 +75,13 @@
 
 (use-package inf-ruby :straight t)
 (use-package nodejs-repl :straight t)
+(use-package pyenv-mode
+  :straight t
+  :config
+  (defun kdz/run-pyenv-python (force-unset)
+    (interactive "P")
+    (when (or force-unset (not (getenv "PYENV_VERSION")) )
+      (call-interactively 'pyenv-mode-set))
+    (call-interactively 'run-python)))
 
 (provide 'packages.d/languages)
