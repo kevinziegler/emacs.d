@@ -189,4 +189,5 @@ actions that would update colors in emacs (such as changing themes)"
 (use-package lorem-ipsum :straight t)
 (use-package uuidgen :straight t)
 
+(use-package fancy-urls-menu :straight t)
 (provide 'packages.d/ui/buffer)
