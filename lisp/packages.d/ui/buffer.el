@@ -52,7 +52,6 @@ actions that would update colors in emacs (such as changing themes)"
   :hook ((reb-mode . hide-mode-line-mode)))
 
 (use-package elec-pair
-  :ensure nil
   :hook ((prog-mode . electric-pair-mode)
 	 (ielm-mode . electric-pair-mode)))
 
@@ -71,6 +70,7 @@ actions that would update colors in emacs (such as changing themes)"
   :straight t
   :config
   (setq origami-fold-replacement " ... ")
+
   (global-origami-mode))
 
 (use-package repl-toggle
@@ -116,7 +116,6 @@ actions that would update colors in emacs (such as changing themes)"
         markdown-xwidget-code-block-theme "default") )
 
 (use-package display-fill-column-indicator
-  :ensure nil
   :init
   (global-display-fill-column-indicator-mode)
   :config
@@ -129,7 +128,6 @@ actions that would update colors in emacs (such as changing themes)"
     (add-to-list 'global-display-fill-column-indicator-modes `(not ,mode))))
 
 (use-package display-line-numbers
-  :ensure nil
   :init
   (global-display-line-numbers-mode)
   :config
