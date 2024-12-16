@@ -56,14 +56,15 @@ A pinned tab is one whose name corresponds to an entry in
   (defun kdz/tab-bar-update-faces (&rest _)
     "Customize tab-bar faces against current theme
 
-  This is performed via a function so it can be used as a hook on
-  actions that would update colors in emacs (such as changing themes)"
-    (let ((box-width 7))
+    This is performed via a function so it can be used as a hook on
+    actions that would update colors in emacs (such as changing themes)"
+    (let ((box-width 7)
+          (box-style (if (version<= "30" emacs-version) 'flat-button 'flat)))
       (set-face-attribute 'tab-bar
                           nil
                           :box (list :line-width box-width
                                      :color (face-background 'tab-bar nil t)
-                                     :style 'flat)
+                                     :style box-style)
                           :underline (list :color 'foreground-color
                                            :position (* -1 box-width)))
       (set-face-attribute 'tab-bar-tab-inactive nil :weight 'normal)
@@ -71,13 +72,16 @@ A pinned tab is one whose name corresponds to an entry in
                           nil
                           :weight 'bold
                           :underline (list :color (face-foreground 'tab-bar)
-                                           :position (* -1 box-width)))))
+                                           :position (* -1 box-width)))
+      (set-face-attribute 'tab-bar-tab-inactive
+                          nil
+                          :weight 'normal)))
 
   (defun kdz/tab-switch-index-or-select (&optional index)
     "Change tabs, optionally by INDEX using a prefix argument.
 
-The INDEX refers to the value displayed in the tab-bar's tab hint, and is then
-mapped to the correct sequential index in tab-bar-tabs"
+    The INDEX refers to the value displayed in the tab-bar's tab hint, and is then
+    mapped to the correct sequential index in tab-bar-tabs"
     (interactive "N")
     (if (eq index nil)
         (call-interactively 'tab-switch)
