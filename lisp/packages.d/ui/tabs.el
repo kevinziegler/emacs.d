@@ -110,14 +110,95 @@ A pinned tab is one whose name corresponds to an entry in
         tab-line-tab-name-truncated-max 40
         tab-line-new-button-show nil)
 
-  (defvar kdz-tab-line-pretty-name-alist
-    '(("\\*Embark Collect: consult-ripgrep - #" . "Search: "))
-    "Regexp replacements for tab-line tab names")
+  (defvar kdz-tab-line-mode-icon-alist
+    '((inferior-emacs-lisp-mode . "nf-custom-emacs")
+      (inferior-python-mode     . "nf-md-language_python")
+      (comint-mode              . "nf-dev-terminal")
+      (tabulated-list-mode      . "nf-fa-list")))
+
+  (defvar kdz-tab-line-mode-renaming-alist
+    '((comint-mode         . kdz/tab-line-comint-name)
+      (embark-collect-mode . kdz/tab-line-embark-name)))
+
+  (defvar kdz-embark-collect-friendly-type-alist
+    '((consult-grep . "Search")))
+
+  (defun kdz/tab-line-icon-for-buffer (buffer)
+    (with-current-buffer buffer
+      (when-let ((icon-name (cdr (seq-find (lambda (mapping)
+                                             (derived-mode-p (car mapping)))
+                                           kdz-tab-line-mode-icon-alist))))
+        (kdz/propertize-nerd-icon icon-name))))
+
+  (defun kdz/tab-line-comint-name (buffer)
+    (string-replace "*" "" (buffer-name buffer)))
+
+  (defun kdz/tab-line-embark-name (buffer)
+    (if-let* (
+              (embark-type (with-current-buffer buffer embark--type))
+              (embark-command (with-current-buffer buffer
+                                (symbol-name embark--command)))
+              (friendly-type-name (alist-get embark-type
+                                             kdz-embark-collect-friendly-type-alist))
+              (despecialized-name (stirng-replace "*" "" (buffer-name buffer)))
+              (minibuffer-input (replace-regexp-in-string (concat "^.+ "
+                                                                  embark-command
+                                                                  " - ")
+                                                          ""
+                                                          despecialized-name)))
+        (concat (or friendly-type-name (symbol-name embark-command))
+                ": "
+                minibuffer-input)))
+
+  (defun kdz/tab-line-name-for-mode (buffer)
+    (if-let* ((buffer-mode (with-current-buffer buffer major-mode))
+              (name-fn-for-mode (alist-get buffer-mode
+                                           kdz-tab-line-mode-renaming-alist)))
+        (funcall name-fn-for-mode buffer)
+      (buffer-name buffer))
+    )
+
+  (defun kdz/tab-line-buffer-display-name (buffer &optional _buffers)
+    (or (kdz/tab-line-name-for-mode buffer) (buffer-name buffer)))
+
 
   (defun kdz/tab-line-tab-name-as-search-results (name)
     (replace-regexp-in-string "\\*Embark Collect: consult-ripgrep - #"
                               "Search: "
                               name))
+
+  (defun kdz/tab-line-tab-name-format (tab tabs)
+    (let* ((buffer-p (bufferp tab))
+           (selected-p (if buffer-p
+                           (eq tab (window-buffer))
+                         (cdr (assq 'selected tab))))
+           (name (if buffer-p
+                     (funcall tab-line-tab-name-function tab tabs)
+                   (cdr (assq 'name tab))))
+           (icon (when buffer-p (kdz/tab-line-icon-for-buffer tab)))
+           (face (if selected-p
+                     (if (mode-line-window-selected-p)
+                         'tab-line-tab-current
+                       'tab-line-tab)
+                   'tab-line-tab-inactive)))
+      (dolist (fn tab-line-tab-face-functions)
+        (setf face (funcall fn tab tabs face buffer-p selected-p)))
+      (apply 'propertize
+             (concat "[ "
+                     icon
+                     (when icon " ")
+                     (propertize (string-replace "%" "%%" name) ;; (bug#57848)
+                                 'face face
+                                 'keymap tab-line-tab-map
+                                 'help-echo (if selected-p "Current tab"
+                                              "Click to select tab")
+                                 ;; Don't turn mouse-1 into mouse-2 (bug#49247)
+                                 'follow-link 'ignore)
+                     " ]")
+             `(tab ,tab ,@(if selected-p '(selected t))))))
+
+  (setq tab-line-tab-name-function #'kdz/tab-line-buffer-display-name
+        tab-line-tab-name-format-function #'kdz/tab-line-tab-name-format)
 
   (advice-add #'tab-line-tab-name-buffer
               :filter-return
