@@ -1,9 +1,5 @@
 (require 'f)
 
-(defun kdz/bin-available (bin)
-  "Check if a BIN is available via `which'."
-  (when (eq (call-process "which" nil nil nil bin) 0) t))
-
 (defun kdz/get-brew-prefix ()
   "Get the path of `brew --prefix' for the system, assuming brew is present."
   (with-temp-buffer
@@ -13,7 +9,7 @@
 
 (defun kdz/brew-prefix ()
   "Get the path of `brew --prefix' for the system."
-  (if (kdz/bin-available "brew")
+  (if (executable-find "brew")
       (kdz/get-brew-prefix)
     (error "Homebrew is not available")))
 
