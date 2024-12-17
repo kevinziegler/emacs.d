@@ -65,13 +65,13 @@
 
 (use-package ielm
   :after 'nerd-icons
+  :hook (ielm-mode . kdz/ielm-fancy-prompt)
   :config
-  (defun kdz/ielm-prompt ()
-    (kdz/propertize-nerd-icon "nf-md-chevron_right_box"
-                              'nerd-icons-mdicon-family))
-  (when (not (s-suffix? "\n" ielm-header ))
-    (setq ielm-header (concat ielm-header "\n")))
-  (setq ielm-prompt (concat "(elisp) " (kdz/ielm-prompt) " ")))
+  (defun kdz/ielm-fancy-prompt ()
+    (let ((chevron (kdz/propertize-nerd-icon "nf-md-chevron_right_box")))
+      (when (not (s-suffix? "\n" ielm-header ))
+        (setq ielm-header (concat ielm-header "\n")))
+      (setq ielm-prompt (concat "(elisp) " chevron " ")))))
 
 (use-package inf-ruby :straight t)
 (use-package nodejs-repl :straight t)
