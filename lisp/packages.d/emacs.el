@@ -151,7 +151,9 @@
   (add-to-list 'display-buffer-alist
                `(,(lambda (buffer _)
                     (with-current-buffer buffer
-                      (derived-mode-p 'comint-mode 'xref--xref-buffer-mode)))
+                      (derived-mode-p 'comint-mode
+                                      'xref--xref-buffer-mode
+                                      'embark-collect-mode)))
                  display-buffer-in-side-window
                  (side . bottom)
                  (slot . 99)
@@ -203,13 +205,6 @@
   (add-to-list 'display-buffer-alist
                '("\\*scratch\\*"
                  display-buffer-in-tab
-                 (tab-name . "Scratchpad")))
-
-  (add-to-list 'display-buffer-alist
-               '("\\*Embark Collect: .+\\*"
-                 display-buffer-in-side-window
-                 (side . bottom)
-                 (slot . 99)
-                 (dedicated . t))))
+                 (tab-name . "Scratchpad"))))
 
 (provide 'packages.d/emacs)
