@@ -67,6 +67,8 @@
   :after 'nerd-icons
   :hook (ielm-mode . kdz/ielm-fancy-prompt)
   :config
+  (setq ielm-history-file-name (kdz/user-directory ".local" "ielm-history.eld"))
+
   (defun kdz/ielm-fancy-prompt ()
     (let ((chevron (kdz/propertize-nerd-icon "nf-md-chevron_right_box")))
       (when (not (s-suffix? "\n" ielm-header ))
