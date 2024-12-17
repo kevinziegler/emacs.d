@@ -15,6 +15,7 @@
 
 (use-package magit-delta
   :straight t
+  :if (executable-find "delta")
   :hook ((magit-mode . magit-delta-mode)))
 
 (use-package magit-file-icons
