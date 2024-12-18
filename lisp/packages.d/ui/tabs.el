@@ -1,8 +1,8 @@
 (use-package tab-bar
   :config
-  (defvar kdz-tab-bar-tab-icons '(("Home"   . "nf-md-home")
+  (defvar kdz-tab-bar-tab-icons '(("Home"       . "nf-md-home")
                                   ("Scratchpad" . "nf-md-note")
-                                  ("System" . "nf-md-cog"))
+                                  ("System"     . "nf-md-cog"))
     "Tabs that should be kept together and in order in tab list")
 
   (defun kdz/tab-bar-pinned-tab-p (tab)
@@ -20,7 +20,7 @@ A pinned tab is one whose name corresponds to an entry in
                                   (when tab-bar-tab-hints (format "%d " i)))
                           'face tab-face)
               (if icon
-                  (nerd-icons-mdicon icon)
+                  (kdz/propertize-nerd-icon icon `(face (:inherit ,tab-face)))
                 (propertize name 'face tab-face))
               (propertize " ]" 'face tab-face))))
 
