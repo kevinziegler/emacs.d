@@ -30,21 +30,31 @@
       ("nf-weather" . nerd-icons-wicon-family))
     "Mapping of nf-<iconset> names to their nerd-icons-* function ")
 
+  (defun kdz/find-by-prefix-key (prefix-alist name)
+    (cdr (seq-find (lambda (mapping) (s-starts-with? (car mapping) name))
+                   prefix-alist)))
+
   (defun kdz/nerd-icons-dwim (name)
     "Get a nerd-icons icon with name, regardless of icon set"
-    (funcall (cdr (seq-find (lambda (mapping)
-                              (s-starts-with? (car mapping) name))
-                            kdz-nerd-icons-function-map))
-             name))
+    (funcall (kdz/find-by-prefix-key kdz-nerd-icons-function-map name) name))
 
-  (defun kdz/propertize-nerd-icon (name &optional face-function)
-    (let ((face-family (funcall (cdr (seq-find (lambda (mapping)
-                                                 (s-starts-with? (car mapping) name))
-                                               kdz-nerd-icons-family-function-map)) )))
-      (propertize (kdz/nerd-icons-dwim name)
-                  'face `(:family ,face-family :height 1.2)
-                  'font-lock-face `(:family ,face-family :height 1.2)
-                  'display '(raise 0)) ) ))
+  (defun kdz/propertize-nerd-icon (name &optional properties)
+    (let* ((face-family-fn
+            (kdz/find-by-prefix-key kdz-nerd-icons-family-function-map name))
+           (face-family (funcall face-family-fn))
+           (base-properties (list 'face `(:family ,face-family :height 1.2)
+                                  'font-lock-face `(:family ,face-family :height 1.2)
+                                  'display '(raise 0)))
+           (evaluated-properties
+            (map-merge-with 'plist
+                            (lambda (base extra)
+                              (if (and (listp base) (listp extra))
+                                  (map-merge 'plist base extra)
+                                extra))
+                            base-properties
+                            properties)))
+      (apply #'propertize
+             `(,(kdz/nerd-icons-dwim name) ,@evaluated-properties)))))
 
 (use-package pretty-hydra :straight t)
 
