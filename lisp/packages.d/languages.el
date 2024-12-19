@@ -64,16 +64,20 @@
   :config (global-treesit-auto-mode))
 
 (use-package ielm
-  :after 'nerd-icons
-  :hook (ielm-mode . kdz/ielm-fancy-prompt)
-  :config
-  (setq ielm-history-file-name (kdz/user-directory ".local" "ielm-history.eld"))
-
+  :after nerd-icons
+  :hook (inferior-emacs-lisp-mode . kdz/ielm-fancy-prompt)
+  :init
   (defun kdz/ielm-fancy-prompt ()
     (let ((chevron (kdz/propertize-nerd-icon "nf-md-chevron_right_box")))
       (when (not (s-suffix? "\n" ielm-header ))
         (setq ielm-header (concat ielm-header "\n")))
-      (setq ielm-prompt (concat "(elisp) " chevron " ")))))
+      (setq ielm-prompt (concat "(elisp) " chevron " "))))
+  :config
+  (setq ielm-history-file-name (kdz/user-directory ".local" "ielm-history.eld"))
+
+  (defun kdz/ielm-project-root ()
+    (interactive)
+    (let ((default-directory (or (project-root (project-current))))) (ielm))))
 
 (use-package inf-ruby :straight t)
 (use-package nodejs-repl :straight t)
