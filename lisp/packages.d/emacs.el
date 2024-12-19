@@ -109,7 +109,7 @@
 
 (use-package mule-util
   :config
-  truncate-string-ellipsis "…")
+  (setopt truncate-string-ellipsis "…"))
 
 (use-package pixel-scroll
   :config
