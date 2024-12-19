@@ -141,7 +141,7 @@
   :config
   (setopt uniquify-buffer-name-style 'post-forward))
 
-(use-package 'use-package-core
+(use-package use-package-core
   :config
   (setopt use-package-enable-imenu-support t))
 
