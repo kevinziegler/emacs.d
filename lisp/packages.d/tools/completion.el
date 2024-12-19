@@ -1,8 +1,11 @@
 (use-package cape
   :straight t
-  :config
-  (add-to-list 'completion-at-point-functions #'cape-file))
+  :init
+  (add-hook 'completion-at-point-functions #'cape-dabbrev)
+  (add-hook 'completion-at-point-functions #'cape-file)
+  (add-hook 'completion-at-point-functions #'cape-elisp-block))
 
+(use-package company :straight t)
 (use-package corfu
   :straight t
   :custom
@@ -22,7 +25,7 @@
 (use-package nerd-icons-corfu
   :straight t
   :after corfu
-  :config
+  :init
   (add-to-list 'corfu-margin-formatters #'nerd-icons-corfu-formatter))
 
 (use-package hotfuzz :straight t
