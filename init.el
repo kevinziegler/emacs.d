@@ -28,7 +28,6 @@
 (require 'lib/window-resize)
 
 (require 'conf.d/keybindings)
-(require 'conf.d/settings)
 
 (let* ((local-config (kdz/user-directory "local.el"))
        (local-template (concat local-config ".tpl")))

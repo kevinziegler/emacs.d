@@ -70,13 +70,22 @@
   :config
   (setopt bookmark-file (kdz/user-directory ".local" "bookmarks")))
 
+(use-package comint
+  :config
+  (setopt comint-prompt-read-only t))
+
 (use-package cus-edit
   :config
   (setopt custom-file (kdz/user-directory ".local" "custom.el")))
 
-(use-package comint
+(use-package custom
+  :init
+  (defvar kdz-load-theme-hook nil
+    "Hook to run actions after calling `load-theme'")
   :config
-  (setopt comint-prompt-read-only t))
+  (advice-add 'load-theme
+              :after
+              (lambda (&rest _) (run-hooks 'kdz-load-theme-hook))))
 
 (use-package eshell
   :init
@@ -84,6 +93,7 @@
 
 (use-package frame
   :config
+  (set-frame-font "Berkeley Mono 12" nil t)
   (blink-cursor-mode -1))
 
 (use-package hl-line

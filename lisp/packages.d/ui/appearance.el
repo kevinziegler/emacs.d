@@ -2,8 +2,15 @@
 (use-package creamsody-theme :straight t)
 (use-package tao-theme :straight t)
 (use-package stimmung-themes :straight t
-  ;; :config (stimmung-themes-load-light)
-  )
+  :config
+  ;; (stimmung-themes-load-light)
+  (advice-add 'stimmung-themes-load-light
+              :after
+              (lambda (&rest _) (run-hooks 'kdz-load-theme-hook)))
+
+  (advice-add 'stimmung-themes-load-dark
+              :after
+              (lambda (&rest _) (run-hooks 'kdz-load-theme-hook))))
 
 (use-package kaolin-themes
   :straight t
