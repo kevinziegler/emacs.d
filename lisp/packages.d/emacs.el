@@ -207,4 +207,8 @@
                  display-buffer-in-tab
                  (tab-name . "Scratchpad"))))
 
+(use-package xref
+  :config
+  (setq xref-prompt-for-identifier nil))
+
 (provide 'packages.d/emacs)
