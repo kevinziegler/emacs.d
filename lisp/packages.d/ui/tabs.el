@@ -1,4 +1,5 @@
 (use-package tab-bar
+  :hook (emacs-startup . kdz/tab-bar-initialize-tab-state)
   :config
   (defvar kdz-tab-bar-tab-icons '(("Home"       . "nf-md-home")
                                   ("Scratchpad" . "nf-md-note")
@@ -90,6 +91,10 @@ A pinned tab is one whose name corresponds to an entry in
         (if tab
             (tab-bar-select-tab (1+ (seq-position (tab-bar-tabs) tab)))
           (message "No tab found at position [%d]" index)))))
+
+  (defun kdz/tab-bar-initialize-tab-state ()
+    (tab-bar-select-tab-by-name "Home")
+    (tab-bar-close-tab-by-name "*scratch*"))
 
   (setq tab-bar-auto-width nil
         tab-bar-close-button-show nil
