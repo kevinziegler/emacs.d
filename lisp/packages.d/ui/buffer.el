@@ -33,6 +33,7 @@
 
 (use-package hl-todo
   :straight t
+  :hook (kdz-load-theme . kdz/set-hl-todo-faces)
   :config
   (defun kdz/set-hl-todo-faces (&rest _)
     "Set face colors for hl-todo keywords

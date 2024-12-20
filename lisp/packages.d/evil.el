@@ -54,8 +54,7 @@
 (use-package evil-cleverparens
   :straight t
   :after (evil smartparens)
-  :config
-  (add-hook 'lisp-mode-hook #'evil-cleverparens-mode))
+  :hook (lisp-mode . evil-cleverparens-mode))
 
 (use-package evil-collection
   :straight t
@@ -65,8 +64,8 @@
 
 (use-package evil-embrace
   :straight t
+  :hook (org-mode . embrace-org-mode-hook)
   :config
-  (add-hook 'org-mode-hook 'embrace-org-mode-hook)
   (evil-embrace-enable-evil-surround-integration))
 
 (use-package evil-escape

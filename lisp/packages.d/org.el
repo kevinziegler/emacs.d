@@ -1,6 +1,8 @@
 (use-package org
   :hook ((org-mode . visual-line-mode)
-         (org-mode . visual-wrap-prefix-mode))
+         (org-mode . visual-wrap-prefix-mode)
+         (org-mode . kdz/org-mode-set-electric-pair-predicate)
+         (org-insert-heading . kdz/org-heading-fixup-new-line))
   :config
   (setopt org-auto-align-tags nil
           org-babel-results-keyword "results"
@@ -144,12 +146,10 @@ appropriate.  In tables, insert a new row or end the table."
             (goto-char (line-end-position))
             (insert "\n"))))))
 
-  (add-hook 'org-insert-heading-hook #'kdz/org-heading-fixup-new-line)
-  (add-hook 'org-mode-hook
-            (lambda ()
-              (add-function :before-until
-                            (local 'electric-pair-inhibit-predicate)
-                            (lambda (c) (eq c ?<)))))
+  (defun kdz/org-mode-set-electric-pair-predicate ()
+    (add-function :before-until
+                  (local 'electric-pair-inhibit-predicate)
+                  (lambda (c) (eq c ?<))))
 
   (org-babel-do-load-languages
    'org-babel-load-languages
@@ -216,21 +216,16 @@ appropriate.  In tables, insert a new row or end the table."
 (use-package org-appear
   :straight t
   :after org
+  :hook ((org-mode . org-appear-mode)
+         (org-mode . kdz/org-appear-respect-evil-state))
   :config
   (setopt org-appear-trigger 'manual
           org-appear-autolinks t
           org-appear-autokeywords t)
 
-  (add-hook 'org-mode-hook 'org-appear-mode)
-  (add-hook 'org-mode-hook (lambda ()
-                             (add-hook 'evil-insert-state-entry-hook
-                                       #'org-appear-manual-start
-                                       nil
-                                       t)
-                             (add-hook 'evil-insert-state-exit-hook
-                                       #'org-appear-manual-stop
-                                       nil
-                                       t))))
+  (defun kdz/org-appear-respect-evil-state ()
+    (add-hook 'evil-insert-state-entry-hook #'org-appear-manual-start nil t)
+    (add-hook 'evil-insert-state-exit-hook #'org-appear-manual-stop nil t)))
 
 (use-package org-autolist
   :straight t
@@ -272,12 +267,12 @@ appropriate.  In tables, insert a new row or end the table."
 (use-package evil-org
   :straight t
   :after (evil org)
-  :hook ((org-mode . evil-org-mode))
+  :hook ((org-mode . evil-org-mode)
+         (org-mode . kdz/org-cycle-table-on-evil-state))
   :config
-  (add-hook 'org-mode-hook
-            (lambda () (add-hook 'evil-insert-state-exit-hook
-                                 (lambda () (when (org-at-table-p)
-                                              (org-cycle)))))))
+  (defun kdz/org-cycle-table-on-evil-state ()
+    (add-hook 'evil-insert-state-exit-hook
+              (lambda () (when (org-at-table-p) (org-cycle))))))
 
 (use-package ox
   :straight nil

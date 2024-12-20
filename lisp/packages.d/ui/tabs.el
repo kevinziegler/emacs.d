@@ -1,5 +1,7 @@
 (use-package tab-bar
-  :hook (emacs-startup . kdz/tab-bar-initialize-tab-state)
+  :hook ((emacs-startup . kdz/tab-bar-initialize-tab-state)
+         (kdz-load-theme . kdz/tab-bar-update-faces)
+         (window-state-change . kdz/ensure-bottom-tab-line))
   :config
   (defvar kdz-tab-bar-tab-icons '(("Home"       . "nf-md-home")
                                   ("Packages"   . "nf-md-package")
@@ -228,8 +230,6 @@ A pinned tab is one whose name corresponds to an entry in
     (when (and (eq 'bottom (window-parameter nil 'window-side))
                (not tab-line-mode))
       (tab-line-mode 1)))
-
-  (add-hook 'window-state-change-hook #'kdz/ensure-bottom-tab-line)
 
   (defun kdz/tab-line-tab-name (buffer &optional _buffers)
     (let* ((comint-mode-p (with-current-buffer buffer

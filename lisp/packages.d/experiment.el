@@ -108,7 +108,8 @@
 (use-package jwt :straight t)
 
 (use-package scopeline
-  :config (add-hook 'prog-mode-hook #'scopeline-mode))
+  :straight t
+  :hook (prog-mode . scopeline-mode))
 
 (defun kdz/get-posframe-for-buffer (buffer-or-name)
   "Get the posframe for BUFFER-OR-STRING, if it exists",
@@ -167,9 +168,9 @@
 (use-package buffer-terminator :straight t)
 (use-package paredit-mode :straight t)
 (use-package enhanced-evil-paredit
+  :straight t
   :ensure t
-  :config
-  (add-hook 'paredit-mode-hook #'enhanced-evil-paredit-mode))
+  :hook (paraedit-mode . enhanced-evil-paraedit-mode))
 
 (use-package js-comint :straight t)
 (use-package ts-comint :straight t)

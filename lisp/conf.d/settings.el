@@ -16,7 +16,4 @@
             :after
             (lambda (&rest _) (run-hooks 'kdz-load-theme-hook)))
 
-(add-hook 'kdz-load-theme-hook 'kdz/set-hl-todo-faces)
-(add-hook 'kdz-load-theme-hook 'kdz/tab-bar-update-faces)
-
 (provide 'conf.d/settings)

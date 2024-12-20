@@ -36,17 +36,13 @@
 
 (use-package ibuffer-project
   :straight t
+  :hook (ibuffer . kdz/ibuffer-tune-sort-and-filter)
   :config
-  (add-hook 'ibuffer-hook
- 	    (lambda ()
- 	      (setq ibuffer-filter-groups
-                    (ibuffer-project-generate-filter-groups))
- 	      (unless (eq ibuffer-sorting-mode 'project-file-relative)
- 		(ibuffer-do-sort-by-project-file-relative))))
-  (add-hook 'ibuffer-hook
- 	    (lambda ()
- 	      (setq ibuffer-filter-groups
-                    (ibuffer-project-generate-filter-groups)))))
+  (defun kdz/ibuffer-tune-sort-and-filter ()
+    (setq ibuffer-filter-groups (ibuffer-project-generate-filter-groups))
+    (unless (eq ibuffer-sorting-mode 'project-file-relative)
+      (ibuffer-do-sort-by-project-file-relative))))
+
 (use-package otpp
   :straight t
   :after project
