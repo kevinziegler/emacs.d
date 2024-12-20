@@ -2,6 +2,7 @@
   :hook (emacs-startup . kdz/tab-bar-initialize-tab-state)
   :config
   (defvar kdz-tab-bar-tab-icons '(("Home"       . "nf-md-home")
+                                  ("Packages"   . "nf-md-package")
                                   ("Scratchpad" . "nf-md-note")
                                   ("System"     . "nf-md-cog"))
     "Tabs that should be kept together and in order in tab list")
