@@ -43,17 +43,20 @@ A pinned tab is one whose name corresponds to an entry in
     (mapcar (lambda (tab-to-index) (cons (cdr tab-to-index) (car tab-to-index)))
             (kdz/tab-bar-map-tabs-to-relative-index)))
 
-  (defun kdz/tab-bar-render-pinned-tabs ()
+  (defun kdz/tab-bar-format-with-relative-index (filter-tabs)
     (let* ((all-tabs (funcall tab-bar-tabs-function))
            (relative-index (kdz/tab-bar-map-tabs-to-relative-index)))
-      (mapcan (lambda (tab) (tab-bar--format-tab tab (alist-get tab relative-index)))
-              (seq-filter #'kdz/tab-bar-pinned-tab-p all-tabs))))
+      (mapcan (lambda (tab)
+                (tab-bar--format-tab tab (alist-get tab relative-index)))
+              (funcall filter-tabs all-tabs))))
 
-  (defun kdz/tab-bar-render-workspaces ()
-    (let* ((all-tabs (funcall tab-bar-tabs-function))
-           (relative-index (kdz/tab-bar-map-tabs-to-relative-index)))
-      (mapcan (lambda (tab) (tab-bar--format-tab tab (alist-get tab relative-index)))
-              (seq-remove #'kdz/tab-bar-pinned-tab-p all-tabs))))
+  (defun kdz/tab-bar-format-pinned-tabs ()
+    (kdz/tab-bar-format-with-relative-index
+     (lambda (all-tabs) (seq-filter #'kdz/tab-bar-pinned-tab-p all-tabs))))
+
+  (defun kdz/tab-bar-format-workspaces ()
+    (kdz/tab-bar-format-with-relative-index
+     (lambda (all-tabs) (seq-remove #'kdz/tab-bar-pinned-tab-p all-tabs))))
 
   (defun kdz/tab-bar-update-faces (&rest _)
     "Customize tab-bar faces against current theme
@@ -102,14 +105,9 @@ A pinned tab is one whose name corresponds to an entry in
         tab-bar-tab-hints t
         tab-bar-tab-name-format-function #'kdz/tab-bar-tab-name-format
         tab-bar-new-tab-to 'rightmost
-        tab-bar-format '(tab-bar-separator
-                         tab-bar-separator
-                         kdz/tab-bar-render-workspaces
+        tab-bar-format '(kdz/tab-bar-format-workspaces
                          tab-bar-format-align-right
-                         kdz/tab-bar-render-pinned-tabs
-                         tab-bar-separator))
-  (tab-bar-select-tab-by-name "Home")
-  (tab-bar-close-tab-by-name "*scratch*"))
+                         kdz/tab-bar-format-pinned-tabs)))
 
 (use-package tab-line
   :config
