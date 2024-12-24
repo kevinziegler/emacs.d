@@ -9,7 +9,6 @@
 (require 'packages.d/workspaces)
 
 (require 'packages.d/tools/dashboard)
-(require 'packages.d/tools/minibuffer)
 (require 'packages.d/tools/treemacs)
 (require 'packages.d/tools/completion)
 (require 'packages.d/tools/help)
