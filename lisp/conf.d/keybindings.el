@@ -237,8 +237,7 @@
   "t" '(tap/consult-ripgrep-dwim     :which-key "Thing-at-point (DWIM)"))
 
 (general-def
-  :states 'normal
-  :keymaps 'org-mode-map
+  :states '(normal insert)
   :prefix "SPC i o"
   :non-normal-prefix "M-SPC i o"
   ""    '(:ignore t                          :which-key "Org-Mode")
