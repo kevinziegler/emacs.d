@@ -161,4 +161,10 @@
 
 (use-package consult-todo :straight t)
 
+(use-package nerd-icons-completion
+  :after (marginalia nerd-icons)
+  :config
+  (nerd-icons-completion-mode)
+  (add-hook 'marginalia-mode-hook #'nerd-icons-completion-marginalia-setup))
+
 (provide 'packages.d/tools/minibuffer)
