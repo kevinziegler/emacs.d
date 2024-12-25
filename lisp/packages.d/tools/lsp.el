@@ -24,7 +24,12 @@
         lsp-ui-doc-show-with-cursor t
         lsp-ui-sideline-enable nil))
 
-(use-package lsp-treemacs :straight t :after lsp-mode)
+(use-package lsp-treemacs
+  :straight t
+  :after lsp-mode
+  :general
+  (kdz/leader-code-lookup-def "l" '("Symbols List" . lsp-treemacs-symbols)))
+
 (use-package consult-lsp :straight t :after (lsp-mode treemacs))
 (use-package lsp-docker :straight t :after lsp-mode)
 (use-package lsp-java :straight t :after lsp-mode)

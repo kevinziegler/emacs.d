@@ -71,6 +71,8 @@
 (use-package avy :straight t)
 (use-package ace-window
   :straight t
+  :general
+  (kdz/leader-window-def "w" '("Select Window" . ace-window))
   :config
   (ace-window-posframe-mode)
   (set-face-attribute 'aw-leading-char-face nil :height 3.0))

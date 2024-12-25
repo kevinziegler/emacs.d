@@ -1,7 +1,12 @@
 ;;; Git/Version Control Tooling
 (use-package magit
   :straight t
-  :after 'lib/system
+  :general
+  (kdz/leader-git-def
+   "g" '("Git Status"   . magit-status)
+   "b" '("Blame File"   . magit-blame)
+   "l" '("Log for File" . magit-log-buffer-file))
+
   :config
   (transient-append-suffix 'magit-fetch "-p"
     '("-t" "Fetch all tags" ("-t" "--tags")))
@@ -10,7 +15,11 @@
   (setq magit-git-executable (brew-bin "git")
         magit-repository-directories '(("~/dev" . 2) ("~/.dotfiles" . 0))))
 
-(use-package git-timemachine :straight t)
+(use-package git-timemachine
+  :general
+  (kdz/leader-git-def "t" '("Time Machine" . git-timemachine))
+  :straight t)
+
 (use-package abridge-diff :after magit :init (abridge-diff-mode 1))
 
 (use-package magit-delta
@@ -40,6 +49,13 @@
 
 (use-package git-link
   :straight t
+  :general
+  (kdz/leader-git-def
+   "y"   (cons "Copy Link" (make-sparse-keymap))
+   "yh" '("Repository Homepage" . git-link-homepage)
+   "yy" '("File + Line Number" . git-link)
+   "yY" '("File + Line Number (@ Commit)" . kdz/git-link-with-commit))
+
   :config
   (defun kdz/git-link-with-commit ()
     (interactive)

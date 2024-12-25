@@ -96,4 +96,12 @@
     ("_" kdz/window-step-size-dec           "Decrease Step Size")
     ("-" kdz/window-step-size-dec           "Decrease Step Size"))))
 
+(kdz/leader-window-def
+  "h" '("Left"                 . kdz/window-left-dwim)
+  "l" '("Right"                . kdz/window-right-dwim)
+  "f" '("Fit to buffer width"  . kdz/window-fit-to-buffer-width)
+  "F" '("Fit to buffer fill"   . kdz/window-fit-to-buffer-fill)
+  "r" '("Restore window width" . kdz/window-restore-original-width)
+  "s" '("Resize Window"        . kdz-pretty-window-resize/body))
+
 (provide 'lib/window-resize)

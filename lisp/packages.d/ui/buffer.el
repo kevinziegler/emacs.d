@@ -4,17 +4,67 @@
 (use-package imenu-list :straight t)
 (use-package yasnippet :straight t :config (yas-global-mode))
 (use-package yasnippet-snippets :straight t :after yasnippet)
-(use-package consult-yasnippet :straight t :after yasnippet)
-(use-package copy-as-format :straight t)
-(use-package separedit :straight t)
-(use-package expand-region :straight t)
-(use-package jinx :straight t :config (global-jinx-mode))
 (use-package apheleia :straight t :config (apheleia-global-mode +1))
-(use-package vundo :straight t)
-(use-package eval-sexp-fu :straight t)
 (use-package anzu :straight t :config (global-anzu-mode +1))
 (use-package flycheck :straight t)
-(use-package sideline :straight t)
+
+(use-package vundo
+  :straight t
+  :general
+  (kdz/leader-buffer-def "h" '("Undo History" . vundo)))
+
+(use-package consult-yasnippet
+  :straight t
+  :after yasnippet
+  :general
+  (kdz/leader-insert-def "s" '("Snippet" . consult-yasnippet)))
+
+(use-package eval-sexp-fu
+  :straight t
+  :general
+  (kdz/leader-code-eval-def
+    "s" '("Evaluate s-exp" . eval-sexp-fu-eval-sexp-inner-list)))
+
+(use-package expand-region
+  :straight t
+  :general
+  (kdz/leader-edit-def "e" '("Expand Region" . er/expand-region)))
+
+(use-package separedit
+  :straight t
+  :general
+  (kdz/leader-edit-def "b" '("Edit block in separate buffer" . separedit)))
+
+(use-package sideline
+  :straight t
+  :general
+  (kdz/leader-toggle-def
+    "s" '("Show/hide Sideline" . sideline-mode))
+  (kdz/leader-toggle-global-def
+    "s" '("Show/hide Sideline" . global-sideline-mode)))
+
+(use-package copy-as-format
+  :straight t
+  :general
+  (kdz/leader-edit-def
+    "y"   (cons "Copy as <format>" (make-sparse-keymap))
+    "yj" '("Copy as JIRA" . copy-as-format-jira)
+    "yh" '("Copy as HTML" . copy-as-format-html)
+    "ys" '("Copy as Slack" . copy-as-format-slack)
+    "ym" '("Copy as Markdown (Plain)" . copy-as-format-markdown)
+    "yg" '("Copy as Markdown (Github)" . copy-as-format-github)
+    "yG" '("Copy as Markdown (Gitlab)" . copy-as-format-gitlab)))
+
+(use-package jinx
+  :straight t
+  :general
+  (general-def
+    :states '(normal)
+    :keymaps 'override
+    :prefix "z"
+    "=" '(jinx-correct :which-key "Correct Spelling"))
+  :config
+  (global-jinx-mode))
 
 (use-package sideline-blame
   :straight t
@@ -76,6 +126,8 @@ actions that would update colors in emacs (such as changing themes)"
 
 (use-package repl-toggle
   :straight t
+  :general
+  (kdz/leader-code-def "r" '("Toggle REPL" . rtog/toggle-repl))
   :config
   (setq rtog/fullscreen nil
         rtog/fallback-repl-fun #'ielm
@@ -100,6 +152,8 @@ actions that would update colors in emacs (such as changing themes)"
 
 (use-package file-info
   :straight t
+  :general
+  (kdz/leader-file-def "i" '("Show Info" . file-info-show))
   :config
   (setq file-info-headline-underline-symbol ?━))
 
@@ -119,6 +173,13 @@ actions that would update colors in emacs (such as changing themes)"
 (use-package display-fill-column-indicator
   :init
   (global-display-fill-column-indicator-mode)
+  :general
+  (kdz/leader-toggle-def "c"
+    '("Show/hide Sideline" . display-fill-column-indicator-mode))
+
+  (kdz/leader-toggle-global-def "c"
+    '("Show/hide fill column" . global-display-fill-column-indicator-mode))
+
   :config
   (dolist (mode '(dired-mode
                   dirvish-directory-view-mode
@@ -131,6 +192,13 @@ actions that would update colors in emacs (such as changing themes)"
 (use-package display-line-numbers
   :init
   (global-display-line-numbers-mode)
+  :general
+  (kdz/leader-toggle-def
+    "l" '("Show/hide line numbers"         . display-line-numbers-mode)
+    "r" '("Relative/absolute line numbers" . kdz/toggle-line-numbers))
+  (kdz/leader-toggle-global-def
+    "l" '("Show/hide line numbers" . global-display-line-numbers-mode))
+
   :config
   (defun kdz/toggle-line-numbers ()
     "Cycle between relative/absolute line numbers"
@@ -150,7 +218,11 @@ actions that would update colors in emacs (such as changing themes)"
     (add-hook mode (lambda () (display-line-numbers-mode -1)))))
 
 ;; TODO Need to adjust face colors to contrast properly
-(use-package highlight-indent-guides :straight t)
+(use-package highlight-indent-guides
+  :straight t
+  :general
+  (kdz/leader-toggle-def
+    "i" '("Show/hide indent guides" . highlight-indent-guides-mode)))
 
 (use-package scroll-on-jump
   :straight t

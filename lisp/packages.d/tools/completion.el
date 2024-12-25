@@ -34,6 +34,14 @@
 
 (use-package consult
   :straight t
+  :general
+  (kdz/leader-search-def
+    "*" '("Search for selection"              . kdz/consult-ripgrep-selected)
+    "l" '("Search for Line (Current Buffer)"  . consult-line)
+    "L" '("Search for Line (Project Buffers)" . consult-line-multi)
+    "p" '("Project"                           . consult-ripgrep)
+    "s" '("Thing-at-point (Select)"           . tap/consult-ripgrep)
+    "t" '("Thing-at-point (DWIM)"             . tap/consult-ripgrep-dwim))
   :config
   (setq consult-narrow-key "<")
 
@@ -107,6 +115,10 @@
 
 (use-package embark-consult
   :straight t
+  :general
+  (kdz/leader-buffer-def
+    "s" '("Search Results" . kdz/consult-embark-ripgrep-results))
+
   :hook ((embark-collect-mode . consult-preview-at-point-mode))
   :config
   (defvar kdz-search-query-rx
@@ -168,6 +180,12 @@
 
 (use-package vertico
   :straight t
+  :general
+  (general-def
+    :keymaps 'vertico-map
+    "C-j" 'next-line-or-history-element
+    "C-k" 'previous-line-or-history-element)
+
   :init
   (vertico-mode)
 

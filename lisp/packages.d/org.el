@@ -3,6 +3,25 @@
          (org-mode . visual-wrap-prefix-mode)
          (org-mode . kdz/org-mode-set-electric-pair-predicate)
          (org-insert-heading . kdz/org-heading-fixup-new-line))
+  :general
+  (general-def
+    :states 'insert
+    :keymaps 'org-mode-map
+    "s-<return>" 'kdz/org-return-dwim)
+
+  (kdz/leader-file-def "l" '("Store Link" . org-store-link))
+  :general-config
+  (kdz/mode-leader-def
+    :keymaps 'org-mode-map
+    "e"   (cons "Edit" (make-sparse-keymap))
+    "eb" '("Edit Org Block" . org-edit-special)
+
+    "i"   (cons "Insert" (make-sparse-keymap))
+    "ic" '("Insert Table of Contents"       . kdz/org-make-toc-dwim)
+    "ih" '("Insert Heading"                 . org-insert-heading-respect-content)
+    "is" '("Insert Sub-heading"             . org-insert-subheading)
+    "il" '("Insert Link (From Application)" . org-mac-link-get-link))
+
   :config
   (setopt org-auto-align-tags nil
           org-babel-results-keyword "results"

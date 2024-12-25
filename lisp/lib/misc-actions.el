@@ -22,9 +22,4 @@
     (when (not (eq window (selected-window)))
       (delete window))))
 
-(defun kdz/switch-to-buffer-current-window ()
-  (interactive)
-  (let ((switch-to-buffer-obey-display-actions nil))
-    (consult-buffer)))
-
 (provide 'lib/misc-actions)

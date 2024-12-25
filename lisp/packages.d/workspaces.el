@@ -1,4 +1,15 @@
 (use-package project
+  :general
+  (kdz/leader-def
+    "p"   (cons "Project" (make-sparse-keymap))
+    "pa" '("Add Projects" . project-remember-projects-under)
+    "pD" '("Remove Project" . project-forget-project)
+    "pe" '("Project Errors" . lsp-treemacs-errors-list)
+    "pf" '("Open Project File" . project-find-file)
+    "pp" '("Switch To Project" . project-switch-project))
+  (kdz/leader-buffer-def
+    "b" '("Switch to Buffer (Workspace)" . project-switch-to-buffer))
+
   :config
   (setq project-list-file (kdz/user-directory ".local" "projects"))
   (defun kdz/project-dashboard-buffer (project-dir)

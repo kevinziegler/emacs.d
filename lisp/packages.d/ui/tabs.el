@@ -1,4 +1,13 @@
 (use-package tab-bar
+  :general
+  (kdz/leader-tab-def
+    "TAB" '("Select Workspace"       . kdz/tab-switch-index-or-select)
+    "h"   '("Previous Workspace"     . tab-previous)
+    "l"   '("Next Workspace"         . tab-next)
+    "H"   '("Move Tab Left"          . kdz/tab-move-left)
+    "L"   '("Move Tab Right"         . tab-move)
+    "d"   '("Close Workspace"        . tab-bar-close-tab)
+    "n"   '("Create Named Workspace" . kdz/create-named-tab))
   :hook ((emacs-startup . kdz/tab-bar-initialize-tab-state)
          (kdz-load-theme . kdz/tab-bar-update-faces)
          (window-state-change . kdz/ensure-bottom-tab-line))
@@ -8,6 +17,8 @@
                                   ("Scratchpad" . "nf-md-note")
                                   ("System"     . "nf-md-cog"))
     "Tabs that should be kept together and in order in tab list")
+
+  (defun kdz/tab-move-left () (tab-move -1))
 
   (defun kdz/tab-bar-pinned-tab-p (tab)
     "Check if TAB should be considered a pinned tab in the tab bar

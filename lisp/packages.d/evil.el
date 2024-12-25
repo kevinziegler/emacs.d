@@ -1,6 +1,26 @@
 (use-package evil
   :straight t
   :demand t
+  :general
+  (kdz/leader-def
+    "j"  `("Jump to <thing>"   . ,(make-sparse-keymap))
+    "jj" '("Jump to line"      . evil-avy-goto-line)
+    "jc" '("Jump to character" . evil-avy-goto-char)
+    "jw" '("Jump to word"      . evil-avy-goto-word-0))
+
+  (kdz/leader-buffer-def "N" '("New Buffer" . evil-buffer-new))
+
+  (kdz/leader-window-def
+    "d"  '("Delete Window"     . evil-window-delete)
+    "j"  '("Down"              . evil-window-down)
+    "k"  '("Up"                . evil-window-up)
+    "n"  '("New Window"        . evil-window-new)
+    "x"  '("Exchange Window"   . evil-window-exchange)
+    "H"  '("Move window left"  . evil-window-move-far-left)
+    "L"  '("Move window right" . evil-window-move-far-right)
+    "J"  '("Move window down"  . evil-window-move-far-down)
+    "K"  '("Move window up"    . evil-window-move-far-up))
+
   :preface
   (setq evil-ex-search-vim-style-regexp t
         evil-ex-visual-char-range t  ; column range for ex commands
@@ -92,7 +112,9 @@
   :init
   (global-evil-matchit-mode 1))
 
-(use-package evil-nerd-commenter :straight t)
+(use-package evil-nerd-commenter
+  :straight t
+  :general (general-def :states '(normal visual) "gc" 'evilnc-comment-operator))
 
 (use-package evil-surround
   :straight t
@@ -118,7 +140,15 @@
 
 (use-package evil-anzu :straight t :after anzu)
 
-(use-package evil-numbers :straight t)
+(use-package evil-numbers
+  :straight t
+  :general
+  (general-def
+    :states 'normal
+    "+" '(evil-numbers/inc-at-pt :which-key "Increment at point")
+    "=" '(evil-numbers/inc-at-pt :which-key "Increment at point")
+    "-" '(evil-numbers/dec-at-pt :which-key "Decrement at point")
+    "_" '(evil-numbers/dec-at-pt :which-key "Decrement at point")))
 
 (use-package exato :straight t)
 

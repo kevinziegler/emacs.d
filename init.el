@@ -1,8 +1,9 @@
 (add-to-list 'load-path (kdz/user-directory "lisp"))
 
-(require 'packages.d/emacs)
 (require 'packages.d/bootstrap)
+(require 'packages.d/emacs)
 (require 'packages.d/system)
+(require 'packages.d/tools/help)
 (require 'packages.d/evil)
 (require 'packages.d/languages)
 (require 'packages.d/org)
@@ -11,7 +12,6 @@
 (require 'packages.d/tools/dashboard)
 (require 'packages.d/tools/treemacs)
 (require 'packages.d/tools/completion)
-(require 'packages.d/tools/help)
 (require 'packages.d/tools/git)
 (require 'packages.d/tools/lsp)
 
@@ -25,8 +25,6 @@
 (require 'lib/system)
 (require 'lib/tap)
 (require 'lib/window-resize)
-
-(require 'conf.d/keybindings)
 
 (let* ((local-config (kdz/user-directory "local.el"))
        (local-template (concat local-config ".tpl")))

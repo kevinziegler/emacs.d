@@ -1,6 +1,23 @@
 (use-package treemacs
   :straight t
   :defer t
+  :general
+  (general-def
+    :keymaps 'treemacs-mode-map
+    :prefix "o"
+    "v" 'treemacs-visit-node-horizontal-split
+    "h" 'treemacs-visit-node-vertical-split
+    "s" 'treemacs-visit-node-vertical-split)
+
+  (general-def
+    :keymaps 'treemacs-mode-map
+    :prefix "o a"
+    "v" 'treemacs-visit-node-ace-horizontal-split
+    "h" 'treemacs-visit-node-ace-vertical-split
+    "s" 'treemacs-visit-node-ace-vertical-split)
+
+  (kdz/leader-open-def "t" '("Project File Tree" . treemacs))
+
   :config
   (setq treemacs-collapse-dirs 7
         treemacs-width 45
