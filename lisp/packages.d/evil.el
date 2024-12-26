@@ -173,7 +173,8 @@
 (use-package evil-owl
   :straight t
   :config
-  (setq evil-owl-max-string-length 500)
+  (setq evil-owl-max-string-length 500
+        evil-owl-idle-delay 0.5)
   (add-to-list 'display-buffer-alist
                '("*evil-owl*"
                  (display-buffer-in-side-window)
