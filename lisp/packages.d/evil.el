@@ -80,7 +80,8 @@
   :straight t
   :after evil
   :config
-  (evil-collection-init))
+  (evil-collection-init)
+  (setq evil-collection-magit-want-horizontal-movement t))
 
 (use-package evil-embrace
   :straight t
