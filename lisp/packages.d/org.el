@@ -10,6 +10,11 @@
     :keymaps 'org-mode-map
     "s-<return>" 'kdz/org-return-dwim)
 
+  (general-def
+    :states 'normal
+    :keymaps 'org-mode-map
+    "RET" 'evil-org-return)
+
   (kdz/leader-file-def "l" '("Store Link" . org-store-link))
 
   :general-config
