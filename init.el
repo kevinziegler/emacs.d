@@ -21,7 +21,6 @@
 (require 'packages.d/ui/posframe)
 (require 'packages.d/ui/tabs)
 
-(require 'lib/misc-actions)
 (require 'lib/system)
 (require 'lib/tap)
 (require 'lib/window-resize)

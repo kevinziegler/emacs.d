@@ -1,16 +1,12 @@
 (require 'f)
 
-(defun kdz/get-brew-prefix ()
-  "Get the path of `brew --prefix' for the system, assuming brew is present."
-  (with-temp-buffer
-    (if  (eq (call-process "brew" nil (current-buffer) nil "--prefix") 0)
-        (string-trim (buffer-string))
-      (error "Failed to get brew prefix path!"))))
-
 (defun kdz/brew-prefix ()
   "Get the path of `brew --prefix' for the system."
   (if (executable-find "brew")
-      (kdz/get-brew-prefix)
+      (with-temp-buffer
+        (if  (eq (call-process "brew" nil (current-buffer) nil "--prefix") 0)
+            (string-trim (buffer-string))
+          (error "Failed to get brew prefix path!")))
     (error "Homebrew is not available")))
 
 (defun brew-bin (bin)
@@ -23,8 +19,5 @@
            (list (call-process "asdf" nil (current-buffer) nil "which" bin)
                  (substring (buffer-string) 0 -1))))
       (if (eq 0 (pop asdf-lookup)) (pop asdf-lookup)))))
-
-(defun kdz/config-resource (name)
-  (expand-file-name name (expand-file-name "resources" doom-user-dir)))
 
 (provide 'lib/system)
