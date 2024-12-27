@@ -3,6 +3,7 @@
          (org-mode . visual-wrap-prefix-mode)
          (org-mode . kdz/org-mode-set-electric-pair-predicate)
          (org-insert-heading . kdz/org-heading-fixup-new-line))
+
   :general
   (general-def
     :states 'insert
@@ -10,17 +11,22 @@
     "s-<return>" 'kdz/org-return-dwim)
 
   (kdz/leader-file-def "l" '("Store Link" . org-store-link))
+
   :general-config
   (kdz/mode-leader-def
     :keymaps 'org-mode-map
     "e"   (cons "Edit" (make-sparse-keymap))
     "eb" '("Edit Org Block" . org-edit-special)
+    "et" '("Update Title"   . kdz/org-rename-title)
 
     "i"   (cons "Insert" (make-sparse-keymap))
     "ic" '("Insert Table of Contents"       . kdz/org-make-toc-dwim)
     "ih" '("Insert Heading"                 . org-insert-heading-respect-content)
     "is" '("Insert Sub-heading"             . org-insert-subheading)
-    "il" '("Insert Link (From Application)" . org-mac-link-get-link))
+    "il" '("Insert Link (From Application)" . org-mac-link-get-link)
+
+    "j"   (cons "Jump" (make-sparse-keymap))
+    "jt" '("Top-Level of current sub-tree"))
 
   :config
   (setopt org-auto-align-tags nil
@@ -44,6 +50,80 @@
           org-special-ctrl-a/e t
           org-tags-column 0
           org-use-property-inheritance t)
+
+  ;; (defun kdz/org-open-one-on-one ()
+  ;;   (interactive)
+  ;;   (find-file "~/notes/one-on-one-discussions.org")
+  ;;   (when (buffer-narrowed-p) (widen))
+  ;;   (let ((org-goto-interface 'outline-path-completion)
+  ;;         (org-goto-max-level 1))
+  ;;     (org-goto))
+  ;;   (org-narrow-to-subtree)
+  ;;   (org-show-todo-tree nil))
+
+  (defun kdz/org-output-dir ()
+    "Helper to set the default path for org babel outputs (via the :dir header)"
+    (concat (file-name-base (buffer-file-name)) ".outputs"))
+
+  (defun kdz/org-export-path (file-name &optional subpath)
+    (interactive "f")
+    (concat (file-name-base file-name)
+            ".exports"
+            (when subpath "/")
+            subpath))
+
+  (defun kdz/org-goto-top-level ()
+    (interactive)
+    (let ((org-goto-interface 'outline-path-completion)
+          (org-goto-max-level 1))
+      (org-goto)
+      (org-narrow-to-subtree)))
+
+  (defun stolen/get-keyword-key-value (kwd)
+    (let ((data (cadr kwd)))
+      (list (plist-get data :key)
+            (plist-get data :value))))
+
+  (defun stolen/org-current-buffer-get-title ()
+    "Get the title of the current org-mode buffer"
+    (nth 1
+         (assoc "TITLE"
+                (org-element-map (org-element-parse-buffer 'greater-element)
+                    '(keyword)
+                  #'stolen/get-keyword-key-value))))
+
+  (defun kdz/string-to-filename (name-string word-sep extension)
+    "Sanitize a string for use as a filename"
+    (let* ((name-alphanumeric
+            (replace-regexp-in-string "[^A-Za-z0-9 ]" "" name-string))
+           (basename (string-replace " " word-sep (downcase name-alphanumeric))))
+      (file-name-with-extension basename extension)))
+
+  (defun kdz/org-sync-title-to-filename ()
+    "Sync the title of the current org document with the filename"
+    (let* ((title (stolen/org-current-buffer-get-title))
+           (basename (kdz/string-to-filename
+                      title "-" (file-name-extension (buffer-file-name)))))
+      (doom/move-this-file (expand-file-name
+                            basename (file-name-directory (buffer-file-name))))))
+
+  (defun kdz/org-update-title (new-title)
+    "Update the title of an org-mode document, or add one if none exists"
+    (save-excursion
+      (goto-char (point-min))
+      (condition-case nil
+          (progn (search-forward "#+title: ")
+                 (kill-line)
+                 (insert new-title))
+        ('error (insert (format "#+title: %s\n" new-title))))))
+
+  (defun kdz/org-rename-title ()
+    "Update the title of an org-mode document interactively, and rename the file"
+    (interactive)
+    (let ((new-title (read-string (format "Re-Title \"%s\" to: "
+                                          (stolen/org-current-buffer-get-title)))))
+      (kdz/org-update-title new-title)
+      (kdz/org-sync-title-to-filename)))
 
   (defmacro kdz/follow-suffix-link (base-url)
     `(lambda (suffix) (browse-url (string-join (list ,base-url suffix) "/") )))
@@ -296,6 +376,31 @@ appropriate.  In tables, insert a new row or end the table."
 (use-package ox
   :straight nil
   :config
+  (defun kdz/line-number-from-fragment (fragment)
+    "Find line number of FRAGMENT in current buffer"
+    (when fragment
+      (save-excursion (goto-char (point-min))
+                      (search-forward fragment)
+                      (line-number-at-pos))))
+
+  (defun kdz/file-link-as-git-link (git-file option)
+    "Convert a file path link to a git-controlled file to a git-link URL"
+    (let* ((existing-buffer (get-file-buffer git-file))
+           (file-buffer (or existing-buffer (find-file-noselect git-file)))
+           (option-as-number (when (and (stringp option)
+                                        (string-match-p "\\`[0-9]+\\'" option))
+                               (string-to-number option)))
+           (url
+            (with-current-buffer file-buffer
+              ;; `git-link'  returns nil on success or a string on error
+              (unless (git-link (git-link--remote)
+                                (or option-as-number
+                                    (kdz/line-number-from-fragment option))
+                                nil)
+                (car kill-ring)))))
+      (unless existing-buffer (kill-buffer file-buffer))
+      url))
+
   (defun kdz/ox-filter-git-file-link (data backend channel)
     "Transform file links in DATA into git-link URLs when appropriate."
     (let* ((beg (next-property-change 0 data))
