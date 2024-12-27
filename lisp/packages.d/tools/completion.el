@@ -40,8 +40,8 @@
     "l" '("Search for Line (Current Buffer)"  . consult-line)
     "L" '("Search for Line (Project Buffers)" . consult-line-multi)
     "p" '("Project"                           . consult-ripgrep)
-    "s" '("Thing-at-point (Select)"           . tap/consult-ripgrep)
-    "t" '("Thing-at-point (DWIM)"             . tap/consult-ripgrep-dwim))
+    "s" '("Thing-at-point (DWIM)"             . tap/consult-ripgrep-dwim)
+    "S" '("Thing-at-point (Select)"           . tap/consult-ripgrep))
   :config
   (setq consult-narrow-key "<")
 
