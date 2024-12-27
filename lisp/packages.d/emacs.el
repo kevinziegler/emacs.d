@@ -108,6 +108,16 @@
               :after
               (lambda (&rest _) (run-hooks 'kdz-load-theme-hook))))
 
+(use-package eldoc
+  :config
+  :after evil
+  ;; allow eldoc to trigger directly after changing modes
+  (eldoc-add-command #'evil-normal-state
+                     #'evil-insert
+                     #'evil-change
+                     #'evil-delete
+                     #'evil-replace))
+
 (use-package eshell
   :straight nil
   :init
