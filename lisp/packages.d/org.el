@@ -31,7 +31,10 @@
     "il" '("Insert Link (From Application)" . org-mac-link-get-link)
 
     "j"   (cons "Jump" (make-sparse-keymap))
-    "jt" '("Top-Level of current sub-tree"))
+    "jt" '("Top-Level of current sub-tree")
+
+    "t"   (cons "Toggle" (make-sparse-keymap))
+    "tn" '("Numbered Headings" . org-num-mode))
 
   :config
   (setopt org-auto-align-tags nil
