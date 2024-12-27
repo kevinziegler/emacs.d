@@ -1,0 +1,115 @@
+#+bibliography: project-todo.org.bib
+
+* Functionality [3/7]
+- [X] LSP Mode
+- [ ] "Launch REPL"
+  + [ ] Open REPL for current or selected language
+  + [ ] Use pop-up instead of current window
+- [X] "File" Action to delete file for current buffer
+- [ ] "DWIM" on Newline for code-related buffers:
+  + Indent as expected
+  + Continue comments
+  + Respond to consecutive presses of "return" (e.g. stop commenting after 2 consecutive presses)
+- [-] Snippets
+  + [ ] ~org-mode~ snippets
+  + [X] ~consult-yasnippet~ to insert snippets manually
+- [X] Clean up trailing whitespace
+- [ ] Set up a =local.el= file to load settings that shouldn't be version controlled
+  - [ ] This file should be git-ignored
+  - [ ] Also a `local.el.tpl` file (that is version controlled) to install on first-run
+
+** Org-Mode
+- [X] Set up ~org-babel~ functionality
+- [ ] DWIM on ~CMD+ENTER~ for org-mode heading/items (e.g. go to next line and create same type of entry)
+  + [ ] Add logic to break of of list/indent on "empty" previous line
+- [X] Set up ~org-appear~ functionality
+- [ ] Set up =org-cite= for citations
+- [X] Port over =ob-plantuml= enhancements from =doom.d= configuration
+- [ ] Advise =org-cycle= to add header/footer lines (~|---|---|~)  to tables when applicable
+
+*** Capture Templates
+- [ ] Retro Topic
+  + [ ] Went well
+  + [ ] Could have been better
+  + [ ] Shout-out
+- [ ] To-do/Action Item
+  + [ ] Set-up a meeting
+  + [ ] Create a ticket
+
+** LaTeX/Markdown LSP Support
+Based on [[https://github.com/mrunhap/.emacs.d/blob/master/lisp/init-text.el][this user configuration]] that sets up LSP functionality for LaTex/Markdown:
+- https://github.com/astoff/digestif
+- https://github.com/valentjn/ltex-ls
+
+* Behavior [8/9]
+- [X] Toggle =org-num-mode= for numbered headings
+- [X] Consolidate generated elisp files (packages, state info, etc) outside of main repository
+- [X] Keep "Home" tab as exclusively a "dashboard" buffer
+- [X] Load environment variables from normal shell
+- [X] Switch to some sort of "project dashboard" buffer when changing projects
+- [X] "Dashboard" Tab name
+- [X] Preclude "Dashboard" buffer from showing up in other tabs
+- [X] Treat ~backspace~ as "Up-one-directory" when completing file paths
+- [ ] Seed query for consult-ripgrep if there's a visual selection in the current buffer
+
+** Smart Comment Indenting
+- https://tony-zorman.com/posts/join-lines-comments.html
+
+** Automatic Frame Resizing
+When creating a side window, determine if the frame should be resized based on:
+- The size of the new side window
+- The size of the display for the frame
+- The position of the frame on  the display
+
+Similarly, deduct the size of the window from the frame when closing the side window
+
+* Packages [7/33]
+- [ ] https://github.com/agzam/browser-hist.el
+- [ ] https://github.com/rnadler/password-menu
+- [ ] https://depp.brause.cc/shackle/
+- [ ] https://github.com/ardumont/markdown-toc
+- [ ] https://codeberg.org/ideasman42/emacs-magit-commit-mark
+- [ ] https://codeberg.org/ideasman42/emacs-fancy-compilation
+- [ ] https://codeberg.org/akib/emacs-popon
+- [ ] https://github.com/jdtsmith/outli
+- [ ] https://github.com/joaotavora/breadcrumb
+- [ ] https://github.com/TheBB/evil-indent-plus
+- [ ] https://github.com/abo-abo/ace-link
+- [ ] https://github.com/emacsorphanage/popwin
+- [ ] https://github.com/karthink/popper
+- [ ] https://github.com/minad/affe
+- [ ] https://github.com/purcell/page-break-lines
+- [ ] https://github.com/roman/evil-visual-mark-mode
+- [ ] https://github.com/skeeto/elfeed
+- [ ] https://github.com/svaante/dape
+
+- [X] https://github.com/sshaw/git-link
+- [ ] https://github.com/isamert/lab.el
+- [ ] https://github.com/tarsius/backline
+- [ ] https://github.com/let-def/texpresso
+- [ ] https://github.com/stevemolitor/robby
+- [ ] https://github.com/mkcms/interactive-align
+- [ ] https://github.com/isamert/swagg.el
+- [X] http://yummymelon.com/devnull/announcing-casual-an-opinionated-porcelain-for-emacs-calc.html
+- [ ] https://spartanengineer.com/posts/2024-03-19-introduction-treesit-jump.html
+- [ ] https://www.masteringemacs.org/article/combobulate-interactive-node-editing-treesitter
+- [X] copy-as-format
+- [X] https://github.com/Artawower/file-info.el
+- [X] https://github.com/emacs-dashboard/dashboard-ls
+- [X] https://github.com/fxbois/web-mode
+- [X] https://github.com/renzmann/treesit-auto
+
+** Minibuffer/Completion
+- [ ] https://github.com/armindarvish/consult-web
+- [ ] https://www.armindarvish.com/en/post/consult-gh_working_with_github_inside_emacs_in_2023_/
+
+** Org-mode Enhancements
+- [ ] https://github.com/alphapapa/org-web-tools
+- [ ] https://github.com/unhammer/org-rich-yank
+
+
+
+* Tab Appearance
+- https://andreyor.st/posts/2020-05-10-making-emacs-tabs-look-like-in-atom/
+- https://www.youtube.com/watch?v=es5AmF807Oo
+- https://github.com/benleis1/emacs-init/blob/main/init.el
