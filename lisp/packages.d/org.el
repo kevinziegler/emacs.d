@@ -1,8 +1,7 @@
 (use-package org
   :hook ((org-mode . visual-line-mode)
          (org-mode . visual-wrap-prefix-mode)
-         (org-mode . kdz/org-mode-set-electric-pair-predicate)
-         (org-insert-heading . kdz/org-heading-fixup-new-line))
+         (org-mode . kdz/org-mode-set-electric-pair-predicate))
 
   :general
   (general-def
@@ -245,18 +244,6 @@ appropriate.  In tables, insert a new row or end the table."
        ((org-at-table-p) (kdz/org-return-handle-point-inside-table))
        ;; All other cases: call `org-return-indent'.
        (t (org-return t)))))
-
-  (defun kdz/org-heading-fixup-new-line ()
-    "Ensure an empty line between non-empty org-mode headings"
-    (when (org-at-heading-p)
-      (save-excursion
-        (previous-line)
-        (let ((previous (thing-at-point 'line)))
-          (when (and previous
-                     (not (string-match-p "^\*+ .*$" previous))
-                     (not (string= "\n" previous)))
-            (goto-char (line-end-position))
-            (insert "\n"))))))
 
   (defun kdz/org-mode-set-electric-pair-predicate ()
     (add-function :before-until
