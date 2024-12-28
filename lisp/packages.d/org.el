@@ -27,6 +27,7 @@
     "i"   (cons "Insert" (make-sparse-keymap))
     "ic" '("Insert Table of Contents"       . kdz/org-make-toc-dwim)
     "ih" '("Insert Heading"                 . org-insert-heading-respect-content)
+    "iH" '("Insert Heading (one level up)"  . kdz/org-insert-heading-one-level-up)
     "is" '("Insert Sub-heading"             . org-insert-subheading)
     "il" '("Insert Link (From Application)" . org-mac-link-get-link)
 
@@ -58,6 +59,10 @@
           org-special-ctrl-a/e t
           org-tags-column 0
           org-use-property-inheritance t)
+
+  (defun kdz/org-insert-heading-one-level-up ()
+    (interactive)
+    (org-insert-heading nil nil (- (org-current-level) 1)))
 
   ;; (defun kdz/org-open-one-on-one ()
   ;;   (interactive)
