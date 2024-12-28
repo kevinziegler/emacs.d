@@ -179,12 +179,6 @@ A pinned tab is one whose name corresponds to an entry in
   (defun kdz/tab-line-buffer-display-name (buffer &optional _buffers)
     (or (kdz/tab-line-name-for-mode buffer) (buffer-name buffer)))
 
-
-  (defun kdz/tab-line-tab-name-as-search-results (name)
-    (replace-regexp-in-string "\\*Embark Collect: consult-ripgrep - #"
-                              "Search: "
-                              name))
-
   (defun kdz/tab-line-tab-name-format (tab tabs)
     (let* ((buffer-p (bufferp tab))
            (selected-p (if buffer-p
@@ -217,13 +211,6 @@ A pinned tab is one whose name corresponds to an entry in
 
   (setq tab-line-tab-name-function #'kdz/tab-line-buffer-display-name
         tab-line-tab-name-format-function #'kdz/tab-line-tab-name-format)
-
-  (advice-add #'tab-line-tab-name-buffer
-              :filter-return
-              (lambda (val) (concat " " val " ")))
-
-  (advice-add #'tab-line-tab-name-buffer
-              :filter-return #'kdz/tab-line-tab-name-as-search-results)
 
   (defun kdz/window-left-dwim ()
     (interactive)
