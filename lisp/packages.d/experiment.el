@@ -183,3 +183,33 @@
 (use-package nerd-icons-multimodal
   :straight (:host github :repo "abougouffa/nerd-icons-multimodal")
   :hook ((archive-mode tar-mode dired-mode) . nerd-icons-multimodal-mode))
+
+(use-package mood-line
+  :straight t
+  ;; Enable mood-line
+  :config
+  (setq mood-line-format mood-line-format-default)
+  (mood-line-mode))
+
+(use-package consult-omni
+  :straight (consult-omni :type git :host github :repo "armindarvish/consult-omni" :branch "main" :files (:defaults "sources/*.el"))
+  :after consult
+  :config
+  ;; Load Sources Core code
+  (require 'consult-omni-sources)
+  ;; Load Embark Actions
+  (require 'consult-omni-embark)
+  (consult-omni-sources-load-modules)
+  ;;; Set your shorthand favorite interactive command
+  (setq consult-omni-default-interactive-command #'consult-omni-brave-autosuggest))
+
+;; TODO Why does this give an error with 'firefox?
+(use-package browser-hist :straight t)
+
+(use-package link-hint :straight t)
+
+;; TODO Remember which buffers I've dealt with in the past that use ansi color sequences and see if this can't help display them properly?
+(use-package xterm-color :straight t)
+
+(use-package shackle :straight t)
+(use-package org-special-block-extras :straight t)
