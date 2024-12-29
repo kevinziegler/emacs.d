@@ -60,8 +60,10 @@
 (elpaca `(,@elpaca-order))
 
 (elpaca elpaca-use-package
-        (elpaca-use-package-mode)
-        (setq elpaca-use-package-by-default t))
+  (elpaca-use-package-mode)
+  (setq elpaca-use-package-by-default t))
+
+(elpaca-wait)
 
 ;; Set up `general' here so the `:general' keyword is available for use in
 ;; `use-package' declarations later in my config
