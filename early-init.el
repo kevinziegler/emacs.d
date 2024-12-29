@@ -1,9 +1,11 @@
-(setq package-enable-at-startup nil)
-(setq byte-compile-warnings '(not obsolete))
-(setq warning-suppress-log-types '((comp) (bytecomp)))
-(setq native-comp-async-report-warnings-errors 'silent)
-(setq gc-cons-threshold 10000000)
-(setq frame-resize-pixelwise t)
+(setq package-enable-at-startup nil
+      byte-compile-warnings '(not obsolete)
+      warning-suppress-log-types '((comp) (bytecomp))
+      native-comp-async-report-warnings-errors 'silent
+      gc-cons-threshold 10000000
+      inhibit-splash-screen t
+      startup-screen-inhibit-startup-screen t
+      frame-resize-pixelwise t)
 
 (setenv "LSP_USE_PLISTS" "true")
 

@@ -1,4 +1,5 @@
 (use-package org
+  :ensure nil
   :hook ((org-mode . visual-line-mode)
          (org-mode . visual-wrap-prefix-mode)
          (org-mode . kdz/org-mode-set-electric-pair-predicate))
@@ -291,7 +292,7 @@ appropriate.  In tables, insert a new row or end the table."
                                                                      jira-host)))))
 
 (use-package org-agenda
-  :straight nil
+  :ensure nil
   :after org
   :config
   (setopt org-agenda-tags-column 0
@@ -303,7 +304,6 @@ appropriate.  In tables, insert a new row or end the table."
           "⭠ now ─────────────────────────────────────────────────"))
 
 (use-package org-modern
-  :straight t
   :after (org nerd-icons)
   :config
   (setq org-modern-star 'replace
@@ -313,7 +313,6 @@ appropriate.  In tables, insert a new row or end the table."
   (global-org-modern-mode))
 
 (use-package org-appear
-  :straight t
   :after org
   :hook ((org-mode . org-appear-mode)
          (org-mode . kdz/org-appear-respect-evil-state))
@@ -326,16 +325,13 @@ appropriate.  In tables, insert a new row or end the table."
     (add-hook 'evil-insert-state-entry-hook #'org-appear-manual-start nil t)
     (add-hook 'evil-insert-state-exit-hook #'org-appear-manual-stop nil t)))
 
-(use-package org-autolist
-  :straight t
-  :after org
-  :hook ((org-mode-hook . org-autolist-mode)))
+(use-package org-autolist :after org :hook ((org-mode . org-autolist-mode)))
 
 ;; TODO Load this via org-babel-do-load-languages
-(use-package ob-http :straight t :after org)
+(use-package ob-http :after org)
 
 ;; TODO Set up keybindings
-(use-package org-mac-link :straight t
+(use-package org-mac-link
   :config
   (defun kdz/org-mac-link-advise-evil (org-mac-link-fn &rest orig-args)
     "Advice to org-mac-link functions to handle insertion with evil-mode"
@@ -352,7 +348,6 @@ appropriate.  In tables, insert a new row or end the table."
               :around #'kdz/org-mac-link-advise-evil))
 
 (use-package org-re-reveal
-  :straight t
   :config
   (setq
    org-re-reveal-subtree-with-title-slide t
@@ -361,10 +356,9 @@ appropriate.  In tables, insert a new row or end the table."
    org-re-reveal-plugins '(highlight markdown notes search zoom)))
 
 ;; TODO Figure out how to get the tree view to show up for this package
-;; (use-package org-sidebar :straight t)
+;; (use-package org-sidebar)
 
 (use-package evil-org
-  :straight t
   :after (evil org)
   :hook ((org-mode . evil-org-mode)
          (org-mode . kdz/org-cycle-table-on-evil-state))
@@ -374,7 +368,7 @@ appropriate.  In tables, insert a new row or end the table."
               (lambda () (when (org-at-table-p) (org-cycle))))))
 
 (use-package ox
-  :straight nil
+  :ensure nil
   :config
   (defun kdz/line-number-from-fragment (fragment)
     "Find line number of FRAGMENT in current buffer"
@@ -417,22 +411,21 @@ appropriate.  In tables, insert a new row or end the table."
   (add-to-list 'org-export-filter-link-functions #'kdz/ox-filter-git-file-link))
 
 ;; TODO Figure out a good keybinding for this
-(use-package ox-clip :straight t)
+(use-package ox-clip)
 
-;; (use-package doct :straight t)
-;; (use-package ob-http :straight t)
-;; (use-package ob-mermaid :straight t)
-;; (use-package org-jira :straight t)
-;; (use-package valign :straight t)
+;; (use-package doct)
+;; (use-package ob-http)
+;; (use-package ob-mermaid)
+;; (use-package org-jira)
+;; (use-package valign)
 
 (use-package ox-pandoc
-  :straight t
   :config
   (add-to-list 'org-pandoc-options '(wrap . "none")))
 
 
 (use-package ob-plantuml
-  :straight nil
+  :ensure nil
   :config
   (setq org-plantuml-exec-mode 'executable)
   (defun kdz/org-babel-plantuml-format-var (var-value)
@@ -495,7 +488,6 @@ using the !define VAR VAL syntax"
               :override #'kdz/org-babel-plantuml-make-body))
 
 (use-package ob-async
-  :straight t
   :config
 
   ;; This addresses changes in the org-babel API that have broken ob-async:
@@ -710,7 +702,6 @@ Also adds support for a `:sync' parameter to override `:async'."
               #'kdz/+org-babel-disable-async-maybe-a))
 
 (use-package org-make-toc
-  :straight t
   :config
   (defvar kdz-org-make-toc-headline "Table of Contents")
   (defun kdz/org-make-toc-dwim ()
@@ -733,23 +724,17 @@ Also adds support for a `:sync' parameter to override `:async'."
           (kdz/org-make-toc-init))))))
 
 (use-package org-sliced-images
-  :straight t
   :config
   (defalias 'org-remove-inline-images #'org-sliced-images-remove-inline-images)
   (defalias 'org-toggle-inline-images #'org-sliced-images-toggle-inline-images)
   (defalias 'org-display-inline-images #'org-sliced-images-display-inline-images))
 
-(use-package org-tidy
-  :straight t
-  :hook
-  (org-mode . org-tidy-mode))
-
-(use-package org-ql :straight t)
+(use-package org-tidy :hook (org-mode . org-tidy-mode))
+(use-package org-ql)
 (use-package om-dash
-  :straight (list :type git
-                  :host github
-                  :repo "gavv/om-dash"
-                  :branch "main"
-                  :files ("om-dash.el")))
+  :ensure (om-dash :host github
+                   :repo "gavv/om-dash"
+                   :branch "main"
+                   :files ("om-dash.el")))
 
 (provide 'packages.d/org)

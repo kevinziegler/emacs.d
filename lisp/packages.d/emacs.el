@@ -1,5 +1,5 @@
 (use-package emacs
-  :straight nil
+  :ensure nil
   :general
   (kdz/leader-code-eval-def
     "b" '("Evaluate Buffer"   . eval-buffer)
@@ -66,17 +66,17 @@
                 prescient-history-length 1000))
 
 (use-package align
-  :straight nil
+  :ensure nil
   :general
   (kdz/leader-edit-def "a" '("Align by Regexp" . align-regexp)))
 
 (use-package apropos
-  :straight nil
+  :ensure nil
   :config
   (setopt appropos-do-all t))
 
 (use-package autorevert
-  :straight nil
+  :ensure nil
   :config
   (setopt auto-revert-avoid-polling t
           auto-revert-check-vc-info t
@@ -84,22 +84,22 @@
   (global-auto-revert-mode 1))
 
 (use-package bookmark
-  :straight nil
+  :ensure nil
   :config
   (setopt bookmark-file (kdz/user-directory ".local" "bookmarks")))
 
 (use-package comint
-  :straight nil
+  :ensure nil
   :config
   (setopt comint-prompt-read-only t))
 
 (use-package cus-edit
-  :straight nil
+  :ensure nil
   :config
   (setopt custom-file (kdz/user-directory ".local" "custom.el")))
 
 (use-package custom
-  :straight nil
+  :ensure nil
   :init
   (defvar kdz-load-theme-hook nil
     "Hook to run actions after calling `load-theme'")
@@ -109,6 +109,7 @@
               (lambda (&rest _) (run-hooks 'kdz-load-theme-hook))))
 
 (use-package eldoc
+  :ensure nil
   :config
   :after evil
   ;; allow eldoc to trigger directly after changing modes
@@ -119,12 +120,12 @@
                      #'evil-replace))
 
 (use-package eshell
-  :straight nil
+  :ensure nil
   :init
   (setq eshell-directory-name (kdz/user-directory ".local" "eshell")))
 
 (use-package frame
-  :straight nil
+  :ensure nil
   :general
   (kdz/leader-open-def "f" '("New Frame" . make-frame))
   :config
@@ -132,18 +133,18 @@
   (blink-cursor-mode -1))
 
 (use-package hl-line
-  :straight nil
+  :ensure nil
   :config
   (global-hl-line-mode))
 
 (use-package minibuffer
-  :straight nil
+  :ensure nil
   :config
   (setopt completion-cycle-threshold 1
           completions-detailed t))
 
 (use-package mouse
-  :straight nil
+  :ensure nil
   :general
   (kdz/leader-window-def "T" '("Tear off Window" . tear-off-window))
   :config
@@ -151,7 +152,7 @@
   (when (display-graphic-p) (context-menu-mode)))
 
 (use-package mule
-  :straight nil
+  :ensure nil
   :config
   (set-terminal-coding-system 'utf-8)
   (set-keyboard-coding-system 'utf-8)
@@ -159,36 +160,36 @@
   (prefer-coding-system 'utf-8))
 
 (use-package mule-util
-  :straight nil
+  :ensure nil
   :config
   (setopt truncate-string-ellipsis "…"))
 
 (use-package pixel-scroll
-  :straight nil
+  :ensure nil
   :config
   (setopt pixel-scroll-precision-mode t
           pixel-scroll-precision-use-momentum t)
   (pixel-scroll-precision-mode))
 
 (use-package re-builder
-  :straight nil
+  :ensure nil
   :general
   (kdz/leader-search-def "r" '("Regexp Builder" . re-builder)))
 
 (use-package savehist
-  :straight nil
+  :ensure nil
   :config
   (setopt savehist-file (kdz/user-directory ".local" "history"))
   (savehist-mode 1))
 
 (use-package saveplace
-  :straight nil
+  :ensure nil
   :config
   (setopt save-place-file (kdz/user-directory ".local" "places"))
   (save-place-mode 1))
 
 (use-package simple
-  :straight nil
+  :ensure nil
   :general
   (kdz/leader-buffer-def "d" '("Kill Buffer" . kill-current-buffer))
   :config
@@ -197,22 +198,22 @@
   (column-number-mode 1))
 
 (use-package so-long
-  :straight nil
+  :ensure nil
   :config
   (global-so-long-mode))
 
 (use-package uniquify
-  :straight nil
+  :ensure nil
   :config
   (setopt uniquify-buffer-name-style 'post-forward))
 
 (use-package use-package-core
-  :straight nil
+  :ensure nil
   :config
   (setopt use-package-enable-imenu-support t))
 
 (use-package window
-  :straight nil
+  :ensure nil
   :general
   (kdz/leader-window-def "=" '("Balance Windows" . balance-windows))
   (kdz/leader-buffer-def
@@ -287,7 +288,7 @@
                  (tab-name . "Scratchpad"))))
 
 (use-package xref
-  :straight nil
+  :ensure nil
   :general
   (kdz/leader-code-lookup-def
     "d" '("Lookup Definition" . xref-find-definitions)

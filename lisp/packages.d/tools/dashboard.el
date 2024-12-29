@@ -1,5 +1,4 @@
 (use-package dashboard
-  :straight t
   :after nerd-icons
   :init
   (setq dashboard-icon-type 'nerd-icons)
@@ -17,14 +16,13 @@
 
 (use-package dashboard-ls
   :after dashboard
-  :straight t
   :config
   (add-to-list 'dashboard-heading-icons
                '(ls-directories . "nf-oct-file_directory"))
   (add-to-list 'dashboard-heading-icons
                '(ls-files . "nf-oct-file")))
 
-(use-package dashboard-project-status :after dashboard :straight t)
+(use-package dashboard-project-status :after dashboard)
 
 (use-package elfeed
   :config

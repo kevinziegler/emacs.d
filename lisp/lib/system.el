@@ -1,5 +1,3 @@
-(require 'f)
-
 (defun kdz/brew-prefix ()
   "Get the path of `brew --prefix' for the system."
   (if (executable-find "brew")

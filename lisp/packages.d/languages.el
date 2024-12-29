@@ -1,22 +1,20 @@
-(use-package dotenv-mode    :straight t :mode (("\\.env\\..*\\'" . dotenv-mode)))
-(use-package scad-mode      :straight t :mode (("\\.scad\\'"     . scad-mode)))
-(use-package restclient     :straight t :mode (("\\.http\\'"     . restclient-mode)))
-(use-package awk-ts-mode    :straight t :mode (("\\.awk\\'"      . awk-ts-mode)))
-(use-package scala-ts-mode  :straight t :mode (("\\.scala\\'"    . scala-ts-mode)))
-(use-package jq-ts-mode     :straight t :mode (("\\.jq\\'"       . jq-ts-mode)))
-(use-package kotlin-ts-mode :straight t :mode (("\\.kt\\'"       . kotlin-ts-mode)))
-(use-package hcl-mode       :straight t)
-(use-package terraform-mode :straight t)
+(use-package dotenv-mode     :mode (("\\.env\\..*\\'" . dotenv-mode)))
+(use-package scad-mode       :mode (("\\.scad\\'"     . scad-mode)))
+(use-package restclient      :mode (("\\.http\\'"     . restclient-mode)))
+(use-package awk-ts-mode     :mode (("\\.awk\\'"      . awk-ts-mode)))
+(use-package scala-ts-mode   :mode (("\\.scala\\'"    . scala-ts-mode)))
+(use-package jq-ts-mode      :mode (("\\.jq\\'"       . jq-ts-mode)))
+(use-package kotlin-ts-mode  :mode (("\\.kt\\'"       . kotlin-ts-mode)))
+(use-package hcl-mode       )
+(use-package terraform-mode )
 
 (use-package lua-mode
-  :straight t
   :mode (("\\.lua\\'" . lua-mode))
   :interpreter (("lua" . lua-mode))
   :config
   (autoload 'lua-mode "lua-mode" "Lua editing mode." t))
 
 (use-package markdown-mode
-  :straight t
   :mode (("\\.md\\'"       . markdown-mode))
   :config
   (setq markdown-enable-wiki-links t
@@ -26,14 +24,12 @@
         markdown-italic-underscore t))
 
 (use-package plantuml-mode
-  :straight t
   :mode (("\\.plantuml\\'" . plantuml-mode)
 	 ("\\.pu?ml\\'"    . plantuml-mode))
   :config
   (setq plantuml-default-exec-mode 'executable))
 
 (use-package web-mode
-  :straight t
   :mode (("\\.html?\\'" . web-mode)
          ("\\.hbs\\'"   . web-mode))
   :config
@@ -42,10 +38,10 @@
   (setq web-mode-code-indent-offset 2)
   (setq web-mode-content-types-alist '(("jsx" . "\\.js[x]?\\'"))))
 
-(use-package inputrc-mode :straight t)
+(use-package inputrc-mode)
 
 (use-package treesit
-  :straight nil
+  :ensure nil
   :mode (("Dockerfile" . dockerfile-ts-mode)
          ("\\.[tj]sx?\\'"  . tsx-ts-mode)
          ("\\.bash\\'" . bash-ts-mode)
@@ -60,10 +56,10 @@
          ("\\go.mode\\'" . go-mod-ts-mode)))
 
 (use-package treesit-auto
-  :straight t
   :config (global-treesit-auto-mode))
 
 (use-package ielm
+  :ensure nil
   :after nerd-icons
   :hook (inferior-emacs-lisp-mode . kdz/ielm-fancy-prompt)
   :init
@@ -79,10 +75,10 @@
     (interactive)
     (let ((default-directory (or (project-root (project-current))))) (ielm))))
 
-(use-package inf-ruby :straight t)
-(use-package nodejs-repl :straight t)
+(use-package inf-ruby)
+(use-package nodejs-repl)
+
 (use-package pyenv-mode
-  :straight t
   :config
   (defun kdz/run-pyenv-python (force-unset)
     (interactive "P")

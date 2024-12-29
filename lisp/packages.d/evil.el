@@ -1,5 +1,4 @@
 (use-package evil
-  :straight t
   :demand t
   :general
   (kdz/leader-def
@@ -55,7 +54,6 @@
   (unless noninteractive (setq save-silently t)))
 
 (use-package evil-args
-  :straight t
   :after evil
   :config
   ;; bind evil-args text objects
@@ -72,30 +70,25 @@
   (define-key evil-normal-state-map "K" 'evil-jump-out-args))
 
 (use-package evil-cleverparens
-  :straight t
   :after (evil smartparens)
   :hook (lisp-mode . evil-cleverparens-mode))
 
 (use-package evil-collection
-  :straight t
   :after evil
   :config
   (evil-collection-init)
   (setq evil-collection-magit-want-horizontal-movement t))
 
 (use-package evil-embrace
-  :straight t
   :hook (org-mode . embrace-org-mode-hook)
   :config
   (evil-embrace-enable-evil-surround-integration))
 
 (use-package evil-escape
-  :straight t
   :init
   (evil-escape-mode 1))
 
 (use-package evil-goggles
-  :straight t
   :after evil
   :config
   (setq evil-goggles-pulse t)
@@ -104,27 +97,22 @@
   (evil-goggles-mode))
 
 (use-package evil-lion
-  :straight t
   :config
   (evil-lion-mode))
 
 (use-package evil-matchit
-  :straight t
   :init
   (global-evil-matchit-mode 1))
 
 (use-package evil-nerd-commenter
-  :straight t
   :general (general-def :states '(normal visual) "gc" 'evilnc-comment-operator))
 
 (use-package evil-surround
-  :straight t
   :config
   (global-evil-surround-mode 1))
 
 ;; Set up text object mappings as keybindings (see project README)
 (use-package evil-textobj-tree-sitter
-  :straight t
   :config
   (define-key evil-outer-text-objects-map
               "f"
@@ -139,10 +127,8 @@
               (evil-textobj-tree-sitter-get-textobj
                 ("conditional.outer" "loop.outer"))))
 
-(use-package evil-anzu :straight t :after anzu)
 
 (use-package evil-numbers
-  :straight t
   :general
   (general-def
     :states 'normal
@@ -151,27 +137,23 @@
     "-" '(evil-numbers/dec-at-pt :which-key "Decrement at point")
     "_" '(evil-numbers/dec-at-pt :which-key "Decrement at point")))
 
-(use-package exato :straight t)
 
 (use-package evil-exchange
-  :straight t
   :config
   (setq evil-exchange-key (kbd "zX"))
   (evil-exchange-install))
 
 (use-package evil-quick-diff
-  :straight '(:type git :host github :repo "rgrinberg/evil-quick-diff")
+  :ensure (evil-quick-diff :host github :repo "rgrinberg/evil-quick-diff")
   :config
   (setq evil-quick-diff-key (kbd "zx"))
   (evil-quick-diff-install))
 
 (use-package evil-visualstar
-  :straight t
   :config
   (global-evil-visualstar-mode))
 
 (use-package evil-owl
-  :straight t
   :config
   (setq evil-owl-max-string-length 500
         evil-owl-idle-delay 0.5)

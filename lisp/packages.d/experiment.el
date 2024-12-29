@@ -1,10 +1,9 @@
-(use-package ace-popup-menu :straight t
-  :config (ace-popup-menu-mode 1))
+(use-package ace-popup-menu :config (ace-popup-menu-mode 1))
 
 ;; TODO Figure out how to enable this conditionally to defer to editorconfig
 ;;      when available (or, if this is already supported by some built-in
 ;;      functionality)
-(use-package dtrt-indent :straight t)
+(use-package dtrt-indent)
 
 ;; TODO This needs tree-sitter to work.  Somehow this is different than using
 ;;      (for example) python-ts-mode, which still doesn't seem to mesh with
@@ -54,7 +53,6 @@
 ;; TODO I like this package, but I need to figure out how to better integrate it
 ;;      into my workflow.
 (use-package mindstream
-  :straight t
   :config
   (setq mindstream-path (kdz/user-directory ".local/mindstream"))
   (mindstream-mode))
@@ -80,7 +78,6 @@
 
 
 (use-package yasnippet-capf
-  :straight t
   :after cape
   :config
   (add-to-list 'completion-at-point-functions #'yasnippet-capf))

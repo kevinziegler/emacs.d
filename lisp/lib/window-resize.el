@@ -67,35 +67,6 @@
     (evil-window-set-width kdz-original-window-width)
     (makunbound 'kdz-original-window-width)))
 
-(pretty-hydra-define
-  kdz-pretty-window-resize
-  ( :foreign-keys warn
-    :title (format "Resize window for: %s (Step size: %d)"
-                   (or (buffer-name) "N/A")
-                   kdz-window-resize-step--current)
-    :quit-key "q"
-    :color pink)
-  ("Resize Window"
-   (("j" kdz/window-dec-height              "Decrease Height")
-    ("k" kdz/window-inc-height              "Increase Height")
-    ("h" kdz/window-dec-width               "Decrease Width")
-    ("l" kdz/window-inc-width               "Increase Width"))
-   "Fit Window"
-   (("w" kdz/window-fit-to-buffer-width     "Fit to buffer width")
-    ("f" kdz/window-fit-to-buffer-fill      "Fit to buffer fill-column")
-    ("R" kdz/window-restore-original-width  "Restore to original width"))
-   "Select Window"
-   (("J" evil-window-down                   "Select window down")
-    ("K" evil-window-up                     "Select window down")
-    ("H" evil-window-left                   "Select window down")
-    ("L" evil-window-right                  "Select window down"))
-   "Resize Step"
-   (("r" kdz/window-step-size-set-or-reset  "(Re)set Step")
-    ("=" kdz/window-step-size-inc           "Increase Step Size")
-    ("+" kdz/window-step-size-inc           "Increase Step Size")
-    ("_" kdz/window-step-size-dec           "Decrease Step Size")
-    ("-" kdz/window-step-size-dec           "Decrease Step Size"))))
-
 (kdz/leader-window-def
   "h" '("Left"                 . kdz/window-left-dwim)
   "l" '("Right"                . kdz/window-right-dwim)

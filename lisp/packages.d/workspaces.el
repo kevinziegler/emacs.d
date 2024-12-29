@@ -1,4 +1,5 @@
 (use-package project
+  :ensure nil
   :general
   (kdz/leader-def
     "p"   (cons "Project" (make-sparse-keymap))
@@ -41,12 +42,10 @@
               #'kdz/project-kill-dashboard))
 
 (use-package project-rootfile
-  :straight t
   :config
   (add-to-list 'project-rootfile-list ".project"))
 
 (use-package ibuffer-project
-  :straight t
   :hook (ibuffer . kdz/ibuffer-tune-sort-and-filter)
   :config
   (defun kdz/ibuffer-tune-sort-and-filter ()
@@ -55,7 +54,6 @@
       (ibuffer-do-sort-by-project-file-relative))))
 
 (use-package otpp
-  :straight t
   :after project
   :init
   (defalias 'one-tab-per-project-mode 'otpp-mode)

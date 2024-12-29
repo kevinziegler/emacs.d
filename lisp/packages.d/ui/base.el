@@ -1,9 +1,48 @@
-(use-package hydra :straight t)
+(use-package avy)
+(use-package hydra
+  :config
+  (setq hydra-hint-display-type 'posframe)
+  (setq hydra-posframe-show-params
+        `(:poshandler posframe-poshandler-frame-center
+                      :internal-border-width 2
+                      :internal-border-color "#61AFEF"
+                      :left-fringe 16
+                      :right-fringe 16)))
+
+(use-package pretty-hydra
+  :after hydra
+  :config
+  (pretty-hydra-define
+    kdz-pretty-window-resize
+    ( :foreign-keys warn
+      :title (format "Resize window for: %s (Step size: %d)"
+                     (or (buffer-name) "N/A")
+                     kdz-window-resize-step--current)
+      :quit-key "q"
+      :color pink)
+    ("Resize Window"
+     (("j" kdz/window-dec-height              "Decrease Height")
+      ("k" kdz/window-inc-height              "Increase Height")
+      ("h" kdz/window-dec-width               "Decrease Width")
+      ("l" kdz/window-inc-width               "Increase Width"))
+     "Fit Window"
+     (("w" kdz/window-fit-to-buffer-width     "Fit to buffer width")
+      ("f" kdz/window-fit-to-buffer-fill      "Fit to buffer fill-column")
+      ("R" kdz/window-restore-original-width  "Restore to original width"))
+     "Select Window"
+     (("J" evil-window-down                   "Select window down")
+      ("K" evil-window-up                     "Select window down")
+      ("H" evil-window-left                   "Select window down")
+      ("L" evil-window-right                  "Select window down"))
+     "Resize Step"
+     (("r" kdz/window-step-size-set-or-reset  "(Re)set Step")
+      ("=" kdz/window-step-size-inc           "Increase Step Size")
+      ("+" kdz/window-step-size-inc           "Increase Step Size")
+      ("_" kdz/window-step-size-dec           "Decrease Step Size")
+      ("-" kdz/window-step-size-dec           "Decrease Step Size")))))
 
 (use-package nerd-icons
-  :straight t
   :config
-
   (defvar kdz-nerd-icons-function-map
     '(("nf-cod"     . nerd-icons-codicon)
       ("nf-dev"     . nerd-icons-devicon)
@@ -56,10 +95,7 @@
       (apply #'propertize
              `(,(kdz/nerd-icons-dwim name) ,@evaluated-properties)))))
 
-(use-package pretty-hydra :straight t)
-
 (use-package transient
-  :straight t
   :config
   (defun kdz/transient-path (file)
     (kdz/user-directory ".local" "transient" file))
@@ -68,15 +104,13 @@
         transient-levels-file  (kdz/transient-path "levels.el")
         transient-values-file  (kdz/transient-path "values.el")))
 
-(use-package avy :straight t)
 (use-package ace-window
-  :straight t
   :general
   (kdz/leader-window-def "w" '("Select Window" . ace-window))
   :config
   (ace-window-posframe-mode)
   (set-face-attribute 'aw-leading-char-face nil :height 3.0))
 
-(use-package casual :straight t)
+;; (use-package casual)
 
 (provide 'packages.d/ui/base)

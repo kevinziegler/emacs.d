@@ -1,10 +1,9 @@
 (use-package help-fns
-  :straight nil
+  :ensure nil
   :general
   (kdz/leader-help-def "M" '("Describe Mode" . describe-mode)))
 
 (use-package helpful
-  :straight t
   :general
   (kdz/leader-help-def
     "f" '("Describe Callable" . helpful-callable)
@@ -12,12 +11,12 @@
     "k" '("Describe Key"      . helpful-key)))
 
 (use-package man
+  :ensure nil
   :general
   (kdz/leader-help-def "m" '("Lookup Manpage" . man)))
 
 (use-package which-key
-  :straight t
-  :demand t
+  :ensure nil
   :init
   (setq which-key-sort-order 'which-key-prefix-then-key-order
 	which-key-max-display-columns 5
@@ -30,24 +29,21 @@
   (which-key-mode))
 
 (use-package keycast
-  :straight t
   :general
   (kdz/leader-toggle-def "k" '("Keycast Display" . keycast-tab-bar-mode)))
 
-(use-package devdocs
-  :straight t
-  :general
-  (kdz/leader-help-def
-    "d"   (cons "DevDocs" (make-sparse-keymap))
-    "dd" '("Search in Documentation" . devdocs-search)
-    "dp" '("Peruse Documentation" . devdocs-peruse)
-    "di" '("Download Documentation Set" . devdocs-install))
+;; (use-package devdocs
+;;   :general
+;;   (kdz/leader-help-def
+;;     "d"   (cons "DevDocs" (make-sparse-keymap))
+;;     "dd" '("Search in Documentation" . devdocs-search)
+;;     "dp" '("Peruse Documentation" . devdocs-peruse)
+;;     "di" '("Download Documentation Set" . devdocs-install))
 
-  :config
-  (setq devdocs-data-dir (kdz/user-directory ".local/devdocs-data")))
+;;   :config
+;;   (setq devdocs-data-dir (kdz/user-directory ".local/devdocs-data")))
 
 (use-package eldoc-box
-  :straight t
   :config
   ;; TODO Make box display in the bottom right of the frame
   (setq eldoc-box-only-multi-line t

@@ -1,13 +1,12 @@
 (use-package cape
-  :straight t
   :init
   (add-hook 'completion-at-point-functions #'cape-dabbrev)
   (add-hook 'completion-at-point-functions #'cape-file)
   (add-hook 'completion-at-point-functions #'cape-elisp-block))
 
-(use-package company :straight t)
+(use-package company)
+
 (use-package corfu
-  :straight t
   :custom
   (corfu-auto t)
   :config
@@ -23,17 +22,15 @@
               :after (lambda (&rest r) (evil-normalize-keymaps))))
 
 (use-package nerd-icons-corfu
-  :straight t
   :after corfu
   :init
   (add-to-list 'corfu-margin-formatters #'nerd-icons-corfu-formatter))
 
-(use-package hotfuzz :straight t
+(use-package hotfuzz
   :config
   (add-to-list 'completion-styles 'hotfuzz))
 
 (use-package consult
-  :straight t
   :general
   (kdz/leader-search-def
     "*" '("Search for selection"              . kdz/consult-ripgrep-selected)
@@ -52,14 +49,13 @@
       (consult-ripgrep nil initial))))
 
 (use-package embark
-  :straight t
   :general
   (general-def
     :keymaps 'vertico-map
-    ("C-." . embark-act)             ;; pick some comfortable binding
-    ("C-;" . embark-dwim)            ;; good alternative: M-.
-    ("C-h B" . embark-bindings)      ;; alternative for `describe-bindings'
-    ("s-<return>" . embark-collect)) ;; 90% of what I want to do is persist results
+    "C-."        '("Act on Candidatae"        . embark-act)             ;; pick some comfortable binding
+    "C-;"        '("Act on Candidate (DWIM)"  . embark-dwim)            ;; good alternative: M-.
+    "C-h B"      '("Describe Embark Bindings" . embark-bindings)      ;; alternative for `describe-bindings'
+    "s-<return>" '("Collect Results"          . embark-collect)) ;; 90% of what I want to do is persist results
 
   :init
   ;; Optionally replace the key help with a completing-read interface
@@ -116,7 +112,6 @@
                  (window-parameters (mode-line-format . none)))))
 
 (use-package embark-consult
-  :straight t
   :general
   (kdz/leader-buffer-def
     "s" '("Search Results" . kdz/consult-embark-ripgrep-results))
@@ -169,19 +164,17 @@
   (add-to-list 'marginalia-annotator-registry
                '(embark-collect-ripgrep kdz/annotate-ripgrep-results)))
 
-(use-package marginalia :straight t
+(use-package marginalia
   :init (marginalia-mode)
   :config
   (setq marginalia-align 'right))
 
 (use-package orderless
-  :straight t
   :custom
   (completion-styles '(orderless basic))
   (completion-category-overrides '((file (styles basic partial-completion)))))
 
 (use-package vertico
-  :straight t
   :general
   (general-def
     :keymaps 'vertico-map
@@ -203,8 +196,8 @@
               :around #'kdz/vertico--format-candiate-marker-advice))
 
 (use-package vertico-directory
+  :ensure nil
   :after vertico
-  :straight nil
   ;; More convenient directory navigation commands
   :bind (:map vertico-map
               ("RET" . vertico-directory-enter)
@@ -213,7 +206,7 @@
   ;; Tidy shadowed file names
   :hook ((rfn-eshadow-update-overlay . vertico-directory-tidy)))
 
-(use-package consult-todo :straight t)
+(use-package consult-todo)
 
 (use-package nerd-icons-completion
   :after (marginalia nerd-icons)

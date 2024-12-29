@@ -1,6 +1,4 @@
 (use-package treemacs
-  :straight t
-  :defer t
   :general
   (general-def
     :keymaps 'treemacs-mode-map
@@ -26,16 +24,14 @@
   (treemacs-hide-gitignored-files-mode 1))
 
 (use-package treemacs-nerd-icons
-  :straight t
   :after treemacs
   :config
   (treemacs-load-theme "nerd-icons"))
 
 (use-package treemacs-tab-bar
-  :straight t
   :after treemacs
   :config (treemacs-set-scope-type 'Tabs))
 
-(use-package treemacs-evil :straight t :after (treemacs evil))
+(use-package treemacs-evil :after (treemacs evil))
 
 (provide 'packages.d/tools/treemacs)

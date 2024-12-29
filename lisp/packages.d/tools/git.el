@@ -1,11 +1,10 @@
 ;;; Git/Version Control Tooling
 (use-package magit
-  :straight t
   :general
   (kdz/leader-git-def
-   "g" '("Git Status"   . magit-status)
-   "b" '("Blame File"   . magit-blame)
-   "l" '("Log for File" . magit-log-buffer-file))
+    "g" '("Git Status"   . magit-status)
+    "b" '("Blame File"   . magit-blame)
+    "l" '("Log for File" . magit-log-buffer-file))
 
   :config
   (transient-append-suffix 'magit-fetch "-p"
@@ -17,23 +16,19 @@
 
 (use-package git-timemachine
   :general
-  (kdz/leader-git-def "t" '("Time Machine" . git-timemachine))
-  :straight t)
+  (kdz/leader-git-def "t" '("Time Machine" . git-timemachine)))
 
 (use-package abridge-diff :after magit :init (abridge-diff-mode 1))
 
 (use-package magit-delta
-  :straight t
   :if (executable-find "delta")
   :hook ((magit-mode . magit-delta-mode)))
 
 (use-package magit-file-icons
-  :straight t
   :after magit
   :init (magit-file-icons-mode 1))
 
 (use-package difftastic
-  :straight t
   :bind (:map magit-blame-read-only-mode-map
               ("D" . difftastic-magit-show)
               ("S" . difftastic-magit-show))
@@ -43,18 +38,15 @@
        [("D" "Difftastic diff (dwim)" difftastic-magit-diff)
         ("S" "Difftastic show" difftastic-magit-show)])))
 
-(use-package git-modes
-  :straight t
-  :mode (("/.dockerignore\\'" . gitignore-mode )))
+(use-package git-modes :mode (("/.dockerignore\\'" . gitignore-mode )))
 
 (use-package git-link
-  :straight t
   :general
   (kdz/leader-git-def
-   "y"   (cons "Copy Link" (make-sparse-keymap))
-   "yh" '("Repository Homepage" . git-link-homepage)
-   "yy" '("File + Line Number" . git-link)
-   "yY" '("File + Line Number (@ Commit)" . kdz/git-link-with-commit))
+    "y"   (cons "Copy Link" (make-sparse-keymap))
+    "yh" '("Repository Homepage" . git-link-homepage)
+    "yy" '("File + Line Number" . git-link)
+    "yY" '("File + Line Number (@ Commit)" . kdz/git-link-with-commit))
 
   :config
   (defun kdz/git-link-with-commit ()

@@ -1,42 +1,36 @@
 ;;;; In-Buffer UI Enhancments - Editing behaviors, formating, etc
-(use-package browse-at-remote :straight t) ;; TODO Set up keybindings
-(use-package perfect-margin :straight t)
-(use-package imenu-list :straight t)
-(use-package yasnippet :straight t :config (yas-global-mode))
-(use-package yasnippet-snippets :straight t :after yasnippet)
-(use-package apheleia :straight t :config (apheleia-global-mode +1))
-(use-package anzu :straight t :config (global-anzu-mode +1))
-(use-package flycheck :straight t)
+(use-package browse-at-remote) ;; TODO Set up keybindings
+(use-package perfect-margin)
+(use-package imenu-list)
+(use-package yasnippet :config (yas-global-mode))
+(use-package yasnippet-snippets :after yasnippet)
+(use-package apheleia :config (apheleia-global-mode +1))
+(use-package anzu :config (global-anzu-mode +1))
+(use-package flycheck)
 
 (use-package vundo
-  :straight t
   :general
   (kdz/leader-buffer-def "h" '("Undo History" . vundo)))
 
 (use-package consult-yasnippet
-  :straight t
   :after yasnippet
   :general
   (kdz/leader-insert-def "s" '("Snippet" . consult-yasnippet)))
 
 (use-package eval-sexp-fu
-  :straight t
   :general
   (kdz/leader-code-eval-def
     "s" '("Evaluate s-exp" . eval-sexp-fu-eval-sexp-inner-list)))
 
 (use-package expand-region
-  :straight t
   :general
   (kdz/leader-edit-def "e" '("Expand Region" . er/expand-region)))
 
 (use-package separedit
-  :straight t
   :general
   (kdz/leader-edit-def "b" '("Edit block in separate buffer" . separedit)))
 
 (use-package sideline
-  :straight t
   :general
   (kdz/leader-toggle-def
     "s" '("Show/hide Sideline" . sideline-mode))
@@ -44,7 +38,6 @@
     "s" '("Show/hide Sideline" . global-sideline-mode)))
 
 (use-package copy-as-format
-  :straight t
   :general
   (kdz/leader-edit-def
     "y"   (cons "Copy as <format>" (make-sparse-keymap))
@@ -56,7 +49,6 @@
     "yG" '("Copy as Markdown (Gitlab)" . copy-as-format-gitlab)))
 
 (use-package jinx
-  :straight t
   :general
   (general-def
     :states '(normal)
@@ -67,22 +59,19 @@
   (global-jinx-mode))
 
 (use-package sideline-blame
-  :straight t
   :after 'sideline
   :config (add-to-list 'sideline-backends-right sideline-blame))
 
 (use-package sideline-flycheck
-  :straight t
   :after '(sideline flycheck)
   :config (add-to-list 'sideline-backends-right sideline-flycheck))
 
 (use-package sideline-lsp
-  :straight t
   :after '(sideline lsp)
   :config (add-to-list 'sideline-backends-right sideline-lsp))
 
 (use-package hl-todo
-  :straight t
+  :after custom
   :hook (kdz-load-theme . kdz/set-hl-todo-faces)
   :config
   (defun kdz/set-hl-todo-faces (&rest _)
@@ -99,15 +88,14 @@ actions that would update colors in emacs (such as changing themes)"
   (global-hl-todo-mode))
 
 (use-package hide-mode-line
-  :straight t
   :hook ((reb-mode . hide-mode-line-mode)))
 
 (use-package elec-pair
+  :ensure nil
   :hook ((prog-mode . electric-pair-mode)
 	 (ielm-mode . electric-pair-mode)))
 
 (use-package git-gutter-fringe
-  :straight t
   :config
   (global-git-gutter-mode 1))
 
@@ -118,14 +106,11 @@ actions that would update colors in emacs (such as changing themes)"
   (modern-fringes-invert-arrows))
 
 (use-package origami
-  :straight t
   :config
   (setq origami-fold-replacement " ... ")
-
   (global-origami-mode))
 
 (use-package repl-toggle
-  :straight t
   :general
   (kdz/leader-code-def "r" '("Toggle REPL" . rtog/toggle-repl))
   :config
@@ -135,23 +120,16 @@ actions that would update colors in emacs (such as changing themes)"
 			       (python-mode . run-python)
 			       (python-ts-mode . run-python))))
 
-(use-package ws-butler
-  :straight t
-  :hook ((prog-mode . ws-butler-mode)))
+(use-package ws-butler :hook ((prog-mode . ws-butler-mode)))
 
 (use-package editorconfig
-  :straight t
   :config
   (setopt editorconfig-trim-whitespaces-mode 'ws-butler-mode)
   (editorconfig-mode 1))
 
-(use-package undo-fu
-  :straight t
-  :config
-  (setopt evil-undo-system 'undo-fu))
+(use-package undo-fu :config (setopt evil-undo-system 'undo-fu))
 
 (use-package file-info
-  :straight t
   :general
   (kdz/leader-file-def "i" '("Show Info" . file-info-show))
   :config
@@ -159,11 +137,10 @@ actions that would update colors in emacs (such as changing themes)"
 
 (use-package markdown-xwidget
   :after markdown-mode
-  :straight (markdown-xwidget
-             :type git
-             :host github
-             :repo "cfclrk/markdown-xwidget"
-             :files (:defaults "resources"))
+  :ensure (markdown-xwidget
+           :host github
+           :repo "cfclrk/markdown-xwidget"
+           :files (:defaults "resources"))
   :config
   (setq markdown-xwidget-command "pandoc"
         markdown-xwidget-github-theme "light"
@@ -171,6 +148,7 @@ actions that would update colors in emacs (such as changing themes)"
         markdown-xwidget-code-block-theme "default") )
 
 (use-package display-fill-column-indicator
+  :ensure nil
   :init
   (global-display-fill-column-indicator-mode)
   :general
@@ -190,6 +168,7 @@ actions that would update colors in emacs (such as changing themes)"
     (add-to-list 'global-display-fill-column-indicator-modes `(not ,mode))))
 
 (use-package display-line-numbers
+  :ensure nil
   :init
   (global-display-line-numbers-mode)
   :general
@@ -219,13 +198,11 @@ actions that would update colors in emacs (such as changing themes)"
 
 ;; TODO Need to adjust face colors to contrast properly
 (use-package highlight-indent-guides
-  :straight t
   :general
   (kdz/leader-toggle-def
     "i" '("Show/hide indent guides" . highlight-indent-guides-mode)))
 
 (use-package scroll-on-jump
-  :straight t
   :after evil
   :config
   (setq scroll-on-jump-curve 'smooth-in)
@@ -255,12 +232,11 @@ actions that would update colors in emacs (such as changing themes)"
 ;; TODO This needs tree-sitter to work
 ;; TODO This pulls from quelpa; how do I set that up with straight?
 ;; (use-package turbo-log
-;;   :straight t
 ;;   :config
 ;;   (setq turbo-log-msg-format-template "\"KDZ-LOG: %s\""))
 
-(use-package lorem-ipsum :straight t)
-(use-package uuidgen :straight t)
+(use-package lorem-ipsum)
+(use-package uuidgen)
+;; (use-package fancy-urls-menu)
 
-(use-package fancy-urls-menu :straight t)
 (provide 'packages.d/ui/buffer)
