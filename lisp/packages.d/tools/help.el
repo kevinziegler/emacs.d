@@ -44,6 +44,8 @@
 ;;   (setq devdocs-data-dir (kdz/user-directory ".local/devdocs-data")))
 
 (use-package eldoc-box
+  :general
+  (kdz/leader-toggle-def "d" '("Documentation Popups" . eldoc-box-hover-mode))
   :config
   ;; TODO Make box display in the bottom right of the frame
   (setq eldoc-box-only-multi-line t
