@@ -14,6 +14,9 @@
   (setq magit-git-executable (brew-bin "git")
         magit-repository-directories '(("~/dev" . 2) ("~/.dotfiles" . 0))))
 
+(use-package magit-file-icons
+  :hook ((magit-mode . magit-file-icons-mode)))
+
 (use-package git-timemachine
   :general
   (kdz/leader-git-def "t" '("Time Machine" . git-timemachine)))
