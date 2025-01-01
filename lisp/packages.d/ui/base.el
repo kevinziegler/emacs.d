@@ -81,8 +81,9 @@
     (let* ((face-family-fn
             (kdz/find-by-prefix-key kdz-nerd-icons-family-function-map name))
            (face-family (funcall face-family-fn))
-           (base-properties (list 'face `(:family ,face-family :height 1.2)
-                                  'font-lock-face `(:family ,face-family :height 1.2)
+           (face-family-props (list :family ,face-family :height 1.2))
+           (base-properties (list 'face face-family-props
+                                  'font-lock-face face-family-props
                                   'display '(raise 0)))
            (evaluated-properties
             (map-merge-with 'plist
