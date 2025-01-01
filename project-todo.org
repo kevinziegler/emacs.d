@@ -1,6 +1,6 @@
 #+bibliography: project-todo.org.bib
 
-* Functionality [3/7]
+* Functionality [3/8]
 - [X] LSP Mode
 - [ ] "Launch REPL"
   + [ ] Open REPL for current or selected language
@@ -17,6 +17,7 @@
 - [ ] Set up a =local.el= file to load settings that shouldn't be version controlled
   - [ ] This file should be git-ignored
   - [ ] Also a `local.el.tpl` file (that is version controlled) to install on first-run
+- [ ] Set up a better `imenu-list` modeline
 
 ** Org-Mode
 - [X] Set up ~org-babel~ functionality
