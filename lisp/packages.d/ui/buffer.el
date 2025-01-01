@@ -1,12 +1,16 @@
 ;;;; In-Buffer UI Enhancments - Editing behaviors, formating, etc
 (use-package browse-at-remote) ;; TODO Set up keybindings
 (use-package perfect-margin)
-(use-package imenu-list)
 (use-package yasnippet :config (yas-global-mode))
 (use-package yasnippet-snippets :after yasnippet)
 (use-package apheleia :config (apheleia-global-mode +1))
 (use-package anzu :config (global-anzu-mode +1))
 (use-package flycheck)
+
+(use-package imenu-list
+  :general
+  (kdz/leader-code-lookup-def "l" '("Symbols List" . imenu-list)) '
+  :hook (prog-mode . imenu-list-minor-mode))
 
 (use-package vundo
   :general

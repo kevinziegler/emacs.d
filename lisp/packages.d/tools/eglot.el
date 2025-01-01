@@ -5,9 +5,6 @@
   (kdz/leader-code-def "a" '("Code Actions" . eglot-code-actions))
   :config
   (setq eglot-autoshutdown t))
-(use-package imenu-list
-  :general
-  (kdz/leader-code-lookup-def "l" '("Symbols List" . imenu-list)) )
 
 ;; TODO Make a helper to look for symbol at point by default
 (use-package consult-eglot)
