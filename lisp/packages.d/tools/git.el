@@ -19,6 +19,9 @@
 (use-package magit-file-icons
   :hook ((magit-mode . magit-file-icons-mode)))
 
+(use-package magit-filenotify
+  :hook (after-save . magit-after-save-refresh-status))
+
 (use-package git-timemachine
   :general
   (kdz/leader-git-def "t" '("Time Machine" . git-timemachine)))
