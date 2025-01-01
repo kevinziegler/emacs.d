@@ -212,6 +212,11 @@
   :config
   (setopt use-package-enable-imenu-support t))
 
+(use-package vc-hooks
+  :ensure nil
+  :config
+  (setq vc-follow-symlinks t))
+
 (use-package window
   :ensure nil
   :general
