@@ -1,6 +1,6 @@
 (use-package tab-bar
   :ensure nil
-  :after custom
+  :after (custom nerd-icons)
   :general
   (kdz/leader-tab-def
     "TAB" '("Select Workspace"       . kdz/tab-switch-index-or-select)
@@ -126,7 +126,7 @@ A pinned tab is one whose name corresponds to an entry in
 
 (use-package tab-line
   :ensure nil
-  :after custom
+  :after (custom nerd-icons)
   :config
   (setq tab-line-close-button-show nil
         tab-line-tab-name-truncated-max 40
