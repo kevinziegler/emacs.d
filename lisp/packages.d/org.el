@@ -739,6 +739,10 @@ Also adds support for a `:sync' parameter to override `:async'."
   (defalias 'org-toggle-inline-images #'org-sliced-images-toggle-inline-images)
   (defalias 'org-display-inline-images #'org-sliced-images-display-inline-images))
 
+(use-package org-src
+  :ensure nil
+  :config (setq org-src-preserve-indentation t))
+
 (use-package org-tidy :hook (org-mode . org-tidy-mode))
 (use-package org-ql)
 (use-package om-dash
