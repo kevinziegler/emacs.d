@@ -99,7 +99,7 @@ actions that would update colors in emacs (such as changing themes)"
 (use-package elec-pair
   :ensure nil
   :hook ((prog-mode . electric-pair-mode)
-	 (ielm-mode . electric-pair-mode)))
+	 (inferior-emacs-lisp-mode . electric-pair-mode)))
 
 (use-package git-gutter-fringe
   :config
