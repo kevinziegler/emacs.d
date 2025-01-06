@@ -9,8 +9,10 @@
 
 (use-package imenu-list
   :general
-  (kdz/leader-code-lookup-def "l" '("Symbols List" . imenu-list)) '
-  :hook (prog-mode . imenu-list-minor-mode))
+  (general-def
+    :keymaps 'imenu-list-major-mode-map
+    "s-RET" 'imenu-list-goto-entry)
+  (kdz/leader-code-lookup-def "l" '("Symbols List" . imenu-list)))
 
 (use-package vundo
   :general
