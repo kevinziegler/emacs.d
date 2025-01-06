@@ -5,8 +5,10 @@
   :config
   (setq dashboard-banner-official-png (expand-file-name "logo.png"
                                                         user-emacs-directory)
+        dashboard-banner-logo-title nil
         dashboard-items '((projects . 5) (bookmarks . 5))
         dashboard-center-content t
+        dashboard-vertically-center-content t
         dashboard-set-file-icons t
         dashboard-set-heading-icons t
         dashboard-projects-backend 'project-el
