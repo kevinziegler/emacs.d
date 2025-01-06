@@ -52,10 +52,10 @@
   :general
   (general-def
     :keymaps 'vertico-map
-    "C-."        '("Act on Candidatae"        . embark-act)             ;; pick some comfortable binding
-    "C-;"        '("Act on Candidate (DWIM)"  . embark-dwim)            ;; good alternative: M-.
-    "C-h B"      '("Describe Embark Bindings" . embark-bindings)      ;; alternative for `describe-bindings'
-    "s-<return>" '("Collect Results"          . embark-collect)) ;; 90% of what I want to do is persist results
+    "C-."   '("Act on Candidatae"        . embark-act)      ;; pick some comfortable binding
+    "C-;"   '("Act on Candidate (DWIM)"  . embark-dwim)     ;; good alternative: M-.
+    "C-h B" '("Describe Embark Bindings" . embark-bindings) ;; alternative for `describe-bindings'
+    "s-RET" '("Collect Results"          . embark-collect)) ;; 90% of what I want to do is persist results
 
   :init
   ;; Optionally replace the key help with a completing-read interface
