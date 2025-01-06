@@ -420,6 +420,7 @@ appropriate.  In tables, insert a new row or end the table."
 ;; (use-package valign)
 
 (use-package ox-pandoc
+  :if (executable-find "pandoc")
   :config
   (add-to-list 'org-pandoc-options '(wrap . "none")))
 
