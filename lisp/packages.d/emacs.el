@@ -215,7 +215,7 @@
 (use-package vc-hooks
   :ensure nil
   :config
-  (setq vc-follow-symlinks t))
+  (setq vc-follow-symlinks nil))
 
 (use-package window
   :ensure nil
