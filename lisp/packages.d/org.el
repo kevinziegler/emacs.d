@@ -8,7 +8,7 @@
   (general-def
     :states 'insert
     :keymaps 'org-mode-map
-    "s-<return>" 'kdz/org-return-dwim)
+    "s-RET" 'kdz/org-return-dwim)
 
   (general-def
     :states 'normal
@@ -140,6 +140,15 @@
 
   (defmacro kdz/follow-suffix-link (base-url)
     `(lambda (suffix) (browse-url (string-join (list ,base-url suffix) "/") )))
+
+  (defun unpackaged/org-element-descendant-of (type element)
+    "Return non-nil if ELEMENT is a descendant of TYPE.
+TYPE should be an element type, like `item' or `paragraph'.
+ELEMENT should be a list like that returned by `org-element-context'."
+    ;; MAYBE: Use `org-element-lineage'.
+    (when-let* ((parent (org-element-property :parent element)))
+      (or (eq type (car parent))
+          (unpackaged/org-element-descendant-of type parent))))
 
   (defun kdz/org-return-handle-point-at-heading ()
     "Handle <return> behavior when point is at an org heading"
