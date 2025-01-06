@@ -29,10 +29,6 @@
   :if (executable-find "delta")
   :hook ((magit-mode . magit-delta-mode)))
 
-(use-package magit-file-icons
-  :after magit
-  :init (magit-file-icons-mode 1))
-
 (use-package difftastic
   :bind (:map magit-blame-read-only-mode-map
               ("D" . difftastic-magit-show)
