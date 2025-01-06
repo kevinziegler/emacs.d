@@ -11,8 +11,10 @@
     '("-t" "Fetch all tags" ("-t" "--tags")))
   (transient-append-suffix 'magit-pull "-r"
     '("-a" "Autostash" "--autostash"))
-  (setq magit-git-executable (brew-bin "git")
-        magit-repository-directories '(("~/dev" . 2) ("~/.dotfiles" . 0))))
+  (when-let ((brew-git (executable-find (brew-bin "git"))))
+    (setq magit-git-executable brew-git))
+
+  (setq magit-repository-directories '(("~/dev" . 2) ("~/.dotfiles" . 0))))
 
 (use-package magit-file-icons
   :hook ((magit-mode . magit-file-icons-mode)))
