@@ -81,7 +81,7 @@
     (let* ((face-family-fn
             (kdz/find-by-prefix-key kdz-nerd-icons-family-function-map name))
            (face-family (funcall face-family-fn))
-           (face-family-props (list :family ,face-family :height 1.2))
+           (face-family-props (list :family face-family :height 1.2))
            (base-properties (list 'face face-family-props
                                   'font-lock-face face-family-props
                                   'display '(raise 0)))
