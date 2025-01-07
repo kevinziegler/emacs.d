@@ -29,7 +29,10 @@
 (use-package consult-lsp :after (lsp-mode treemacs))
 (use-package lsp-docker :after lsp-mode)
 (use-package lsp-java :after lsp-mode)
-(use-package lsp-pyright :after lsp-mode)
+(use-package lsp-pyright
+  :after lsp-mode
+  :init
+  (setopt lsp-pyright-langserver-command "basedpyright"))
 
 (use-package dap-mode
   :init
