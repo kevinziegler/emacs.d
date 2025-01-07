@@ -21,3 +21,5 @@
 ;; (use-package dape
 ;;   :general
 ;;   (kdz/leader-code-def "d" '("Debug" . dape)))
+
+(provide 'packages.d/tools/eglot)
