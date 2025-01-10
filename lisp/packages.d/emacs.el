@@ -2,13 +2,18 @@
   :ensure nil
   :general
   (kdz/leader-code-eval-def
-    "b" '("Evaluate Buffer"   . eval-buffer)
-    "d" '("Evaluate Function" . eval-defun)
-    "r" '("Evaluate Region"   . eval-region))
+    "b" '("Evaluate Buffer"      . eval-buffer)
+    "d" '("Evaluate Function"    . eval-defun)
+    "r" '("Evaluate Region"      . eval-region))
   (kdz/leader-file-def
-    "f" '("Find File"         . find-file))
+    "f" '("Find File"            . find-file))
   (kdz/leader-insert-def
-    "u" '("Unicode Character" . insert-char))
+    "u" '("Unicode Character"    . insert-char))
+  (kdz/leader-frame-def
+    "h" '("Move frame to left"   . kdz/place-frame-in-display-left)
+    "w" '("Move frame to center" . kdz/place-frame-in-display-center)
+    "l" '("Move frame to right"  . kdz/place-frame-in-display-right))
+
   :init
   (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
   (set-charset-priority 'unicode)
@@ -63,7 +68,32 @@
 
 
   (setq-default history-length 1000
-                prescient-history-length 1000))
+                prescient-history-length 1000)
+
+  (defvar kdz-frame-side-offset 0.07
+    "Offset to use when placing the frame on left side of the display")
+
+  (defun kdz/place-frame-in-display-left ()
+    "Move the current frame to the left side of the display"
+    (interactive)
+    (let ((position-x (round (* (display-pixel-width) kdz-frame-side-offset)))
+          (position-y (/ (- (display-pixel-height) (frame-pixel-height)) 2)))
+      (set-frame-position nil position-x position-y)))
+
+  (defun kdz/place-frame-in-display-right ()
+    "Move the current frame to the right side of the display"
+    (interactive)
+    (let* ((offset-x (round (* (display-pixel-width) kdz-frame-side-offset)))
+           (position-x (- (display-pixel-width) (frame-pixel-width) offset-x))
+           (position-y (/ (- (display-pixel-height) (frame-pixel-height)) 2)))
+      (set-frame-position nil position-x position-y)))
+
+  (defun kdz/place-frame-in-display-center ()
+    "Move the current frame to the center of the display"
+    (interactive)
+    (let ((center-x (/ (- (display-pixel-width) (frame-pixel-width)) 2))
+          (center-y (/ (- (display-pixel-height) (frame-pixel-height)) 2)))
+      (set-frame-position nil center-x center-y))))
 
 (use-package align
   :ensure nil

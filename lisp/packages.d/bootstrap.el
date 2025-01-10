@@ -90,6 +90,7 @@
   (kdz/leader-nested-map-init "toggle")
   (kdz/leader-nested-map-init "toggle-global")
   (kdz/leader-nested-map-init "window")
+  (kdz/leader-nested-map-init "frame")
 
   (kdz/leader-code-def "e"   `("Code Evaluation" . ,kdz-code-eval-actions-map))
   (kdz/leader-code-def "l"   `("Lookup Symbols"  . ,kdz-code-lookup-actions-map))
@@ -114,6 +115,7 @@
     "s"    (cons "Search"          kdz-search-actions-map)
     "t"    (cons "Toggle"          kdz-toggle-actions-map)
     "w"    (cons "Window"          kdz-window-actions-map)
+    "W"    (cons "Frame"           kdz-frame-actions-map)
     "TAB"  (cons "Workspace"       kdz-tab-actions-map)))
 
 ;; Make `elpaca' wait for `general' package to load so we can use the `:general'

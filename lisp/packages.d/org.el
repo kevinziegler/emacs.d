@@ -26,6 +26,8 @@
 
     "i"   (cons "Insert" (make-sparse-keymap))
     "ic" '("Insert Table of Contents"       . kdz/org-make-toc-dwim)
+    "if" '("Insert Footnote (inline)"       . org-footnote-new)
+    "iF" '("Insert Footnote (outline)"      . kdz/org-insert-outline-footnote)
     "ih" '("Insert Heading"                 . org-insert-heading-respect-content)
     "iH" '("Insert Heading (one level up)"  . kdz/org-insert-heading-one-level-up)
     "is" '("Insert Sub-heading"             . org-insert-subheading)
@@ -46,6 +48,7 @@
           org-fold-catch-invisible-edits 'show-and-error
           org-fold-core-style 'overlays
           org-hidden-keywords '(title)
+          org-footnote-section nil
           org-fontify-quote-and-verse-blocks t
           org-hide-emphasis-markers t
           org-html-doctype "html5"
