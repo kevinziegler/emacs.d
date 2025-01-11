@@ -13,12 +13,12 @@
 ;;   :config
 ;;   (setq turbo-log-msg-format-template "\"KDZ-LOG: %s\""))
 
-;; (use-package string-inflection :straight t)
-;; (use-package gnuplot :straight t)
-;; (use-package wordel :straight t)
+;; (use-package string-inflection)
+;; (use-package gnuplot)
+;; (use-package wordel)
 
 ;; (use-package which-key-posframe
-;;   :straight t
+;;  
 ;;   :config
 ;;   ;; Stand-in until the following issue is merged:
 ;;   ;; https://github.com/yanghaoxie/which-key-posframe/pull/21
@@ -83,7 +83,7 @@
   (add-to-list 'completion-at-point-functions #'yasnippet-capf))
 
 ;; TODO Set up keybindings
-(use-package docsim :straight t
+(use-package docsim
   :config
   (setq docsim-search-paths (list org-directory))
   (defun kdz/docsim-search-current-project ()
@@ -92,21 +92,19 @@
         (let ((docsim-search-paths (project-root (project-current))))
           (call-interactively #'docsim-search)))))
 
-(use-package ialign :straight t)
-(use-package wgrep :straight t)
-(use-package mistty :straight t)
-(use-package grip-mode :straight t)
-(use-package auto-virtualenv :straight t)
-(use-package projection :straight t)
-(use-package json-navigator :straight t)
-(use-package focus :straight t)
-(use-package better-defaults :straight t)
-(use-package duplexer :straight t)
-(use-package jwt :straight t)
+(use-package ialign)
+(use-package wgrep)
+(use-package mistty)
+(use-package grip-mode)
+(use-package auto-virtualenv)
+(use-package projection)
+(use-package json-navigator)
+(use-package focus)
+(use-package better-defaults)
+(use-package duplexer)
+(use-package jwt)
 
-(use-package scopeline
-  :straight t
-  :hook (prog-mode . scopeline-mode))
+(use-package scopeline :hook (prog-mode . scopeline-mode))
 
 (defun kdz/get-posframe-for-buffer (buffer-or-name)
   "Get the posframe for BUFFER-OR-STRING, if it exists",
@@ -141,55 +139,55 @@
   ;; hence not affecting emacs startup time
   :defer 1)
 
-(use-package copyit :straight t)
-(use-package popwin :straight t)
-(use-package git-grep-transient :straight t)
-(use-package grip-mode :straight t)
-(use-package shx :straight t)
-(use-package org-timeblock :straight t)
-(use-package color-identifiers-mode :straight t)
-(use-package deadgrep :straight t)
-(use-package recursion-indicator
-  :demand t
-  :config
-  (recursion-indicator-mode))
+(use-package copyit)
+(use-package popwin)
+(use-package git-grep-transient)
+(use-package grip-mode)
+(use-package shx)
+(use-package org-timeblock)
+(use-package color-identifiers-mode)
+(use-package deadgrep)
+(use-package recursion-indicator :demand t :config (recursion-indicator-mode))
 (straight-use-package '(ct :host github :repo "neeasade/ct.el" :branch "master"))
 
-(use-package hass :straight t)
+(use-package hass)
 
-(use-package edit-list :straight t)
-(use-package test-case-mode :straight t)
-(use-package org-linenote :straight t)
-(use-package shell-pop :straight t)
-(use-package writefreely :straight t)
-(use-package buffer-terminator :straight t)
-(use-package paredit-mode :straight t)
+(use-package edit-list)
+(use-package test-case-mode)
+(use-package org-linenote)
+(use-package shell-pop)
+(use-package writefreely)
+(use-package buffer-terminator)
+(use-package paredit-mode)
 (use-package enhanced-evil-paredit
-  :straight t
+  
   :ensure t
   :hook (paraedit-mode . enhanced-evil-paraedit-mode))
 
-(use-package js-comint :straight t)
-(use-package ts-comint :straight t)
+(use-package js-comint)
+(use-package ts-comint)
 (use-package bifocal
-  :straight t
+  
   :hook (js-comint-mode . bifocal-mode))
 
-(use-package ztree :straight t)
+(use-package ztree)
 
 (use-package nerd-icons-multimodal
   :straight (:host github :repo "abougouffa/nerd-icons-multimodal")
   :hook ((archive-mode tar-mode dired-mode) . nerd-icons-multimodal-mode))
 
 (use-package mood-line
-  :straight t
+  
   ;; Enable mood-line
   :config
   (setq mood-line-format mood-line-format-default)
   (mood-line-mode))
 
 (use-package consult-omni
-  :straight (consult-omni :type git :host github :repo "armindarvish/consult-omni" :branch "main" :files (:defaults "sources/*.el"))
+  :ensure (consult-omni :host github
+                        :repo "armindarvish/consult-omni"
+                        :branch "main"
+                        :files (:defaults "sources/*.el"))
   :after consult
   :config
   ;; Load Sources Core code
@@ -201,12 +199,15 @@
   (setq consult-omni-default-interactive-command #'consult-omni-brave-autosuggest))
 
 ;; TODO Why does this give an error with 'firefox?
-(use-package browser-hist :straight t)
-
-(use-package link-hint :straight t)
+(use-package browser-hist)
+(use-package link-hint)
 
 ;; TODO Remember which buffers I've dealt with in the past that use ansi color sequences and see if this can't help display them properly?
-(use-package xterm-color :straight t)
-
-(use-package shackle :straight t)
-(use-package org-special-block-extras :straight t)
+(use-package xterm-color)
+(use-package shackle)
+(use-package org-special-block-extras)
+(use-package no-littering)
+(use-package tab-bar-notch)
+(use-package tab-line-nerd-icons)
+(use-package smart-delete)
+(use-package on-parens)
