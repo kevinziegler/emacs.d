@@ -743,7 +743,13 @@ Also adds support for a `:sync' parameter to override `:async'."
   :ensure nil
   :config (setq org-src-preserve-indentation t))
 
-(use-package org-tidy :hook (org-mode . org-tidy-mode))
+(use-package org-tidy
+  :general
+  (kdz/mode-leader-def
+    :keymaps 'org-mode-map
+    "tt" '("Toggle Org Tidy" . org-tidy-toggle))
+  :hook (org-mode . org-tidy-mode))
+
 (use-package org-ql)
 (use-package om-dash
   :ensure (om-dash :host github
