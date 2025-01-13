@@ -757,4 +757,12 @@ Also adds support for a `:sync' parameter to override `:async'."
                    :branch "main"
                    :files ("om-dash.el")))
 
+
+(use-package org-chef
+  :after org
+  :general
+  (kdz/mode-leader-def
+    :keymaps 'org-mode-map
+    "iR" '("Insert Recipe (By URL)" . org-chef-insert-recipe)))
+
 (provide 'packages.d/org)
