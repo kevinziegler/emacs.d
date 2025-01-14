@@ -211,3 +211,16 @@
 (use-package tab-line-nerd-icons)
 (use-package smart-delete)
 (use-package on-parens)
+(use-package beacon)
+(use-package better-scroll)
+(use-package centered-window)
+(use-package buffer-terminator)
+(use-package org-linenote)
+(use-package lispy)
+(use-package test-case-mode)
+
+;; TODO Figure out what modes hook up
+(use-package auto-rename-tag)
+
+(use-package tabgo)
+(use-package nocomments-mode)
