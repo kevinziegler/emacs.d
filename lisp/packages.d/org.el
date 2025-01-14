@@ -63,19 +63,14 @@
           org-tags-column 0
           org-use-property-inheritance t)
 
+  (defun kdz/org-insert-outline-footnote ()
+    (interactive)
+    (let ((org-footnote-section "Footnotes"))
+      (funcall-interactively 'org-footnote-new)))
+
   (defun kdz/org-insert-heading-one-level-up ()
     (interactive)
     (org-insert-heading nil nil (- (org-current-level) 1)))
-
-  ;; (defun kdz/org-open-one-on-one ()
-  ;;   (interactive)
-  ;;   (find-file "~/notes/one-on-one-discussions.org")
-  ;;   (when (buffer-narrowed-p) (widen))
-  ;;   (let ((org-goto-interface 'outline-path-completion)
-  ;;         (org-goto-max-level 1))
-  ;;     (org-goto))
-  ;;   (org-narrow-to-subtree)
-  ;;   (org-show-todo-tree nil))
 
   (defun kdz/org-output-dir ()
     "Helper to set the default path for org babel outputs (via the :dir header)"
