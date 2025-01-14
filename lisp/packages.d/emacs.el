@@ -272,6 +272,7 @@
                `(,(lambda (buffer _)
                     (with-current-buffer buffer
                       (derived-mode-p 'comint-mode
+                                      'flycheck-error-list-mode
                                       'xref--xref-buffer-mode
                                       'embark-collect-mode)))
                  display-buffer-in-side-window
