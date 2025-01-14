@@ -154,6 +154,11 @@
   :init
   (setq eshell-directory-name (kdz/user-directory ".local" "eshell")))
 
+(use-package flycheck
+  :ensure nil
+  :config
+  (setopt flycheck-checker-error-threshold 10000))
+
 (use-package frame
   :ensure nil
   :general
