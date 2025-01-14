@@ -69,6 +69,7 @@
   (kdz/mode-leader-def "" nil)
 
   (defmacro kdz/leader-nested-map-init (name)
+    "Create a keymap and corresponding general definer based on NAME"
     `(progn
        (defvar-keymap ,(intern (format "kdz-%s-actions-map" name)))
        (general-create-definer ,(intern (format "kdz/leader-%s-def" name))
