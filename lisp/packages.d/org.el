@@ -57,6 +57,9 @@
           org-insert-heading-respect-content t
           org-list-allow-alphabetical t
           org-list-demote-modify-bullet '(("-" . "+") ("+" . "1.") ("1." . "-"))
+          org-log-done 'time
+          org-log-into-drawer t
+          org-M-RET-may-split-line '((default . nil))
           org-pretty-entities t
           org-return-follows-link t
           org-special-ctrl-a/e t
