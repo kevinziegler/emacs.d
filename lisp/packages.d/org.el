@@ -751,7 +751,12 @@ Also adds support for a `:sync' parameter to override `:async'."
     "tt" '("Toggle Org Tidy" . org-tidy-toggle))
   :hook (org-mode . org-tidy-mode))
 
-(use-package org-ql)
+(use-package org-ql
+  :config
+  (org-ql-defpred shopping-list (store)
+    "Collect items to build a shopping list for STORE"
+    :body (and (outline-path store) (regexp "- \\[ \\]"))))
+
 (use-package om-dash
   :ensure (om-dash :host github
                    :repo "gavv/om-dash"
