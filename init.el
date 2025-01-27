@@ -10,15 +10,11 @@
 (require 'packages.d/workspaces)
 
 (require 'packages.d/tools/dashboard)
-(require 'packages.d/tools/treemacs)
 (require 'packages.d/tools/completion)
-(require 'packages.d/tools/git)
 (require 'packages.d/tools/lsp)
 
 (require 'packages.d/ui/base)
-(require 'packages.d/ui/appearance)
 (require 'packages.d/ui/buffer)
-(require 'packages.d/ui/posframe)
 (require 'packages.d/ui/tabs)
 
 (require 'lib/system)

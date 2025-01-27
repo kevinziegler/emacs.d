@@ -1,3 +1,10 @@
+(use-package ace-window
+  :general
+  (kdz/leader-window-def "w" '("Select Window" . ace-window))
+  :config
+  (ace-window-posframe-mode)
+  (set-face-attribute 'aw-leading-char-face nil :height 3.0))
+
 (use-package avy)
 (use-package hydra
   :config
@@ -14,12 +21,12 @@
   :config
   (pretty-hydra-define
     kdz-pretty-window-resize
-    ( :foreign-keys warn
-      :title (format "Resize window for: %s (Step size: %d)"
-                     (or (buffer-name) "N/A")
-                     kdz-window-resize-step--current)
-      :quit-key "q"
-      :color pink)
+    (:foreign-keys warn
+                   :title (format "Resize window for: %s (Step size: %d)"
+                                  (or (buffer-name) "N/A")
+                                  kdz-window-resize-step--current)
+                   :quit-key "q"
+                   :color pink)
     ("Resize Window"
      (("j" kdz/window-dec-height              "Decrease Height")
       ("k" kdz/window-inc-height              "Increase Height")
@@ -96,6 +103,11 @@
       (apply #'propertize
              `(,(kdz/nerd-icons-dwim name) ,@evaluated-properties)))))
 
+(use-package nerd-icons-ibuffer
+  :hook (ibuffer-mode . nerd-icons-ibuffer-mode)
+  :config
+  (setq nerd-icons-ibuffer-icon t))
+
 (use-package transient
   :config
   (defun kdz/transient-path (file)
@@ -105,13 +117,100 @@
         transient-levels-file  (kdz/transient-path "levels.el")
         transient-values-file  (kdz/transient-path "values.el")))
 
-(use-package ace-window
-  :general
-  (kdz/leader-window-def "w" '("Select Window" . ace-window))
-  :config
-  (ace-window-posframe-mode)
-  (set-face-attribute 'aw-leading-char-face nil :height 3.0))
-
 ;; (use-package casual)
+
+(use-package spacious-padding
+  :config
+  (setq spacious-padding-widths (list :internal-border-width 1
+                                      :header-line-width 4
+                                      :mode-line-width 6
+                                      :tab-width 4
+                                      :right-divider-width 7
+                                      :scroll-bar-width 0))
+  (spacious-padding-mode))
+
+(use-package solaire-mode
+  :after catppuccin-theme
+  :config
+  (solaire-global-mode +1))
+
+(use-package svg-tag-mode)
+
+(use-package doom-modeline
+  :init (doom-modeline-mode 1)
+  :config
+  (setq doom-modeline-time nil
+        doom-modeline-persp-icon nil
+        doom-modeline-persp-name nil
+        doom-modeline-buffer-encoding nil))
+
+(use-package posframe
+  :config
+  (defvar kdz--posframe-offset-top-percent 10)
+  (defvar kdz--posframe-offset-bottom-percent 10)
+
+  (defun kdz/posframe-center-width (info)
+    (round
+     (* 0.5 (- (plist-get info :parent-frame-width)
+               (plist-get info :posframe-width)))))
+
+  (defun kdz/posframe-offset-top (info)
+    (let ((offset-percent (/ kdz--posframe-offset-top-percent 100.0))
+          (frame-height (plist-get info :parent-frame-height)))
+      (cons (kdz/posframe-center-width info)
+            (round (* offset-percent frame-height)))))
+
+  (defun kdz/posframe-offset-bottom (info)
+    (let* ((parent-frame-height (plist-get info :parent-frame-height))
+           (posframe-height (plist-get info :posframe-height))
+           (offset-percent (/ kdz--posframe-offset-bottom-percent 100.0)))
+      (cons (kdz/posframe-center-width info)
+            (round (- parent-frame-height
+                      posframe-height
+                      (* offset-percent parent-frame-height)))))))
+
+(use-package treemacs
+  :general
+  (general-def
+    :keymaps 'treemacs-mode-map
+    :prefix "o"
+    "v" 'treemacs-visit-node-horizontal-split
+    "h" 'treemacs-visit-node-vertical-split
+    "s" 'treemacs-visit-node-vertical-split)
+
+  (general-def
+    :keymaps 'treemacs-mode-map
+    :prefix "o a"
+    "v" 'treemacs-visit-node-ace-horizontal-split
+    "h" 'treemacs-visit-node-ace-vertical-split
+    "s" 'treemacs-visit-node-ace-vertical-split)
+
+  (kdz/leader-open-def "t" '("Project File Tree" . treemacs))
+
+  :config
+  (setq treemacs-collapse-dirs 7
+        treemacs-width 45
+        treemacs-recenter-after-file-follow 'on-distance
+        treemacs-project-follow-cleanup t)
+  (treemacs-hide-gitignored-files-mode 1))
+
+(use-package treemacs-nerd-icons
+  :after treemacs
+  :config
+  (treemacs-load-theme "nerd-icons"))
+
+(use-package treemacs-tab-bar
+  :after treemacs
+  :config (treemacs-set-scope-type 'Tabs))
+
+(use-package treemacs-evil :after (treemacs evil))
+
+(use-package vertico-posframe
+  :after (posframe vertico)
+  :config
+  (vertico-posframe-mode 1)
+  (setq vertico-posframe-poshandler #'kdz/posframe-offset-top)
+  (setq vertico-posframe-parameters '((left-fringe . 8)
+                                      (right-fringe . 8))))
 
 (provide 'packages.d/ui/base)

@@ -48,14 +48,10 @@
   :general
   (kdz/leader-toggle-def "d" '("Documentation Popups" . eldoc-box-hover-mode))
   :config
-  ;; TODO Make box display in the bottom right of the frame
   (setq eldoc-box-only-multi-line t
         eldoc-box-position-function #'eldoc-box--default-at-point-position-function)
-
-  ;; TODO Run this as a hook when changing themes
-  (defun kdz/eldoc-box-update-faces ()
-    (set-face-attribute 'eldoc-box-border
-                        nil
-                        :background (face-foreground 'default))))
+  (set-face-attribute 'eldoc-box-border
+                      nil
+                      :background (face-foreground 'default)))
 
 (provide 'packages.d/tools/help)
