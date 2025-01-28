@@ -121,7 +121,8 @@
 (use-package comint
   :ensure nil
   :config
-  (setopt comint-prompt-read-only t))
+  (setopt comint-prompt-read-only t
+          comint-scroll-to-bottom-on-input t))
 
 (use-package cus-edit
   :ensure nil
