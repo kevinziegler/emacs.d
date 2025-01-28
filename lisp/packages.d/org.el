@@ -771,4 +771,9 @@ Also adds support for a `:sync' parameter to override `:async'."
     :keymaps 'org-mode-map
     "iR" '("Insert Recipe (By URL)" . org-chef-insert-recipe)))
 
+
+(use-package org-ac
+  :config
+  (org-ac/config-default))
+
 (provide 'packages.d/org)
