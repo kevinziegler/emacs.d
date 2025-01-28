@@ -160,14 +160,11 @@
 (use-package buffer-terminator)
 (use-package paredit-mode)
 (use-package enhanced-evil-paredit
-  
-  :ensure t
-  :hook (paraedit-mode . enhanced-evil-paraedit-mode))
+  :hook (paredit-mode . enhanced-evil-paredit-mode))
 
 (use-package js-comint)
 (use-package ts-comint)
 (use-package bifocal
-  
   :hook (js-comint-mode . bifocal-mode))
 
 (use-package ztree)
