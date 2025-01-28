@@ -127,16 +127,6 @@
 
 ;; (use-package casual)
 
-(use-package spacious-padding
-  :config
-  (setq spacious-padding-widths (list :internal-border-width 1
-                                      :header-line-width 4
-                                      :mode-line-width 6
-                                      :tab-width 4
-                                      :right-divider-width 7
-                                      :scroll-bar-width 0))
-  (spacious-padding-mode))
-
 (use-package solaire-mode
   :after catppuccin-theme
   :config
@@ -251,7 +241,7 @@
 
 (use-package spacious-padding
   :config
-  (setq spacious-padding-widths (list :internal-border-width 7
+  (setq spacious-padding-widths (list :internal-border-width 1
                                       :header-line-width 4
                                       :mode-line-width 6
                                       :tab-width 4
