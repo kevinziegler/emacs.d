@@ -179,6 +179,7 @@
   (general-def
     :keymaps 'vertico-map
     "C-j" 'next-line-or-history-element
+    "C-h" 'which-key-show-major-mode
     "C-k" 'previous-line-or-history-element)
 
   :init
