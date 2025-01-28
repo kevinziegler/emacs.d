@@ -117,6 +117,14 @@
         transient-levels-file  (kdz/transient-path "levels.el")
         transient-values-file  (kdz/transient-path "values.el")))
 
+(use-package ultra-scroll
+  :ensure (ultra-scroll :host github :repo "jdtsmith/ultra-scroll")
+  :init
+  (setq scroll-conservatively 101 ; important!
+        scroll-margin 0)
+  :config
+  (ultra-scroll-mode 1))
+
 ;; (use-package casual)
 
 (use-package spacious-padding
