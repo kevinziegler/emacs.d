@@ -101,4 +101,9 @@
   (setq terminal-here-mac-terminal-command
         (lambda (path) (list "open" "-a" "iTerm.app" path))))
 
+(use-package gcmh
+  :demand t
+  :config
+  (add-hook 'elpaca-after-init-hook (lambda () (gcmh-mode 1))))
+
 (provide 'packages.d/system)
