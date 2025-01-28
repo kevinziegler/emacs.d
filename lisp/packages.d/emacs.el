@@ -165,7 +165,9 @@
   :general
   (kdz/leader-open-def "f" '("New Frame" . make-frame))
   :config
-  (set-frame-font "Berkeley Mono 12" nil t)
+  (let ((default-font-string  "Berkeley Mono 12"))
+    (when (find-font (font-spec :name default-font-string))
+      (set-frame-font default-font-string nil t)))
   (blink-cursor-mode -1))
 
 (use-package hl-line
