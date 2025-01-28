@@ -208,7 +208,6 @@
 (use-package tab-line-nerd-icons)
 (use-package smart-delete)
 (use-package on-parens)
-(use-package beacon)
 (use-package better-scroll)
 (use-package centered-window)
 (use-package buffer-terminator)
@@ -221,3 +220,29 @@
 
 (use-package tabgo)
 (use-package nocomments-mode)
+
+(use-package scopeline
+  :config (add-hook 'prog-mode-hook #'scopeline-mode))
+
+(use-package org-timeblock)
+(use-package org-table-color)
+
+(use-package consult-gh)
+(use-package beacon
+  :delight beacon-mode
+  :custom
+  (beacon-color "#33DB12")
+  (beacon-blink-duration 0.5)
+  (beacon-size 60)
+  (beacon-blink-when-point-moves-vertically t)
+  (beacon-blink-when-window-changes t)
+  (beacon-blink-when-focused t)
+  :config
+  (beacon-mode)
+  ;; blink after switching windows.
+  (if window-selection-change-functions
+      (push (lambda (_) (beacon-blink-automated)) 'window-selection-change-functions)
+    (setq window-selection-change-functions '((lambda (_) (beacon-blink-automated))))))
+
+(use-package citre)
+(use-package enlight)
