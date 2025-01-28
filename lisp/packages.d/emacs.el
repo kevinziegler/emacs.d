@@ -238,6 +238,12 @@
   :config
   (global-so-long-mode))
 
+(use-package subword
+  :ensure nil
+  :general
+  (kdz/leader-toggle-def "w" '("Sub-word mode" . subword-mode))
+  (kdz/leader-toggle-global-def "w" '("Sub-word mode" . global-subword-mode)))
+
 (use-package uniquify
   :ensure nil
   :config
