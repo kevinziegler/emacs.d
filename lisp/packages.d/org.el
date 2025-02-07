@@ -10,11 +10,6 @@
     :keymaps 'org-mode-map
     "s-RET" 'kdz/org-return-dwim)
 
-  (general-def
-    :states 'normal
-    :keymaps 'org-mode-map
-    "RET" 'evil-org-return)
-
   (kdz/leader-file-def "l" '("Store Link" . org-store-link))
 
   :general-config
@@ -372,6 +367,9 @@ appropriate.  In tables, insert a new row or end the table."
   :after (evil org)
   :hook ((org-mode . evil-org-mode)
          (org-mode . kdz/org-cycle-table-on-evil-state))
+  :general
+  (general-def :states 'normal :keymaps 'org-mode-map "RET" 'evil-org-return)
+
   :config
   (defun kdz/org-cycle-table-on-evil-state ()
     (add-hook 'evil-insert-state-exit-hook
