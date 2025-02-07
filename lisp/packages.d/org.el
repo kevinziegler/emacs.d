@@ -324,7 +324,8 @@ appropriate.  In tables, insert a new row or end the table."
   :config
   (setopt org-appear-trigger 'manual
           org-appear-autolinks t
-          org-appear-autokeywords t)
+          org-appear-autokeywords t
+          org-appear-manual-linger t)
 
   (defun kdz/org-appear-respect-evil-state ()
     (add-hook 'evil-insert-state-entry-hook #'org-appear-manual-start nil t)
