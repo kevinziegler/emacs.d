@@ -249,23 +249,4 @@
                                       :scroll-bar-width 0))
   (spacious-padding-mode))
 
-(use-package solaire-mode
-  :after catppuccin-theme
-  :config
-  (solaire-global-mode +1))
-
-(use-package svg-tag-mode)
-
-(use-package nerd-icons-ibuffer
-  :hook (ibuffer-mode . nerd-icons-ibuffer-mode)
-  :config
-  (setq nerd-icons-ibuffer-icon t))
-
-(use-package doom-modeline
-  :init (doom-modeline-mode 1)
-  :config
-  (setq doom-modeline-time nil
-	doom-modeline-persp-icon nil
-	doom-modeline-persp-name nil
-	doom-modeline-buffer-encoding nil))
 (provide 'packages.d/ui/base)
