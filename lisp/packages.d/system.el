@@ -73,14 +73,12 @@
   (when-let ((brew-git (executable-find (brew-bin "git"))))
     (setq magit-git-executable brew-git))
 
-  (setq magit-repository-directories '(("~/dev" . 2) ("~/.dotfiles" . 0))))
+  (setq magit-repository-directories '(("~/dev" . 2) ("~/.dotfiles" . 0))
+        magit-format-file-function #'magit-format-file-nerd-icons))
 
 (use-package magit-delta
   :if (executable-find "delta")
   :hook ((magit-mode . magit-delta-mode)))
-
-(use-package magit-file-icons
-  :hook ((magit-mode . magit-file-icons-mode)))
 
 (use-package magit-filenotify
   :hook (after-save . magit-after-save-refresh-status))
