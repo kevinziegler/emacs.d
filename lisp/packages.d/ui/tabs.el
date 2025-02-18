@@ -10,8 +10,7 @@
     "L"   '("Move Tab Right"         . tab-move)
     "d"   '("Close Workspace"        . tab-bar-close-tab)
     "n"   '("Create Named Workspace" . kdz/create-named-tab))
-  :hook ((emacs-startup . kdz/tab-bar-initialize-tab-state)
-         (kdz-load-theme . kdz/tab-bar-update-faces)
+  :hook ((elpaca-after-init   . kdz/tab-bar-initialize-tab-state)
          (window-state-change . kdz/ensure-bottom-tab-line))
   :config
   (defvar kdz-tab-bar-tab-icons '(("Home"       . "nf-md-home")
@@ -72,31 +71,6 @@ A pinned tab is one whose name corresponds to an entry in
   (defun kdz/tab-bar-format-workspaces ()
     (kdz/tab-bar-format-with-relative-index
      (lambda (all-tabs) (seq-remove #'kdz/tab-bar-pinned-tab-p all-tabs))))
-
-  (defun kdz/tab-bar-update-faces (&rest _)
-    "Customize tab-bar faces against current theme
-
-    This is performed via a function so it can be used as a hook on
-    actions that would update colors in emacs (such as changing themes)"
-    (let ((box-width 7)
-          (box-style (if (version<= "30" emacs-version) 'flat-button 'flat))
-          (background-color (face-background 'tab-bar nil t)))
-      (set-face-attribute 'tab-bar
-                          nil
-                          :box (list :line-width box-width
-                                     :color background-color
-                                     :style box-style)
-                          :underline (list :color 'foreground-color
-                                           :position (* -1 box-width)))
-      (set-face-attribute 'tab-bar-tab-inactive nil :weight 'normal)
-      (set-face-attribute 'tab-bar-tab
-                          nil
-                          :background background-color
-                          :foreground "selectedControlColor"
-                          :weight 'bold
-                          :underline (list :color (face-foreground 'tab-bar)
-                                           :position (* -1 box-width)))
-      (set-face-attribute 'tab-bar-tab-inactive nil :weight 'normal)))
 
   (defun kdz/tab-switch-index-or-select (&optional index)
     "Change tabs, optionally by INDEX using a prefix argument.

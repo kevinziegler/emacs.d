@@ -212,11 +212,29 @@
                                       (right-fringe . 8))))
 (use-package catppuccin-theme
   :after custom
-  :hook (elpaca-after-init . (lambda () (catppuccin-load-flavor 'mocha)))
+  :hook ((elpaca-after-init . (lambda () (load-theme 'catppuccin :no-confirm)))
+         (kdz-load-theme . kdz/catppuccin-theme-custom-faces))
   :config
-  (advice-add 'catppuccin-reload
-              :after
-              (lambda (&rest _) (run-hooks 'kdz-load-theme-hook))))
+  (setopt catppuccin-flavor 'mocha)
+
+  (defun kdz/catppuccin-theme-custom-faces ()
+    (when (custom-theme-enabled-p 'catppuccin)
+      (let* ((custom--inhibit-theme-enable nil)
+             (tab-bar-box-style (if (version<= "30" emacs-version)
+                                    'flat-button
+                                  'flat))
+             (tab-bar-box-width 7)
+             (tab-bar-underline-opts (list :color (face-foreground 'tab-bar)
+                                           :position (* -1 tab-bar-box-width))))
+        (custom-theme-set-faces
+         'catppuccin
+         `(tab-bar ((t :box ,(list :line-width tab-bar-box-width
+                                   :color (face-background 'tab-bar nil t)
+                                   :style tab-bar-box-style)
+                       :underline ,tab-bar-underline-opts)))
+         `(tab-bar-tab ((t :foreground ,(catppuccin-color 'sapphire)
+                           :weight bold)))
+         `(tab-line-tab-special ((t :slant italic :weight bold))))))))
 
 (use-package creamsody-theme)
 (use-package tao-theme)
