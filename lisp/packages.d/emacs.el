@@ -126,7 +126,7 @@
 
 (use-package cus-edit
   :ensure nil
-  :config
+  :init
   (setopt custom-file (kdz/user-directory ".local" "custom.el")))
 
 (use-package custom
