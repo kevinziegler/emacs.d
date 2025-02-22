@@ -246,6 +246,11 @@
   (kdz/leader-toggle-def "w" '("Sub-word mode" . subword-mode))
   (kdz/leader-toggle-global-def "w" '("Sub-word mode" . global-subword-mode)))
 
+(use-package thingatpt
+  :ensure nil
+  :config
+  (require 'lib/tap))
+
 (use-package uniquify
   :ensure nil
   :config

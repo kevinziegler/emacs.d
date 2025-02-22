@@ -18,7 +18,6 @@
 (require 'packages.d/ui/tabs)
 
 (require 'lib/system)
-(require 'lib/tap)
 (require 'lib/window-resize)
 
 (let* ((local-config (kdz/user-directory "local.el"))
