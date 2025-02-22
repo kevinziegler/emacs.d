@@ -28,8 +28,8 @@
         which-key-max-description-length 30
         which-key-idle-delay 0.5
         which-key-idle-secondary-delay 0.05
-        which-key-prefix-prefix "✚ ")
-  (setq which-key-show-prefix 'top)
+        which-key-prefix-prefix "✚ "
+        which-key-show-prefix 'left)
   (which-key-mode))
 
 (use-package keycast
