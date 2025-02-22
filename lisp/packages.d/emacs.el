@@ -256,6 +256,11 @@
   :config
   (setopt uniquify-buffer-name-style 'post-forward))
 
+(use-package url
+  :ensure nil
+  :config
+  (setq url-configuration-directory (kdz/user-directory ".local" "url")))
+
 (use-package use-package-core
   :ensure nil
   :config
