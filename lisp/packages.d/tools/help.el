@@ -6,9 +6,12 @@
 (use-package helpful
   :general
   (kdz/leader-help-def
-    "f" '("Describe Callable" . helpful-callable)
-    "v" '("Describe Variable" . helpful-variable)
-    "k" '("Describe Key"      . helpful-key)))
+    "c" '("Describe Command"        . helpful-command)
+    "f" '("Describe Callable"       . helpful-callable)
+    "h" '("Describe Thing-at-point" . helpful-at-point)
+    "v" '("Describe Variable"       . helpful-variable)
+    "k" '("Describe Key"            . helpful-key)
+    "s" '("Describe Symbol"         . helpful-symbol)))
 
 (use-package man
   :ensure nil
