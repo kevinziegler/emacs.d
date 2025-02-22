@@ -39,6 +39,11 @@
                      (buffer-substring start end))))
       (consult-ripgrep nil initial))))
 
+(use-package consult-yasnippet
+  :after (consult yasnippet)
+  :general
+  (kdz/leader-insert-def "s" '("Snippet" . consult-yasnippet)))
+
 (use-package embark
   :general
   (general-def

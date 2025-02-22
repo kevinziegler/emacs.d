@@ -6,6 +6,130 @@
   (set-face-attribute 'aw-leading-char-face nil :height 3.0))
 
 (use-package avy)
+
+(use-package dashboard
+  :after nerd-icons
+  :init
+  (setq dashboard-icon-type 'nerd-icons)
+  :config
+  (setq dashboard-banner-official-png (expand-file-name "logo.png"
+                                                        user-emacs-directory)
+        dashboard-banner-logo-title nil
+        dashboard-items '((projects . 5) (bookmarks . 5))
+        dashboard-center-content t
+        dashboard-vertically-center-content t
+        dashboard-set-file-icons t
+        dashboard-set-heading-icons t
+        dashboard-projects-backend 'project-el
+        dashboard-projects-switch-function #'project-switch-project)
+
+  (dashboard-setup-startup-hook))
+
+(use-package dashboard-ls
+  :after dashboard
+  :config
+  (add-to-list 'dashboard-heading-icons
+               '(ls-directories . "nf-oct-file_directory"))
+  (add-to-list 'dashboard-heading-icons
+               '(ls-files . "nf-oct-file")))
+
+(use-package dashboard-project-status :after dashboard)
+
+(use-package display-fill-column-indicator
+  :ensure nil
+  :init
+  (global-display-fill-column-indicator-mode)
+  :general
+  (kdz/leader-toggle-def "c"
+    '("Show/hide Sideline" . display-fill-column-indicator-mode))
+
+  (kdz/leader-toggle-global-def "c"
+    '("Show/hide fill column" . global-display-fill-column-indicator-mode))
+
+  :config
+  (dolist (mode '(dired-mode
+                  dirvish-directory-view-mode
+                  helpful-mode
+                  markdown-mode
+                  org-mode
+                  special-mode))
+    (add-to-list 'global-display-fill-column-indicator-modes `(not ,mode))))
+
+(use-package display-line-numbers
+  :ensure nil
+  :init
+  (global-display-line-numbers-mode)
+  :general
+  (kdz/leader-toggle-def
+    "l" '("Show/hide line numbers"         . display-line-numbers-mode)
+    "r" '("Relative/absolute line numbers" . kdz/toggle-line-numbers))
+  (kdz/leader-toggle-global-def
+    "l" '("Show/hide line numbers" . global-display-line-numbers-mode))
+
+  :config
+  (defun kdz/toggle-line-numbers ()
+    "Cycle between relative/absolute line numbers"
+    (interactive)
+    (if display-line-numbers
+        (setq display-line-numbers
+	      (if (eq display-line-numbers 'relative) t 'relative))
+      (message "Line numbers are currently disabled!")))
+
+  (dolist (mode '(dashboard-mode-hook
+                  dired-mode
+                  dirvish-directory-view-mode
+                  org-mode-hook
+                  term-mode-hook
+                  treemacs-mode-hook
+                  eshell-mode-hook))
+    (add-hook mode (lambda () (display-line-numbers-mode -1)))))
+
+(use-package elfeed
+  :config
+  (setq elfeed-search-feed-face ":foreground #ffffff :weight bold"
+        elfeed-feeds (quote
+                      (("https://www.reddit.com/r/commandline.rss" reddit commandline)
+                       ("https://www.reddit.com/r/distrotube.rss" reddit distrotube)
+                       ("https://www.reddit.com/r/emacs.rss" reddit emacs)
+                       ("https://hackaday.com/blog/feed/" hackaday linux)
+                       ("https://news.ycombinator.com/rss" hackernews)))))
+
+(use-package file-info
+  :general
+  (kdz/leader-file-def "i" '("Show Info" . file-info-show))
+  :config
+  (setq file-info-headline-underline-symbol ?━))
+
+(use-package git-gutter-fringe
+  :config
+  (global-git-gutter-mode 1))
+
+(use-package hide-mode-line
+  :hook ((reb-mode . hide-mode-line-mode)))
+
+;; TODO Need to adjust face colors to contrast properly
+(use-package highlight-indent-guides
+  :general
+  (kdz/leader-toggle-def
+    "i" '("Show/hide indent guides" . highlight-indent-guides-mode)))
+
+(use-package hl-todo
+  :after custom
+  :hook (kdz-load-theme . kdz/set-hl-todo-faces)
+  :config
+  (defun kdz/set-hl-todo-faces (&rest _)
+    "Set face colors for hl-todo keywords
+
+This is performed via a function so it can be used as a hook on
+actions that would update colors in emacs (such as changing themes)"
+    (setq hl-todo-keyword-faces
+          `(("TODO"   . ,(face-foreground 'hl-todo))
+            ("FIXME"  . ,(face-foreground 'ansi-color-red))
+            ("DEBUG"  . ,(face-foreground 'ansi-color-cyan))
+            ("NOTE"   . ,(face-foreground 'ansi-color-blue))
+            ("STUB"   . ,(face-foreground 'ansi-color-green)))))
+  (global-hl-todo-mode))
+
 (use-package hydra
   :config
   (setq hydra-hint-display-type 'posframe)
@@ -15,6 +139,13 @@
                       :internal-border-color "#61AFEF"
                       :left-fringe 16
                       :right-fringe 16)))
+
+(use-package imenu-list
+  :general
+  (general-def
+    :keymaps 'imenu-list-major-mode-map
+    "s-RET" 'imenu-list-goto-entry)
+  (kdz/leader-code-lookup-def "l" '("Symbols List" . imenu-list)))
 
 (use-package pretty-hydra
   :after hydra
@@ -47,6 +178,12 @@
       ("+" kdz/window-step-size-inc           "Increase Step Size")
       ("_" kdz/window-step-size-dec           "Decrease Step Size")
       ("-" kdz/window-step-size-dec           "Decrease Step Size")))))
+
+(use-package modern-fringes
+  :config
+  (fringe-mode)
+  (modern-fringes-mode)
+  (modern-fringes-invert-arrows))
 
 (use-package nerd-icons
   :config
@@ -107,6 +244,35 @@
   :hook (ibuffer-mode . nerd-icons-ibuffer-mode)
   :config
   (setq nerd-icons-ibuffer-icon t))
+
+(use-package perfect-margin)
+
+(use-package scroll-on-jump
+  :after evil
+  :config
+  (setq scroll-on-jump-curve 'smooth-in)
+  (setq scroll-on-jump-duration 0.6)
+  (setq scroll-on-jump-curve-power 3.5)
+
+  (scroll-on-jump-advice-add evil-undo)
+  (scroll-on-jump-advice-add evil-redo)
+  (scroll-on-jump-advice-add evil-jump-item)
+  (scroll-on-jump-advice-add evil-jump-forward)
+  (scroll-on-jump-advice-add evil-jump-backward)
+  (scroll-on-jump-advice-add evil-ex-search-next)
+  (scroll-on-jump-advice-add evil-ex-search-previous)
+  (scroll-on-jump-advice-add evil-forward-paragraph)
+  (scroll-on-jump-advice-add evil-backward-paragraph)
+  (scroll-on-jump-advice-add evil-goto-mark)
+
+  ;; Actions that themselves scroll.
+  (scroll-on-jump-with-scroll-advice-add evil-goto-line)
+  (scroll-on-jump-with-scroll-advice-add evil-goto-first-line)
+  (scroll-on-jump-with-scroll-advice-add evil-scroll-down)
+  (scroll-on-jump-with-scroll-advice-add evil-scroll-up)
+  (scroll-on-jump-with-scroll-advice-add evil-scroll-line-to-center)
+  (scroll-on-jump-with-scroll-advice-add evil-scroll-line-to-top)
+  (scroll-on-jump-with-scroll-advice-add evil-scroll-line-to-bottom))
 
 (use-package transient
   :config
@@ -266,5 +432,24 @@
                                       :right-divider-width 7
                                       :scroll-bar-width 0))
   (spacious-padding-mode))
+
+(use-package sideline
+  :general
+  (kdz/leader-toggle-def
+    "s" '("Show/hide Sideline" . sideline-mode))
+  (kdz/leader-toggle-global-def
+    "s" '("Show/hide Sideline" . global-sideline-mode)))
+
+(use-package sideline-blame
+  :after 'sideline
+  :config (add-to-list 'sideline-backends-right sideline-blame))
+
+(use-package sideline-flycheck
+  :after '(sideline flycheck)
+  :config (add-to-list 'sideline-backends-right sideline-flycheck))
+
+(use-package sideline-lsp
+  :after '(sideline lsp)
+  :config (add-to-list 'sideline-backends-right sideline-lsp))
 
 (provide 'packages.d/ui/base)

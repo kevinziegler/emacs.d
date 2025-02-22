@@ -9,7 +9,6 @@
 (require 'packages.d/org)
 (require 'packages.d/workspaces)
 
-(require 'packages.d/tools/dashboard)
 (require 'packages.d/tools/completion)
 (require 'packages.d/tools/lsp)
 
