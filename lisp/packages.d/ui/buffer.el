@@ -15,6 +15,7 @@
     "s" '("Evaluate s-exp" . eval-sexp-fu-eval-sexp-inner-list)))
 
 (use-package expand-region
+  :ensure (:wait t)
   :general
   (kdz/leader-edit-def "e" '("Expand Region" . er/expand-region)))
 

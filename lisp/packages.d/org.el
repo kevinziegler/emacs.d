@@ -1,5 +1,5 @@
 (use-package org
-  :ensure nil
+  :ensure (:wait t)
   :hook ((org-mode . visual-line-mode)
          (org-mode . visual-wrap-prefix-mode)
          (org-mode . kdz/org-mode-set-electric-pair-predicate))

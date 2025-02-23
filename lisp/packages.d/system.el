@@ -83,10 +83,6 @@
 (use-package magit-filenotify
   :hook (after-save . magit-after-save-refresh-status))
 
-(use-package nerd-icons-dired
-  :after (dired nerd-icons)
-  :hook (dired-mode . nerd-icons-dired-mode))
-
 (use-package reveal-in-osx-finder
   :general
   (kdz/leader-open-def

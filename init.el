@@ -1,9 +1,11 @@
 (add-to-list 'load-path (kdz/user-directory "lisp"))
 
 (require 'packages.d/bootstrap)
+(require 'packages.d/general)
 (require 'packages.d/emacs)
 (require 'packages.d/system)
 (require 'packages.d/tools/help)
+(require 'packages.d/ui/buffer)
 (require 'packages.d/evil)
 (require 'packages.d/languages)
 (require 'packages.d/org)
@@ -13,7 +15,6 @@
 (require 'packages.d/tools/lsp)
 
 (require 'packages.d/ui/base)
-(require 'packages.d/ui/buffer)
 (require 'packages.d/ui/tabs)
 
 (require 'lib/system)

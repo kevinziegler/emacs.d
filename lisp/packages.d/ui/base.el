@@ -244,6 +244,10 @@ actions that would update colors in emacs (such as changing themes)"
       (apply #'propertize
              `(,(kdz/nerd-icons-dwim name) ,@evaluated-properties)))))
 
+(use-package nerd-icons-dired
+  :after (dired nerd-icons)
+  :hook (dired-mode . nerd-icons-dired-mode))
+
 (use-package nerd-icons-ibuffer
   :hook (ibuffer-mode . nerd-icons-ibuffer-mode)
   :config
