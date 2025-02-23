@@ -51,7 +51,7 @@
           org-image-actual-width nil
           org-insert-heading-respect-content t
           org-list-allow-alphabetical t
-          org-list-demote-modify-bullet '(("-" . "+") ("+" . "1.") ("1." . "a.") ("a." . "-"))
+          org-list-demote-modify-bullet '(("-" . "+") ("+" . "1.") ("1." . "-"))
           org-log-done 'time
           org-log-into-drawer t
           org-M-RET-may-split-line '((default . nil))
