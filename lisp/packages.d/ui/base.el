@@ -100,6 +100,10 @@
   :config
   (setq file-info-headline-underline-symbol ?━))
 
+(use-package flycheck
+  :config
+  (setopt flycheck-checker-error-threshold 10000))
+
 (use-package git-gutter-fringe
   :config
   (global-git-gutter-mode 1))
