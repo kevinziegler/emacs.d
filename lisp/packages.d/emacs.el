@@ -328,7 +328,7 @@
                  (tab-name . "System")))
 
   (add-to-list 'display-buffer-alist
-               '("\\*straight-process\\*"
+               '("\\*elpaca-log\\*"
                  display-buffer-in-tab
                  (tab-name . "Packages")))
 
