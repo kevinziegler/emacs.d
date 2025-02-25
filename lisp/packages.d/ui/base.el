@@ -41,7 +41,7 @@
   (global-display-fill-column-indicator-mode)
   :general
   (kdz/leader-toggle-def "c"
-    '("Show/hide Sideline" . display-fill-column-indicator-mode))
+    '("Show/hide fill column" . display-fill-column-indicator-mode))
 
   (kdz/leader-toggle-global-def "c"
     '("Show/hide fill column" . global-display-fill-column-indicator-mode))
