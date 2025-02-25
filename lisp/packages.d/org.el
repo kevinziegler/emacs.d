@@ -31,8 +31,19 @@
     "j"   (cons "Jump" (make-sparse-keymap))
     "jt" '("Top-Level of current sub-tree")
 
+    "n"   (cons "Narrow" (make-sparse-keymap))
+    "nn" '("Narrow to Sub-tree"             . org-narrow-to-subtree)
+    "ne" '("Narrow to current element"      . org-narrow-to-element)
+    "nb" '("Narrow to current block"        . org-narrow-to-block)
+
+    "s"   (cons "Scheduling" (make-sparse-keymap))
+    "ss" '("Schedule Entry"                 . org-schedule)
+    "sd" '("Set Deadline for Entry"         . org-deadline)
+
     "t"   (cons "Toggle" (make-sparse-keymap))
-    "tn" '("Numbered Headings" . org-num-mode))
+    "tn" '("Numbered Headings"              . org-num-mode)
+
+    "x"  '("Export Document"                . org-export-dispatch))
 
   :config
   (setopt org-auto-align-tags nil
