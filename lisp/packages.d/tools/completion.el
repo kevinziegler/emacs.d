@@ -204,6 +204,18 @@
 
 (use-package consult-todo)
 
+(use-package consult-gh
+  :after consult
+  :if (executable-find "gh")
+  :config
+  (setq consult-gh-default-clone-directory "~/dev"))
+
+(use-package consult-gh-embark
+  :after consult-gh
+  :if (executable-find "gh")
+  :config
+  (consult-gh-embark-mode +1))
+
 (use-package nerd-icons-completion
   :after (marginalia nerd-icons)
   :config
