@@ -398,14 +398,18 @@ actions that would update colors in emacs (such as changing themes)"
                                     'flat-button
                                   'flat))
              (tab-bar-box-width 7)
-             (tab-bar-underline-opts (list :color (face-foreground 'tab-bar)
+             (tab-bar-underline-opts (list :color 'foreground-color
                                            :position (* -1 tab-bar-box-width))))
         (custom-theme-set-faces
          'catppuccin
+         `(minibuffer-prompt ((t :weight bold
+                                 :foreground ,(catppuccin-color 'sapphire))))
          `(tab-bar ((t :box ,(list :line-width tab-bar-box-width
                                    :color (face-background 'tab-bar nil t)
                                    :style tab-bar-box-style)
                        :underline ,tab-bar-underline-opts)))
+         `(tab-bar-tab-inactive (( t :underline ,(list :color (face-foreground 'default)
+                                                       :position (* -1 tab-bar-box-width)))))
          `(tab-bar-tab ((t :foreground ,(catppuccin-color 'sapphire)
                            :weight bold)))
          `(tab-line-tab-special ((t :slant italic :weight bold))))))))
