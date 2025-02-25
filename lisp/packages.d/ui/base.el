@@ -464,4 +464,6 @@ actions that would update colors in emacs (such as changing themes)"
   :after '(sideline lsp)
   :config (add-to-list 'sideline-backends-right sideline-lsp))
 
+(use-package colorful-mode)
+
 (provide 'packages.d/ui/base)
