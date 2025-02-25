@@ -372,6 +372,14 @@ appropriate.  In tables, insert a new row or end the table."
   (general-def :states 'normal :keymaps 'org-mode-map "RET" 'evil-org-return)
 
   :config
+  (evil-org-set-key-theme '(textobjects
+                            insert
+                            navigation
+                            additional
+                            shift
+                            todo
+                            heading))
+
   (defun kdz/org-cycle-table-on-evil-state ()
     (add-hook 'evil-insert-state-exit-hook
               (lambda () (when (org-at-table-p) (org-cycle))))))
