@@ -414,19 +414,6 @@ actions that would update colors in emacs (such as changing themes)"
                            :weight bold)))
          `(tab-line-tab-special ((t :slant italic :weight bold))))))))
 
-(use-package creamsody-theme)
-(use-package tao-theme)
-(use-package stimmung-themes
-  :config
-  ;; (stimmung-themes-load-light)
-  (advice-add 'stimmung-themes-load-light
-              :after
-              (lambda (&rest _) (run-hooks 'kdz-load-theme-hook)))
-
-  (advice-add 'stimmung-themes-load-dark
-              :after
-              (lambda (&rest _) (run-hooks 'kdz-load-theme-hook))))
-
 (use-package kaolin-themes
   :config
   (setq kaolin-themes-bold t
