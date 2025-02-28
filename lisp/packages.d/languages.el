@@ -52,7 +52,7 @@
          ("\\.php\\'" . php-ts-mode)
          ("\\.py[iw]?\\'" . python-ts-mode)
          ("\\.toml\\'" . toml-ts-mode)
-         ("\\.yaml\\'" . yaml-ts-mode)
+         ("\\.ya?ml\\'" . yaml-ts-mode)
          ("\\go.mode\\'" . go-mod-ts-mode)))
 
 (use-package treesit-auto
