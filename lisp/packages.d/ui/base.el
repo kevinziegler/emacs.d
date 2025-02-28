@@ -381,9 +381,10 @@ actions that would update colors in emacs (such as changing themes)"
   :after (posframe vertico)
   :config
   (vertico-posframe-mode 1)
-  (setq vertico-posframe-poshandler #'kdz/posframe-offset-top)
-  (setq vertico-posframe-parameters '((left-fringe . 8)
-                                      (right-fringe . 8))))
+  (setopt vertico-posframe-poshandler #'kdz/posframe-offset-top
+          vertico-posframe-parameters '((left-fringe . 8)
+                                        (right-fringe . 8))))
+
 (use-package catppuccin-theme
   :after custom
   :hook ((elpaca-after-init . (lambda () (load-theme 'catppuccin :no-confirm)))
