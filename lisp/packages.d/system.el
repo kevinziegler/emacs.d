@@ -100,4 +100,6 @@
   :config
   (add-hook 'elpaca-after-init-hook (lambda () (gcmh-mode 1))))
 
+(use-package docker :general (kdz/leader-open-def "d" '("Docker" . docker)))
+
 (provide 'packages.d/system)
