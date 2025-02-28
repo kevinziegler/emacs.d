@@ -18,13 +18,18 @@
         ("S" "Difftastic show" difftastic-magit-show)])))
 
 (use-package dired :ensure nil :config (setq insert-directory-program "gls"))
-
 (use-package dirvish :init (dirvish-override-dired-mode))
+(use-package docker :general (kdz/leader-open-def "d" '("Docker" . docker)))
 
 (use-package exec-path-from-shell
   :config
   (when (memq window-system '(mac ns x))
     (exec-path-from-shell-initialize)))
+
+(use-package gcmh
+  :demand t
+  :config
+  (add-hook 'elpaca-after-init-hook (lambda () (gcmh-mode 1))))
 
 (use-package git-link
   :general
@@ -94,12 +99,5 @@
   :config
   (setq terminal-here-mac-terminal-command
         (lambda (path) (list "open" "-a" "iTerm.app" path))))
-
-(use-package gcmh
-  :demand t
-  :config
-  (add-hook 'elpaca-after-init-hook (lambda () (gcmh-mode 1))))
-
-(use-package docker :general (kdz/leader-open-def "d" '("Docker" . docker)))
 
 (provide 'packages.d/system)
