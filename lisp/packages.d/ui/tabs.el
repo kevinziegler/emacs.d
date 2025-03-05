@@ -140,46 +140,26 @@ A pinned tab is one whose name corresponds to an entry in
       (tabulated-list-mode      . "nf-fa-list")))
 
   (defvar kdz-tab-line-mode-renaming-alist
-    '((comint-mode         . kdz/tab-line-comint-name)
-      (embark-collect-mode . kdz/tab-line-embark-name)))
+    '((comint-mode         . kdz/tab-line-comint-name)))
 
   (defvar kdz-embark-collect-friendly-type-alist
     '((consult-grep . "Search")))
 
-  (defun kdz/tab-line-icon-for-buffer (buffer)
+  (defun kdz/tab-line-icon-name-for-buffer (buffer)
     (with-current-buffer buffer
-      (when-let ((icon-name (cdr (seq-find (lambda (mapping)
-                                             (derived-mode-p (car mapping)))
-                                           kdz-tab-line-mode-icon-alist))))
-        (kdz/propertize-nerd-icon icon-name))))
+      (cdr (seq-find (lambda (mapping) (derived-mode-p (car mapping)))
+                     kdz-tab-line-mode-icon-alist))))
 
   (defun kdz/tab-line-comint-name (buffer)
     (string-replace "*" "" (buffer-name buffer)))
 
-  (defun kdz/tab-line-embark-name (buffer)
-    (if-let* (
-              (embark-type (with-current-buffer buffer embark--type))
-              (embark-command (with-current-buffer buffer
-                                (symbol-name embark--command)))
-              (friendly-type-name (alist-get embark-type
-                                             kdz-embark-collect-friendly-type-alist))
-              (despecialized-name (stirng-replace "*" "" (buffer-name buffer)))
-              (minibuffer-input (replace-regexp-in-string (concat "^.+ "
-                                                                  embark-command
-                                                                  " - ")
-                                                          ""
-                                                          despecialized-name)))
-        (concat (or friendly-type-name (symbol-name embark-command))
-                ": "
-                minibuffer-input)))
-
   (defun kdz/tab-line-name-for-mode (buffer)
     (if-let* ((buffer-mode (with-current-buffer buffer major-mode))
-              (name-fn-for-mode (alist-get buffer-mode
-                                           kdz-tab-line-mode-renaming-alist)))
-        (funcall name-fn-for-mode buffer)
-      (buffer-name buffer))
-    )
+              (name-fn (cdr (seq-find (lambda (mapping)
+                                        (derived-mode-p (car mapping)))
+                                      kdz-tab-line-mode-renaming-alist))))
+        (funcall name-fn buffer)
+      (buffer-name buffer)))
 
   (defun kdz/tab-line-buffer-display-name (buffer &optional _buffers)
     (or (kdz/tab-line-name-for-mode buffer) (buffer-name buffer)))
@@ -192,7 +172,7 @@ A pinned tab is one whose name corresponds to an entry in
            (name (if buffer-p
                      (funcall tab-line-tab-name-function tab tabs)
                    (cdr (assq 'name tab))))
-           (icon (when buffer-p (kdz/tab-line-icon-for-buffer tab)))
+           (icon (when buffer-p (kdz/tab-line-icon-name-for-buffer tab)))
            (face (if selected-p
                      (if (mode-line-window-selected-p)
                          'tab-line-tab-current
@@ -200,18 +180,16 @@ A pinned tab is one whose name corresponds to an entry in
                    'tab-line-tab-inactive)))
       (dolist (fn tab-line-tab-face-functions)
         (setf face (funcall fn tab tabs face buffer-p selected-p)))
+
+      (defun propertize-tab-line-string (string)
+        (propertize string 'face face 'follow-link 'ignore))
+
       (apply 'propertize
-             (concat "[ "
-                     icon
-                     (when icon " ")
-                     (propertize (string-replace "%" "%%" name) ;; (bug#57848)
-                                 'face face
-                                 'keymap tab-line-tab-map
-                                 'help-echo (if selected-p "Current tab"
-                                              "Click to select tab")
-                                 ;; Don't turn mouse-1 into mouse-2 (bug#49247)
-                                 'follow-link 'ignore)
-                     " ]")
+             (concat (propertize-tab-line-string "[ ")
+                     (when icon (kdz/propertize-nerd-icon icon `(face ,face)))
+                     (when icon (propertize-tab-line-string " "))
+                     (propertize-tab-line-string (string-replace "%" "%%" name))
+                     (propertize-tab-line-string " ]"))
              `(tab ,tab ,@(if selected-p '(selected t))))))
 
   (setq tab-line-tab-name-function #'kdz/tab-line-buffer-display-name
@@ -232,16 +210,6 @@ A pinned tab is one whose name corresponds to an entry in
   (defun kdz/ensure-bottom-tab-line (&rest args)
     (when (and (eq 'bottom (window-parameter nil 'window-side))
                (not tab-line-mode))
-      (tab-line-mode 1)))
-
-  (defun kdz/tab-line-tab-name (buffer &optional _buffers)
-    (let* ((comint-mode-p (with-current-buffer buffer
-                            (derived-mode-p 'comint-mode)))
-           (icon (when comint-mode-p
-                   `(" " ,(nerd-icons-devicon "nf-dev-terminal"))))
-           (parts `(" [ " ,(buffer-name buffer) ,icon " ] ")))
-      (apply 'concat (flatten-list parts))))
-
-  (setq tab-line-tab-name-function #'kdz/tab-line-tab-name))
+      (tab-line-mode 1))))
 
 (provide 'packages.d/ui/tabs)
