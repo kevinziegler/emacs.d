@@ -21,6 +21,33 @@
 
   (defun kdz/tab-move-left () (tab-move -1))
 
+  (defvar kdz-blank-buffer-text  "Nothing to see here."
+    "Filler text to use in *blank* buffer")
+
+  (defvar kdz-blank-buffer-name  "*blank*"
+    "Placeholder buffer name")
+
+  ;; TODO Change the default directory for new tabs
+  (defun kdz/create-named-tab ()
+    (interactive)
+    (tab-bar-new-tab)
+    (tab-bar-rename-tab "*New Tab*")
+    (kdz/show-blank-buffer)
+    (call-interactively 'tab-bar-rename-tab))
+
+  ;; TODO Make this center the content in the window
+  (defun kdz/show-blank-buffer ()
+    (interactive)
+    (let ((blank-buffer (get-buffer-create kdz-blank-buffer-name)))
+      (with-current-buffer blank-buffer
+        (unless
+            (save-excursion
+              (beginning-of-buffer)
+              (search-forward kdz-blank-buffer-text nil t))
+          (insert kdz-blank-buffer-text))
+        (hide-mode-line-mode 1))
+      (switch-to-buffer blank-buffer)))
+
   (defun kdz/tab-bar-pinned-tab-p (tab)
     "Check if TAB should be considered a pinned tab in the tab bar
 
