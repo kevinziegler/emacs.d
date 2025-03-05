@@ -425,11 +425,11 @@ actions that would update colors in emacs (such as changing themes)"
 
 (use-package spacious-padding
   :config
-  (setq spacious-padding-widths (list :internal-border-width 1
+  (setq spacious-padding-widths (list :internal-border-width 2
                                       :header-line-width     4
                                       :mode-line-width       6
-                                      :tab-width             4
-                                      :right-divider-width   7
+                                      :tab-width             0
+                                      :right-divider-width   2
                                       :scroll-bar-width      0))
   (spacious-padding-mode))
 
