@@ -57,26 +57,6 @@
   (setq mindstream-path (kdz/user-directory ".local/mindstream"))
   (mindstream-mode))
 
-(defun kdz/transient-context-menu-entry-to-transient (menu-entry)
-  (if (eq (car menu-entry) 'keymap)
-      (message "FIXME")
-    (let ((entry-type (nth 2 menu-entry))))))
-
-(defun kdz/transient-context-menu-at-point ()
-  "Generate a transient menu for the current context menu options"
-  (let ((context (context-menu-map)))
-    ;; TODO Make this work:
-    ;;      - Need to parse `menu-item' items from the context menu into actions
-    ;;        that can be executed here
-    ;;      - Need to generate context sub-menu structures into transient's
-    ;;        data structure
-    (transient-define-prefix context-menu-transient ()
-      "Context Menu"
-      [[(car context)
-        :pad-keys t
-        ]])))
-
-
 (use-package yasnippet-capf
   :after cape
   :config
@@ -132,12 +112,6 @@
                        :position new-position
                        :posfame-width other-width))
     (message "No OTHER-POSFRAME supplied!")))
-
-(use-package evil-expat
-  :ensure t
-  ;; optional, defer loading until 1 second of inactivity,
-  ;; hence not affecting emacs startup time
-  :defer 1)
 
 (use-package copyit)
 (use-package popwin)
@@ -224,10 +198,8 @@
 (use-package scopeline
   :config (add-hook 'prog-mode-hook #'scopeline-mode))
 
-(use-package org-timeblock)
 (use-package org-table-color)
 
-(use-package consult-gh)
 (use-package beacon
   :delight beacon-mode
   :custom
