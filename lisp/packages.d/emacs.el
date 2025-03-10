@@ -340,7 +340,18 @@
   (add-to-list 'display-buffer-alist
                '("\\*scratch\\*"
                  display-buffer-in-tab
-                 (tab-name . "Scratchpad"))))
+                 (tab-name . "Scratchpad")))
+
+  (add-to-list 'display-buffer-alist
+               '("\\*elfeed-search\\*"
+                 display-buffer-in-tab
+                 (dedicated .t)
+                 (tab-name . "Feeds")))
+
+  (add-to-list 'display-buffer-alist
+               '("\\*elfeed-log\\*"
+                 display-buffer-in-tab
+                 (tab-name . "System"))))
 
 (use-package xref
   :ensure nil

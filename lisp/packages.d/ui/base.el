@@ -87,12 +87,16 @@
 (use-package elfeed
   :config
   (setq elfeed-search-feed-face ":foreground #ffffff :weight bold"
-        elfeed-feeds (quote
-                      (("https://www.reddit.com/r/commandline.rss" reddit commandline)
-                       ("https://www.reddit.com/r/distrotube.rss" reddit distrotube)
-                       ("https://www.reddit.com/r/emacs.rss" reddit emacs)
-                       ("https://hackaday.com/blog/feed/" hackaday linux)
-                       ("https://news.ycombinator.com/rss" hackernews)))))
+        elfeed-feeds '(("https://planet.emacslife.com/atom.xml" devtools emacs)
+                       ("https://www.reddit.com/r/austin.rss" reddit austin)
+                       ("https://www.reddit.com/r/commandline.rss" reddit devtools)
+                       ("https://www.reddit.com/r/emacs.rss" reddit devtools emacs)
+                       ("https://www.reddit.com/r/orgmode.rss" reddit devtools emacs)
+                       ("https://www.reddit.com/r/zsh.rss" reddit devtools)
+                       ("https://hackaday.com/blog/feed/" tech news)
+                       ("https://news.ycombinator.com/rss" tech news)
+                       ("https://www.commitstrip.com/en/feed/" webcomic)
+                       ("https://xkcd.com/rss.xml" webcomic))))
 
 (use-package file-info
   :general

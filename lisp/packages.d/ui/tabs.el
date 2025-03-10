@@ -16,7 +16,8 @@
   (defvar kdz-tab-bar-tab-icons '(("Home"       . "nf-md-home")
                                   ("Packages"   . "nf-md-package")
                                   ("Scratchpad" . "nf-md-note")
-                                  ("System"     . "nf-md-cog"))
+                                  ("System"     . "nf-md-cog")
+                                  ("Feeds"      . "nf-md-rss"))
     "Tabs that should be kept together and in order in tab list")
 
   (defun kdz/tab-move-left () (tab-move -1))
