@@ -131,7 +131,9 @@ A pinned tab is one whose name corresponds to an entry in
   :config
   (setq tab-line-close-button-show nil
         tab-line-tab-name-truncated-max 40
-        tab-line-new-button-show nil)
+        tab-line-new-button-show nil
+        tab-line-tab-name-function #'kdz/tab-line-buffer-display-name
+        tab-line-tab-name-format-function #'kdz/tab-line-tab-name-format)
 
   (defvar kdz-tab-line-mode-icon-alist
     '((inferior-emacs-lisp-mode . "nf-custom-emacs")
@@ -191,9 +193,6 @@ A pinned tab is one whose name corresponds to an entry in
                      (propertize-tab-line-string (string-replace "%" "%%" name))
                      (propertize-tab-line-string " ]"))
              `(tab ,tab ,@(if selected-p '(selected t))))))
-
-  (setq tab-line-tab-name-function #'kdz/tab-line-buffer-display-name
-        tab-line-tab-name-format-function #'kdz/tab-line-tab-name-format)
 
   (defun kdz/window-left-dwim ()
     (interactive)
