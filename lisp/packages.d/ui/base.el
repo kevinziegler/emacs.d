@@ -403,6 +403,12 @@ actions that would update colors in emacs (such as changing themes)"
                                            :position (* -1 tab-bar-box-width))))
         (custom-theme-set-faces
          'catppuccin
+         `(lazy-highlight ((t :foreground ,(catppuccin-color 'base)
+                              :background ,(catppuccin-color 'flamingo))))
+         `(highlight ((t :foreground ,(catppuccin-color 'base)
+                         :background ,(catppuccin-color 'flamingo))))
+         `(completions-highlight ((t :background ,(catppuccin-color 'surface1))))
+         `(vertico-current ((t :background ,(catppuccin-color 'surface1))))
          `(minibuffer-prompt ((t :weight bold
                                  :foreground ,(catppuccin-color 'sapphire))))
          `(tab-bar ((t :box ,(list :line-width tab-bar-box-width
