@@ -5,8 +5,9 @@
 (use-package scala-ts-mode   :mode (("\\.scala\\'"    . scala-ts-mode)))
 (use-package jq-ts-mode      :mode (("\\.jq\\'"       . jq-ts-mode)))
 (use-package kotlin-ts-mode  :mode (("\\.kt\\'"       . kotlin-ts-mode)))
-(use-package hcl-mode       )
-(use-package terraform-mode )
+(use-package groovy-mode)
+(use-package hcl-mode)
+(use-package terraform-mode)
 
 (use-package lua-mode
   :mode (("\\.lua\\'" . lua-mode))
