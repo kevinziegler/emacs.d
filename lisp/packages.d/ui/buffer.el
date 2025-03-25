@@ -95,4 +95,9 @@
 (use-package uuidgen)
 ;; (use-package fancy-urls-menu)
 
+(use-package nocomments-mode
+  :general
+  (kdz/leader-toggle-def "C" '("Show/Hide comments" . nocomments-mode)))
+
+(use-package sticky-scroll-mode)
 (provide 'packages.d/ui/buffer)
