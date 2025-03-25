@@ -159,6 +159,7 @@
   :ensure nil
   :general
   (kdz/leader-open-def "f" '("New Frame" . make-frame))
+  (kdz/leader-toggle-def "f" '("Fullscreen" . toggle-frame-fullscreen))
   :config
   (let ((default-font-string  "Berkeley Mono 12"))
     (when (find-font (font-spec :name default-font-string))
