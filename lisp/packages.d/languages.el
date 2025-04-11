@@ -87,4 +87,6 @@
       (call-interactively 'pyenv-mode-set))
     (call-interactively 'run-python)))
 
+(use-package graphql-mode :mode ("\\.graphql\\'" "\\.gql\\'"))
+
 (provide 'packages.d/languages)
