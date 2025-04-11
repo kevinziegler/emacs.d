@@ -193,7 +193,6 @@
 (use-package auto-rename-tag)
 
 (use-package tabgo)
-(use-package nocomments-mode)
 
 (use-package scopeline
   :config (add-hook 'prog-mode-hook #'scopeline-mode))
@@ -218,3 +217,29 @@
 
 (use-package citre)
 (use-package enlight)
+
+(use-package grpclient
+  :if (executable-find "grpcurl")
+  :ensure (grpclient :host github :repo "Prikaz98/grpclient.el")
+  :init
+  (add-to-list 'auto-mode-alist '("\\.grpc\\'" . grpclient-mode)))
+
+(use-package jira
+  :config
+  ;; TODO Fix these variables; move to `local' config
+  (setq jira-username "johndoe@acme.com") ;; Jira username (usually, an email)
+  (setq jira-base-url "https://acme.atlassian.net") ;; Jira instance URL
+  ;; API token for Jira
+  ;; See https://support.atlassian.com/atlassian-account/docs/manage-api-tokens-for-your-atlassian-account/
+  (setq jira-token "foobar123123")
+  (setq jira-api-version 3) ;; Version 2 is also allowed
+  ;; (Optional) API token for JIRA TEMPO plugin
+  ;; See https://apidocs.tempo.io/
+  (setq jira-tempo-token "foobar123123"))
+
+(use-package thankful-eyes-theme)
+(use-package rg-themes)
+(use-package rotate)
+(use-package auto-side-windows)
+(use-package popper)
+(use-package savefold)
