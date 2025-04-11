@@ -48,24 +48,24 @@
     (tab-bar-select-tab-by-name "Home")
     (tab-bar-close-tab-by-name "*scratch*"))
 
-  (setq tab-bar-auto-width nil
-        tab-bar-close-button-show nil
-        tab-bar-tab-hints t
-        tab-bar-tab-name-format-function #'kdz/tab-bar-tab-name-format
-        tab-bar-new-tab-to 'rightmost
-        tab-bar-format '(kdz/tab-bar-format-workspaces
-                         tab-bar-format-align-right
-                         kdz/tab-bar-format-pinned-tabs)))
+  (setopt tab-bar-auto-width nil
+          tab-bar-close-button-show nil
+          tab-bar-tab-hints t
+          tab-bar-tab-name-format-function #'kdz/tab-bar-tab-name-format
+          tab-bar-new-tab-to 'rightmost
+          tab-bar-format '(kdz/tab-bar-format-workspaces
+                           tab-bar-format-align-right
+                           kdz/tab-bar-format-pinned-tabs)))
 
 (use-package tab-line
   :ensure nil
   :after (custom nerd-icons)
   :config
-  (setq tab-line-close-button-show nil
-        tab-line-tab-name-truncated-max 40
-        tab-line-new-button-show nil
-        tab-line-tab-name-function #'kdz/tab-line-buffer-display-name
-        tab-line-tab-name-format-function #'kdz/tab-line-tab-name-format)
+  (setopt tab-line-close-button-show nil
+          tab-line-tab-name-truncated-max 40
+          tab-line-new-button-show nil
+          tab-line-tab-name-function #'kdz/tab-line-buffer-display-name
+          tab-line-tab-name-format-function #'kdz/tab-line-tab-name-format)
 
   (defvar kdz-tab-line-mode-icon-alist
     '((inferior-emacs-lisp-mode . "nf-custom-emacs")
