@@ -457,6 +457,7 @@ appropriate.  In tables, insert a new row or end the table."
   :ensure nil
   :config
   (setq org-plantuml-exec-mode 'executable)
+  (setopt org-plantuml-exec-mode 'plantuml)
   (defun kdz/org-babel-plantuml-format-var (var-value)
     (cond ((numberp var-value) (number-to-string var-value))
           ((booleanp var-value) (if var-value "true" "false"))
