@@ -61,11 +61,7 @@
   :ensure nil
   :after (custom nerd-icons)
   :config
-  (setopt tab-line-close-button-show nil
-          tab-line-tab-name-truncated-max 40
-          tab-line-new-button-show nil
-          tab-line-tab-name-function #'kdz/tab-line-buffer-display-name
-          tab-line-tab-name-format-function #'kdz/tab-line-tab-name-format)
+  
 
   (defvar kdz-tab-line-mode-icon-alist
     '((inferior-emacs-lisp-mode . "nf-custom-emacs")
@@ -141,6 +137,12 @@
   (defun kdz/ensure-bottom-tab-line (&rest args)
     (when (and (eq 'bottom (window-parameter nil 'window-side))
                (not tab-line-mode))
-      (tab-line-mode 1))))
+      (tab-line-mode 1)))
+
+  (setopt tab-line-close-button-show nil
+          tab-line-tab-name-truncated-max 40
+          tab-line-new-button-show nil
+          tab-line-tab-name-function #'kdz/tab-line-buffer-display-name
+          tab-line-tab-name-format-function #'kdz/tab-line-tab-name-format))
 
 (provide 'packages.d/ui/tabs)
