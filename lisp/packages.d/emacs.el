@@ -272,17 +272,12 @@
   :general
   (kdz/leader-window-def "=" '("Balance Windows" . balance-windows))
   (kdz/leader-buffer-def
-    "B" '("Switch to Buffer (Global)"               . switch-to-buffer)
-    "c" '("Switch to Buffer (Force current window)" . kdz/switch-to-buffer-current-window)
-    "n" '("Next Buffer"                             . next-buffer)
-    "p" '("Previous Buffer"                         . previous-buffer))
-  :config
-  (defun kdz/switch-to-buffer-current-window ()
-    (interactive)
-    (let ((switch-to-buffer-obey-display-actions nil))
-      (switch-to-buffer)))
-
+    "B" '("Switch to Buffer (Global)" . switch-to-buffer)
+    "n" '("Next Buffer"               . next-buffer)
+    "p" '("Previous Buffer"           . previous-buffer))
+  
   (setq switch-to-buffer-obey-display-actions t)
+
   (add-to-list 'display-buffer-alist
                `(,(lambda (buffer _)
                     (with-current-buffer buffer
