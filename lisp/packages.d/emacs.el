@@ -276,7 +276,12 @@
     "n" '("Next Buffer"               . next-buffer)
     "p" '("Previous Buffer"           . previous-buffer))
   
-  (setq switch-to-buffer-obey-display-actions t)
+  :config
+  (setopt switch-to-buffer-obey-display-actions t)
+
+  (defmacro kdz/display-rule-buffer-to-tab (pattern tab-name)
+    `(add-to-list 'display-buffer-alist
+                  '(,pattern display-buffer-in-tab (tab-name . ,tab-name))))
 
   (add-to-list 'display-buffer-alist
                `(,(lambda (buffer _)
@@ -298,56 +303,15 @@
                  (side . right)
                  (dedicated . t)))
 
-  (add-to-list 'display-buffer-alist
-               '("\\*Ibuffer\\*"
-                 display-buffer-in-tab
-                 (tab-name . "Buffers")))
-
-  (add-to-list 'display-buffer-alist
-               '("\\*Messages\\*"
-                 display-buffer-in-tab
-                 (tab-name . "System")))
-
-  (add-to-list 'display-buffer-alist
-               '("\\*Warnings\\*"
-                 display-buffer-in-tab
-                 (tab-name . "System")))
-
-  (add-to-list 'display-buffer-alist
-               '("\\*lsp-install: .+\\*"
-                 display-buffer-in-tab
-                 (tab-name . "System")))
-
-  (add-to-list 'display-buffer-alist
-               '("\\*elpaca-log\\*"
-                 display-buffer-in-tab
-                 (tab-name . "Packages")))
-
-  (add-to-list 'display-buffer-alist
-               '("\\*Packages\\*"
-                 display-buffer-in-tab
-                 (tab-name . "Packages")))
-
-  (add-to-list 'display-buffer-alist
-               '("\\*dashboard\\*"
-                 display-buffer-in-tab
-                 (tab-name . "Home")))
-
-  (add-to-list 'display-buffer-alist
-               '("\\*scratch\\*"
-                 display-buffer-in-tab
-                 (tab-name . "Scratchpad")))
-
-  (add-to-list 'display-buffer-alist
-               '("\\*elfeed-search\\*"
-                 display-buffer-in-tab
-                 (dedicated .t)
-                 (tab-name . "Feeds")))
-
-  (add-to-list 'display-buffer-alist
-               '("\\*elfeed-log\\*"
-                 display-buffer-in-tab
-                 (tab-name . "System"))))
+  (kdz/display-rule-buffer-to-tab "\\*dashboard\\*"       "Home")
+  (kdz/display-rule-buffer-to-tab "\\*scratch\\*"         "Scratchpad")
+  (kdz/display-rule-buffer-to-tab "\\*Ibuffer\\*"         "Buffers")
+  (kdz/display-rule-buffer-to-tab "\\*Messages\\*"        "System")
+  (kdz/display-rule-buffer-to-tab "\\*Warnings\\*"        "System")
+  (kdz/display-rule-buffer-to-tab "\\*elfeed-log\\*"      "System")
+  (kdz/display-rule-buffer-to-tab "\\*lsp-install: .+\\*" "System")
+  (kdz/display-rule-buffer-to-tab "\\*Packages\\*"        "Packages")
+  (kdz/display-rule-buffer-to-tab "\\*elpaca-log\\*"      "Packages"))
 
 (use-package xref
   :ensure nil
