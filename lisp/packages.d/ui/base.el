@@ -467,4 +467,30 @@ actions that would update colors in emacs (such as changing themes)"
 
 (use-package colorful-mode)
 
+(use-package stimmung-themes
+  :config
+  ;; :hook ((elpaca-after-init . (lambda () (load-theme 'stimmnung-themes-light :no-confirm)))
+  ;;        (kdz-load-theme . kdz/stimmung-theme-custom-faces))
+  (defun kdz/stimmung-theme-custom-faces ()
+    (when (custom-theme-enabled-p 'stimmung-themes-light)
+      (kdz/custom-theme-git-gutter-faces 'stimmung-themes-light
+                                         "systemGreenColor"
+                                         "systemRedColor"
+                                         "systemYellowColor")
+      
+      (kdz/tab-bar-set-theme-faces 'stimmung-themes-light
+                                   "Black"
+                                   "Black"
+                                   "White"
+                                   10))
+    (when (custom-theme-enabled-p 'stimmung-themes-dark)
+      (kdz/custom-theme-git-gutter-faces 'stimmung-themes-dark
+                                         "systemGreenColor"
+                                         "systemRedColor"
+                                         "systemYellowColor")
+      (kdz/tab-bar-set-theme-faces 'stimmung-themes-dark
+                                   "White"
+                                   "White"
+                                   "Black"
+                                   10))))
 (provide 'packages.d/ui/base)
