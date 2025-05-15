@@ -493,4 +493,20 @@ actions that would update colors in emacs (such as changing themes)"
                                    "White"
                                    "Black"
                                    10))))
+
+(use-package modus-themes
+  :hook ((elpaca-after-init . (lambda () (load-theme 'modus-operandi-tritanopia :no-confirm)))
+         (kdz-load-theme . kdz/modus-themes-custom-faces))
+  :config
+  (defun kdz/modus-themes-custom-faces ()
+    (when (custom-theme-enabled-p 'modus-operandi-tritanopia)
+      (kdz/custom-theme-git-gutter-faces 'modus-operandi-tritanopia
+                                         "#1782cc"
+                                         "#d84a4f"
+                                         "#9f6ab0")
+      (kdz/tab-bar-set-theme-faces 'modus-operandi-tritanopia
+                                   "Black"
+                                   "Black"
+                                   "White"
+                                   10))))
 (provide 'packages.d/ui/base)
