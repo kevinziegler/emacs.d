@@ -404,7 +404,8 @@ actions that would update colors in emacs (such as changing themes)"
 
 (use-package catppuccin-theme
   :after custom
-  :hook ((elpaca-after-init . (lambda () (load-theme 'catppuccin :no-confirm)))
+  :hook (
+         ;;(elpaca-after-init . (lambda () (load-theme 'catppuccin :no-confirm)))
          (kdz-load-theme . kdz/catppuccin-theme-custom-faces))
   :config
   (setopt catppuccin-flavor 'mocha)
