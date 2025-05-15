@@ -110,7 +110,20 @@
 
 (use-package git-gutter-fringe
   :config
-  (global-git-gutter-mode 1))
+  (global-git-gutter-mode 1)
+
+  (defun kdz/custom-theme-git-gutter-faces
+      (theme added-fg deleted-fg modified-fg &optional background)
+    (let ((custom--inhibit-theme-enable nil)
+          (bg-spec (when background (list :background background))))
+      (custom-theme-set-faces
+       theme
+       `(git-gutter:added       ((t :foreground ,added-fg    ,@bg-spec)))
+       `(git-gutter:deleted     ((t :foreground ,deleted-fg  ,@bg-spec)))
+       `(git-gutter:modified    ((t :foreground ,modified-fg ,@bg-spec)))
+       `(git-gutter-fr:added    ((t :foreground ,added-fg    ,@bg-spec)))
+       `(git-gutter-fr:deleted  ((t :foreground ,deleted-fg  ,@bg-spec)))
+       `(git-gutter-fr:modified ((t :foreground ,modified-fg ,@bg-spec)))))))
 
 (use-package hide-mode-line
   :hook ((reb-mode . hide-mode-line-mode)))
