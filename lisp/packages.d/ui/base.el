@@ -412,31 +412,21 @@ actions that would update colors in emacs (such as changing themes)"
   (defun kdz/catppuccin-theme-custom-faces ()
     (when (custom-theme-enabled-p 'catppuccin)
       (let* ((custom--inhibit-theme-enable nil)
-             (tab-bar-box-style (if (version<= "30" emacs-version)
-                                    'flat-button
-                                  'flat))
-             (tab-bar-box-width 7)
-             (tab-bar-underline-opts (list :color 'foreground-color
-                                           :position (* -1 tab-bar-box-width))))
+             (highlight-fg (catppuccin-color 'base))
+             (highlight-bg (catppuccin-color 'flamingo))
+             (selection-bg (catppuccin-color 'surface1)))
+        (kdz/tab-bar-theme-set-faces 'catppuccin
+                                     (face-foreground 'tab-bar-tab nil t)
+                                     (catppuccin-color 'sapphire)
+                                     (face-background 'tab-bar nil t)
+                                     7)
         (custom-theme-set-faces
          'catppuccin
-         `(lazy-highlight ((t :foreground ,(catppuccin-color 'base)
-                              :background ,(catppuccin-color 'flamingo))))
-         `(highlight ((t :foreground ,(catppuccin-color 'base)
-                         :background ,(catppuccin-color 'flamingo))))
-         `(completions-highlight ((t :background ,(catppuccin-color 'surface1))))
-         `(vertico-current ((t :background ,(catppuccin-color 'surface1))))
-         `(minibuffer-prompt ((t :weight bold
-                                 :foreground ,(catppuccin-color 'sapphire))))
-         `(tab-bar ((t :box ,(list :line-width tab-bar-box-width
-                                   :color (face-background 'tab-bar nil t)
-                                   :style tab-bar-box-style)
-                       :underline ,tab-bar-underline-opts)))
-         `(tab-bar-tab-inactive (( t :underline ,(list :color (face-foreground 'default)
-                                                       :position (* -1 tab-bar-box-width)))))
-         `(tab-bar-tab ((t :foreground ,(catppuccin-color 'sapphire)
-                           :weight bold)))
-         `(tab-line-tab-special ((t :slant italic :weight bold))))))))
+         `(lazy-highlight ((t :foreground ,highlight-fg :background ,highlight-bg)))
+         `(highlight ((t :foreground ,highlight-fg :background ,highlight-bg)))
+         `(completions-highlight ((t :background ,selection-bg)))
+         `(vertico-current ((t :background ,selection-bg)))
+         `(minibuffer-prompt ((t :weight bold :foreground ,(catppuccin-color 'sapphire)))))))))
 
 (use-package kaolin-themes
   :config
