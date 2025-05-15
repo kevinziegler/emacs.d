@@ -15,6 +15,31 @@
   :config
   (require 'lib/pinned-tabs)
 
+  (defun kdz/tab-bar-set-theme-faces (theme
+                                      underline-color
+                                      selected-color
+                                      box-color
+                                      box-width)
+    "Set tab-bar faces for THEME to ensure theme-agnostic attributes.
+
+This includes setting the box width & underline attributes that aren't normally
+handled by theme styling."
+    (let ((custom--inhibit-theme-enable nil)
+          (tab-bar-underline-opts (list :color underline-color
+                                        :position (* -1 box-width))))
+      (custom-theme-set-faces
+       theme
+       `(tab-bar              ((t :box ,(list :line-width box-width
+                                              :color      box-color
+                                              :style      'flat-button)
+                                  :underline ,tab-bar-underline-opts)))
+       `(tab-bar-tab-inactive ((t :underline  ,tab-bar-underline-opts)))
+       `(tab-bar-tab          ((t :foreground ,selected-color :weight bold)))
+       '(tab-line             ((t :inherit tab-bar)))
+       '(tab-line-tab         ((t :inherit tab-bar-tab)))
+       '(tab-line-tab-current ((t :inherit tab-bar-tab)))
+       '(tab-line-tab-special ((t :slant italic :weight bold))))))
+
   (defun kdz/tab-move-left () (interactive) (tab-move -1))
 
   (defvar kdz-blank-buffer-text  "Nothing to see here."
