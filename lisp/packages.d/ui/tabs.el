@@ -10,8 +10,7 @@
     "L"   '("Move Tab Right"         . tab-move)
     "d"   '("Close Workspace"        . tab-bar-close-tab)
     "n"   '("Create Named Workspace" . kdz/create-named-tab))
-  :hook ((elpaca-after-init   . kdz/tab-bar-initialize-tab-state)
-         (window-state-change . kdz/ensure-bottom-tab-line))
+  :hook ((elpaca-after-init   . kdz/tab-bar-initialize-tab-state))
   :config
   (require 'lib/pinned-tabs)
 
@@ -85,6 +84,7 @@ handled by theme styling."
 (use-package tab-line
   :ensure nil
   :after (custom nerd-icons)
+  :hook ((window-state-change . kdz/ensure-bottom-tab-line))
   :config
   
 
