@@ -7,6 +7,9 @@
 	 (lsp-mode . lsp-enable-which-key-integration))
   :commands (lsp lsp-deferred))
 
+(use-package lsp-headerline
+  :config
+  (setopt lsp-headerline-arrow "❱"))
 (use-package lsp-origami
   :after (lsp-mode origiami)
   :hook (lsp-after-open . #'lsp-origami-try-enable))
