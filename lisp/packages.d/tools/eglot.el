@@ -1,5 +1,6 @@
 (use-package eglot
   :ensure nil
+  :hook (eglot-mode . sideline-mode)
   :general
   (kdz/leader-toggle-def "h" '("Inlay hints" . eglot-inlay-hints-mode))
   (kdz/leader-code-def "a" '("Code Actions" . eglot-code-actions))
@@ -16,6 +17,9 @@
   :init
   (setq sideline-backends-right '(sideline-flycheck)))
 
+(use-package sideline-eglot
+  :init
+  (add-to-list 'sideline-backends-right 'sideline-eglot))
 ;; (use-package projection)
 ;; (use-package projection-dape)
 ;; (use-package dape
