@@ -63,6 +63,7 @@
 
 (use-package logview)
 
+(use-package transient)
 (use-package magit
   :general
   (kdz/leader-git-def
