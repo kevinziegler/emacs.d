@@ -243,3 +243,8 @@
 (use-package auto-side-windows)
 (use-package popper)
 (use-package savefold)
+(use-package impostman) ;; https://github.com/flashcode/impostman
+(use-package org-review) ;;https://github.com/brabalan/org-review
+
+
+(use-package mistty)
