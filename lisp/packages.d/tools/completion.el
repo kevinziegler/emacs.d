@@ -23,6 +23,7 @@
   (add-to-list 'completion-styles 'hotfuzz))
 
 (use-package consult
+  :after nerd-icons
   :general
   (kdz/leader-search-def
     "*" '("Search for selection"              . kdz/consult-ripgrep-selected)
@@ -32,7 +33,31 @@
     "s" '("Thing-at-point (DWIM)"             . tap/consult-ripgrep-dwim)
     "S" '("Thing-at-point (Select)"           . tap/consult-ripgrep))
   :config
-  (setq consult-narrow-key "<")
+
+  (defface consult-async-running-nf
+    '((t :inherit consult-async-running
+         :family "Symbols Nerd Font Mono"))
+    "Consult async indicator for running state using nerd-icons")
+
+  (defface consult-async-finished-nf
+    '((t :inherit consult-async-finished
+         :family "Symbols Nerd Font Mono"))
+    "Consult async indicator for finished state using nerd-icons")
+
+  (defface consult-async-failed-nf
+    '((t :inherit consult-async-failed
+         :family "Symbols Nerd Font Mono"))
+    "Consult async indicator for failed state using nerd-icons")
+
+  (defun kdz/nerd-icon-as-char (icon-name)
+    (string-to-char (nerd-icons-mdicon icon-name)))
+
+  (setopt consult-narrow-key "<"
+          consult-async-indicator
+          `((running  ,(kdz/nerd-icon-as-char "nf-md-progress_clock") consult-async-running-nf)
+            (finished ,(kdz/nerd-icon-as-char "nf-md-progress_check") consult-async-finished-nf)
+            (failed   ,(kdz/nerd-icon-as-char "nf-md-progress_alert") consult-async-failed-nf)
+            (killed   ,(kdz/nerd-icon-as-char "nf-md-progress_close") consult-async-failed-nf)))
 
   (defun kdz/consult-ripgrep-selected (start end)
     (interactive "r")
