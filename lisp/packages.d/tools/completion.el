@@ -10,8 +10,8 @@
 (use-package corfu
   :custom
   (corfu-auto t)
-  :config
-  (global-corfu-mode))
+  :hook ((after-init . global-corfu-mode)
+         (global-corfu-mode . corfu-popupinfo-mode)))
 
 (use-package nerd-icons-corfu
   :after corfu
