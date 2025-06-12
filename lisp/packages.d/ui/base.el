@@ -52,7 +52,8 @@
                   helpful-mode
                   markdown-mode
                   org-mode
-                  special-mode))
+                  special-mode
+                  xref--xref-buffer-mode))
     (add-to-list 'global-display-fill-column-indicator-modes `(not ,mode))))
 
 (use-package display-line-numbers
@@ -81,7 +82,8 @@
                   org-mode-hook
                   term-mode-hook
                   treemacs-mode-hook
-                  eshell-mode-hook))
+                  eshell-mode-hook
+                  xref--xref-buffer-mode-hook))
     (add-hook mode (lambda () (display-line-numbers-mode -1)))))
 
 (use-package elfeed
