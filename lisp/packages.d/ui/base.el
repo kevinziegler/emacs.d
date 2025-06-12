@@ -500,16 +500,22 @@ actions that would update colors in emacs (such as changing themes)"
 (use-package modus-themes
   :hook ((elpaca-after-init . (lambda () (load-theme 'modus-operandi-tritanopia :no-confirm)))
          (kdz-load-theme . kdz/modus-themes-custom-faces))
+  :init
+  (setq modus-themes-bold-constructs t
+        modus-themes-italic-constructs t)
   :config
+
   (defun kdz/modus-themes-custom-faces ()
     (when (custom-theme-enabled-p 'modus-operandi-tritanopia)
-      (kdz/custom-theme-git-gutter-faces 'modus-operandi-tritanopia
-                                         "#1782cc"
-                                         "#d84a4f"
-                                         "#9f6ab0")
-      (kdz/tab-bar-set-theme-faces 'modus-operandi-tritanopia
-                                   "Black"
-                                   "Black"
-                                   "White"
-                                   10))))
+      (kdz/custom-theme-git-gutter-faces
+       'modus-operandi-tritanopia
+       (car (alist-get 'bg-added-fringe modus-operandi-tritanopia-palette))
+       (car (alist-get 'bg-removed-fringe modus-operandi-tritanopia-palette))
+       (car (alist-get 'bg-changed-fringe modus-operandi-tritanopia-palette)))
+      (kdz/tab-bar-set-theme-faces
+       'modus-operandi-tritanopia
+       (car (alist-get 'fg-main modus-operandi-tritanopia-palette))
+       (car (alist-get 'fg-main modus-operandi-tritanopia-palette))
+       (car (alist-get 'bg-main modus-operandi-tritanopia-palette))
+       10))))
 (provide 'packages.d/ui/base)
