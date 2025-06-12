@@ -13,6 +13,7 @@
 
 (require 'packages.d/tools/completion)
 (require 'packages.d/tools/lsp)
+(require 'packages.d/tools/llm)
 
 (require 'packages.d/ui/base)
 (require 'packages.d/ui/tabs)
