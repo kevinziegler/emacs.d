@@ -2,14 +2,13 @@
   :init
   (setq read-process-output-max (* 1024 1024)
         lsp-headerline-breadcrumb-icons-enable nil
+        lsp-headerline-arrow "❱"
         lsp-session-file (kdz/user-directory ".local/lsp-session-v1"))
   :hook ((python-ts-mode . lsp-deferred)
-	 (lsp-mode . lsp-enable-which-key-integration))
+         (lsp-mode . lsp-enable-which-key-integration)
+         (lsp-mode . lsp-headerline-breadcrumb-mode))
   :commands (lsp lsp-deferred))
 
-(use-package lsp-headerline
-  :config
-  (setopt lsp-headerline-arrow "❱"))
 (use-package lsp-origami
   :after (lsp-mode origiami)
   :hook (lsp-after-open . #'lsp-origami-try-enable))
