@@ -199,30 +199,8 @@
 
 (use-package org-table-color)
 
-(use-package beacon
-  :delight beacon-mode
-  :custom
-  (beacon-color "#33DB12")
-  (beacon-blink-duration 0.5)
-  (beacon-size 60)
-  (beacon-blink-when-point-moves-vertically t)
-  (beacon-blink-when-window-changes t)
-  (beacon-blink-when-focused t)
-  :config
-  (beacon-mode)
-  ;; blink after switching windows.
-  (if window-selection-change-functions
-      (push (lambda (_) (beacon-blink-automated)) 'window-selection-change-functions)
-    (setq window-selection-change-functions '((lambda (_) (beacon-blink-automated))))))
-
 (use-package citre)
-(use-package enlight)
-
-(use-package grpclient
-  :if (executable-find "grpcurl")
-  :ensure (grpclient :host github :repo "Prikaz98/grpclient.el")
-  :init
-  (add-to-list 'auto-mode-alist '("\\.grpc\\'" . grpclient-mode)))
+(use-package enlight) ;; Potential alternative dashboard?
 
 (use-package jira
   :config
@@ -245,6 +223,3 @@
 (use-package savefold)
 (use-package impostman) ;; https://github.com/flashcode/impostman
 (use-package org-review) ;;https://github.com/brabalan/org-review
-
-
-(use-package mistty)

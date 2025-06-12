@@ -89,4 +89,13 @@
 
 (use-package graphql-mode :mode ("\\.graphql\\'" "\\.gql\\'"))
 
+(use-package swift-mode)
+(use-package just-mode)
+
+(use-package grpclient
+  :if (executable-find "grpcurl")
+  :ensure (grpclient :host github :repo "Prikaz98/grpclient.el")
+  :init
+  (add-to-list 'auto-mode-alist '("\\.grpc\\'" . grpclient-mode)))
+
 (provide 'packages.d/languages)
