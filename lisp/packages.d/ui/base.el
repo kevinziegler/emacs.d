@@ -383,6 +383,7 @@ actions that would update colors in emacs (such as changing themes)"
         treemacs-width 45
         treemacs-recenter-after-file-follow 'on-distance
         treemacs-project-follow-cleanup t)
+  (treemacs-git-mode 0)
   (treemacs-hide-gitignored-files-mode 1))
 
 (use-package treemacs-nerd-icons
