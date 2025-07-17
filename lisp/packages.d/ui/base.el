@@ -507,6 +507,13 @@ actions that would update colors in emacs (such as changing themes)"
 
   (defun kdz/modus-themes-custom-faces ()
     (when (custom-theme-enabled-p 'modus-operandi-tritanopia)
+      (let ((custom--inhibit-theme-enable nil)
+            (flyover-marker-fg (car (alist-get 'bg-cyan-intense
+                                               modus-operandi-tritanopia))))
+        (custom-theme-set-faces
+         'modus-operandi-tritanopia
+         `(flyover-maker ((t :foreground ,flyover-marker-fg)))
+         `(child-frame-border (( t :foreground 'Black :background 'Black)))))
       (kdz/custom-theme-git-gutter-faces
        'modus-operandi-tritanopia
        (car (alist-get 'bg-added-fringe modus-operandi-tritanopia-palette))
@@ -518,4 +525,5 @@ actions that would update colors in emacs (such as changing themes)"
        (car (alist-get 'fg-main modus-operandi-tritanopia-palette))
        (car (alist-get 'bg-main modus-operandi-tritanopia-palette))
        10))))
+
 (provide 'packages.d/ui/base)
