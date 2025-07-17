@@ -1,6 +1,7 @@
 #+bibliography: project-todo.org.bib
 
 * Functionality [3/8]
+- https://dawranliou.com/blog/xref-with-eglot-and-project/
 - [X] LSP Mode
 - [ ] "Launch REPL"
   + [ ] Open REPL for current or selected language
@@ -53,6 +54,12 @@ Based on [[https://github.com/mrunhap/.emacs.d/blob/master/lisp/init-text.el][th
 - [X] Treat ~backspace~ as "Up-one-directory" when completing file paths
 - [ ] Seed query for consult-ripgrep if there's a visual selection in the current buffer
 
+** Org Mode
+- Bind ~g-o~ (in normal mode) to open links in an org file (C-c C-o by default)
+
+** System Fixes 
+- Fix mouse action on tab-bar to select correct tab, or make mouse action a no-op
+
 ** Smart Comment Indenting
 - https://tony-zorman.com/posts/join-lines-comments.html
 
@@ -64,7 +71,7 @@ When creating a side window, determine if the frame should be resized based on:
 
 Similarly, deduct the size of the window from the frame when closing the side window
 
-* Packages [7/33]
+* Packages [8/34]
 - [ ] https://github.com/agzam/browser-hist.el
 - [ ] https://github.com/rnadler/password-menu
 - [ ] https://depp.brause.cc/shackle/
@@ -81,8 +88,10 @@ Similarly, deduct the size of the window from the frame when closing the side wi
 - [ ] https://github.com/minad/affe
 - [ ] https://github.com/purcell/page-break-lines
 - [ ] https://github.com/roman/evil-visual-mark-mode
-- [ ] https://github.com/skeeto/elfeed
+- [X] https://github.com/skeeto/elfeed
 - [ ] https://github.com/svaante/dape
+
+- [ ] https://www.reddit.com/r/emacs/comments/1iu04zg/released_floatnarrowindirect_provides_floating/
 
 - [X] https://github.com/sshaw/git-link
 - [ ] https://github.com/isamert/lab.el
@@ -109,8 +118,26 @@ Similarly, deduct the size of the window from the frame when closing the side wi
 - [ ] https://github.com/unhammer/org-rich-yank
 
 
+** AI Tools
+- [ ] https://github.com/mzacho/claudia
+- [ ] https://github.com/andreasjansson/greger.el
+- [ ] https://github.com/milanglacier/minuet-ai.el
+- [ ] https://github.com/cpoile/claudemacs
+- [ ] https://github.com/chep/copilot-chat.el
+- [ ] https://github.com/karthink/gptel
 
 * Tab Appearance
 - https://andreyor.st/posts/2020-05-10-making-emacs-tabs-look-like-in-atom/
 - https://www.youtube.com/watch?v=es5AmF807Oo
 - https://github.com/benleis1/emacs-init/blob/main/init.el
+
+* Split Minibuffer Posframe(s)
+- One posframe showing just the first line (prompt and input)
+- A second posframe showing the list of results
+
+** TODO Show minibuffer content in indirect buffer
+- Figure out how to use indirect buffers and capture minibuffer contents
+- Narrow content shown in indirect buffer to single (first) line of full minibuffer content
+
+** TODO Make posframes positioned relative to each other
+** TODO Figure out how to hide 'real' minibuffer window (While also keeping it focused?)
