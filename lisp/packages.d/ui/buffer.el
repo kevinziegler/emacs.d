@@ -100,4 +100,8 @@
   (kdz/leader-toggle-def "C" '("Show/Hide comments" . nocomments-mode)))
 
 (use-package sticky-scroll-mode)
+
+(use-package flyover
+  :ensure (flyover :host github :repo "konrad1977/flyover" :branch "main"))
+
 (provide 'packages.d/ui/buffer)
