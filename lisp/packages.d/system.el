@@ -84,7 +84,19 @@
 
 (use-package magit-delta
   :if (executable-find "delta")
-  :hook ((magit-mode . magit-delta-mode)))
+  :hook ((magit-mode . magit-delta-mode))
+  :config
+  (defconst kdz-magit-delta-delta-args-default magit-delta-delta-args)
+  (defconst kdz-magit-delta-delta-extra-args
+    '("--features='side-by-side line-numbers decorations'"
+      "--side-by-side"))
+
+  (defun kdz/magit-delta-toggle-appearance ()
+    (interactive)
+    (if (eq kdz-magit-delta-delta-args-default magit-delta-delta-args)
+        (setopt magit-delta-delta-args (append magit-delta-delta-args
+                                               kdz-magit-delta-delta-extra-args))
+      (setopt magit-delta-delta-args kdz-magit-delta-delta-args-default))))
 
 (use-package magit-filenotify
   :hook (after-save . magit-after-save-refresh-status))
