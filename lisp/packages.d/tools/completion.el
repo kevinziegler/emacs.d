@@ -10,7 +10,7 @@
 (use-package corfu
   :custom
   (corfu-auto t)
-  :hook ((after-init . global-corfu-mode)
+  :hook ((elpaca-after-init . global-corfu-mode)
          (global-corfu-mode . corfu-popupinfo-mode)))
 
 (use-package nerd-icons-corfu
