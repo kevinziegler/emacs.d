@@ -505,16 +505,15 @@ actions that would update colors in emacs (such as changing themes)"
   (setq modus-themes-bold-constructs t
         modus-themes-italic-constructs t)
   :config
-
   (defun kdz/modus-themes-custom-faces ()
     (when (custom-theme-enabled-p 'modus-operandi-tritanopia)
       (let ((custom--inhibit-theme-enable nil)
             (flyover-marker-fg (car (alist-get 'bg-cyan-intense
-                                               modus-operandi-tritanopia))))
+                                               modus-operandi-tritanopia-palette))))
         (custom-theme-set-faces
          'modus-operandi-tritanopia
          `(flyover-maker ((t :foreground ,flyover-marker-fg)))
-         `(child-frame-border (( t :foreground 'Black :background 'Black)))))
+         `(child-frame-border (( t :foreground "Black" :background "Black")))))
       (kdz/custom-theme-git-gutter-faces
        'modus-operandi-tritanopia
        (car (alist-get 'bg-added-fringe modus-operandi-tritanopia-palette))
