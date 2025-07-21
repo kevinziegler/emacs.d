@@ -70,7 +70,7 @@ handled by theme styling."
 
   (defun kdz/tab-bar-initialize-tab-state ()
     (tab-bar-select-tab-by-name "Home")
-    (tab-bar-close-tab-by-name "*scratch*"))
+    (tab-bar-close-tab-by-name "*default*"))
 
   (setopt tab-bar-auto-width nil
           tab-bar-close-button-show nil
