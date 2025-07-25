@@ -84,8 +84,6 @@
 (use-package duplexer)
 (use-package jwt)
 
-(use-package scopeline :hook (prog-mode . scopeline-mode))
-
 (defun kdz/get-posframe-for-buffer (buffer-or-name)
   "Get the posframe for BUFFER-OR-STRING, if it exists",
   (when-let ((buffer (get-buffer buffer-or-name)))
@@ -193,9 +191,6 @@
 (use-package auto-rename-tag)
 
 (use-package tabgo)
-
-(use-package scopeline
-  :config (add-hook 'prog-mode-hook #'scopeline-mode))
 
 (use-package org-table-color)
 

@@ -104,4 +104,11 @@
 (use-package flyover
   :ensure (flyover :host github :repo "konrad1977/flyover" :branch "main"))
 
+(use-package scopeline
+  :hook '(prog-mode . scopeline-mode)
+  :general
+  (kdz/leader-toggle-def "b" '("Block indicators" . scopeline-mode))
+  :config
+  (setopt scopeline-min-lines 10))
+
 (provide 'packages.d/ui/buffer)
