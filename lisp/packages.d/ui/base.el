@@ -39,6 +39,7 @@
     '("Show/hide fill column" . global-display-fill-column-indicator-mode))
 
   :config
+  (setopt display-fill-column-indicator-character ?\u2502)
   (dolist (mode '(dired-mode
                   dirvish-directory-view-mode
                   helpful-mode
