@@ -496,14 +496,14 @@ actions that would update colors in emacs (such as changing themes)"
     (when (custom-theme-enabled-p 'modus-operandi-tritanopia)
       (let ((bg-main (kdz/modus-operandi-tritanopia-color 'bg-main))
             (fg-main (kdz/modus-operandi-tritanopia-color 'fg-main))
+            (border (kdz/modus-operandi-tritanopia-color 'border))
             (flyover-marker-fg (kdz/modus-operandi-tritanopia-color 'bg-cyan-intense)))
-
         (kdz/custom-theme-set-faces
          'modus-operandi-tritanopia
          `(flyover-maker         ((t :foreground ,flyover-marker-fg)))
          `(fill-column-indicator ((t :background ,bg-main)))
-         `(child-frame-border    ((t :foreground ,bg-main
-                                     :background ,bg-main)))))
+         `(child-frame-border    ((t :foreground ,border
+                                     :background ,border)))))
 
       (kdz/custom-theme-git-gutter-faces
        'modus-operandi-tritanopia
