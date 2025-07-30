@@ -139,6 +139,22 @@
               :after
               (lambda (&rest _) (run-hooks 'kdz-load-theme-hook))))
 
+(use-package ediff
+  :ensure nil
+  :hook ((ediff-before-setup . kdz/store-pre-ediff-winconfig)
+         (ediff-quit-hook    . kdz/restore-pre-ediff-winconfig))
+  :config
+  (setopt ediff-keep-variants nil
+          ediff-split-window-function #'split-window-horizontally
+          ediff-window-setup-function #'ediff-setup-windows-plain)
+
+  (defvar kdz-ediff-last-windows nil)
+  (defun kdz/store-pre-ediff-winconfig ()
+    (setq kdz-ediff-last-windows (current-window-configuration)))
+
+  (defun kdz/restore-pre-ediff-winconfig ()
+    (set-window-configuration my-ediff-last-windows)))
+
 (use-package eldoc
   :ensure nil
   :config
