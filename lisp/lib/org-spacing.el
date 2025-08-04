@@ -1,0 +1,126 @@
+;;; org-spacing.el --- Add visual spacing between org headings -*- lexical-binding: t; -*-
+
+;;; Commentary:
+;; Minor mode that uses overlays to show empty lines between org headings
+;; when there is visible content between them or when headings are at different levels.
+
+;;; Code:
+
+(defvar-local kdz/org-spacing--overlays nil
+  "List of overlays created by org-spacing mode.")
+
+(defun kdz/org-spacing--clear-overlays ()
+  "Remove all org-spacing overlays from the current buffer."
+  (dolist (overlay kdz/org-spacing--overlays)
+    (when (overlay-buffer overlay)
+      (delete-overlay overlay)))
+  (setq kdz/org-spacing--overlays nil))
+
+(defun kdz/org-spacing--heading-has-visible-content-p (heading-pos)
+  "Check if the heading at HEADING-POS has visible content before the next heading."
+  (save-excursion
+    (goto-char heading-pos)
+    (let ((heading-end (line-end-position))
+          (next-heading (save-excursion
+                          (outline-next-heading)
+                          (point))))
+      ;; Check if there's visible non-whitespace content between heading and next heading
+      (goto-char heading-end)
+      (forward-line 1)
+      (catch 'found-content
+        (while (< (point) next-heading)
+          (let ((line-start (line-beginning-position))
+                (line-end (line-end-position)))
+            ;; Check if this line is visible (not hidden by folding)
+            (unless (org-invisible-p line-start)
+              ;; Check if line has non-whitespace content
+              (unless (string-match-p "\\`[[:space:]]*\\'"
+                                      (buffer-substring-no-properties line-start line-end))
+                (throw 'found-content t))))
+          (forward-line 1))
+        nil))))
+
+(defun kdz/org-spacing--content-ends-with-visible-newline-p (heading-pos)
+  "Check if the content at HEADING-POS ends with a visible newline."
+  (save-excursion
+    (goto-char heading-pos)
+    (let ((next-heading (save-excursion
+                          (outline-next-heading)
+                          (point))))
+      ;; Go to the line before the next heading
+      (goto-char next-heading)
+      (forward-line -1)
+      (let ((line-start (line-beginning-position))
+            (line-end (line-end-position)))
+        ;; Check if this line is visible and empty (just whitespace)
+        (and (not (org-invisible-p line-start))
+             (string-match-p "\\`[[:space:]]*\\'"
+                             (buffer-substring-no-properties line-start line-end)))))))
+
+(defun kdz/org-spacing--get-heading-level (pos)
+  "Get the level of the org heading at POS."
+  (save-excursion
+    (goto-char pos)
+    (when (org-at-heading-p)
+      (org-outline-level))))
+
+(defun kdz/org-spacing--should-add-spacing-p (current-pos next-pos)
+  "Determine if spacing should be added between headings at CURRENT-POS and NEXT-POS."
+  (let ((current-level (kdz/org-spacing--get-heading-level current-pos))
+        (next-level (kdz/org-spacing--get-heading-level next-pos))
+        (has-visible-content (kdz/org-spacing--heading-has-visible-content-p current-pos))
+        (ends-with-newline (kdz/org-spacing--content-ends-with-visible-newline-p current-pos)))
+    ;; Add spacing if:
+    ;; 1. There is visible content between headings, OR
+    ;; 2. The headings are at different levels
+    ;; BUT NOT if the content already ends with a visible newline
+    (and (or has-visible-content
+             (not (= current-level next-level)))
+         (not ends-with-newline))))
+
+(defun kdz/org-spacing--add-overlays ()
+  "Add spacing overlays between org headings where appropriate."
+  (kdz/org-spacing--clear-overlays)
+  (save-excursion
+    (goto-char (point-min))
+    (while (outline-next-heading)
+      (let ((current-pos (point))
+            (next-pos (save-excursion
+                        (when (outline-next-heading)
+                          (point)))))
+        (when (and next-pos
+                   (kdz/org-spacing--should-add-spacing-p current-pos next-pos))
+          ;; Find the end of content for current heading
+          (goto-char current-pos)
+          (let ((content-end (save-excursion
+                               (goto-char next-pos)
+                               (forward-line -1)
+                               (end-of-line)
+                               (point))))
+            ;; Create overlay at the end of content
+            (let ((overlay (make-overlay content-end content-end)))
+              (overlay-put overlay 'after-string "\n")
+              (overlay-put overlay 'kdz/org-spacing t)
+              (push overlay kdz/org-spacing--overlays))))))))
+
+(defun kdz/org-spacing--update-overlays (&rest _)
+  "Update spacing overlays after buffer changes."
+  (when kdz/org-spacing-mode
+    (run-with-idle-timer 0.1 nil #'kdz/org-spacing--add-overlays)))
+
+(define-minor-mode kdz/org-spacing-mode
+  "Minor mode to add visual spacing between org headings."
+  :lighter " OrgSpacing"
+  :keymap nil
+  (if kdz/org-spacing-mode
+      (progn
+        (unless (derived-mode-p 'org-mode)
+          (user-error "org-spacing-mode can only be enabled in org-mode buffers"))
+        (kdz/org-spacing--add-overlays)
+        (add-hook 'after-change-functions #'kdz/org-spacing--update-overlays nil t))
+    (progn
+      (kdz/org-spacing--clear-overlays)
+      (remove-hook 'after-change-functions #'kdz/org-spacing--update-overlays t))))
+
+(provide 'lib/org-spacing)
+;;; org-spacing.el ends here
