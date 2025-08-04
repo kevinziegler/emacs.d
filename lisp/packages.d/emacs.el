@@ -135,6 +135,23 @@
   (defvar kdz-load-theme-hook nil
     "Hook to run actions after calling `load-theme'")
   :config
+  (defmacro kdz/customize-with-palette (theme palette &rest face-specs)
+    "Set custom FACE-SPECS for THEME with access to colors from PALETTE.
+
+PALETTE is a symbol referencing either a function or alist mapping, and is
+used to create a scoped function, (color NAME) that can be used to access colors
+defined in that palette from within FACE-SPECS."
+    `(cl-flet ((color (name)
+                 (when (and (boundp ,palette))
+                   (cond ((functionp ,palette) (funcall ,palette name))
+                         ((and (listp (symbol-value ,palette))
+                               (every #'consp (symbol-value ,palette)))
+                          (car (alist-get name (symbol-value ,palette))))
+                         (t (error "Expected function or alist, but received neither."))))))
+       (when (custom-theme-enabled-p ,theme)
+         (let ((custom--inhibit-theme-enable nil))
+           (custom-theme-set-faces ,theme ,@face-specs)))))
+
   (advice-add 'load-theme
               :after
               (lambda (&rest _) (run-hooks 'kdz-load-theme-hook))))

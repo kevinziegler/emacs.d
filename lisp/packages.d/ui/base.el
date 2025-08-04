@@ -105,20 +105,7 @@
 
 (use-package git-gutter-fringe
   :config
-  (global-git-gutter-mode 1)
-
-  (defun kdz/custom-theme-git-gutter-faces
-      (theme added-fg deleted-fg modified-fg &optional background)
-    (let ((custom--inhibit-theme-enable nil)
-          (bg-spec (when background (list :background background))))
-      (custom-theme-set-faces
-       theme
-       `(git-gutter:added       ((t :foreground ,added-fg    ,@bg-spec)))
-       `(git-gutter:deleted     ((t :foreground ,deleted-fg  ,@bg-spec)))
-       `(git-gutter:modified    ((t :foreground ,modified-fg ,@bg-spec)))
-       `(git-gutter-fr:added    ((t :foreground ,added-fg    ,@bg-spec)))
-       `(git-gutter-fr:deleted  ((t :foreground ,deleted-fg  ,@bg-spec)))
-       `(git-gutter-fr:modified ((t :foreground ,modified-fg ,@bg-spec)))))))
+  (global-git-gutter-mode 1))
 
 (use-package hide-mode-line
   :hook ((reb-mode . hide-mode-line-mode)))
@@ -363,7 +350,7 @@ actions that would update colors in emacs (such as changing themes)"
   (kdz/leader-open-def "t" '("Project File Tree" . treemacs))
 
   :config
-  (setq treemacs-collapse-dirs 7
+  (setq treemacs-collapse-dirs 0
         treemacs-width 45
         treemacs-recenter-after-file-follow 'on-distance
         treemacs-project-follow-cleanup t)
@@ -398,23 +385,24 @@ actions that would update colors in emacs (such as changing themes)"
   (setopt catppuccin-flavor 'mocha)
 
   (defun kdz/catppuccin-theme-custom-faces ()
-    (when (custom-theme-enabled-p 'catppuccin)
-      (let* ((custom--inhibit-theme-enable nil)
-             (highlight-fg (catppuccin-color 'base))
-             (highlight-bg (catppuccin-color 'flamingo))
-             (selection-bg (catppuccin-color 'surface1)))
-        (kdz/tab-bar-theme-set-faces 'catppuccin
-                                     (face-foreground 'tab-bar-tab nil t)
-                                     (catppuccin-color 'sapphire)
-                                     (face-background 'tab-bar nil t)
-                                     7)
-        (custom-theme-set-faces
-         'catppuccin
-         `(lazy-highlight ((t :foreground ,highlight-fg :background ,highlight-bg)))
-         `(highlight ((t :foreground ,highlight-fg :background ,highlight-bg)))
-         `(completions-highlight ((t :background ,selection-bg)))
-         `(vertico-current ((t :background ,selection-bg)))
-         `(minibuffer-prompt ((t :weight bold :foreground ,(catppuccin-color 'sapphire)))))))))
+    (kdz/customize-with-palette
+     'catppuccin
+     'catppuccin-color
+     `(highlight             ((t :foreground ,(color 'base)
+                                 :background ,(color 'flamingo))))
+     `(lazy-highlight        ((t :foreground ,(color 'base)
+                                 :background ,(color 'flamingo))))
+     `(completions-highlight ((t :background ,(color 'surface1))))
+     `(vertico-current       ((t :background ,(color 'surface1))))
+     `(minibuffer-prompt     ((t :weight bold :foreground ,(color 'sapphire))))
+     `(tab-bar              ,(kdz/tab-bar-face-spec-base
+                              (face-background 'tab-bar-tab nil t)
+                              (face-foreground 'tab-bar-tab nil t)))
+     `(tab-bar-tab           ((t :weight bold)))
+     '(tab-bar-tab-inactive  ((t :inherit tab-bar)))
+     '(tab-line              ((t :inherit tab-bar)))
+     '(tab-line-tab          ((t :inherit tab-bar-tab)))
+     '(tab-line-tab-current  ((t :inherit tab-bar-tab))))))
 
 (use-package kaolin-themes
   :config
@@ -460,61 +448,70 @@ actions that would update colors in emacs (such as changing themes)"
   ;; :hook ((elpaca-after-init . (lambda () (load-theme 'stimmnung-themes-light :no-confirm)))
   ;;        (kdz-load-theme . kdz/stimmung-theme-custom-faces))
   (defun kdz/stimmung-theme-custom-faces ()
-    (when (custom-theme-enabled-p 'stimmung-themes-light)
-      (kdz/custom-theme-git-gutter-faces 'stimmung-themes-light
-                                         "systemGreenColor"
-                                         "systemRedColor"
-                                         "systemYellowColor")
-      
-      (kdz/tab-bar-set-theme-faces 'stimmung-themes-light
-                                   "Black"
-                                   "Black"
-                                   "White"
-                                   10))
-    (when (custom-theme-enabled-p 'stimmung-themes-dark)
-      (kdz/custom-theme-git-gutter-faces 'stimmung-themes-dark
-                                         "systemGreenColor"
-                                         "systemRedColor"
-                                         "systemYellowColor")
-      (kdz/tab-bar-set-theme-faces 'stimmung-themes-dark
-                                   "White"
-                                   "White"
-                                   "Black"
-                                   10))))
+    (kdz/customize-with-palette
+     'stimmung-themes-light
+     nil
+     '(git-gutter:added      ((t :foreground "systemGreenColor")))
+     '(git-gutter:deleted    ((t :foreground "systemRedColor")))
+     '(git-gutter:added      ((t :foreground "systemYellowColor")))
+     '(git-gutter-fr:added   ((t :foreground "systemGreenColor")))
+     '(git-gutter-fr:deleted ((t :foreground "systemRedColor")))
+     '(git-gutter-fr:added   ((t :foreground "systemYellowColor")))
+     `(tab-bar              ,(kdz/tab-bar-face-spec-base "White" "Black"))
+     '(tab-bar-tab           ((t :foreground "Black" :weight bold)))
+     '(tab-bar-tab-inactive  ((t :inherit tab-bar)))
+     '(tab-line              ((t :inherit tab-bar)))
+     '(tab-line-tab          ((t :inherit tab-bar-tab)))
+     '(tab-line-tab-current  ((t :inherit tab-bar-tab))))
+    (kdz/customize-with-palette
+     'stimmung-themes-dark
+     nil
+     '(git-gutter:added      ((t :foreground "systemGreenColor")))
+     '(git-gutter:deleted    ((t :foreground "systemRedColor")))
+     '(git-gutter:added      ((t :foreground "systemYellowColor")))
+     '(git-gutter-fr:added   ((t :foreground "systemGreenColor")))
+     '(git-gutter-fr:deleted ((t :foreground "systemRedColor")))
+     '(git-gutter-fr:added   ((t :foreground "systemYellowColor")))
+     `(tab-bar              ,(kdz/tab-bar-face-spec-base "Black" "White"))
+     '(tab-bar-tab           ((t :foreground "White" :weight bold)))
+     '(tab-bar-tab-inactive  ((t :inherit tab-bar)))
+     '(tab-line              ((t :inherit tab-bar)))
+     '(tab-line-tab          ((t :inherit tab-bar-tab)))
+     '(tab-line-tab-current  ((t :inherit tab-bar-tab))))))
 
 (use-package modus-themes
   :hook ((elpaca-after-init . (lambda () (load-theme 'modus-operandi-tritanopia :no-confirm)))
-         (kdz-load-theme . kdz/modus-themes-custom-faces))
+         (kdz-load-theme    . kdz/modus-operandi-tritanopia-customizations))
   :init
-  (setq modus-themes-bold-constructs t
-        modus-themes-italic-constructs t)
+  (setopt modus-themes-bold-constructs t
+          modus-themes-italic-constructs t)
   :config
-  (defun kdz/modus-operandi-tritanopia-color (color-name)
-    (car (alist-get color-name modus-operandi-tritanopia-palette)))
-
-  (defun kdz/modus-themes-custom-faces ()
-    (when (custom-theme-enabled-p 'modus-operandi-tritanopia)
-      (let ((bg-main (kdz/modus-operandi-tritanopia-color 'bg-main))
-            (fg-main (kdz/modus-operandi-tritanopia-color 'fg-main))
-            (border (kdz/modus-operandi-tritanopia-color 'border))
-            (flyover-marker-fg (kdz/modus-operandi-tritanopia-color 'bg-cyan-intense)))
-        (kdz/custom-theme-set-faces
-         'modus-operandi-tritanopia
-         `(flyover-maker         ((t :foreground ,flyover-marker-fg)))
-         `(fill-column-indicator ((t :background ,bg-main)))
-         `(child-frame-border    ((t :foreground ,border
-                                     :background ,border)))))
-
-      (kdz/custom-theme-git-gutter-faces
-       'modus-operandi-tritanopia
-       (car (alist-get 'bg-added-fringe   modus-operandi-tritanopia-palette))
-       (car (alist-get 'bg-removed-fringe modus-operandi-tritanopia-palette))
-       (car (alist-get 'bg-changed-fringe modus-operandi-tritanopia-palette)))
-      (kdz/tab-bar-set-theme-faces
-       'modus-operandi-tritanopia
-       (car (alist-get 'fg-main modus-operandi-tritanopia-palette))
-       (car (alist-get 'fg-main modus-operandi-tritanopia-palette))
-       (car (alist-get 'bg-main modus-operandi-tritanopia-palette))
-       10))))
+  (defun kdz/modus-operandi-tritanopia-customizations ()
+    (kdz/customize-with-palette
+     'modus-operandi-tritanopia
+     'modus-operandi-tritanopia-palette
+     `(flyover-marker           ((t :foreground ,(color 'bg-cyan-intense))))
+     `(fill-column-indicator    ((t :background ,(color 'bg-main))))
+     `(child-frame-border       ((t :background ,(color 'border)
+                                    :foreground ,(color 'border))))
+     `(git-gutter:added         ((t :foreground ,(color 'bg-added-fringe)
+                                    :background ,(color 'bg-main))))
+     `(git-gutter:deleted       ((t :foreground ,(color 'bg-removed-fringe)
+                                    :background ,(color 'bg-main))))
+     `(git-gutter:modified      ((t :foreground ,(color 'bg-changed-fringe)
+                                    :background ,(color 'bg-main))))
+     `(git-gutter-fr:added      ((t :foreground ,(color 'bg-added-fringe)
+                                    :background ,(color 'bg-main))))
+     `(git-gutter-fr:deleted    ((t :foreground ,(color 'bg-removed-fringe)
+                                    :background ,(color 'bg-main))))
+     `(git-gutter-fr:modified   ((t :foreground ,(color 'bg-changed-fringe)
+                                    :background ,(color 'bg-main))))
+     `(tab-bar                 ,(kdz/tab-bar-face-spec-base (color 'bg-main)
+                                                            (color 'fg-main)))
+     `(tab-bar-tab              ((t :foreground ,(color 'fg-main) :weight bold)))
+     '(tab-bar-tab-inactive     ((t :inherit tab-bar)))
+     '(tab-line                 ((t :inherit tab-bar)))
+     '(tab-line-tab             ((t :inherit tab-bar-tab)))
+     '(tab-line-tab-current     ((t :inherit tab-bar-tab))))))
 
 (provide 'packages.d/ui/base)

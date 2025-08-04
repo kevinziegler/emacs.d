@@ -14,32 +14,22 @@
   :config
   (require 'lib/pinned-tabs)
 
-  (defun kdz/tab-bar-set-theme-faces (theme
-                                      underline-color
-                                      selected-color
-                                      box-color
-                                      box-width)
-    "Set tab-bar faces for THEME to ensure theme-agnostic attributes.
-
-This includes setting the box width & underline attributes that aren't normally
-handled by theme styling."
-    (let ((custom--inhibit-theme-enable nil)
-          (tab-bar-underline-opts (list :color underline-color
-                                        :position (* -1 box-width))))
-      (custom-theme-set-faces
-       theme
-       `(tab-bar              ((t :box ,(list :line-width box-width
-                                              :color      box-color
-                                              :style      'flat-button)
-                                  :underline ,tab-bar-underline-opts)))
-       `(tab-bar-tab-inactive ((t :underline  ,tab-bar-underline-opts)))
-       `(tab-bar-tab          ((t :foreground ,selected-color :weight bold)))
-       '(tab-line             ((t :inherit tab-bar)))
-       '(tab-line-tab         ((t :inherit tab-bar-tab)))
-       '(tab-line-tab-current ((t :inherit tab-bar-tab)))
-       '(tab-line-tab-special ((t :slant italic :weight bold))))))
-
   (defun kdz/tab-move-left () (interactive) (tab-move -1))
+
+  (defvar kdz--tab-bar-box-width 10
+    "Sizing of box to draw around tab-bar faces.
+
+This is used to generate face specs when making theme customizations related to
+the tab-bar.")
+
+  (defun kdz/tab-bar-face-spec-base (background underline-color &rest specs)
+    "Generate a face-spec for the tab-bar with preferred appearance."
+    `((t :box       ,(list :line-width kdz--tab-bar-box-width
+                           :color      background
+                           :style      'flat-button)
+         :underline ,(list :color      underline-color
+                           :position   (* -1 kdz--tab-bar-box-width))
+         ,@specs)))
 
   (defvar kdz-blank-buffer-text  "Nothing to see here."
     "Filler text to use in *blank* buffer")
@@ -86,8 +76,6 @@ handled by theme styling."
   :after (custom nerd-icons)
   :hook ((window-state-change . kdz/ensure-bottom-tab-line))
   :config
-  
-
   (defvar kdz-tab-line-mode-icon-alist
     '((inferior-emacs-lisp-mode . "nf-custom-emacs")
       (inferior-python-mode     . "nf-md-language_python")
