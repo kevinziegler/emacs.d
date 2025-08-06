@@ -94,18 +94,11 @@
                           (point)))))
         (when (and next-pos
                    (kdz/org-spacing--should-add-spacing-p current-pos next-pos))
-          ;; Find the end of content for current heading
-          (goto-char current-pos)
-          (let ((content-end (save-excursion
-                               (goto-char next-pos)
-                               (forward-line -1)
-                               (end-of-line)
-                               (point))))
-            ;; Create overlay at the end of content
-            (let ((overlay (make-overlay content-end content-end)))
-              (overlay-put overlay 'after-string "\n")
-              (overlay-put overlay 'kdz/org-spacing t)
-              (push overlay kdz/org-spacing--overlays))))))))
+          ;; Create overlay at the beginning of the next heading
+          (let ((overlay (make-overlay next-pos next-pos)))
+            (overlay-put overlay 'before-string "\n")
+            (overlay-put overlay 'kdz/org-spacing t)
+            (push overlay kdz/org-spacing--overlays)))))))
 
 (defun kdz/org-spacing--update-overlays (&rest _)
   "Update spacing overlays after buffer changes."
