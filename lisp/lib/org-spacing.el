@@ -73,10 +73,14 @@
     ;; Add spacing if:
     ;; 1. There is visible content between headings, OR
     ;; 2. The headings are at different levels
-    ;; BUT NOT if the content already ends with a visible newline
+    ;; BUT NOT if:
+    ;; - The content already ends with a visible newline, OR
+    ;; - Current heading has no content AND next heading is a sub-heading
     (and (or has-visible-content
              (not (= current-level next-level)))
-         (not ends-with-newline))))
+         (not ends-with-newline)
+         (not (and (not has-visible-content)
+                   (> next-level current-level))))))
 
 (defun kdz/org-spacing--add-overlays ()
   "Add spacing overlays between org headings where appropriate."
