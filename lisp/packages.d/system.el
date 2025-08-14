@@ -1,5 +1,14 @@
 (use-package abridge-diff :after magit :init (abridge-diff-mode 1))
 
+(use-package transient
+  :config
+  (defun kdz/transient-path (file)
+    (kdz/user-directory ".local" "transient" file))
+
+  (setq transient-history-file (kdz/transient-path "history.el")
+        transient-levels-file  (kdz/transient-path "levels.el")
+        transient-values-file  (kdz/transient-path "values.el")))
+
 (use-package crux
   :general
   (kdz/leader-file-def
@@ -8,6 +17,7 @@
     "c" '("Copy File"   . crux-copy-file-preserve-attributes)))
 
 (use-package difftastic
+  :after transient
   :bind (:map magit-blame-read-only-mode-map
               ("D" . difftastic-magit-show)
               ("S" . difftastic-magit-show))
@@ -19,7 +29,10 @@
 
 (use-package dired :ensure nil :config (setq insert-directory-program "gls"))
 (use-package dirvish :init (dirvish-override-dired-mode))
-(use-package docker :general (kdz/leader-open-def "d" '("Docker" . docker)))
+
+(use-package docker
+  :after transient
+  :general (kdz/leader-open-def "d" '("Docker" . docker)))
 
 (use-package exec-path-from-shell
   :config
@@ -54,6 +67,7 @@
 (use-package git-modes :mode (("/.dockerignore\\'" . gitignore-mode )))
 
 (use-package git-timemachine
+  :after transient
   :general
   (kdz/leader-git-def "t" '("Time Machine" . git-timemachine)))
 
@@ -63,8 +77,8 @@
 
 (use-package logview)
 
-(use-package transient)
 (use-package magit
+  :after transient
   :general
   (kdz/leader-git-def
     "g" '("Git Status"   . magit-status)

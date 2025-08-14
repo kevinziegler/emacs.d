@@ -301,15 +301,6 @@ actions that would update colors in emacs (such as changing themes)"
   (scroll-on-jump-with-scroll-advice-add evil-scroll-line-to-top)
   (scroll-on-jump-with-scroll-advice-add evil-scroll-line-to-bottom))
 
-(use-package transient
-  :config
-  (defun kdz/transient-path (file)
-    (kdz/user-directory ".local" "transient" file))
-
-  (setq transient-history-file (kdz/transient-path "history.el")
-        transient-levels-file  (kdz/transient-path "levels.el")
-        transient-values-file  (kdz/transient-path "values.el")))
-
 (use-package ultra-scroll
   :ensure (ultra-scroll :host github :repo "jdtsmith/ultra-scroll")
   :init
