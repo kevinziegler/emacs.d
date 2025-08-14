@@ -13,33 +13,26 @@
 
   :config
   (setq project-list-file (kdz/user-directory ".local" "projects"))
-  (defun kdz/project-dashboard-buffer (project-dir)
-    "Generate a project-specific name for the dashboard buffer"
-    (format "*dashboard: %s*" project-dir))
 
-  (defun kdz/project-open-show-dashboard (project-dir)
-    "Open a new dashboard buffer for the supplied PROJECT-DIR"
-    (when (and project-dir (member (list project-dir) project--list))
-      (let ((dashboard-buffer-name (kdz/project-dashboard-buffer project-dir))
-            (dashboard-item-generators dashboard-item-generators)
-            (dashboard-items '((ls-directories . 5)
-                               (ls-files . 5))))
-        (push `(project-status . ,(dashboard-project-status project-dir))
-              dashboard-item-generators)
-        (dashboard-open))))
+  (defvar kdz-project-switch-init-hook nil
+    "Hooks to run after selecting a project via `project-switch-project'.
 
-  (defun kdz/project-kill-dashboard (project-dir)
-    "Kill the dashboard buffer for the supplied PROJECT-DIR"
-    (let ((dashboard (kdz/project-dashboard-buffer project-dir)))
-      (when (get-buffer dashboard)
-        (kill-buffer dashboard))))
+This is executed *prior* to running on of `project-switch-commands'.")
 
+  (defvar kdz-project-switch-after-init-hook nil
+    "Hooks to run after running one of `project-switch-commands'.")
+
+  ;; Run this hook only after we've selected the project
   (advice-add 'project-switch-project
               :before
-              #'kdz/project-open-show-dashboard)
+              (lambda (&rest _)
+                (run-hooks 'kdz-project-switch-init-hook)))
+
+  ;; Run this hook after we've selected/undertaken one of `project-switch-commands'
   (advice-add 'project-switch-project
               :after
-              #'kdz/project-kill-dashboard))
+              (lambda (&rest _)
+                (run-hooks 'kdz-project-switch-after-init-hook))))
 
 (use-package project-rootfile
   :config
