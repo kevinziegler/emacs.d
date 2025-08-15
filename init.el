@@ -12,7 +12,7 @@
 (require 'packages.d/workspaces)
 
 (require 'packages.d/tools/completion)
-(require 'packages.d/tools/lsp)
+(require 'packages.d/tools/eglot)
 (require 'packages.d/tools/llm)
 
 (require 'packages.d/ui/base)
