@@ -46,6 +46,7 @@
     "x"  '("Export Document"                . org-export-dispatch))
 
   :config
+  (require 'lib/org-spacing)
   (setopt org-auto-align-tags nil
           org-babel-results-keyword "results"
           org-cycle-separator-lines 0
