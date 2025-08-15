@@ -170,7 +170,7 @@ defined in that palette from within FACE-SPECS."
     (setq kdz-ediff-last-windows (current-window-configuration)))
 
   (defun kdz/restore-pre-ediff-winconfig ()
-    (set-window-configuration my-ediff-last-windows)))
+    (set-window-configuration kdz-ediff-last-windows)))
 
 (use-package eldoc
   :ensure nil
