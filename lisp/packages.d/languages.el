@@ -5,9 +5,16 @@
 (use-package scala-ts-mode   :mode (("\\.scala\\'"    . scala-ts-mode)))
 (use-package jq-ts-mode      :mode (("\\.jq\\'"       . jq-ts-mode)))
 (use-package kotlin-ts-mode  :mode (("\\.kt\\'"       . kotlin-ts-mode)))
+(use-package graphql-mode    :mode ("\\.graphql\\'" "\\.gql\\'"))
 (use-package groovy-mode)
 (use-package hcl-mode)
 (use-package terraform-mode)
+(use-package inputrc-mode)
+(use-package swift-mode)
+(use-package just-mode)
+(use-package inf-ruby)
+(use-package nodejs-repl)
+
 
 (use-package lua-mode
   :mode (("\\.lua\\'" . lua-mode))
@@ -34,12 +41,10 @@
   :mode (("\\.html?\\'" . web-mode)
          ("\\.hbs\\'"   . web-mode))
   :config
-  (setq web-mode-markup-indent-offset 2)
-  (setq web-mode-css-indent-offset 2)
-  (setq web-mode-code-indent-offset 2)
-  (setq web-mode-content-types-alist '(("jsx" . "\\.js[x]?\\'"))))
-
-(use-package inputrc-mode)
+  (setq web-mode-markup-indent-offset 2
+        web-mode-css-indent-offset 2
+        web-mode-code-indent-offset 2
+        web-mode-content-types-alist '(("jsx" . "\\.js[x]?\\'"))))
 
 (use-package treesit
   :ensure nil
@@ -78,11 +83,6 @@
     (when (or force-unset (not (getenv "PYENV_VERSION")) )
       (call-interactively 'pyenv-mode-set))
     (call-interactively 'run-python)))
-
-(use-package graphql-mode :mode ("\\.graphql\\'" "\\.gql\\'"))
-
-(use-package swift-mode)
-(use-package just-mode)
 
 (use-package grpclient
   :if (executable-find "grpcurl")
