@@ -289,8 +289,6 @@ actions that would update colors in emacs (such as changing themes)"
   :config
   (ultra-scroll-mode 1))
 
-;; (use-package casual)
-
 (use-package solaire-mode
   :after catppuccin-theme
   :config
@@ -312,9 +310,8 @@ actions that would update colors in emacs (such as changing themes)"
   (defvar kdz--posframe-offset-bottom-percent 10)
 
   (defun kdz/posframe-center-width (info)
-    (round
-     (* 0.5 (- (plist-get info :parent-frame-width)
-               (plist-get info :posframe-width)))))
+    (round (* 0.5 (- (plist-get info :parent-frame-width)
+                     (plist-get info :posframe-width)))))
 
   (defun kdz/posframe-offset-top (info)
     (let ((offset-percent (/ kdz--posframe-offset-top-percent 100.0))
