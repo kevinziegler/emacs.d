@@ -54,16 +54,6 @@
   (setq origami-fold-replacement " ... ")
   (global-origami-mode))
 
-(use-package repl-toggle
-  :general
-  (kdz/leader-code-def "r" '("Toggle REPL" . rtog/toggle-repl))
-  :config
-  (setq rtog/fullscreen nil
-        rtog/fallback-repl-fun #'ielm
-	rtog/mode-repl-alist '((emacs-lisp-mode . ielm)
-			       (python-mode . run-python)
-			       (python-ts-mode . run-python))))
-
 (use-package ws-butler :hook ((prog-mode . ws-butler-mode)))
 
 (use-package editorconfig
@@ -83,17 +73,13 @@
   (setq markdown-xwidget-command "pandoc"
         markdown-xwidget-github-theme "light"
         markdown-xwidget-mermaid-theme "default"
-        markdown-xwidget-code-block-theme "default") )
+        markdown-xwidget-code-block-theme "default"))
 
 ;; TODO This needs tree-sitter to work
 ;; TODO This pulls from quelpa; how do I set that up with straight?
 ;; (use-package turbo-log
 ;;   :config
 ;;   (setq turbo-log-msg-format-template "\"KDZ-LOG: %s\""))
-
-(use-package lorem-ipsum)
-(use-package uuidgen)
-;; (use-package fancy-urls-menu)
 
 (use-package nocomments-mode
   :general
