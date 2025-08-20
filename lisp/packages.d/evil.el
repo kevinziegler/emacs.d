@@ -24,19 +24,12 @@
   (setq evil-ex-search-vim-style-regexp t
         evil-ex-visual-char-range t  ; column range for ex commands
         evil-mode-line-format 'before
-        ;; more vim-like behavior
         evil-symbol-word-search t
-        ;; if the current state is obvious from the cursor's color/shape, then
-        ;; we won't need superfluous indicators to do it instead.
-        ;; evil-default-cursor '+evil-default-cursor-fn
         evil-default-cursor      'box
         evil-normal-state-cursor 'box
         evil-insert-state-cursor 'bar
         evil-visual-state-cursor 'hollow
         evil-emacs-state-cursor  'box
-        ;; evil-emacs-state-cursor  '(box +evil-emacs-cursor-fn)
-        ;; Only do highlighting in selected window so that Emacs has less work
-        ;; to do highlighting them all.
         evil-ex-interactive-search-highlight 'selected-window
         ;; It's infuriating that innocuous "beginning of line" or "end of line"
         ;; errors will abort macros, so suppress them:
@@ -47,7 +40,6 @@
   :init
   (setq evil-want-keybinding nil)
   :config
-
   (evil-mode 1)
   (evil-select-search-module 'evil-search-module 'evil-search)
   (setq evil-visual-update-x-selection-p nil)
@@ -84,32 +76,17 @@
   :config
   (evil-embrace-enable-evil-surround-integration))
 
-(use-package evil-escape
-  :init
-  (evil-escape-mode 1))
-
 (use-package evil-goggles
   :after evil
   :config
-  (setq evil-goggles-pulse t)
-  (setq evil-goggles-blocking-duration 0.300)
-  (setq evil-goggles-async-duration 0.900)
+  (setq evil-goggles-pulse t
+        evil-goggles-blocking-duration 0.300
+        evil-goggles-async-duration 0.900)
   (evil-goggles-mode))
-
-(use-package evil-lion
-  :config
-  (evil-lion-mode))
-
-(use-package evil-matchit
-  :init
-  (global-evil-matchit-mode 1))
 
 (use-package evil-nerd-commenter
   :general (general-def :states '(normal visual) "gc" 'evilnc-comment-operator))
 
-(use-package evil-surround
-  :config
-  (global-evil-surround-mode 1))
 
 ;; Set up text object mappings as keybindings (see project README)
 (use-package evil-textobj-tree-sitter
@@ -127,7 +104,6 @@
               (evil-textobj-tree-sitter-get-textobj
                 ("conditional.outer" "loop.outer"))))
 
-
 (use-package evil-numbers
   :general
   (general-def
@@ -136,22 +112,6 @@
     "=" '(evil-numbers/inc-at-pt :which-key "Increment at point")
     "-" '(evil-numbers/dec-at-pt :which-key "Decrement at point")
     "_" '(evil-numbers/dec-at-pt :which-key "Decrement at point")))
-
-
-(use-package evil-exchange
-  :config
-  (setq evil-exchange-key (kbd "zX"))
-  (evil-exchange-install))
-
-(use-package evil-quick-diff
-  :ensure (evil-quick-diff :host github :repo "rgrinberg/evil-quick-diff")
-  :config
-  (setq evil-quick-diff-key (kbd "zx"))
-  (evil-quick-diff-install))
-
-(use-package evil-visualstar
-  :config
-  (global-evil-visualstar-mode))
 
 (use-package evil-owl
   :config
@@ -163,5 +123,11 @@
                  (side . bottom)
                  (window-height . 0.3)))
   (evil-owl-mode))
+
+(use-package evil-escape     :init (evil-escape-mode 1))
+(use-package evil-lion       :config (evil-lion-mode))
+(use-package evil-matchit    :init (global-evil-matchit-mode 1))
+(use-package evil-surround   :config (global-evil-surround-mode 1))
+(use-package evil-visualstar :config (global-evil-visualstar-mode))
 
 (provide 'packages.d/evil)
