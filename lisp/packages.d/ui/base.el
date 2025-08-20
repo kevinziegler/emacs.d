@@ -404,4 +404,24 @@ actions that would update colors in emacs (such as changing themes)"
 
 (use-package colorful-mode)
 
+(use-package project-rootfile
+  :config
+  (add-to-list 'project-rootfile-list ".project"))
+
+(use-package ibuffer-project
+  :hook (ibuffer . kdz/ibuffer-tune-sort-and-filter)
+  :config
+  (defun kdz/ibuffer-tune-sort-and-filter ()
+    (setq ibuffer-filter-groups (ibuffer-project-generate-filter-groups))
+    (unless (eq ibuffer-sorting-mode 'project-file-relative)
+      (ibuffer-do-sort-by-project-file-relative))))
+
+(use-package otpp
+  :after project
+  :init
+  (defalias 'one-tab-per-project-mode 'otpp-mode)
+  (defalias 'one-tab-per-project-override-mode 'otpp-override-mode)
+  (otpp-mode 1)
+  (otpp-override-mode 1))
+
 (provide 'packages.d/ui/base)

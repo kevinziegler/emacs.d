@@ -238,6 +238,42 @@ defined in that palette from within FACE-SPECS."
           pixel-scroll-precision-use-momentum t)
   (pixel-scroll-precision-mode))
 
+(use-package project
+  :ensure nil
+  :general
+  (kdz/leader-def
+    "p"   (cons "Project" (make-sparse-keymap))
+    "pa" '("Add Projects" . project-remember-projects-under)
+    "pD" '("Remove Project" . project-forget-project)
+    "pe" '("Project Errors" . lsp-treemacs-errors-list)
+    "pf" '("Open Project File" . project-find-file)
+    "pp" '("Switch To Project" . project-switch-project))
+  (kdz/leader-buffer-def
+    "b" '("Switch to Buffer (Workspace)" . project-switch-to-buffer))
+
+  :config
+  (setq project-list-file (kdz/user-directory ".local" "projects"))
+
+  (defvar kdz-project-switch-init-hook nil
+    "Hooks to run after selecting a project via `project-switch-project'.
+
+This is executed *prior* to running on of `project-switch-commands'.")
+
+  (defvar kdz-project-switch-after-init-hook nil
+    "Hooks to run after running one of `project-switch-commands'.")
+
+  ;; Run this hook only after we've selected the project
+  (advice-add 'project-switch-project
+              :before
+              (lambda (&rest _)
+                (run-hooks 'kdz-project-switch-init-hook)))
+
+  ;; Run this hook after we've selected/undertaken one of `project-switch-commands'
+  (advice-add 'project-switch-project
+              :after
+              (lambda (&rest _)
+                (run-hooks 'kdz-project-switch-after-init-hook))))
+
 (use-package re-builder
   :ensure nil
   :general

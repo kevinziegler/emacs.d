@@ -9,7 +9,6 @@
 (require 'packages.d/evil)
 (require 'packages.d/languages)
 (require 'packages.d/org)
-(require 'packages.d/workspaces)
 
 (require 'packages.d/tools/completion)
 (require 'packages.d/tools/eglot)
