@@ -33,8 +33,4 @@
 ;;   :general
 ;;   (kdz/leader-code-def "d" '("Debug" . dape)))
 
-(use-package pyvenv-auto
-  :hook ((python-ts-mode . pyvenv-auto-run)
-         (python-mode . pyvenv-auto-run)))
-
 (provide 'packages.d/tools/eglot)
