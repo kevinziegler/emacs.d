@@ -424,4 +424,28 @@ actions that would update colors in emacs (such as changing themes)"
   (otpp-mode 1)
   (otpp-override-mode 1))
 
+(use-package keycast
+  :general
+  (kdz/leader-toggle-def "k" '("Keycast Display" . keycast-tab-bar-mode)))
+
+(use-package eldoc-box
+  :general
+  (kdz/leader-toggle-def "d" '("Documentation Popups" . eldoc-box-hover-mode))
+  :config
+  (setq eldoc-box-only-multi-line t
+        eldoc-box-position-function #'eldoc-box--default-at-point-position-function)
+  (set-face-attribute 'eldoc-box-border
+                      nil
+                      :background (face-foreground 'default)))
+
+(use-package helpful
+  :general
+  (kdz/leader-help-def
+    "c" '("Describe Command"        . helpful-command)
+    "f" '("Describe Callable"       . helpful-callable)
+    "h" '("Describe Thing-at-point" . helpful-at-point)
+    "v" '("Describe Variable"       . helpful-variable)
+    "k" '("Describe Key"            . helpful-key)
+    "s" '("Describe Symbol"         . helpful-symbol)))
+
 (provide 'packages.d/ui/base)

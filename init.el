@@ -4,7 +4,6 @@
 (require 'packages.d/general)
 (require 'packages.d/emacs)
 (require 'packages.d/system)
-(require 'packages.d/tools/help)
 (require 'packages.d/ui/buffer)
 (require 'packages.d/evil)
 (require 'packages.d/languages)

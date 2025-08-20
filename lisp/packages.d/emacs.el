@@ -199,10 +199,20 @@ defined in that palette from within FACE-SPECS."
       (set-frame-font default-font-string nil t)))
   (blink-cursor-mode -1))
 
+(use-package help-fns
+  :ensure nil
+  :general
+  (kdz/leader-help-def "M" '("Describe Mode" . describe-mode)))
+
 (use-package hl-line
   :ensure nil
   :config
   (global-hl-line-mode))
+
+(use-package man
+  :ensure nil
+  :general
+  (kdz/leader-help-def "m" '("Lookup Manpage" . man)))
 
 (use-package minibuffer
   :ensure nil
@@ -335,6 +345,20 @@ This is executed *prior* to running on of `project-switch-commands'.")
   :ensure nil
   :config
   (setopt vc-follow-symlinks t))
+
+(use-package which-key
+  :ensure nil
+  :init
+  (setq which-key-sort-order 'which-key-prefix-then-key-order
+	which-key-max-display-columns 5
+        which-key-add-column-padding 2
+	which-key-sort-uppercase-first nil
+        which-key-max-description-length 30
+        which-key-idle-delay 0.5
+        which-key-idle-secondary-delay 0.05
+        which-key-prefix-prefix "✚ "
+        which-key-show-prefix 'left)
+  (which-key-mode))
 
 (use-package window
   :ensure nil
