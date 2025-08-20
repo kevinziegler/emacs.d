@@ -16,7 +16,6 @@
 (use-package inf-ruby)
 (use-package nodejs-repl)
 
-
 (use-package lua-mode
   :mode (("\\.lua\\'" . lua-mode))
   :interpreter (("lua" . lua-mode))
@@ -24,7 +23,7 @@
   (autoload 'lua-mode "lua-mode" "Lua editing mode." t))
 
 (use-package markdown-mode
-  :mode (("\\.md\\'"       . markdown-mode))
+  ;; :mode (("\\.md\\'"       . markdown-mode))
   :config
   (setq markdown-enable-wiki-links t
         markdown-fontify-code-blocks-natively t
@@ -49,21 +48,20 @@
 
 (use-package treesit
   :ensure nil
-  :mode (("Dockerfile" . dockerfile-ts-mode)
+  :mode (("Dockerfile"     . dockerfile-ts-mode)
          ("\\.[tj]sx?\\'"  . tsx-ts-mode)
-         ("\\.bash\\'" . bash-ts-mode)
-         ("\\.css\\'"   . css-ts-mode)
-         ("\\.go\\'" . go-ts-mode)
-         ("\\.java\\'" . java-ts-mode)
-         ("\\.json\\'" . json-ts-mode)
-         ("\\.php\\'" . php-ts-mode)
-         ("\\.py[iw]?\\'" . python-ts-mode)
-         ("\\.toml\\'" . toml-ts-mode)
-         ("\\.ya?ml\\'" . yaml-ts-mode)
-         ("\\go.mode\\'" . go-mod-ts-mode)))
+         ("\\.bash\\'"     . bash-ts-mode)
+         ("\\.css\\'"      . css-ts-mode)
+         ("\\.go\\'"       . go-ts-mode)
+         ("\\.java\\'"     . java-ts-mode)
+         ("\\.json\\'"     . json-ts-mode)
+         ("\\.php\\'"      . php-ts-mode)
+         ("\\.py[iw]?\\'"  . python-ts-mode)
+         ("\\.toml\\'"     . toml-ts-mode)
+         ("\\.ya?ml\\'"    . yaml-ts-mode)
+         ("\\go.mode\\'"   . go-mod-ts-mode)))
 
-(use-package treesit-auto
-  :config (global-treesit-auto-mode))
+(use-package treesit-auto :config (global-treesit-auto-mode))
 
 (use-package ielm
   :ensure nil
@@ -81,14 +79,17 @@
   :config
   (defun kdz/run-pyenv-python (force-unset)
     (interactive "P")
-    (when (or force-unset (not (getenv "PYENV_VERSION")) )
+    (when (or force-unset (not (getenv "PYENV_VERSION")))
       (call-interactively 'pyenv-mode-set))
     (call-interactively 'run-python)))
+
+(use-package pyvenv-auto
+  :hook ((python-ts-mode . pyvenv-auto-run)
+         (python-mode    . pyvenv-auto-run)))
 
 (use-package grpclient
   :if (executable-find "grpcurl")
   :ensure (grpclient :host github :repo "Prikaz98/grpclient.el")
-  :init
-  (add-to-list 'auto-mode-alist '("\\.grpc\\'" . grpclient-mode)))
+  :mode (("\\.grpc\\'" . grpclient-mode)))
 
 (provide 'packages.d/languages)
