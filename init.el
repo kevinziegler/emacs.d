@@ -17,6 +17,7 @@
 
 (require 'packages.d/ui/base)
 (require 'packages.d/ui/tabs)
+(require 'packages.d/ui/themes)
 
 (require 'lib/system)
 (require 'lib/window-resize)
