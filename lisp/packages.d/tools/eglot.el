@@ -16,7 +16,8 @@
       :inlayHints (:callArgumentNames :json-false)
       :diagnosticMode "openFilesOnly")))
 
-  (setq eglot-autoshutdown t))
+  (setq eglot-autoshutdown t
+        eglot-events-buffer-config '(:size 0)))
 
 ;; TODO Make a helper to look for symbol at point by default
 (use-package consult-eglot)
