@@ -34,4 +34,12 @@
 ;;   :general
 ;;   (kdz/leader-code-def "d" '("Debug" . dape)))
 
+(use-package eglot-booster
+  :ensure (eglot-booster :host github :repo "jdtsmith/eglot-booster")
+  :if (executable-find "emacs-lsp-booster")
+  :after eglot
+  :config
+  (setopt eglot-booster-io-only t)
+  (eglot-booster-mode))
+
 (provide 'packages.d/tools/eglot)
