@@ -1,6 +1,6 @@
 (use-package eglot
   :ensure nil
-  :hook ((prog-mode . eglot-ensure)
+  :hook ((prog-mode . kdz/eglot-ensure-maybe)
          (eglot-mode . sideline-mode))
   :general
   (kdz/leader-toggle-def "h" '("Inlay hints" . eglot-inlay-hints-mode))
@@ -17,7 +17,12 @@
       :diagnosticMode "openFilesOnly")))
 
   (setq eglot-autoshutdown t
-        eglot-events-buffer-config '(:size 0)))
+        eglot-events-buffer-config '(:size 0))
+  (defun kdz/eglot-ensure-maybe ()
+    (when (seq-contains-p
+           (-flatten (mapcar #'car eglot-server-programs))
+           major-mode)
+      (eglot-ensure))))
 
 ;; TODO Make a helper to look for symbol at point by default
 (use-package consult-eglot)
