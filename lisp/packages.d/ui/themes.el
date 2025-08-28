@@ -3,9 +3,8 @@
   :hook (
          ;;(elpaca-after-init . (lambda () (load-theme 'catppuccin :no-confirm)))
          (kdz-load-theme . kdz/catppuccin-theme-custom-faces))
+  :custom (catppuccin-flavor 'mocha)
   :config
-  (setopt catppuccin-flavor 'mocha)
-
   (defun kdz/catppuccin-theme-custom-faces ()
     (kdz/customize-with-palette
      'catppuccin
@@ -27,17 +26,15 @@
      '(tab-line-tab-current  ((t :inherit tab-bar-tab))))))
 
 (use-package kaolin-themes
-  :config
-  (setq kaolin-themes-bold t
-        kaolin-themes-distinct-company-scrollbar t
-        kaolin-themes-italic t
-        kaolin-themes-italic-comments t
-        kaolin-themes-underline-wave nil))
+  :custom
+  (kaolin-themes-bold t)
+  (kaolin-themes-distinct-company-scrollbar t)
+  (kaolin-themes-italic t)
+  (kaolin-themes-italic-comments t)
+  (kaolin-themes-underline-wave nil))
 
 (use-package stimmung-themes
   :config
-  ;; :hook ((elpaca-after-init . (lambda () (load-theme 'stimmnung-themes-light :no-confirm)))
-  ;;        (kdz-load-theme . kdz/stimmung-theme-custom-faces))
   (defun kdz/stimmung-theme-custom-faces ()
     (kdz/customize-with-palette
      'stimmung-themes-light

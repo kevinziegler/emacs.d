@@ -124,6 +124,7 @@
                  (window-parameters (mode-line-format . none)))))
 
 (use-package embark-consult
+  :after marginalia
   :general
   (kdz/leader-buffer-def
     "s" '("Search Results" . kdz/consult-embark-ripgrep-results))
@@ -177,9 +178,8 @@
                '(embark-collect-ripgrep kdz/annotate-ripgrep-results)))
 
 (use-package marginalia
-  :init (marginalia-mode)
-  :config
-  (setq marginalia-align 'right))
+  :hook (elpaca-after-init . marginalia-mode)
+  :custom (marginalia-align 'right))
 
 (use-package orderless
   :custom
@@ -224,19 +224,16 @@
 (use-package consult-gh
   :after consult
   :if (executable-find "gh")
-  :config
-  (setq consult-gh-default-clone-directory "~/dev"))
+  :custom (consult-gh-default-clone-directory "~/dev"))
 
 (use-package consult-gh-embark
   :after consult-gh
   :if (executable-find "gh")
-  :config
-  (consult-gh-embark-mode +1))
+  :hook (elpaca-after-init . consult-gh-embark-mode))
 
 (use-package nerd-icons-completion
   :after (marginalia nerd-icons)
-  :config
-  (nerd-icons-completion-mode)
-  (add-hook 'marginalia-mode-hook #'nerd-icons-completion-marginalia-setup))
+  :hook ((elpaca-after-init . nerd-icons-completion-mode)
+         (marginalia-mode . nerd-icons-completion-marginalia-setup)))
 
 (provide 'packages.d/tools/completion)

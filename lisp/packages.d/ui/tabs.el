@@ -1,6 +1,15 @@
 (use-package tab-bar
-  :ensure nil
   :after (custom nerd-icons)
+  :ensure nil
+  :custom
+  (tab-bar-auto-width nil)
+  (tab-bar-close-button-show nil)
+  (tab-bar-tab-hints t)
+  (tab-bar-tab-name-format-function #'kdz/tab-bar-tab-name-format)
+  (tab-bar-new-tab-to 'rightmost)
+  (tab-bar-format '(kdz/tab-bar-format-workspaces
+                    tab-bar-format-align-right
+                    kdz/tab-bar-format-pinned-tabs))
   :general
   (kdz/leader-tab-def
     "TAB" '("Select Workspace"       . kdz/tab-switch-index-or-select)
@@ -60,20 +69,17 @@ the tab-bar.")
 
   (defun kdz/tab-bar-initialize-tab-state ()
     (tab-bar-select-tab-by-name "Home")
-    (tab-bar-close-tab-by-name "*default*"))
-
-  (setopt tab-bar-auto-width nil
-          tab-bar-close-button-show nil
-          tab-bar-tab-hints t
-          tab-bar-tab-name-format-function #'kdz/tab-bar-tab-name-format
-          tab-bar-new-tab-to 'rightmost
-          tab-bar-format '(kdz/tab-bar-format-workspaces
-                           tab-bar-format-align-right
-                           kdz/tab-bar-format-pinned-tabs)))
+    (tab-bar-close-tab-by-name "*default*")))
 
 (use-package tab-line
-  :ensure nil
   :after (custom nerd-icons)
+  :ensure nil
+  :custom
+  (tab-line-close-button-show nil)
+  (tab-line-tab-name-truncated-max 40)
+  (tab-line-new-button-show nil)
+  (tab-line-tab-name-function #'kdz/tab-line-buffer-display-name)
+  (tab-line-tab-name-format-function #'kdz/tab-line-tab-name-format)
   :hook ((window-state-change . kdz/ensure-bottom-tab-line))
   :config
   (defvar kdz-tab-line-mode-icon-alist
@@ -150,12 +156,6 @@ the tab-bar.")
   (defun kdz/ensure-bottom-tab-line (&rest args)
     (when (and (eq 'bottom (window-parameter nil 'window-side))
                (not tab-line-mode))
-      (tab-line-mode 1)))
-
-  (setopt tab-line-close-button-show nil
-          tab-line-tab-name-truncated-max 40
-          tab-line-new-button-show nil
-          tab-line-tab-name-function #'kdz/tab-line-buffer-display-name
-          tab-line-tab-name-format-function #'kdz/tab-line-tab-name-format))
+      (tab-line-mode 1))))
 
 (provide 'packages.d/ui/tabs)

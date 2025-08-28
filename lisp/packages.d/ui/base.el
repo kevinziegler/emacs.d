@@ -1,11 +1,15 @@
+(use-package avy)
+(use-package flycheck :custom (flycheck-checker-error-threshold 10000))
+(use-package git-gutter-fringe :hook (elpaca-after-init . global-git-gutter-mode))
+(use-package hide-mode-line :hook ((reb-mode . hide-mode-line-mode)))
+(use-package perfect-margin)
+
 (use-package ace-window
   :general
   (kdz/leader-window-def "w" '("Select Window" . ace-window))
   :config
   (ace-window-posframe-mode)
   (set-face-attribute 'aw-leading-char-face nil :height 3.0))
-
-(use-package avy)
 
 (use-package minimal-dashboard
   :ensure (minimal-dashboard :host github
@@ -29,8 +33,7 @@
 
 (use-package display-fill-column-indicator
   :ensure nil
-  :init
-  (global-display-fill-column-indicator-mode)
+  :hook (elpaca-after-init . global-display-fill-column-indicator-mode)
   :general
   (kdz/leader-toggle-def "c"
     '("Show/hide fill column" . display-fill-column-indicator-mode))
@@ -38,8 +41,9 @@
   (kdz/leader-toggle-global-def "c"
     '("Show/hide fill column" . global-display-fill-column-indicator-mode))
 
+  :custom
+  (display-fill-column-indicator-character ?\u2502)
   :config
-  (setopt display-fill-column-indicator-character ?\u2502)
   (dolist (mode '(dired-mode
                   dirvish-directory-view-mode
                   helpful-mode
@@ -51,8 +55,7 @@
 
 (use-package display-line-numbers
   :ensure nil
-  :init
-  (global-display-line-numbers-mode)
+  :hook (elpaca-after-init . global-display-line-numbers-mode)
   :general
   (kdz/leader-toggle-def
     "l" '("Show/hide line numbers"         . display-line-numbers-mode)
@@ -80,35 +83,22 @@
     (add-hook mode (lambda () (display-line-numbers-mode -1)))))
 
 (use-package elfeed
-  :config
-  (setq elfeed-search-feed-face ":foreground #ffffff :weight bold"
-        elfeed-feeds '(("https://planet.emacslife.com/atom.xml" devtools emacs)
-                       ("https://www.reddit.com/r/austin.rss" reddit austin)
-                       ("https://www.reddit.com/r/commandline.rss" reddit devtools)
-                       ("https://www.reddit.com/r/emacs.rss" reddit devtools emacs)
-                       ("https://www.reddit.com/r/orgmode.rss" reddit devtools emacs)
-                       ("https://www.reddit.com/r/zsh.rss" reddit devtools)
-                       ("https://hackaday.com/blog/feed/" tech news)
-                       ("https://news.ycombinator.com/rss" tech news)
-                       ("https://www.commitstrip.com/en/feed/" webcomic)
-                       ("https://xkcd.com/rss.xml" webcomic))))
+  :custom
+  (elfeed-search-feed-face ":foreground #ffffff :weight bold")
+  (elfeed-feeds '(("https://planet.emacslife.com/atom.xml" devtools emacs)
+                  ("https://www.reddit.com/r/austin.rss" reddit austin)
+                  ("https://www.reddit.com/r/commandline.rss" reddit devtools)
+                  ("https://www.reddit.com/r/emacs.rss" reddit devtools emacs)
+                  ("https://www.reddit.com/r/orgmode.rss" reddit devtools emacs)
+                  ("https://www.reddit.com/r/zsh.rss" reddit devtools)
+                  ("https://hackaday.com/blog/feed/" tech news)
+                  ("https://news.ycombinator.com/rss" tech news)
+                  ("https://www.commitstrip.com/en/feed/" webcomic)
+                  ("https://xkcd.com/rss.xml" webcomic))))
 
 (use-package file-info
-  :general
-  (kdz/leader-file-def "i" '("Show Info" . file-info-show))
-  :config
-  (setq file-info-headline-underline-symbol ?━))
-
-(use-package flycheck
-  :config
-  (setopt flycheck-checker-error-threshold 10000))
-
-(use-package git-gutter-fringe
-  :config
-  (global-git-gutter-mode 1))
-
-(use-package hide-mode-line
-  :hook ((reb-mode . hide-mode-line-mode)))
+  :custom (file-info-headline-underline-symbol ?━)
+  :general (kdz/leader-file-def "i" '("Show Info" . file-info-show)))
 
 ;; TODO Need to adjust face colors to contrast properly
 (use-package highlight-indent-guides
@@ -118,7 +108,8 @@
 
 (use-package hl-todo
   :after custom
-  :hook (kdz-load-theme . kdz/set-hl-todo-faces)
+  :hook ((elpaca-after-init . glboal-hl-todo-mode)
+         (kdz-load-theme . kdz/set-hl-todo-faces))
   :config
   (defun kdz/set-hl-todo-faces (&rest _)
     "Set face colors for hl-todo keywords
@@ -130,8 +121,7 @@ actions that would update colors in emacs (such as changing themes)"
             ("FIXME"  . ,(face-foreground 'ansi-color-red))
             ("DEBUG"  . ,(face-foreground 'ansi-color-cyan))
             ("NOTE"   . ,(face-foreground 'ansi-color-blue))
-            ("STUB"   . ,(face-foreground 'ansi-color-green)))))
-  (global-hl-todo-mode))
+            ("STUB"   . ,(face-foreground 'ansi-color-green))))))
 
 (use-package hydra
   :config
@@ -249,10 +239,7 @@ actions that would update colors in emacs (such as changing themes)"
 
 (use-package nerd-icons-ibuffer
   :hook (ibuffer-mode . nerd-icons-ibuffer-mode)
-  :config
-  (setq nerd-icons-ibuffer-icon t))
-
-(use-package perfect-margin)
+  :custom (nerd-icons-ibuffer-icon t))
 
 (use-package scroll-on-jump
   :after evil
@@ -329,6 +316,11 @@ actions that would update colors in emacs (such as changing themes)"
                       (* offset-percent parent-frame-height)))))))
 
 (use-package treemacs
+  :custom
+  (treemacs-collapse-dirs 0)
+  (treemacs-width 45)
+  (treemacs-recenter-after-file-follow 'on-distance)
+  (treemacs-project-follow-cleanup t)
   :general
   (general-def
     :keymaps 'treemacs-mode-map
@@ -345,19 +337,13 @@ actions that would update colors in emacs (such as changing themes)"
     "s" 'treemacs-visit-node-ace-vertical-split)
 
   (kdz/leader-open-def "t" '("Project File Tree" . treemacs))
-
   :config
-  (setq treemacs-collapse-dirs 0
-        treemacs-width 45
-        treemacs-recenter-after-file-follow 'on-distance
-        treemacs-project-follow-cleanup t)
   (treemacs-git-mode 0)
   (treemacs-hide-gitignored-files-mode 1))
 
 (use-package treemacs-nerd-icons
   :after treemacs
-  :config
-  (treemacs-load-theme "nerd-icons"))
+  :config (treemacs-load-theme "nerd-icons"))
 
 (use-package treemacs-tab-bar
   :after treemacs

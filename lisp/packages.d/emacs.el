@@ -100,29 +100,25 @@
   :general
   (kdz/leader-edit-def "a" '("Align by Regexp" . align-regexp)))
 
-(use-package apropos
-  :ensure nil
-  :config
-  (setopt appropos-do-all t))
+(use-package apropos :ensure nil :custom (appropos-do-all t))
 
 (use-package autorevert
   :ensure nil
-  :config
-  (setopt auto-revert-avoid-polling t
-          auto-revert-check-vc-info t
-          auto-revert-interval 5)
-  (global-auto-revert-mode 1))
+  :hook (elpaca-after-init . global-auto-revert-mode)
+  :custom
+  (auto-revert-avoid-polling t)
+  (auto-revert-check-vc-info t)
+  (auto-revert-interval 5))
 
 (use-package bookmark
   :ensure nil
-  :config
-  (setopt bookmark-file (kdz/user-directory ".local" "bookmarks")))
+  :custom (bookmark-default-file (kdz/user-directory ".local" "bookmarks")))
 
 (use-package comint
   :ensure nil
-  :config
-  (setopt comint-prompt-read-only t
-          comint-scroll-to-bottom-on-input t))
+  :custom
+  (comint-prompt-read-only t)
+  (comint-scroll-to-bottom-on-input t))
 
 (use-package cus-edit
   :ensure nil
@@ -321,15 +317,11 @@ This is executed *prior* to running on of `project-switch-commands'.")
   (kdz/leader-toggle-def "w" '("Sub-word mode" . subword-mode))
   (kdz/leader-toggle-global-def "w" '("Sub-word mode" . global-subword-mode)))
 
-(use-package thingatpt
-  :ensure nil
-  :config
-  (require 'lib/tap))
+(use-package thingatpt :ensure nil :config (require 'lib/tap))
 
 (use-package uniquify
   :ensure nil
-  :config
-  (setopt uniquify-buffer-name-style 'post-forward))
+  :custom (uniquify-buffer-name-style 'post-forward))
 
 (use-package url
   :ensure nil
@@ -338,30 +330,27 @@ This is executed *prior* to running on of `project-switch-commands'.")
 
 (use-package use-package-core
   :ensure nil
-  :config
-  (setopt use-package-enable-imenu-support t))
+  :custom (use-package-enable-imenu-support t))
 
-(use-package vc-hooks
-  :ensure nil
-  :config
-  (setopt vc-follow-symlinks t))
+(use-package vc-hooks :ensure nil :custom (vc-follow-symlinks t))
 
 (use-package which-key
   :ensure nil
-  :init
-  (setq which-key-sort-order 'which-key-prefix-then-key-order
-	which-key-max-display-columns 5
-        which-key-add-column-padding 2
-	which-key-sort-uppercase-first nil
-        which-key-max-description-length 30
-        which-key-idle-delay 0.5
-        which-key-idle-secondary-delay 0.05
-        which-key-prefix-prefix "✚ "
-        which-key-show-prefix 'left)
-  (which-key-mode))
+  :hook (elpaca-after-init . which-key-mode)
+  :custom
+  (which-key-sort-order 'which-key-prefix-then-key-order)
+  (which-key-max-display-columns 5)
+  (which-key-add-column-padding 2)
+  (which-key-sort-uppercase-first nil)
+  (which-key-max-description-length 30)
+  (which-key-idle-delay 0.5)
+  (which-key-idle-secondary-delay 0.05)
+  (which-key-prefix-prefix "✚ ")
+  (which-key-show-prefix 'left))
 
 (use-package window
   :ensure nil
+  :custom (switch-to-buffer-obey-display-actions t)
   :general
   (kdz/leader-window-def "=" '("Balance Windows" . balance-windows))
   (kdz/leader-buffer-def
@@ -370,8 +359,6 @@ This is executed *prior* to running on of `project-switch-commands'.")
     "p" '("Previous Buffer"           . previous-buffer))
   
   :config
-  (setopt switch-to-buffer-obey-display-actions t)
-
   (defmacro kdz/display-rule-buffer-to-tab (pattern tab-name)
     `(add-to-list 'display-buffer-alist
                   '(,pattern display-buffer-in-tab (tab-name . ,tab-name))))
@@ -412,8 +399,8 @@ This is executed *prior* to running on of `project-switch-commands'.")
   (kdz/leader-code-lookup-def
     "d" '("Lookup Definition" . xref-find-definitions)
     "r" '("Lookup References" . xref-find-references))
-  :config
-  (setq xref-prompt-for-identifier nil
-        xref-search-program 'ripgrep))
+  :custom
+  (xref-prompt-for-identifier nil)
+  (xref-search-program 'ripgrep))
 
 (provide 'packages.d/emacs)

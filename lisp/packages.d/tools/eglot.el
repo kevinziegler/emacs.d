@@ -26,20 +26,17 @@
 
 (use-package sideline-eglot
   :after sideline
-  :init
-  (add-to-list 'sideline-backends-right 'sideline-eglot))
+  :init (add-to-list 'sideline-backends-right 'sideline-eglot))
+
 ;; (use-package projection)
 ;; (use-package projection-dape)
-;; (use-package dape
-;;   :general
-;;   (kdz/leader-code-def "d" '("Debug" . dape)))
+;; (use-package dape :general (kdz/leader-code-def "d" '("Debug" . dape)))
 
 (use-package eglot-booster
-  :ensure (eglot-booster :host github :repo "jdtsmith/eglot-booster")
-  :if (executable-find "emacs-lsp-booster")
   :after eglot
-  :config
-  (setopt eglot-booster-io-only t)
-  (eglot-booster-mode))
+  :ensure (eglot-booster :host github :repo "jdtsmith/eglot-booster")
+  :hook (elpaca-after-init . eglot-booster-mode)
+  :if (executable-find "emacs-lsp-booster")
+  :custom (eglot-booster-io-only t))
 
 (provide 'packages.d/tools/eglot)
