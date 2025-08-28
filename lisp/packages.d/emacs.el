@@ -145,7 +145,7 @@ defined in that palette from within FACE-SPECS."
                  (when (and (boundp ,palette))
                    (cond ((functionp ,palette) (funcall ,palette name))
                          ((and (listp (symbol-value ,palette))
-                               (every #'consp (symbol-value ,palette)))
+                               (cl-every #'consp (symbol-value ,palette)))
                           (car (alist-get name (symbol-value ,palette))))
                          (t (error "Expected function or alist, but received neither."))))))
        (when (custom-theme-enabled-p ,theme)
