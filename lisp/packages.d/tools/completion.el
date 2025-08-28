@@ -74,13 +74,9 @@
   :general
   (general-def
     :keymaps 'vertico-map
-    "C-."        '("Act on Candidatae"        . embark-act)      ;; pick some comfortable binding
-    "C-;"        '("Act on Candidate (DWIM)"  . embark-dwim)     ;; good alternative: M-.
-    "s-<return>" '("Collect Results"          . embark-collect)) ;; 90% of what I want to do is persist results
-
-  :init
-  ;; Optionally replace the key help with a completing-read interface
-  (setq prefix-help-command #'embark-prefix-help-command)
+    "s-."        '("Act on Candidate"         . embark-act)
+    "s-;"        '("Act on Candidate (DWIM)"  . embark-dwim)
+    "s-<return>" '("Collect Results"          . embark-collect))
 
   :config
   (defun embark-which-key-indicator ()
@@ -123,7 +119,7 @@
 
   ;; Hide the mode line of the Embark live/completions buffers
   (add-to-list 'display-buffer-alist
-               '("\\`\\*Embark Collect \\(Live\\|Completions\\)\\*"
+               '((derived-mode . embark-collect-mode)
                  nil
                  (window-parameters (mode-line-format . none)))))
 
