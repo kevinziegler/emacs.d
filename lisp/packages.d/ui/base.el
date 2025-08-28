@@ -367,11 +367,10 @@ actions that would update colors in emacs (such as changing themes)"
 
 (use-package vertico-posframe
   :after (posframe vertico)
-  :config
-  (vertico-posframe-mode 1)
-  (setopt vertico-posframe-poshandler #'kdz/posframe-offset-top
-          vertico-posframe-parameters '((left-fringe . 8)
-                                        (right-fringe . 8))))
+  :hook (elpaca-after-init . vertico-posframe-mode)
+  :custom
+  (vertico-posframe-poshandler #'kdz/posframe-offset-top)
+  (vertico-posframe-parameters '((left-fringe . 8) (right-fringe . 8))))
 
 (use-package spacious-padding
   :config
@@ -418,11 +417,8 @@ actions that would update colors in emacs (such as changing themes)"
 
 (use-package otpp
   :after project
-  :init
-  (defalias 'one-tab-per-project-mode 'otpp-mode)
-  (defalias 'one-tab-per-project-override-mode 'otpp-override-mode)
-  (otpp-mode 1)
-  (otpp-override-mode 1))
+  :hook ((elpaca-after-init . otpp-mode)
+         (elpaca-after-init . otpp-override-mode)))
 
 (use-package keycast
   :general
@@ -431,12 +427,9 @@ actions that would update colors in emacs (such as changing themes)"
 (use-package eldoc-box
   :general
   (kdz/leader-toggle-def "d" '("Documentation Popups" . eldoc-box-hover-mode))
-  :config
-  (setq eldoc-box-only-multi-line t
-        eldoc-box-position-function #'eldoc-box--default-at-point-position-function)
-  (set-face-attribute 'eldoc-box-border
-                      nil
-                      :background (face-foreground 'default)))
+  :custom
+  (eldoc-box-only-multi-line t)
+  (eldoc-box-position-function #'eldoc-box--default-at-point-position-function))
 
 (use-package helpful
   :general

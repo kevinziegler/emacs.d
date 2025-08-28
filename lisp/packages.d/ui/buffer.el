@@ -1,13 +1,13 @@
 ;;;; In-Buffer UI Enhancments - Editing behaviors, formating, etc
 (use-package browse-at-remote) ;; TODO Set up keybindings
-(use-package yasnippet :config (yas-global-mode))
+(use-package yasnippet :hook (elpaca-after-init . yas-global-mode))
 (use-package yasnippet-snippets :after yasnippet)
-(use-package apheleia :config (apheleia-global-mode +1))
-(use-package anzu :config (global-anzu-mode +1))
+(use-package apheleia :hook (elpaca-after-init . apheleia-global-mode))
+(use-package anzu :hook (elpaca-after-init . global-anzu-mode))
+(use-package undo-fu :custom (evil-undo-system 'undo-fu))
 
 (use-package vundo
-  :general
-  (kdz/leader-buffer-def "h" '("Undo History" . vundo)))
+  :general (kdz/leader-buffer-def "h" '("Undo History" . vundo)))
 
 (use-package eval-sexp-fu
   :general
@@ -16,8 +16,7 @@
 
 (use-package expand-region
   :ensure (:wait t)
-  :general
-  (kdz/leader-edit-def "e" '("Expand Region" . er/expand-region)))
+  :general (kdz/leader-edit-def "e" '("Expand Region" . er/expand-region)))
 
 (use-package separedit
   :general
@@ -35,14 +34,13 @@
     "yG" '("Copy as Markdown (Gitlab)" . copy-as-format-gitlab)))
 
 (use-package jinx
+  :hook (elpaca-after-init . global-jinx-mode)
   :general
   (general-def
     :states '(normal)
     :keymaps 'override
     :prefix "z"
-    "=" '(jinx-correct :which-key "Correct Spelling"))
-  :config
-  (global-jinx-mode))
+    "=" '(jinx-correct :which-key "Correct Spelling")))
 
 (use-package elec-pair
   :ensure nil
@@ -50,18 +48,14 @@
 	 (inferior-emacs-lisp-mode . electric-pair-mode)))
 
 (use-package origami
-  :config
-  (setq origami-fold-replacement " ... ")
-  (global-origami-mode))
+  :custom (origami-fold-replacement " ... ")
+  :hook (elpaca-after-init . global-origami-mode))
 
 (use-package ws-butler :hook ((prog-mode . ws-butler-mode)))
 
 (use-package editorconfig
-  :config
-  (setopt editorconfig-trim-whitespaces-mode 'ws-butler-mode)
-  (editorconfig-mode 1))
-
-(use-package undo-fu :config (setopt evil-undo-system 'undo-fu))
+  :custom (editorconfig-trim-whitespaces-mode 'ws-butler-mode)
+  :hook   (elpaca-after-init . editorconfig-mode))
 
 (use-package markdown-xwidget
   :after markdown-mode
@@ -69,11 +63,11 @@
            :host github
            :repo "cfclrk/markdown-xwidget"
            :files (:defaults "resources"))
-  :config
-  (setq markdown-xwidget-command "pandoc"
-        markdown-xwidget-github-theme "light"
-        markdown-xwidget-mermaid-theme "default"
-        markdown-xwidget-code-block-theme "default"))
+  :custom
+  (markdown-xwidget-command          "pandoc")
+  (markdown-xwidget-github-theme     "light")
+  (markdown-xwidget-mermaid-theme    "default")
+  (markdown-xwidget-code-block-theme "default"))
 
 ;; TODO This needs tree-sitter to work
 ;; TODO This pulls from quelpa; how do I set that up with straight?
@@ -91,10 +85,7 @@
   :ensure (flyover :host github :repo "konrad1977/flyover" :branch "main"))
 
 (use-package scopeline
-  :hook '(prog-mode . scopeline-mode)
-  :general
-  (kdz/leader-toggle-def "b" '("Block indicators" . scopeline-mode))
-  :config
-  (setopt scopeline-min-lines 10))
+  :custom (scopeline-main-lines 10)
+  :general (kdz/leader-toggle-def "b" '("Block indicators" . scopeline-mode)))
 
 (provide 'packages.d/ui/buffer)
