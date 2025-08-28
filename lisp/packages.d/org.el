@@ -333,34 +333,34 @@ appropriate.  In tables, insert a new row or end the table."
 (use-package org-agenda
   :ensure nil
   :after org
-  :config
-  (setopt org-agenda-tags-column 0
-          org-agenda-block-separator ?─
-          org-agenda-time-grid '((daily today require-timed)
-                                 (800 1000 1200 1400 1600 1800 2000)
-                                 " ┄┄┄┄┄ " "┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄")
-          org-agenda-current-time-string
-          "⭠ now ─────────────────────────────────────────────────"))
+  :custom
+  (org-agenda-tags-column 0)
+  (org-agenda-block-separator ?─)
+  (org-agenda-time-grid '((daily today require-timed)
+                          (800 1000 1200 1400 1600 1800 2000)
+                          " ┄┄┄┄┄ " "┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄"))
+  (org-agenda-current-time-string
+   "⭠ now ─────────────────────────────────────────────────"))
 
 (use-package org-modern
   :after (org nerd-icons)
-  :config
-  (setq org-modern-star 'replace
-        org-modern-checkbox `((?X  . ,(nerd-icons-mdicon "nf-md-checkbox_marked"))
-                              (?-  . ,(nerd-icons-mdicon "nf-md-checkbox_intermediate"))
-                              (?\s . ,(nerd-icons-mdicon "nf-md-checkbox_blank_outline"))))
-  (global-org-modern-mode))
+  :hook (elpaca-after-init . global-org-modern-mode)
+  :custom
+  (org-modern-star 'replace)
+  (org-modern-checkbox `((?X  . ,(nerd-icons-mdicon "nf-md-checkbox_marked"))
+                         (?-  . ,(nerd-icons-mdicon "nf-md-checkbox_intermediate"))
+                         (?\s . ,(nerd-icons-mdicon "nf-md-checkbox_blank_outline")))))
 
 (use-package org-appear
   :after org
   :hook ((org-mode . org-appear-mode)
          (org-mode . kdz/org-appear-respect-evil-state))
+  :custom
+  (org-appear-trigger 'manual)
+  (org-appear-autolinks t)
+  (org-appear-autokeywords t)
+  (org-appear-manual-linger t)
   :config
-  (setopt org-appear-trigger 'manual
-          org-appear-autolinks t
-          org-appear-autokeywords t
-          org-appear-manual-linger t)
-
   (defun kdz/org-appear-respect-evil-state ()
     (add-hook 'evil-insert-state-entry-hook #'org-appear-manual-start nil t)
     (add-hook 'evil-insert-state-exit-hook #'org-appear-manual-stop nil t)))
@@ -379,24 +379,20 @@ appropriate.  In tables, insert a new row or end the table."
     (let ((char-at-insert (thing-at-point 'char)))
       (evil-save-state
         (evil-append 1)
-        (when (not (string-match-p "[[:space:]]" char-at-insert))
-          (insert " "))
+        (when (not (string-match-p "[[:space:]]" char-at-insert)) (insert " "))
         (apply org-mac-link-fn orig-args))))
+
   (advice-add 'org-mac-link-firefox-insert-frontmost-url
               :around #'kdz/org-mac-link-advise-evil)
   (advice-add 'org-mac-link-finder-insert-selected
               :around #'kdz/org-mac-link-advise-evil))
 
 (use-package org-re-reveal
-  :config
-  (setq
-   org-re-reveal-subtree-with-title-slide t
-   org-re-reveal-transition "slide"
-   org-re-reveal-title-slide "<h1>%t</h1><p>%a | %d</p>"
-   org-re-reveal-plugins '(highlight markdown notes search zoom)))
-
-;; TODO Figure out how to get the tree view to show up for this package
-;; (use-package org-sidebar)
+  :custom
+  (org-re-reveal-subtree-with-title-slide t)
+  (org-re-reveal-transition "slide")
+  (org-re-reveal-title-slide "<h1>%t</h1><p>%a | %d</p>")
+  (org-re-reveal-plugins '(highlight markdown notes search zoom)))
 
 (use-package evil-org
   :after (evil org)
@@ -406,13 +402,8 @@ appropriate.  In tables, insert a new row or end the table."
   (general-def :states 'normal :keymaps 'org-mode-map "RET" 'evil-org-return)
 
   :config
-  (evil-org-set-key-theme '(textobjects
-                            insert
-                            navigation
-                            additional
-                            shift
-                            todo
-                            heading))
+  (evil-org-set-key-theme
+   '(textobjects insert navigation additional shift todo heading))
 
   (defun kdz/org-cycle-table-on-evil-state ()
     (add-hook 'evil-insert-state-exit-hook
@@ -472,15 +463,14 @@ appropriate.  In tables, insert a new row or end the table."
 
 (use-package ox-pandoc
   :if (executable-find "pandoc")
-  :config
-  (add-to-list 'org-pandoc-options '(wrap . "none")))
-
+  :config (add-to-list 'org-pandoc-options '(wrap . "none")))
 
 (use-package ob-plantuml
   :ensure nil
+  :custom
+  (org-plantuml-exec-mode 'executable)
+  (org-plantuml-exec-mode 'plantuml)
   :config
-  (setq org-plantuml-exec-mode 'executable)
-  (setopt org-plantuml-exec-mode 'plantuml)
   (defun kdz/org-babel-plantuml-format-var (var-value)
     (cond ((numberp var-value) (number-to-string var-value))
           ((booleanp var-value) (if var-value "true" "false"))
@@ -778,13 +768,11 @@ Also adds support for a `:sync' parameter to override `:async'."
 
 (use-package org-sliced-images
   :config
-  (defalias 'org-remove-inline-images #'org-sliced-images-remove-inline-images)
-  (defalias 'org-toggle-inline-images #'org-sliced-images-toggle-inline-images)
+  (defalias 'org-remove-inline-images  #'org-sliced-images-remove-inline-images)
+  (defalias 'org-toggle-inline-images  #'org-sliced-images-toggle-inline-images)
   (defalias 'org-display-inline-images #'org-sliced-images-display-inline-images))
 
-(use-package org-src
-  :ensure nil
-  :config (setq org-src-preserve-indentation t))
+(use-package org-src :ensure nil :custom (org-src-preserve-indentation t))
 
 (use-package org-tidy
   :general
@@ -813,9 +801,6 @@ Also adds support for a `:sync' parameter to override `:async'."
     :keymaps 'org-mode-map
     "iR" '("Insert Recipe (By URL)" . org-chef-insert-recipe)))
 
-
-(use-package org-ac
-  :config
-  (org-ac/config-default))
+(use-package org-ac :config (org-ac/config-default))
 
 (provide 'packages.d/org)

@@ -35,8 +35,7 @@
           `((".*" ,auto-save-dir t)))
 
     (make-directory backup-dir t)
-    (setf backup-directory-alist
-          `((".*" . ,backup-dir))))
+    (setf backup-directory-alist `((".*" . ,backup-dir))))
 
   ;; files.el
   (setopt backup-by-copying t
@@ -100,8 +99,6 @@
   :general
   (kdz/leader-edit-def "a" '("Align by Regexp" . align-regexp)))
 
-(use-package apropos :ensure nil :custom (appropos-do-all t))
-
 (use-package autorevert
   :ensure nil
   :hook (elpaca-after-init . global-auto-revert-mode)
@@ -154,13 +151,13 @@ defined in that palette from within FACE-SPECS."
 
 (use-package ediff
   :ensure nil
+  :custom
+  (ediff-keep-variants nil)
+  (ediff-split-window-function #'split-window-horizontally)
+  (ediff-window-setup-function #'ediff-setup-windows-plain)
   :hook ((ediff-before-setup . kdz/store-pre-ediff-winconfig)
          (ediff-quit-hook    . kdz/restore-pre-ediff-winconfig))
   :config
-  (setopt ediff-keep-variants nil
-          ediff-split-window-function #'split-window-horizontally
-          ediff-window-setup-function #'ediff-setup-windows-plain)
-
   (defvar kdz-ediff-last-windows nil)
   (defun kdz/store-pre-ediff-winconfig ()
     (setq kdz-ediff-last-windows (current-window-configuration)))
@@ -170,19 +167,14 @@ defined in that palette from within FACE-SPECS."
 
 (use-package eldoc
   :ensure nil
-  :config
   :after evil
-  ;; allow eldoc to trigger directly after changing modes
-  (eldoc-add-command #'evil-normal-state
-                     #'evil-insert
-                     #'evil-change
-                     #'evil-delete
-                     #'evil-replace))
+  :config
+  (eldoc-add-command
+   #'evil-normal-state #'evil-insert #'evil-change #'evil-delete #'evil-replace))
 
 (use-package eshell
   :ensure nil
-  :init
-  (setq eshell-directory-name (kdz/user-directory ".local" "eshell")))
+  :custom (eshell-directory-name (kdz/user-directory ".local" "eshell")))
 
 (use-package frame
   :ensure nil
@@ -197,32 +189,23 @@ defined in that palette from within FACE-SPECS."
 
 (use-package help-fns
   :ensure nil
-  :general
-  (kdz/leader-help-def "M" '("Describe Mode" . describe-mode)))
-
-(use-package hl-line
-  :ensure nil
-  :config
-  (global-hl-line-mode))
+  :general (kdz/leader-help-def "M" '("Describe Mode" . describe-mode)))
 
 (use-package man
   :ensure nil
-  :general
-  (kdz/leader-help-def "m" '("Lookup Manpage" . man)))
+  :general (kdz/leader-help-def "m" '("Lookup Manpage" . man)))
 
 (use-package minibuffer
   :ensure nil
-  :config
-  (setopt completion-cycle-threshold 1
-          completions-detailed t))
+  :custom
+  (completion-cycle-threshold 1)
+  (completions-detailed t))
 
 (use-package mouse
   :ensure nil
-  :general
-  (kdz/leader-window-def "T" '("Tear off Window" . tear-off-window))
-  :config
-  (setopt mouse-yank-at-point t)
-  (when (display-graphic-p) (context-menu-mode)))
+  :custom (mouse-yank-at-point t)
+  :general (kdz/leader-window-def "T" '("Tear off Window" . tear-off-window))
+  :config (when (display-graphic-p) (context-menu-mode)))
 
 (use-package mule
   :ensure nil
@@ -232,20 +215,16 @@ defined in that palette from within FACE-SPECS."
   (set-selection-coding-system 'utf-8)
   (prefer-coding-system 'utf-8))
 
-(use-package mule-util
-  :ensure nil
-  :config
-  (setopt truncate-string-ellipsis "…"))
-
 (use-package pixel-scroll
   :ensure nil
-  :config
-  (setopt pixel-scroll-precision-mode t
-          pixel-scroll-precision-use-momentum t)
-  (pixel-scroll-precision-mode))
+  :hook (elpaca-after-init . pixel-scroll-precision-mode)
+  :custom
+  (pixel-scroll-precision-mode t)
+  (pixel-scroll-precision-use-momentum t))
 
 (use-package project
   :ensure nil
+  :custom (project-list-file (kdz/user-directory ".local" "projects"))
   :general
   (kdz/leader-def
     "p"   (cons "Project" (make-sparse-keymap))
@@ -256,10 +235,7 @@ defined in that palette from within FACE-SPECS."
     "pp" '("Switch To Project" . project-switch-project))
   (kdz/leader-buffer-def
     "b" '("Switch to Buffer (Workspace)" . project-switch-to-buffer))
-
   :config
-  (setq project-list-file (kdz/user-directory ".local" "projects"))
-
   (defvar kdz-project-switch-init-hook nil
     "Hooks to run after selecting a project via `project-switch-project'.
 
@@ -271,14 +247,12 @@ This is executed *prior* to running on of `project-switch-commands'.")
   ;; Run this hook only after we've selected the project
   (advice-add 'project-switch-project
               :before
-              (lambda (&rest _)
-                (run-hooks 'kdz-project-switch-init-hook)))
+              (lambda (&rest _) (run-hooks 'kdz-project-switch-init-hook)))
 
   ;; Run this hook after we've selected/undertaken one of `project-switch-commands'
   (advice-add 'project-switch-project
               :after
-              (lambda (&rest _)
-                (run-hooks 'kdz-project-switch-after-init-hook))))
+              (lambda (&rest _) (run-hooks 'kdz-project-switch-after-init-hook))))
 
 (use-package re-builder
   :ensure nil
@@ -287,15 +261,13 @@ This is executed *prior* to running on of `project-switch-commands'.")
 
 (use-package savehist
   :ensure nil
-  :config
-  (setopt savehist-file (kdz/user-directory ".local" "history"))
-  (savehist-mode 1))
+  :custom (savehist-file (kdz/user-directory ".local" "history"))
+  :hook (elpaca-after-init . savehist-mode))
 
 (use-package saveplace
   :ensure nil
-  :config
-  (setopt save-place-file (kdz/user-directory ".local" "places"))
-  (save-place-mode 1))
+  :custom (save-place-file (kdz/user-directory ".local" "places"))
+  :hook (elpaca-after-init . save-place-mode))
 
 (use-package simple
   :ensure nil
@@ -306,33 +278,15 @@ This is executed *prior* to running on of `project-switch-commands'.")
   (setq-default indent-tabs-mode nil)
   (column-number-mode 1))
 
-(use-package so-long
-  :ensure nil
-  :config
-  (global-so-long-mode))
-
 (use-package subword
   :ensure nil
   :general
   (kdz/leader-toggle-def "w" '("Sub-word mode" . subword-mode))
   (kdz/leader-toggle-global-def "w" '("Sub-word mode" . global-subword-mode)))
 
-(use-package thingatpt :ensure nil :config (require 'lib/tap))
-
-(use-package uniquify
-  :ensure nil
-  :custom (uniquify-buffer-name-style 'post-forward))
-
 (use-package url
   :ensure nil
-  :config
-  (setq url-configuration-directory (kdz/user-directory ".local" "url")))
-
-(use-package use-package-core
-  :ensure nil
-  :custom (use-package-enable-imenu-support t))
-
-(use-package vc-hooks :ensure nil :custom (vc-follow-symlinks t))
+  :custom (url-configuration-directory (kdz/user-directory ".local" "url")))
 
 (use-package which-key
   :ensure nil
@@ -402,5 +356,14 @@ This is executed *prior* to running on of `project-switch-commands'.")
   :custom
   (xref-prompt-for-identifier nil)
   (xref-search-program 'ripgrep))
+
+(use-package apropos :ensure nil :custom (appropos-do-all t))
+(use-package hl-line :ensure nil :hook (elpaca-after-init . global-hl-line-mode))
+(use-package mule-util :ensure nil :custom (truncate-string-ellipsis "…"))
+(use-package so-long :ensure nil :hook (elpaca-after-init . global-so-long-mode))
+(use-package thingatpt :ensure nil :config (require 'lib/tap))
+(use-package uniquify :ensure nil :custom (uniquify-buffer-name-style 'post-forward))
+(use-package use-package-core :ensure nil :custom (use-package-enable-imenu-support t))
+(use-package vc-hooks :ensure nil :custom (vc-follow-symlinks t))
 
 (provide 'packages.d/emacs)
