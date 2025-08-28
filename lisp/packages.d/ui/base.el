@@ -147,7 +147,7 @@ actions that would update colors in emacs (such as changing themes)"
   :general
   (general-def
     :keymaps 'imenu-list-major-mode-map
-    "s-RET" 'imenu-list-goto-entry)
+    "s-<return>" 'imenu-list-goto-entry)
   (kdz/leader-code-lookup-def "l" '("Symbols List" . imenu-list)))
 
 (use-package pretty-hydra
