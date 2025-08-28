@@ -108,7 +108,7 @@
 
 (use-package hl-todo
   :after custom
-  :hook ((elpaca-after-init . glboal-hl-todo-mode)
+  :hook ((elpaca-after-init . global-hl-todo-mode)
          (kdz-load-theme . kdz/set-hl-todo-faces))
   :config
   (defun kdz/set-hl-todo-faces (&rest _)
