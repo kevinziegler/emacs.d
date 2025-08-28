@@ -397,10 +397,6 @@ actions that would update colors in emacs (such as changing themes)"
   :after '(sideline flycheck)
   :config (add-to-list 'sideline-backends-right sideline-flycheck))
 
-(use-package sideline-lsp
-  :after '(sideline lsp)
-  :config (add-to-list 'sideline-backends-right sideline-lsp))
-
 (use-package colorful-mode)
 
 (use-package project-rootfile

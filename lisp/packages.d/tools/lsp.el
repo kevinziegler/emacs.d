@@ -40,4 +40,8 @@
   :init
   (setq dap-breakpoints-file (kdz/user-directory ".local/dap-breakpoints")))
 
+(use-package sideline-lsp
+  :after '(sideline lsp)
+  :config (add-to-list 'sideline-backends-right sideline-lsp))
+
 (provide 'packages.d/tools/lsp)
