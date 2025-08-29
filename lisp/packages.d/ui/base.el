@@ -16,14 +16,14 @@
                              :repo "dheerajshenoy/minimal-dashboard.el")
   :after project
   :preface
-  (setq initial-buffer-choice #'minimal-dashboard)
+  (setq minimal-dashboard-image-path (expand-file-name "logo.svg"
+                                                       user-emacs-directory)
+        initial-buffer-choice #'minimal-dashboard)
+  :custom
+  (minimal-dashboard-buffer-name "*dashboard*")
+  (minimal-dashboard-enable-resize-handling t)
+  (minimal-dashboard-text "Welcome.")
   :config
-  (setopt minimal-dashboard-buffer-name "*dashboard*"
-          minimal-dashboard-enable-resize-handling t
-          minimal-dashboard-text "Welcome."
-          minimal-dashboard-image-path (expand-file-name "logo.svg"
-                                                         user-emacs-directory))
-
   ;; TODO Figure out why the dashboard buffer gets killed (or buried)
   ;;      immediately after launching `project-find-file' (instead of running
   ;;      `kdz/kill-dashboard' after finishing the selection process)
@@ -124,14 +124,13 @@ actions that would update colors in emacs (such as changing themes)"
             ("STUB"   . ,(face-foreground 'ansi-color-green))))))
 
 (use-package hydra
-  :config
-  (setq hydra-hint-display-type 'posframe)
-  (setq hydra-posframe-show-params
-        `(:poshandler posframe-poshandler-frame-center
-                      :internal-border-width 2
-                      :internal-border-color "#61AFEF"
-                      :left-fringe 16
-                      :right-fringe 16)))
+  :custom
+  (hydra-hint-display-type 'posframe)
+  (hydra-posframe-show-params (list :poshandler posframe-poshandler-frame-center
+                                    :internal-border-width 2
+                                    :internal-border-color "#61AFEF"
+                                    :left-fringe 16
+                                    :right-fringe 16)))
 
 (use-package imenu-list
   :general
@@ -173,10 +172,10 @@ actions that would update colors in emacs (such as changing themes)"
       ("-" kdz/window-step-size-dec           "Decrease Step Size")))))
 
 (use-package modern-fringes
-  :config
-  (fringe-mode)
-  (modern-fringes-mode)
-  (modern-fringes-invert-arrows))
+  :hook
+  (elpaca-after-init . fringe-mode)
+  (elpaca-after-init . modern-fringes-mode)
+  (elpaca-after-init . modern-fringes-invert-arrows))
 
 (use-package nerd-icons
   :config
@@ -230,8 +229,7 @@ actions that would update colors in emacs (such as changing themes)"
                                 extra))
                             base-properties
                             properties)))
-      (apply #'propertize
-             `(,(kdz/nerd-icons-dwim name) ,@evaluated-properties)))))
+      (apply #'propertize `(,(kdz/nerd-icons-dwim name) ,@evaluated-properties)))))
 
 (use-package nerd-icons-dired
   :after (dired nerd-icons)
@@ -243,10 +241,11 @@ actions that would update colors in emacs (such as changing themes)"
 
 (use-package scroll-on-jump
   :after evil
+  :custom
+  (scroll-on-jump-curve 'smooth-in)
+  (scroll-on-jump-duration 0.6)
+  (scroll-on-jump-curve-power 3.5)
   :config
-  (setq scroll-on-jump-curve 'smooth-in)
-  (setq scroll-on-jump-duration 0.6)
-  (setq scroll-on-jump-curve-power 3.5)
 
   (scroll-on-jump-advice-add evil-undo)
   (scroll-on-jump-advice-add evil-redo)
@@ -270,26 +269,25 @@ actions that would update colors in emacs (such as changing themes)"
 
 (use-package ultra-scroll
   :ensure (ultra-scroll :host github :repo "jdtsmith/ultra-scroll")
-  :init
-  (setq scroll-conservatively 101 ; important!
-        scroll-margin 0)
-  :config
-  (ultra-scroll-mode 1))
+  :custom
+  (scroll-conservatively 101); important!
+  (scroll-margin 0)
+  :hook (elpaca-after-init . ultra-scroll-mode))
 
 (use-package solaire-mode
   :after catppuccin-theme
-  :config
-  (solaire-global-mode +1))
+  :hook (elpaca-after-init . solaire-global-mode))
 
 (use-package svg-tag-mode)
 
 (use-package doom-modeline
   :init (doom-modeline-mode 1)
+  :custom
+  (doom-modeline-time nil)
+  (doom-modeline-persp-icon nil)
+  (doom-modeline-persp-name nil)
+  (doom-modeline-buffer-encoding nil)
   :config
-  (setq doom-modeline-time nil
-        doom-modeline-persp-icon nil
-        doom-modeline-persp-name nil
-        doom-modeline-buffer-encoding nil))
 
 (use-package posframe
   :config
@@ -359,21 +357,19 @@ actions that would update colors in emacs (such as changing themes)"
   (vertico-posframe-parameters '((left-fringe . 8) (right-fringe . 8))))
 
 (use-package spacious-padding
-  :config
-  (setq spacious-padding-widths (list :internal-border-width 2
-                                      :header-line-width     4
-                                      :mode-line-width       6
-                                      :tab-width             0
-                                      :right-divider-width   2
-                                      :scroll-bar-width      0))
-  (spacious-padding-mode))
+  :custom
+  (spacious-padding-widths (list :internal-border-width 2
+                                 :header-line-width     4
+                                 :mode-line-width       6
+                                 :tab-width             0
+                                 :right-divider-width   2
+                                 :scroll-bar-width      0))
+  :hook (elpaca-after-init . spacious-padding-mode))
 
 (use-package sideline
   :general
-  (kdz/leader-toggle-def
-    "s" '("Show/hide Sideline" . sideline-mode))
-  (kdz/leader-toggle-global-def
-    "s" '("Show/hide Sideline" . global-sideline-mode)))
+  (kdz/leader-toggle-def "s" '("Show/hide Sideline" . sideline-mode))
+  (kdz/leader-toggle-global-def "s" '("Show/hide Sideline" . global-sideline-mode)))
 
 (use-package sideline-blame
   :after 'sideline

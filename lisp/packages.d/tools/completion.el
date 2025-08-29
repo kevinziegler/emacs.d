@@ -8,8 +8,7 @@
 (use-package company)
 
 (use-package corfu
-  :custom
-  (corfu-auto t)
+  :custom (corfu-auto t)
   :hook ((elpaca-after-init . global-corfu-mode)
          (global-corfu-mode . corfu-popupinfo-mode)))
 
@@ -18,9 +17,7 @@
   :init
   (add-to-list 'corfu-margin-formatters #'nerd-icons-corfu-formatter))
 
-(use-package hotfuzz
-  :config
-  (add-to-list 'completion-styles 'hotfuzz))
+(use-package hotfuzz :config (add-to-list 'completion-styles 'hotfuzz))
 
 (use-package consult
   :after nerd-icons
@@ -35,18 +32,15 @@
   :config
 
   (defface consult-async-running-nf
-    '((t :inherit consult-async-running
-         :family "Symbols Nerd Font Mono"))
+    '((t :inherit consult-async-running :family "Symbols Nerd Font Mono"))
     "Consult async indicator for running state using nerd-icons")
 
   (defface consult-async-finished-nf
-    '((t :inherit consult-async-finished
-         :family "Symbols Nerd Font Mono"))
+    '((t :inherit consult-async-finished :family "Symbols Nerd Font Mono"))
     "Consult async indicator for finished state using nerd-icons")
 
   (defface consult-async-failed-nf
-    '((t :inherit consult-async-failed
-         :family "Symbols Nerd Font Mono"))
+    '((t :inherit consult-async-failed :family "Symbols Nerd Font Mono"))
     "Consult async indicator for failed state using nerd-icons")
 
   (defun kdz/nerd-icon-as-char (icon-name)
@@ -67,8 +61,7 @@
 
 (use-package consult-yasnippet
   :after (consult yasnippet)
-  :general
-  (kdz/leader-insert-def "s" '("Snippet" . consult-yasnippet)))
+  :general (kdz/leader-insert-def "s" '("Snippet" . consult-yasnippet)))
 
 (use-package embark
   :general

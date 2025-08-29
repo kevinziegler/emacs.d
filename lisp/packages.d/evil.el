@@ -67,22 +67,20 @@
 
 (use-package evil-collection
   :after evil
-  :config
-  (evil-collection-init)
-  (setq evil-collection-magit-want-horizontal-movement t))
+  :custom (evil-collection-magit-want-horizontal-movement t)
+  :hook (elpaca-after-init . evil-collection-init))
 
 (use-package evil-embrace
   :hook (org-mode . embrace-org-mode-hook)
-  :config
-  (evil-embrace-enable-evil-surround-integration))
+  :config (evil-embrace-enable-evil-surround-integration))
 
 (use-package evil-goggles
   :after evil
-  :config
-  (setq evil-goggles-pulse t
-        evil-goggles-blocking-duration 0.300
-        evil-goggles-async-duration 0.900)
-  (evil-goggles-mode))
+  :custom
+  (evil-goggles-pulse t)
+  (evil-goggles-blocking-duration 0.300)
+  (evil-goggles-async-duration 0.900)
+  :hook (elpaca-after-init . evil-goggles-mode))
 
 (use-package evil-nerd-commenter
   :general (general-def :states '(normal visual) "gc" 'evilnc-comment-operator))
@@ -114,15 +112,16 @@
     "_" '(evil-numbers/dec-at-pt :which-key "Decrement at point")))
 
 (use-package evil-owl
+  :hook (elpaca-after-init . evil-owl-mode)
+  :custom
+  (evil-owl-max-string-length 500)
+  (evil-owl-idle-delay 0.5)
   :config
-  (setq evil-owl-max-string-length 500
-        evil-owl-idle-delay 0.5)
   (add-to-list 'display-buffer-alist
                '("*evil-owl*"
                  (display-buffer-in-side-window)
                  (side . bottom)
-                 (window-height . 0.3)))
-  (evil-owl-mode))
+                 (window-height . 0.3))))
 
 (use-package evil-escape     :init (evil-escape-mode 1))
 (use-package evil-lion       :config (evil-lion-mode))
