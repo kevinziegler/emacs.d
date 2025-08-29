@@ -108,13 +108,7 @@
       (apply fn args)))
 
   (advice-add #'embark-completing-read-prompter
-              :around #'embark-hide-which-key-indicator)
-
-  ;; Hide the mode line of the Embark live/completions buffers
-  (add-to-list 'display-buffer-alist
-               '((derived-mode . embark-collect-mode)
-                 nil
-                 (window-parameters (mode-line-format . none)))))
+              :around #'embark-hide-which-key-indicator))
 
 (use-package embark-consult
   :after marginalia

@@ -317,26 +317,22 @@ This is executed *prior* to running on of `project-switch-commands'.")
     `(add-to-list 'display-buffer-alist
                   '(,pattern display-buffer-in-tab (tab-name . ,tab-name))))
 
-  (add-to-list 'display-buffer-alist
-               `(,(lambda (buffer _)
-                    (with-current-buffer buffer
-                      (derived-mode-p 'comint-mode
-                                      'flycheck-error-list-mode
-                                      'xref--xref-buffer-mode
-                                      'embark-collect-mode)))
-                 display-buffer-in-side-window
-                 (side . bottom)
-                 (slot . 99)
-                 (dedicated . t)))
+  (defmacro kdz/display-rule-mode-to-side (mode side)
+    `(add-to-list 'display-buffer-alist
+                  '((derived-mode . ,mode)
+                    display-buffer-in-side-window
+                    (side . ,side)
+                    (slot . 99)
+                    (window-parameters (mode-line-format . none))
+                    (dedicated . t))))
 
-  (add-to-list 'display-buffer-alist
-               `(,(lambda (buffer _)
-                    (with-current-buffer buffer
-                      (derived-mode-p 'help-mode 'helpful-mode)))
-                 display-buffer-in-side-window
-                 (side . right)
-                 (dedicated . t)))
-
+  (kdz/display-rule-mode-to-side comint-mode               bottom)
+  (kdz/display-rule-mode-to-side flycheck-error-list-mode  bottom)
+  (kdz/display-rule-mode-to-side xref--xref-buffer-mode    bottom)
+  (kdz/display-rule-mode-to-side embark-collect-mode       bottom)
+  (kdz/display-rule-mode-to-side helpful-mode              right)
+  (kdz/display-rule-mode-to-side help-mode                 right)
+  (kdz/display-rule-mode-to-side embark-collect-mode       right)
   (kdz/display-rule-buffer-to-tab "\\*dashboard\\*"       "Home")
   (kdz/display-rule-buffer-to-tab "\\*scratch\\*"         "Scratchpad")
   (kdz/display-rule-buffer-to-tab "\\*Ibuffer\\*"         "Buffers")
@@ -357,13 +353,13 @@ This is executed *prior* to running on of `project-switch-commands'.")
   (xref-prompt-for-identifier nil)
   (xref-search-program 'ripgrep))
 
-(use-package apropos :ensure nil :custom (appropos-do-all t))
-(use-package hl-line :ensure nil :hook (elpaca-after-init . global-hl-line-mode))
-(use-package mule-util :ensure nil :custom (truncate-string-ellipsis "…"))
-(use-package so-long :ensure nil :hook (elpaca-after-init . global-so-long-mode))
-(use-package thingatpt :ensure nil :config (require 'lib/tap))
-(use-package uniquify :ensure nil :custom (uniquify-buffer-name-style 'post-forward))
+(use-package apropos          :ensure nil :custom (appropos-do-all t))
+(use-package hl-line          :ensure nil :hook (elpaca-after-init . global-hl-line-mode))
+(use-package mule-util        :ensure nil :custom (truncate-string-ellipsis "…"))
+(use-package so-long          :ensure nil :hook (elpaca-after-init . global-so-long-mode))
+(use-package thingatpt        :ensure nil :config (require 'lib/tap))
+(use-package uniquify         :ensure nil :custom (uniquify-buffer-name-style 'post-forward))
 (use-package use-package-core :ensure nil :custom (use-package-enable-imenu-support t))
-(use-package vc-hooks :ensure nil :custom (vc-follow-symlinks t))
+(use-package vc-hooks         :ensure nil :custom (vc-follow-symlinks t))
 
 (provide 'packages.d/emacs)
