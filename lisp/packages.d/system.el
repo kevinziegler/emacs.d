@@ -36,13 +36,11 @@
 
 (use-package exec-path-from-shell
   :config
-  (when (memq window-system '(mac ns x))
-    (exec-path-from-shell-initialize)))
+  (when (memq window-system '(mac ns x)) (exec-path-from-shell-initialize)))
 
 (use-package gcmh
   :demand t
-  :config
-  (add-hook 'elpaca-after-init-hook (lambda () (gcmh-mode 1))))
+  :config (add-hook 'elpaca-after-init-hook (lambda () (gcmh-mode 1))))
 
 (use-package git-link
   :general
@@ -68,33 +66,29 @@
 
 (use-package git-timemachine
   :after transient
-  :general
-  (kdz/leader-git-def "t" '("Time Machine" . git-timemachine)))
+  :general (kdz/leader-git-def "t" '("Time Machine" . git-timemachine)))
 
 (use-package list-environment
-  :general
-  (kdz/leader-help-def "e" '("List Environment Variables" . list-environment)))
+  :general (kdz/leader-help-def "e" '("Environment Variables" . list-environment)))
 
 (use-package logview)
 
 (use-package magit
   :after transient
+  :custom
+  (magit-repository-directories '(("~/dev" . 2) ("~/.dotfiles" . 0)))
+  (magit-format-file-function #'magit-format-file-nerd-icons)
   :general
   (kdz/leader-git-def
     "g" '("Git Status"   . magit-status)
     "b" '("Blame File"   . magit-blame)
     "l" '("Log for File" . magit-log-buffer-file))
-
   :config
-  (transient-append-suffix 'magit-fetch "-p"
-    '("-t" "Fetch all tags" ("-t" "--tags")))
-  (transient-append-suffix 'magit-pull "-r"
-    '("-a" "Autostash" "--autostash"))
-  (when-let ((brew-git (executable-find (brew-bin "git"))))
-    (setq magit-git-executable brew-git))
+  (transient-append-suffix 'magit-fetch "-p" '("-t" "Fetch all tags" ("-t" "--tags")))
+  (transient-append-suffix 'magit-pull "-r" '("-a" "Autostash" "--autostash"))
 
-  (setq magit-repository-directories '(("~/dev" . 2) ("~/.dotfiles" . 0))
-        magit-format-file-function #'magit-format-file-nerd-icons))
+  (when-let ((brew-git (executable-find (brew-bin "git"))))
+    (setq magit-git-executable brew-git)))
 
 (use-package magit-delta
   :if (executable-find "delta")

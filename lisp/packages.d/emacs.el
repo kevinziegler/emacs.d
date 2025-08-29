@@ -122,14 +122,12 @@
 
 (use-package cus-edit
   :ensure nil
-  :init
-  (setopt custom-file (kdz/user-directory ".local" "custom.el")))
+  :init (setopt custom-file (kdz/user-directory ".local" "custom.el")))
 
 (use-package custom
   :ensure nil
   :init
-  (defvar kdz-load-theme-hook nil
-    "Hook to run actions after calling `load-theme'")
+  (defvar kdz-load-theme-hook nil "Hook to run actions after calling `load-theme'")
   :config
   (defmacro kdz/customize-with-palette (theme palette &rest face-specs)
     "Set custom FACE-SPECS for THEME with access to colors from PALETTE.
@@ -148,9 +146,7 @@ defined in that palette from within FACE-SPECS."
          (let ((custom--inhibit-theme-enable nil))
            (custom-theme-set-faces ,theme ,@face-specs)))))
 
-  (advice-add 'load-theme
-              :after
-              (lambda (&rest _) (run-hooks 'kdz-load-theme-hook))))
+  (advice-add 'load-theme :after (lambda (&rest _) (run-hooks 'kdz-load-theme-hook))))
 
 (use-package ediff
   :ensure nil
@@ -259,8 +255,7 @@ This is executed *prior* to running on of `project-switch-commands'.")
 
 (use-package re-builder
   :ensure nil
-  :general
-  (kdz/leader-search-def "r" '("Regexp Builder" . re-builder)))
+  :general (kdz/leader-search-def "r" '("Regexp Builder" . re-builder)))
 
 (use-package savehist
   :ensure nil

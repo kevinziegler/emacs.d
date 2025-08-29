@@ -1,13 +1,13 @@
 ;;;; In-Buffer UI Enhancments - Editing behaviors, formating, etc
+(use-package anzu :hook (elpaca-after-init . global-anzu-mode))
+(use-package apheleia :hook (elpaca-after-init . apheleia-global-mode))
 (use-package browse-at-remote) ;; TODO Set up keybindings
+(use-package sticky-scroll-mode)
+(use-package undo-fu :custom (evil-undo-system 'undo-fu))
+(use-package vundo :general (kdz/leader-buffer-def "h" '("Undo History" . vundo)))
+(use-package ws-butler :hook ((prog-mode . ws-butler-mode)))
 (use-package yasnippet :hook (elpaca-after-init . yas-global-mode))
 (use-package yasnippet-snippets :after yasnippet)
-(use-package apheleia :hook (elpaca-after-init . apheleia-global-mode))
-(use-package anzu :hook (elpaca-after-init . global-anzu-mode))
-(use-package undo-fu :custom (evil-undo-system 'undo-fu))
-
-(use-package vundo
-  :general (kdz/leader-buffer-def "h" '("Undo History" . vundo)))
 
 (use-package eval-sexp-fu
   :general
@@ -51,8 +51,6 @@
   :custom (origami-fold-replacement " ... ")
   :hook (elpaca-after-init . global-origami-mode))
 
-(use-package ws-butler :hook ((prog-mode . ws-butler-mode)))
-
 (use-package editorconfig
   :custom (editorconfig-trim-whitespaces-mode 'ws-butler-mode)
   :hook   (elpaca-after-init . editorconfig-mode))
@@ -76,10 +74,7 @@
 ;;   (setq turbo-log-msg-format-template "\"KDZ-LOG: %s\""))
 
 (use-package nocomments-mode
-  :general
-  (kdz/leader-toggle-def "C" '("Show/Hide comments" . nocomments-mode)))
-
-(use-package sticky-scroll-mode)
+  :general (kdz/leader-toggle-def "C" '("Show/Hide comments" . nocomments-mode)))
 
 (use-package flyover
   :ensure (flyover :host github :repo "konrad1977/flyover" :branch "main"))
