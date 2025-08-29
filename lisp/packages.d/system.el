@@ -106,19 +106,6 @@
                                                kdz-magit-delta-delta-extra-args))
       (setopt magit-delta-delta-args kdz-magit-delta-delta-args-default))))
 
-(use-package magit-filenotify
-  :hook (after-save . magit-after-save-refresh-status))
-
-(use-package reveal-in-osx-finder
-  :general
-  (kdz/leader-open-def
-    "F" '("Finder Window (Current Directory)" . reveal-in-osx-finder)))
-
-(use-package terminal-here
-  :general
-  (kdz/leader-open-def "s" '("Terminal (Current Directory)" . terminal-here))
-  :config
-  (setq terminal-here-mac-terminal-command
-        (lambda (path) (list "open" "-a" "iTerm.app" path))))
+(use-package magit-filenotify :hook (after-save . magit-after-save-refresh-status))
 
 (provide 'packages.d/system)
