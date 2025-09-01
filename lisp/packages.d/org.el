@@ -73,6 +73,28 @@
           org-tags-column 0
           org-use-property-inheritance t)
 
+  (defvar kdz-notes-dir "~/Documents/org/" "Path to notebook files")
+
+  (add-to-list 'display-buffer-alist
+               '(kdz/notes-file-p display-buffer-in-tab (tab-name . "Notes")))
+
+  (defun kdz/notes-file-p (buffer)
+    "Determine if a file should"
+    (s-starts-with? (expand-file-name kdz-notes-dir)
+                    (buffer-file-name (get-buffer buffer))))
+
+  (defun kdz/notes (open-in-current-tab)
+    "Open a file in `kdz-notes-dir'"
+    ;; TODO Figure out why the prefix arg isn't causing `find-file' to ignore
+    ;; `display-buffer-alist'
+    (interactive "P")
+    (let ((default-directory (if (s-ends-with-p "/" kdz-notes-dir)
+                                 kdz-notes-dir
+                               (concat kdz-notes-dir "/")))
+          (switch-to-buffer-obey-display-actions (not open-in-current-tab)))
+      (message "Got prefix argument %s" open-in-current-tab)
+      (call-interactively #'find-file)))
+
   (defun kdz/org-insert-outline-footnote ()
     (interactive)
     (let ((org-footnote-section "Footnotes"))
