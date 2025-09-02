@@ -1,3 +1,6 @@
+(use-package auto-complete
+  :custom (ac-comphist-file (kdz/user-directory ".local" "ac-comphist.dat")))
+
 (use-package cape
   :init
   (add-hook 'completion-at-point-functions #'cape-dabbrev)

@@ -98,10 +98,6 @@
   :ensure nil
   :general (kdz/leader-edit-def "a" '("Align by Regexp" . align-regexp)))
 
-(use-package auto-complete
-  :ensure nil
-  :custom (ac-comphist-file (kdz/user-directory ".local" "ac-comphist.dat")))
-
 (use-package autorevert
   :ensure nil
   :hook (elpaca-after-init . global-auto-revert-mode)
