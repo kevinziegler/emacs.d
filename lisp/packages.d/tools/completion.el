@@ -112,57 +112,7 @@
 
 (use-package embark-consult
   :after marginalia
-  :general
-  (kdz/leader-buffer-def
-    "s" '("Search Results" . kdz/consult-embark-ripgrep-results))
-
-  :hook ((embark-collect-mode . consult-preview-at-point-mode))
-  :config
-  (defvar kdz-search-query-rx
-    "^\\*Embark Collect: consult-ripgrep - #\\(.+\\)\\*$"
-    "Regexp to extract a search query from a buffer name")
-
-  (defun kdz/embark-collect-ripgrep-pair (buffer)
-    (let* ((name (buffer-name buffer)))
-      (cons (save-match-data
-              (string-match kdz-search-query-rx name)
-              (match-string 1 name))
-            buffer)))
-
-  (defun kdz/consult-embark-ripgrep-collected ()
-    "Provide buffers for collected ripgrep results as a consult source"
-    (consult--buffer-query :sort 'visibility
-                           :as #'kdz/embark-collect-ripgrep-pair
-                           :include "^\*Embark Collect: consult-ripgrep"))
-
-  (defun kdz/annotate-ripgrep-results (buffer)
-    "Marginalia annotation for collected search results"
-    (let* ((count-results (with-current-buffer buffer
-                            (how-many "^[0-9]+:" (point-min) (point-max))))
-           (count-files (- (car (buffer-line-statistics buffer))
-                           count-results)))
-
-      (marginalia--fields
-       (count-results :format "[%d lines]" :face 'marginalia-number)
-       (count-files :format "[%d files]" :face 'marginalia-number))))
-
-  (defvar consult--source-embark-collect-ripgrep
-    (list :name "Search Results [rg]"
-          :category 'embark-collect-ripgrep
-          :narrow ?r
-          :face 'consult-buffer
-          :history 'embark-collect-ripgrep
-          :state #'consult--buffer-state
-          :items #'kdz/consult-embark-ripgrep-collected)
-    "Consult source specifically for embark-ripgrep results")
-
-  (defun kdz/consult-embark-ripgrep-results ()
-    "Show a previously collected set of results from `consult-ripgrep'"
-    (interactive)
-    (consult-buffer '(consult--source-embark-collect-ripgrep)))
-
-  (add-to-list 'marginalia-annotator-registry
-               '(embark-collect-ripgrep kdz/annotate-ripgrep-results)))
+  :hook ((embark-collect-mode . consult-preview-at-point-mode)))
 
 (use-package marginalia
   :hook (elpaca-after-init . marginalia-mode)
