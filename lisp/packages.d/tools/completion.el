@@ -14,8 +14,7 @@
 
 (use-package nerd-icons-corfu
   :after corfu
-  :init
-  (add-to-list 'corfu-margin-formatters #'nerd-icons-corfu-formatter))
+  :init (add-to-list 'corfu-margin-formatters #'nerd-icons-corfu-formatter))
 
 (use-package hotfuzz :config (add-to-list 'completion-styles 'hotfuzz))
 
@@ -30,7 +29,6 @@
     "s" '("Thing-at-point (DWIM)"             . tap/consult-ripgrep-dwim)
     "S" '("Thing-at-point (Select)"           . tap/consult-ripgrep))
   :config
-
   (defface consult-async-running-nf
     '((t :inherit consult-async-running :family "Symbols Nerd Font Mono"))
     "Consult async indicator for running state using nerd-icons")
@@ -55,9 +53,7 @@
 
   (defun kdz/consult-ripgrep-selected (start end)
     (interactive "r")
-    (let ((initial (when (use-region-p)
-                     (buffer-substring start end))))
-      (consult-ripgrep nil initial))))
+    (consult-ripgrep nil (when (use-region-p) (buffer-substring start end)))))
 
 (use-package consult-yasnippet
   :after (consult yasnippet)
@@ -71,6 +67,10 @@
     "s-;"        '("Act on Candidate (DWIM)"  . embark-dwim)
     "s-<return>" '("Collect Results"          . embark-collect))
 
+  :custom
+  (embark-indicators '(embark-which-key-indicator
+                       embark-highlight-indicator
+                       embark-isearch-highlight-indicator))
   :config
   (defun embark-which-key-indicator ()
     "An embark indicator that displays keymaps using which-key.
@@ -92,13 +92,8 @@
                ((and (pred keymapp) km) km)
                (_ (key-binding prefix 'accept-default)))
            keymap)
-         nil nil t (lambda (binding)
-                     (not (string-suffix-p "-argument" (cdr binding))))))))
-
-  (setq embark-indicators
-        '(embark-which-key-indicator
-          embark-highlight-indicator
-          embark-isearch-highlight-indicator))
+         nil nil t
+         (lambda (binding) (not (string-suffix-p "-argument" (cdr binding))))))))
 
   (defun embark-hide-which-key-indicator (fn &rest args)
     "Hide the which-key indicator immediately when using the completing-read prompter."
@@ -124,6 +119,7 @@
   (completion-category-overrides '((file (styles basic partial-completion)))))
 
 (use-package vertico
+  :hook (elpaca-after-init . vertico-mode)
   :general
   (general-def
     :keymaps 'vertico-map
@@ -131,9 +127,7 @@
     "C-h" 'which-key-show-major-mode
     "C-k" 'previous-line-or-history-element)
 
-  :init
-  (vertico-mode)
-
+  :config
   (defun kdz/vertico--format-candiate-marker-advice
       (orig cand prefix suffix index start)
     (setq cand (funcall orig cand prefix suffix index start))
