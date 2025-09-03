@@ -122,7 +122,7 @@
   (completion-category-overrides '((file (styles basic partial-completion)))))
 
 (use-package vertico
-  :hook (elpaca-after-init . vertico-mode)
+  :init (vertico-mode)
   :general
   (general-def
     :keymaps 'vertico-map
