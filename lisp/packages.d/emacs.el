@@ -144,6 +144,57 @@ defined in that palette from within FACE-SPECS."
 
   (advice-add 'load-theme :after (lambda (&rest _) (run-hooks 'kdz-load-theme-hook))))
 
+(use-package display-fill-column-indicator
+  :ensure nil
+  :hook (elpaca-after-init . global-display-fill-column-indicator-mode)
+  :general
+  (kdz/leader-toggle-def "c"
+    '("Show/hide fill column" . display-fill-column-indicator-mode))
+
+  (kdz/leader-toggle-global-def "c"
+    '("Show/hide fill column" . global-display-fill-column-indicator-mode))
+
+  :custom
+  (display-fill-column-indicator-character ?\u2502)
+  :config
+  (dolist (mode '(dired-mode
+                  dirvish-directory-view-mode
+                  helpful-mode
+                  markdown-mode
+                  org-mode
+                  special-mode
+                  xref--xref-buffer-mode))
+    (add-to-list 'global-display-fill-column-indicator-modes `(not ,mode))))
+
+(use-package display-line-numbers
+  :ensure nil
+  :hook (elpaca-after-init . global-display-line-numbers-mode)
+  :general
+  (kdz/leader-toggle-def
+    "l" '("Show/hide line numbers"         . display-line-numbers-mode)
+    "r" '("Relative/absolute line numbers" . kdz/toggle-line-numbers))
+  (kdz/leader-toggle-global-def
+    "l" '("Show/hide line numbers" . global-display-line-numbers-mode))
+
+  :config
+  (defun kdz/toggle-line-numbers ()
+    "Cycle between relative/absolute line numbers"
+    (interactive)
+    (if display-line-numbers
+        (setq display-line-numbers
+	      (if (eq display-line-numbers 'relative) t 'relative))
+      (message "Line numbers are currently disabled!")))
+
+  (dolist (mode '(dashboard-mode-hook
+                  dired-mode
+                  dirvish-directory-view-mode
+                  org-mode-hook
+                  term-mode-hook
+                  treemacs-mode-hook
+                  eshell-mode-hook
+                  xref--xref-buffer-mode-hook))
+    (add-hook mode (lambda () (display-line-numbers-mode -1)))))
+
 (use-package ediff
   :ensure nil
   :custom
