@@ -78,10 +78,11 @@
     (kdz/customize-with-palette
      'modus-operandi-tritanopia
      'modus-operandi-tritanopia-palette
+     `(aw-leading-char-face       ((t :foreground ,(color 'red) :height 3.0)))
+     `(child-frame-border         ((t :background ,(color 'border)
+                                      :foreground ,(color 'border))))
      `(flyover-marker             ((t :foreground ,(color 'bg-cyan-intense))))
      `(fill-column-indicator      ((t :background ,(color 'bg-main)
-                                      :foreground ,(color 'border))))
-     `(child-frame-border         ((t :background ,(color 'border)
                                       :foreground ,(color 'border))))
      `(git-gutter:added           ((t :foreground ,(color 'bg-added-fringe)
                                       :background ,(color 'bg-main))))

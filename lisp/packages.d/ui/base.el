@@ -5,11 +5,8 @@
 (use-package perfect-margin)
 
 (use-package ace-window
-  :general
-  (kdz/leader-window-def "w" '("Select Window" . ace-window))
-  :config
-  (ace-window-posframe-mode)
-  (set-face-attribute 'aw-leading-char-face nil :height 3.0))
+  :general (kdz/leader-window-def "w" '("Select Window" . ace-window))
+  :hook (elpaca-after-init . ace-window-posframe-mode))
 
 (use-package minimal-dashboard
   :ensure
