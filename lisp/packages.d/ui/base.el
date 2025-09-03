@@ -12,12 +12,10 @@
   (set-face-attribute 'aw-leading-char-face nil :height 3.0))
 
 (use-package minimal-dashboard
-  :ensure (minimal-dashboard :host github
-                             :repo "dheerajshenoy/minimal-dashboard.el")
-  :after project
+  :ensure
+  (minimal-dashboard :host github :repo "dheerajshenoy/minimal-dashboard.el")
   :preface
-  (setq minimal-dashboard-image-path (expand-file-name "logo.svg"
-                                                       user-emacs-directory)
+  (setq minimal-dashboard-image-path ""
         initial-buffer-choice #'minimal-dashboard)
   :custom
   (minimal-dashboard-buffer-name "*dashboard*")
