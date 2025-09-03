@@ -315,8 +315,7 @@
 (use-package colorful-mode)
 
 (use-package project-rootfile
-  :config
-  (add-to-list 'project-rootfile-list ".project"))
+  :config (add-to-list 'project-rootfile-list ".project"))
 
 (use-package ibuffer-project
   :hook (ibuffer . kdz/ibuffer-tune-sort-and-filter)
@@ -332,15 +331,15 @@
          (elpaca-after-init . otpp-override-mode)))
 
 (use-package keycast
-  :general
-  (kdz/leader-toggle-def "k" '("Keycast Display" . keycast-tab-bar-mode)))
+  :general (kdz/leader-toggle-def "k" '("Keycast Display" . keycast-tab-bar-mode)))
 
 (use-package eldoc-box
   :general
   (kdz/leader-toggle-def "d" '("Documentation Popups" . eldoc-box-hover-mode))
+  :hook (eglot-managed-mode . eldoc-box-hover-mode)
   :custom
   (eldoc-box-only-multi-line t)
-  (eldoc-box-position-function #'eldoc-box--default-at-point-position-function))
+  (eldoc-box-position-function eldoc-box--default-at-point-position-function))
 
 (use-package helpful
   :general
