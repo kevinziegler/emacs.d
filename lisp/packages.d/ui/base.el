@@ -54,21 +54,10 @@
     "i" '("Show/hide indent guides" . highlight-indent-guides-mode)))
 
 (use-package hl-todo
-  :after custom
-  :hook ((elpaca-after-init . global-hl-todo-mode)
-         (kdz-load-theme . kdz/set-hl-todo-faces))
+  :hook ((elpaca-after-init . global-hl-todo-mode))
   :config
-  (defun kdz/set-hl-todo-faces (&rest _)
-    "Set face colors for hl-todo keywords
-
-This is performed via a function so it can be used as a hook on
-actions that would update colors in emacs (such as changing themes)"
-    (setq hl-todo-keyword-faces
-          `(("TODO"   . ,(face-foreground 'hl-todo))
-            ("FIXME"  . ,(face-foreground 'ansi-color-red))
-            ("DEBUG"  . ,(face-foreground 'ansi-color-cyan))
-            ("NOTE"   . ,(face-foreground 'ansi-color-blue))
-            ("STUB"   . ,(face-foreground 'ansi-color-green))))))
+  (add-to-list 'hl-todo-keyword-faces '("DEBUG" .  "#d0bf8f"))
+  (add-to-list 'hl-todo-keyword-faces '("STUB"  .  "#7cb8bb")))
 
 (use-package hydra
   :custom
