@@ -31,6 +31,8 @@
     "p" '("Project"                           . consult-ripgrep)
     "s" '("Thing-at-point (DWIM)"             . tap/consult-ripgrep-dwim)
     "S" '("Thing-at-point (Select)"           . tap/consult-ripgrep))
+  (kdz/leader-buffer-def
+    "b" '("Switch to Buffer (Workspace)"      . consult-project-buffer))
   :config
   (defface consult-async-running-nf
     '((t :inherit consult-async-running :family "Symbols Nerd Font Mono"))

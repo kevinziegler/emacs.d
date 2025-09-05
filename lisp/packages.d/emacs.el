@@ -279,8 +279,6 @@ defined in that palette from within FACE-SPECS."
     "pe" '("Project Errors" . lsp-treemacs-errors-list)
     "pf" '("Open Project File" . project-find-file)
     "pp" '("Switch To Project" . project-switch-project))
-  (kdz/leader-buffer-def
-    "b" '("Switch to Buffer (Workspace)" . project-switch-to-buffer))
   :config
   (defvar kdz-project-switch-init-hook nil
     "Hooks to run after selecting a project via `project-switch-project'.
