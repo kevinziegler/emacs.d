@@ -1,5 +1,8 @@
 (use-package eglot
   :ensure nil
+  :custom
+  (eglot-autoshutdown t)
+  (eglot-events-buffer-config '(:size 0))
   :hook ((prog-mode . kdz/eglot-ensure-maybe)
          (eglot-mode . sideline-mode))
   :general
@@ -16,8 +19,6 @@
       :inlayHints (:callArgumentNames :json-false)
       :diagnosticMode "openFilesOnly")))
 
-  (setq eglot-autoshutdown t
-        eglot-events-buffer-config '(:size 0))
   (defun kdz/eglot-ensure-maybe ()
     (when (seq-contains-p
            (-flatten (mapcar #'car eglot-server-programs))
