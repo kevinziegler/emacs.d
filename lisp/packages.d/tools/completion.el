@@ -33,6 +33,9 @@
     "S" '("Thing-at-point (Select)"           . tap/consult-ripgrep))
   (kdz/leader-buffer-def
     "b" '("Switch to Buffer (Workspace)"      . consult-project-buffer))
+  (kdz/leader-jump-def
+    "j"  '("Jump to item"      . consult-outline)
+    "f"  '("Filter lines"      . consult-focus-lines))
   :config
   (defface consult-async-running-nf
     '((t :inherit consult-async-running :family "Symbols Nerd Font Mono"))

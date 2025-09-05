@@ -1,11 +1,11 @@
 (use-package evil
   :demand t
   :general
-  (kdz/leader-def
-    "j"  `("Jump to <thing>"   . ,(make-sparse-keymap))
-    "jj" '("Jump to line"      . evil-avy-goto-line)
-    "jc" '("Jump to character" . evil-avy-goto-char)
-    "jw" '("Jump to word"      . evil-avy-goto-word-0))
+  (kdz/leader-jump-def
+    "a"  `("Jump to <thing>"   . ,(make-sparse-keymap))
+    "aj" '("Jump to line"      . evil-avy-goto-line)
+    "ac" '("Jump to character" . evil-avy-goto-char)
+    "aw" '("Jump to word"      . evil-avy-goto-word-0))
 
   (kdz/leader-buffer-def "N" '("New Buffer" . evil-buffer-new))
 
