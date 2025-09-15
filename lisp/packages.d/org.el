@@ -3,7 +3,6 @@
   :hook ((org-mode . visual-line-mode)
          (org-mode . visual-wrap-prefix-mode)
          (org-mode . kdz/org-mode-set-electric-pair-predicate))
-
   :general
   (general-def
     :states 'insert
@@ -54,9 +53,9 @@
           org-ellipsis " ⋯"
           org-fold-catch-invisible-edits 'show-and-error
           org-fold-core-style 'overlays
-          org-hidden-keywords '(title)
           org-footnote-section nil
           org-fontify-quote-and-verse-blocks t
+          org-hidden-keywords '(title)
           org-hide-emphasis-markers t
           org-html-doctype "html5"
           org-html-html5-fancy t
@@ -74,7 +73,7 @@
           org-use-property-inheritance t)
 
   (add-to-list 'display-buffer-alist
-               '(#'kdz/notes-file-p display-buffer-in-tab (tab-name . "Notes")))
+               '(kdz/notes-file-p display-buffer-in-tab (tab-name . "Notes")))
 
   (defun kdz/notes-file-p (buffer &rest _)
     "Determine if a file should be consider a 'notebook' item"
