@@ -1,8 +1,15 @@
 (use-package avy)
+(use-package colorful-mode)
 (use-package flycheck :custom (flycheck-checker-error-threshold 10000))
 (use-package git-gutter-fringe :hook (elpaca-after-init . global-git-gutter-mode))
 (use-package hide-mode-line :hook ((reb-mode . hide-mode-line-mode)))
 (use-package perfect-margin)
+(use-package project-rootfile :config (add-to-list 'project-rootfile-list ".project"))
+(use-package solaire-mode :hook (elpaca-after-init . solaire-global-mode))
+(use-package svg-tag-mode)
+(use-package treemacs-nerd-icons :after treemacs :config (treemacs-load-theme "nerd-icons"))
+(use-package treemacs-tab-bar :after treemacs :config (treemacs-set-scope-type 'Tabs))
+(use-package treemacs-evil :after (treemacs evil))
 
 (use-package ace-window
   :general (kdz/leader-window-def "w" '("Select Window" . ace-window))
@@ -23,8 +30,7 @@
   ;;      immediately after launching `project-find-file' (instead of running
   ;;      `kdz/kill-dashboard' after finishing the selection process)
   (defun kdz/kill-dashboard ()
-    (with-current-buffer minimal-dashboard-buffer-name
-      (kill-buffer-and-window))))
+    (with-current-buffer minimal-dashboard-buffer-name (kill-buffer-and-window))))
 
 (use-package elfeed
   :custom
@@ -44,11 +50,8 @@
   :custom (file-info-headline-underline-symbol ?━)
   :general (kdz/leader-file-def "i" '("Show Info" . file-info-show)))
 
-;; TODO Need to adjust face colors to contrast properly
 (use-package highlight-indent-guides
-  :general
-  (kdz/leader-toggle-def
-    "i" '("Show/hide indent guides" . highlight-indent-guides-mode)))
+  :general (kdz/leader-toggle-def "i" '("Indent guides" . highlight-indent-guides-mode)))
 
 (use-package hl-todo
   :hook ((elpaca-after-init . global-hl-todo-mode))
@@ -179,7 +182,6 @@
   (scroll-on-jump-duration 0.6)
   (scroll-on-jump-curve-power 3.5)
   :config
-
   (scroll-on-jump-advice-add evil-undo)
   (scroll-on-jump-advice-add evil-redo)
   (scroll-on-jump-advice-add evil-jump-item)
@@ -207,12 +209,6 @@
   (scroll-margin 0)
   :hook (elpaca-after-init . ultra-scroll-mode))
 
-(use-package solaire-mode
-  :after catppuccin-theme
-  :hook (elpaca-after-init . solaire-global-mode))
-
-(use-package svg-tag-mode)
-
 (use-package doom-modeline
   :init (doom-modeline-mode 1)
   :custom
@@ -221,6 +217,17 @@
   (doom-modeline-persp-name nil)
   (doom-modeline-buffer-encoding nil)
   :config
+  (defvar kdz-modeline-buffer-name-maps '(("*IList*" . "Symbols")))
+
+  (defun kdz/imenu-list-buffer-display-name (buffer-or-name)
+    (with-current-buffer buffer-or-name
+      (format "Symbols (%s)" (buffer-file-name imenu-list--displayed-buffer))))
+
+  (defun kdz/modeline-buffer-name (buffer)
+    (let ((override (cdr (assoc buffer kdz-modeline-buffer-name-maps))))
+      (cond ((stringp override) override)
+            ((functionp overide) (funcall override buffer))
+            ((t buffer))))))
 
 (use-package posframe
   :config
@@ -244,7 +251,17 @@
       (cons (kdz/posframe-center-width info)
             (round (- parent-frame-height
                       posframe-height
-                      (* offset-percent parent-frame-height)))))))
+                      (* offset-percent parent-frame-height))))))
+
+  (defun kdz/display-in-posframe-bottom (buffer alist)
+    "Show BUFFER in a posframe at the bottom of the frame."
+    (posframe-show buffer
+                   :poshandler #'kdz/posframe-offset-bottom
+                   :border-color (face-foreground 'child-frame-border))))
+
+(use-package transient-posframe
+  :after (transient posframe)
+  :hook (elpaca-after-init . transient-posframe-mode))
 
 (use-package treemacs
   :custom
@@ -272,16 +289,6 @@
   (treemacs-git-mode 0)
   (treemacs-hide-gitignored-files-mode 1))
 
-(use-package treemacs-nerd-icons
-  :after treemacs
-  :config (treemacs-load-theme "nerd-icons"))
-
-(use-package treemacs-tab-bar
-  :after treemacs
-  :config (treemacs-set-scope-type 'Tabs))
-
-(use-package treemacs-evil :after (treemacs evil))
-
 (use-package vertico-posframe
   :after (posframe vertico)
   :hook (elpaca-after-init . vertico-posframe-mode)
@@ -305,17 +312,12 @@
   (kdz/leader-toggle-global-def "s" '("Show/hide Sideline" . global-sideline-mode)))
 
 (use-package sideline-blame
-  :after 'sideline
+  :after sideline
   :config (add-to-list 'sideline-backends-right sideline-blame))
 
 (use-package sideline-flycheck
-  :after '(sideline flycheck)
+  :after (sideline flycheck)
   :config (add-to-list 'sideline-backends-right sideline-flycheck))
-
-(use-package colorful-mode)
-
-(use-package project-rootfile
-  :config (add-to-list 'project-rootfile-list ".project"))
 
 (use-package ibuffer-project
   :hook (ibuffer . kdz/ibuffer-tune-sort-and-filter)
