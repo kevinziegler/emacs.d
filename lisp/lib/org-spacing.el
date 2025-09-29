@@ -64,23 +64,49 @@
     (when (org-at-heading-p)
       (org-outline-level))))
 
+(defun kdz/org-spacing--heading-is-folded-p (heading-pos)
+  "Check if the heading at HEADING-POS is collapsed/folded."
+  (save-excursion
+    (goto-char heading-pos)
+    (when (org-at-heading-p)
+      (org-invisible-p (line-end-position)))))
+
+(defun kdz/org-spacing--find-ancestor-at-level (start-pos target-level)
+  "Find the ancestor heading of START-POS that is at TARGET-LEVEL.
+Returns the position of the ancestor heading, or nil if not found."
+  (save-excursion
+    (goto-char start-pos)
+    (while (and (org-up-heading-safe)
+                (> (org-outline-level) target-level)))
+    (when (and (org-at-heading-p)
+               (= (org-outline-level) target-level))
+      (point))))
+
 (defun kdz/org-spacing--should-add-spacing-p (current-pos next-pos)
   "Determine if spacing should be added between headings at CURRENT-POS and NEXT-POS."
   (let ((current-level (kdz/org-spacing--get-heading-level current-pos))
         (next-level (kdz/org-spacing--get-heading-level next-pos))
         (has-visible-content (kdz/org-spacing--heading-has-visible-content-p current-pos))
-        (ends-with-newline (kdz/org-spacing--content-ends-with-visible-newline-p current-pos)))
+        (ends-with-newline (kdz/org-spacing--content-ends-with-visible-newline-p current-pos))
+        (current-is-folded (kdz/org-spacing--heading-is-folded-p current-pos)))
     ;; Add spacing if:
     ;; 1. There is visible content between headings, OR
     ;; 2. The headings are at different levels
     ;; BUT NOT if:
     ;; - The content already ends with a visible newline, OR
-    ;; - Current heading has no content AND next heading is a sub-heading
+    ;; - Current heading has no content AND next heading is a sub-heading, OR
+    ;; - Current heading is collapsed/folded (UNLESS it's at greater depth than next heading
+    ;;   AND its ancestor at the same level as next heading is not also collapsed)
     (and (or has-visible-content
              (not (= current-level next-level)))
          (not ends-with-newline)
          (not (and (not has-visible-content)
-                   (> next-level current-level))))))
+                   (> next-level current-level)))
+         (not (and current-is-folded
+                   (or (<= current-level next-level)
+                       (let ((ancestor-pos (kdz/org-spacing--find-ancestor-at-level current-pos next-level)))
+                         (and ancestor-pos
+                              (kdz/org-spacing--heading-is-folded-p ancestor-pos)))))))))
 
 (defun kdz/org-spacing--add-overlays ()
   "Add spacing overlays between org headings where appropriate."
@@ -105,6 +131,11 @@
   (when kdz/org-spacing-mode
     (run-with-idle-timer 0.1 nil #'kdz/org-spacing--add-overlays)))
 
+(defun kdz/org-spacing--update-overlays-on-visibility-change (&rest _)
+  "Update spacing overlays after visibility changes (folding/unfolding)."
+  (when kdz/org-spacing-mode
+    (kdz/org-spacing--add-overlays)))
+
 (define-minor-mode kdz/org-spacing-mode
   "Minor mode to add visual spacing between org headings."
   :lighter " OrgSpacing"
@@ -114,10 +145,14 @@
         (unless (derived-mode-p 'org-mode)
           (user-error "org-spacing-mode can only be enabled in org-mode buffers"))
         (kdz/org-spacing--add-overlays)
-        (add-hook 'after-change-functions #'kdz/org-spacing--update-overlays nil t))
+        (add-hook 'after-change-functions #'kdz/org-spacing--update-overlays nil t)
+        (add-hook 'org-cycle-hook #'kdz/org-spacing--update-overlays-on-visibility-change nil t)
+        (add-hook 'org-after-visibility-change-hook #'kdz/org-spacing--update-overlays-on-visibility-change nil t))
     (progn
       (kdz/org-spacing--clear-overlays)
-      (remove-hook 'after-change-functions #'kdz/org-spacing--update-overlays t))))
+      (remove-hook 'after-change-functions #'kdz/org-spacing--update-overlays t)
+      (remove-hook 'org-cycle-hook #'kdz/org-spacing--update-overlays-on-visibility-change t)
+      (remove-hook 'org-after-visibility-change-hook #'kdz/org-spacing--update-overlays-on-visibility-change t))))
 
 (provide 'lib/org-spacing)
 ;;; org-spacing.el ends here
