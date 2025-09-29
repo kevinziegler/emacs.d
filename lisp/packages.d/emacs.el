@@ -268,6 +268,16 @@ defined in that palette from within FACE-SPECS."
   (pixel-scroll-precision-mode t)
   (pixel-scroll-precision-use-momentum t))
 
+(use-package proced
+  :ensure nil
+  :commands (proced)
+  :custom
+  (proced-auto-update-flag 'visible)
+  (proced-enable-color-flag t)
+  (proced-auto-update-interval 5)
+  (proced-descend t)
+  (proced-filter 'user))
+
 (use-package project
   :ensure nil
   :custom (project-list-file (kdz/user-directory ".local" "projects"))
