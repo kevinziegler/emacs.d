@@ -38,13 +38,12 @@
   (setq plantuml-default-exec-mode 'executable))
 
 (use-package web-mode
-  :mode (("\\.html?\\'" . web-mode)
-         ("\\.hbs\\'"   . web-mode))
-  :config
-  (setq web-mode-markup-indent-offset 2
-        web-mode-css-indent-offset 2
-        web-mode-code-indent-offset 2
-        web-mode-content-types-alist '(("jsx" . "\\.js[x]?\\'"))))
+  :mode (("\\.html?\\'" . web-mode) ("\\.hbs\\'"   . web-mode))
+  :custom
+  (web-mode-markup-indent-offset 2)
+  (web-mode-css-indent-offset 2)
+  (web-mode-code-indent-offset 2)
+  (web-mode-content-types-alist '(("jsx" . "\\.js[x]?\\'"))))
 
 (use-package treesit
   :ensure nil
