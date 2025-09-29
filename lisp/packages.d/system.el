@@ -18,6 +18,7 @@
 
 (use-package difftastic
   :after transient
+  :if (executable-find "difft")
   :bind (:map magit-blame-read-only-mode-map
               ("D" . difftastic-magit-show)
               ("S" . difftastic-magit-show))
