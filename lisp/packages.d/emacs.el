@@ -407,6 +407,7 @@ This is executed *prior* to running on of `project-switch-commands'.")
   (xref-search-program 'ripgrep))
 
 (use-package apropos          :ensure nil :custom (appropos-do-all t))
+(use-package dired            :ensure nil :custom (insert-directory-program "gls"))
 (use-package hl-line          :ensure nil :hook (elpaca-after-init . global-hl-line-mode))
 (use-package mule-util        :ensure nil :custom (truncate-string-ellipsis "…"))
 (use-package so-long          :ensure nil :hook (elpaca-after-init . global-so-long-mode))
