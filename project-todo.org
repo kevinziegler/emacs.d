@@ -71,7 +71,7 @@ When creating a side window, determine if the frame should be resized based on:
 
 Similarly, deduct the size of the window from the frame when closing the side window
 
-* Packages [8/34]
+* Packages [8/39]
 - [ ] https://github.com/agzam/browser-hist.el
 - [ ] https://github.com/rnadler/password-menu
 - [ ] https://depp.brause.cc/shackle/
@@ -108,6 +108,11 @@ Similarly, deduct the size of the window from the frame when closing the side wi
 - [X] https://github.com/emacs-dashboard/dashboard-ls
 - [X] https://github.com/fxbois/web-mode
 - [X] https://github.com/renzmann/treesit-auto
+- [ ] https://github.com/zellerin/dynamic-graphs
+- [ ] https://git.sr.ht/~swflint/emacs-universal-sidecar
+- [ ] https://github.com/conao3/dired-posframe.el
+- [ ] https://github.com/Fuco1/dired-hacks
+- [ ] https://github.com/Qkessler/consult-project-extra
 
 ** Minibuffer/Completion
 - [ ] https://github.com/armindarvish/consult-web
@@ -116,6 +121,7 @@ Similarly, deduct the size of the window from the frame when closing the side wi
 ** Org-mode Enhancements
 - [ ] https://github.com/alphapapa/org-web-tools
 - [ ] https://github.com/unhammer/org-rich-yank
+- [ ] https://github.com/llcc/org-table-highlight
 
 
 ** AI Tools
@@ -141,3 +147,8 @@ Similarly, deduct the size of the window from the frame when closing the side wi
 
 ** TODO Make posframes positioned relative to each other
 ** TODO Figure out how to hide 'real' minibuffer window (While also keeping it focused?)
+
+* Articles
+- https://www.reddit.com/r/emacs/comments/1kwt90h/a_collection_of_macos_emacs_tips_ive_accumulated/
+- https://xenodium.com/awesome-emacs-on-macos
+- 

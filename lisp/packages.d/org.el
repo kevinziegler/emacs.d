@@ -798,4 +798,51 @@ Also adds support for a `:sync' parameter to override `:async'."
 
 (use-package org-ac :config (org-ac/config-default))
 
+(use-package doct
+  :config
+  (defvar kdz-doct-entry-default-properties
+    '(":PROPERTIES:" ":Created: %U" ":END:"))
+
+  ;; TODO Move this to org config
+  (setq org-default-notes-file (expand-file-name "index.org" org-directory))
+
+  ;; TODO Add template for "career notes" (accomplishments, things to do, etc)
+  ;; TODO Make parent for "Team/Sprint activites"
+  (setq org-capture-templates
+        (doct `(("Action Item"
+                 :keys "a"
+                 :prepend t
+                 :file org-default-notes-file
+                 :headline "Action Items"
+                 :template ("* TODO %^{Description} ${tags}"
+                            ,@kdz-doct-entry-default-properties)
+                 :children
+                 (("General To-Do"    :keys "g")
+                  ("Create Ticket"    :keys "t" :tags ":ticket:")
+                  ("Discussion Topic" :keys "d" :tags ":discussion:")
+                  ("Set a Meeting"    :keys "m" :tags ":meeting:")))
+                ("Retro Note"
+                 :keys "r"
+                 :prepend t
+                 :file org-default-notes-file
+                 :headline "Retro Notes"
+                 :template ("* TODO %^{Description} :retro${tags}"
+                            ,@kdz-doct-entry-default-properties)
+                 :children
+                 (("Good"     :keys "g" :tags ":wentwell:")
+                  ("Bad"      :keys "b" :tags ":wentpoorly:")
+                  ("Shoutout" :keys "s" :tags ":shoutout:")))
+                ("Stand-up Topic"
+                 :keys "t"
+                 :prepend t
+                 :file org-default-notes-file
+                 :headline "Stand up Topics"
+                 :template ("* TODO %^{Description} :retro${tags}"
+                            ,@kdz-doct-entry-default-properties))
+                ("Random Thought/Scratch"
+                 :keys "s"
+                 :file org-default-notes-file
+                 :template ("* %^{Description} :random:"
+                            ,@kdz-doct-entry-default-properties))))))
+
 (provide 'packages.d/org)
