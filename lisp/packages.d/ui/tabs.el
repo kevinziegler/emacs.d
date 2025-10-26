@@ -64,7 +64,7 @@ the tab-bar.")
               (search-forward kdz-blank-buffer-text nil t))
           (insert kdz-blank-buffer-text))
         (hide-mode-line-mode 1))
-      (switch-to-buffer blank-buffer)))
+      (display-buffer-full-frame blank-buffer '((inhibit-same-window . t)))))
 
   (defun kdz/tab-bar-initialize-tab-state ()
     (tab-bar-select-tab-by-name "Home")
