@@ -344,6 +344,7 @@
   (eldoc-box-position-function eldoc-box--default-at-point-position-function))
 
 (use-package helpful
+  :hook (helpful-mode . kdz/helpful-header)
   :general
   (kdz/leader-help-def
     "c" '("Describe Command"        . helpful-command)
@@ -351,6 +352,12 @@
     "h" '("Describe Thing-at-point" . helpful-at-point)
     "v" '("Describe Variable"       . helpful-variable)
     "k" '("Describe Key"            . helpful-key)
-    "s" '("Describe Symbol"         . helpful-symbol)))
+    "s" '("Describe Symbol"         . helpful-symbol))
+
+  :config
+  (defun kdz/helpful-header ()
+    (setq-local header-line-format
+                '(:eval (concat  (propertize "Help: " 'face `(:weight bold))
+                                 (symbol-name helpful--sym))))))
 
 (provide 'packages.d/ui/base)
