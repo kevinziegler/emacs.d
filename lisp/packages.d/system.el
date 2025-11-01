@@ -70,12 +70,18 @@
     "g" '("Git Status"   . magit-status)
     "b" '("Blame File"   . magit-blame)
     "l" '("Log for File" . magit-log-buffer-file))
+  :hook (magit-mode . kdz/magit-header)
   :config
   (transient-append-suffix 'magit-fetch "-p" '("-t" "Fetch all tags" ("-t" "--tags")))
   (transient-append-suffix 'magit-pull  "-r" '("-a" "Autostash" "--autostash"))
 
   (when-let ((brew-git (executable-find (brew-bin "git"))))
-    (setq magit-git-executable brew-git)))
+    (setq magit-git-executable brew-git))
+
+  (defun kdz/magit-header ()
+    (setq-local header-line-format
+                '(:eval (concat  (propertize "Git: " 'face `(:weight bold))
+                                 (project-root (project-current)))))))
 
 (use-package magit-delta
   :if (executable-find "delta")
