@@ -188,10 +188,11 @@ defined in that palette from within FACE-SPECS."
   (dolist (mode '(dashboard-mode-hook
                   dired-mode
                   dirvish-directory-view-mode
+                  eshell-mode-hook
+                  helpful-mode-hook
                   org-mode-hook
                   term-mode-hook
                   treemacs-mode-hook
-                  eshell-mode-hook
                   xref--xref-buffer-mode-hook))
     (add-hook mode (lambda () (display-line-numbers-mode -1)))))
 
