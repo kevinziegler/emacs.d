@@ -114,57 +114,51 @@
   (elpaca-after-init . modern-fringes-invert-arrows))
 
 (use-package nerd-icons
+  :after emacs
   :config
-  (defvar kdz-nerd-icons-function-map
-    '(("nf-cod"     . nerd-icons-codicon)
-      ("nf-dev"     . nerd-icons-devicon)
-      ("nf-fa"      . nerd-icons-faicon)
-      ("nf-iec"     . nerd-icons-ipsicon)
-      ("nf-md"      . nerd-icons-mdicon)
-      ("nf-oct"     . nerd-icons-octicon)
-      ("nf-pom"     . nerd-icons-pomicon)
-      ("nf-seti"    . nerd-icons-sucicon)
-      ("nf-custom"  . nerd-icons-sucicon)
-      ("nf-weather" . nerd-icons-wicon))
-    "Mapping of nf-<iconset> names to their nerd-icons-* function ")
+  (defvar kdz-nerd-icons-mapped-prefixes
+    '(("iec"     . nerd-icons-ipsicon)
+      ("seti"    . nerd-icons-sucicon)
+      ("custom"  . nerd-icons-sucicon)
+      ("weather" . nerd-icons-wicon))
+    "Mapping of nf-<iconset> names to their nerd-icons-* symbol prefixes.
 
-  (defvar kdz-nerd-icons-family-function-map
-    '(("nf-cod"     . nerd-icons-codicon-family)
-      ("nf-dev"     . nerd-icons-devicon-family)
-      ("nf-fa"      . nerd-icons-faicon-family)
-      ("nf-iec"     . nerd-icons-ipsicon-family)
-      ("nf-md"      . nerd-icons-mdicon-family)
-      ("nf-oct"     . nerd-icons-octicon-family)
-      ("nf-pom"     . nerd-icons-pomicon-family)
-      ("nf-seti"    . nerd-icons-sucicon-family)
-      ("nf-custom"  . nerd-icons-sucicon-family)
-      ("nf-weather" . nerd-icons-wicon-family))
-    "Mapping of nf-<iconset> names to their nerd-icons-* function ")
+This is to handle cases where the symbol name cannot be constructed from the
+string name programmatically")
 
-  (defun kdz/find-by-prefix-key (prefix-alist name)
-    (cdr (seq-find (lambda (mapping) (s-starts-with? (car mapping) name))
-                   prefix-alist)))
+  (defun kdz/nerd-icons-prefix-for-name (icon-name &optional as-symbol)
+    "Find the correct symbol prefix for ICON-NAME."
+    (let* ((family-str (nth 1 (s-split "-" icon-name)))
+           (mapped-prefix (kdz/alist-str-get family-str
+                                             kdz-nerd-icons-mapped-prefixes)))
+      (if mapped-prefix
+          (if as-symbol mapped-prefix (symbol-name mapped-prefix))
+        (let ((prefix (concat "nerd-icons-" family-str "icon")))
+          (if as-symbol (intern prefix) prefix)))))
+
+  (defun kdz/nerd-icons-function-for-name (icon-name)
+    "Return the function for rendering ICON-NAME"
+    (kdz/nerd-icons-prefix-for-name icon-name t))
+
+  (defun kdz/nerd-icons-family-for-name (icon-name)
+    "Return the font family for ICON-NAME"
+    (intern (concat (kdz/nerd-icons-prefix-for-name icon-name) "-family")))
+
+  (defun kdz/iconify-string (icon string)
+    (format "%s %s" (kdz/nerd-icons-dwim icon) string))
 
   (defun kdz/nerd-icons-dwim (name)
     "Get a nerd-icons icon with name, regardless of icon set"
-    (funcall (kdz/find-by-prefix-key kdz-nerd-icons-function-map name) name))
+    (funcall (kdz/nerd-icons-function-for-name name) name))
 
   (defun kdz/propertize-nerd-icon (name &optional properties)
-    (let* ((face-family-fn
-            (kdz/find-by-prefix-key kdz-nerd-icons-family-function-map name))
+    (let* ((face-family-fn (kdz/nerd-icons-family-for-name name))
            (face-family (funcall face-family-fn))
            (face-family-props (list :family face-family :height 1.2))
            (base-properties (list 'face face-family-props
                                   'font-lock-face face-family-props
                                   'display '(raise 0)))
-           (evaluated-properties
-            (map-merge-with 'plist
-                            (lambda (base extra)
-                              (if (and (listp base) (listp extra))
-                                  (map-merge 'plist base extra)
-                                extra))
-                            base-properties
-                            properties)))
+           (evaluated-properties (kdz/plist-merge base-properties properties)))
       (apply #'propertize `(,(kdz/nerd-icons-dwim name) ,@evaluated-properties)))))
 
 (use-package nerd-icons-dired
