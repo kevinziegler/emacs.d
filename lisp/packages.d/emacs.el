@@ -72,6 +72,27 @@
   (defvar kdz-frame-side-offset 0.07
     "Offset to use when placing the frame on left side of the display")
 
+  (defun kdz/alist-str-get (key alist &optional default remove testfn)
+    "Get KEY from ALIST where KEY is a string.
+
+This is a thin wrapper around the built-in `alist-get', but changes the
+default TESTFN value to check for string equality.  TESTFN can still be
+used to override the TESTFN passed to `alist-get', and all other
+arguments are passed through directly to their `alist-get' counterparts."
+    (alist-get key alist default remove (or testfn #'equal)))
+
+  (defun kdz/plist-merge (base graft)
+    "Perform a shallow merge of plist BASE with another plist GRAFT.
+
+Keys contained in both BASE and GRAFT will prefer the values in GRAFT."
+    (map-merge-with 'plist
+                    (lambda (base-plist-plist graft-plist)
+                      (if (and (listp base-plist-plist) (listp graft-plist))
+                          (map-merge 'plist base-plist-plist graft-plist)
+                        graft-plist))
+                    base
+                    graft))
+
   (defun kdz/place-frame-in-display-left ()
     "Move the current frame to the left side of the display"
     (interactive)
