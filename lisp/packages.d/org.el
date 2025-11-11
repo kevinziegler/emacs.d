@@ -819,8 +819,10 @@ Also adds support for a `:sync' parameter to override `:async'."
                  :children
                  (("General To-Do"    :keys "g")
                   ("Create Ticket"    :keys "t" :tags ":ticket:")
+                  ("Follow-up"        :keys "f" :tags ":followup:")
                   ("Discussion Topic" :keys "d" :tags ":discussion:")
                   ("Set a Meeting"    :keys "m" :tags ":meeting:")))
+
                 ("Retro Note"
                  :keys "r"
                  :prepend t
@@ -832,6 +834,7 @@ Also adds support for a `:sync' parameter to override `:async'."
                  (("Good"     :keys "g" :tags ":wentwell:")
                   ("Bad"      :keys "b" :tags ":wentpoorly:")
                   ("Shoutout" :keys "s" :tags ":shoutout:")))
+
                 ("Stand-up Topic"
                  :keys "t"
                  :prepend t
@@ -839,6 +842,14 @@ Also adds support for a `:sync' parameter to override `:async'."
                  :headline "Stand up Topics"
                  :template ("* TODO %^{Description} :retro${tags}"
                             ,@kdz-doct-entry-default-properties))
+
+                ("Draft Message"
+                 :keys "d"
+                 :file org-default-notes-file
+                 :headline "Drafts"
+                 ;; TODO Add "Recipient" as a property
+                 :template ("* TODO %^{Subject} :drafts:message:"))
+
                 ("Random Thought/Scratch"
                  :keys "s"
                  :file org-default-notes-file
