@@ -255,6 +255,7 @@ string name programmatically")
 
 (use-package transient-posframe
   :after (transient posframe)
+  :custom (transient-posframe-poshandler #'posframe-poshandler-window-bottom-right-corner)
   :hook (elpaca-after-init . transient-posframe-mode))
 
 (use-package treemacs
