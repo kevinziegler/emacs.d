@@ -29,7 +29,8 @@
 
   :hook ((org-mode . visual-line-mode)
          (org-mode . visual-wrap-prefix-mode)
-         (org-mode . kdz/org-mode-set-electric-pair-predicate))
+         (org-mode . kdz/org-mode-set-electric-pair-predicate)
+         (org-mode . kdz/org-spacing-mode))
   :general
   (general-def :states 'insert :keymaps 'org-mode-map "s-RET" 'kdz/org-return-dwim)
   (kdz/leader-file-def "l" '("Store Link" . org-store-link))
