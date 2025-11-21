@@ -65,8 +65,43 @@
     (make-directory backup-dir t)
     (setf backup-directory-alist `((".*" . ,backup-dir))))
 
-  (setq-default history-length           1000
+  ;; startup.el
+  (setopt fancy-splash-image (expand-file-name "logo.png" user-emacs-directory))
+
+  (setq-default history-length 1000
                 prescient-history-length 1000)
+
+  (defvar kdz-config-file-paths '("~/.bash_profile"
+                                  "~/.bashrc"
+                                  "~/.config/gh/config.yml"
+                                  "~/.config/gh/hosts.yml"
+                                  "~/.curlrc"
+                                  "~/.emacs.d/local.el"
+                                  "~/.gitattributes"
+                                  "~/.gitconfig"
+                                  "~/.gitconfig.local"
+                                  "~/.npmrc"
+                                  "~/.zprofile"
+                                  "~/.zshenv"
+                                  "~/.zshrc"
+                                  "~/dotfiles/local/config/zsh/zshrc.mine.zsh")
+    "List of system configuration files not associated with a project.")
+
+  (defun kdz/known-config-file-p (buffer &rest _)
+    (when-let ((filename (buffer-file-name (get-buffer buffer))))
+      (seq-contains-p (mapcar #'expand-file-name kdz-config-file-paths)
+                      (expand-file-name filename)
+                      'equal)))
+
+  (defun kdz/edit-config-file ()
+    (interactive)
+    (find-file (consult--read kdz-config-file-paths
+                              :category 'file
+                              :require-match t)))
+
+  (add-to-list 'display-buffer-alist
+               '(kdz/known-config-file-p display-buffer-in-tab
+                                         (tab-name . "Configuration")))
 
   (defvar kdz-frame-side-offset 0.07
     "Offset to use when placing the frame on left side of the display")
