@@ -91,4 +91,14 @@
   :ensure (grpclient :host github :repo "Prikaz98/grpclient.el")
   :mode (("\\.grpc\\'" . grpclient-mode)))
 
+(use-package csv-mode
+  :hook ((csv-mode csv-guess-set-separator)
+         (csv-mode csv-align-mode)
+         (csv-mode kdz/csv-mode-display))
+  :init
+  (defun kdz/csv-mode-display ()
+    "Ensure line wrap behaviors are disabled in CSV mode"
+    (visual-line-mode -1)
+    (toggle-truncate-lines 1)))
+
 (provide 'packages.d/languages)
