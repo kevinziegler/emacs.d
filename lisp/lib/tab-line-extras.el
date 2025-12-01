@@ -82,6 +82,11 @@
                    (propertize-tab-line-string " ]"))
            `(tab ,tab ,@(if selected-p '(selected t))))))
 
+(defun kdz/tab-line-tab-face-inactive (tab _tabs face _buffer-p selected-p)
+  (let ((inherited (if selected-p 'tab-line-tab-current 'tab-line-tab-inactive)))
+    (setf face `(:inherit (,inherited ,face))))
+  face)
+
 (defun kdz/window-move-dwim (tab-switch-fn window-switch-fn)
   (if (and (eq 'bottom (window-parameter nil 'window-side)) tab-line-mode)
       (funcall tab-switch-fn)

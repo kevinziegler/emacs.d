@@ -80,6 +80,8 @@ the tab-bar.")
   (tab-line-tab-name-function #'kdz/tab-line-buffer-display-name)
   (tab-line-tab-name-format-function #'kdz/tab-line-tab-name-format)
   :hook ((window-state-change . kdz/tab-line-ensure-in-side-window))
-  :config (require 'lib/tab-line-extras))
+  :config
+  (require 'lib/tab-line-extras)
+  (add-to-list 'tab-line-tab-face-functions #'kdz/tab-line-tab-face-inactive))
 
 (provide 'packages.d/ui/tabs)
