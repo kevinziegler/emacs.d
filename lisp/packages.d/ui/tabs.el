@@ -79,7 +79,7 @@ the tab-bar.")
   (tab-line-new-button-show nil)
   (tab-line-tab-name-function #'kdz/tab-line-buffer-display-name)
   (tab-line-tab-name-format-function #'kdz/tab-line-tab-name-format)
-  :hook ((window-state-change . kdz/ensure-bottom-tab-line))
+  :hook ((window-state-change . kdz/tab-line-ensure-in-side-window))
   :config (require 'lib/tab-line-extras))
 
 (provide 'packages.d/ui/tabs)
