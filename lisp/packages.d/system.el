@@ -42,13 +42,19 @@
   :general
   (kdz/leader-git-def
     "y"   (cons "Copy Link" (make-sparse-keymap))
-    "yh" '("Repository Homepage" . git-link-homepage)
-    "yy" '("File + Line Number" . git-link)
-    "yY" '("File + Line Number (@ Commit)" . kdz/git-link-with-commit))
+    "yh" '("Repository Homepage"            . git-link-homepage)
+    "yo" `("Open file at remote"            . ,(kdz/git-link nil t))
+    "yO" `("Open file at remote (@ Commit)" . ,(kdz/git-link t   t))
+    "yy" `("File + Line Number"             . ,(kdz/git-link nil nil))
+    "yY" `("File + Line Number (@ Commit)"  . ,(kdz/git-link t   nil)))
   :config
-  (defun kdz/git-link-with-commit ()
-    (interactive)
-    (let ((git-link-use-commit t)) (call-interactively 'git-link)))
+  (defmacro kdz/git-link (use-commit open-in-browser)
+    "Create a function to copy/open git links with options for link attributes."
+    `(lambda ()
+       (interactive)
+       (let ((git-link-use-commit      ,use-commit)
+             (git-link-open-in-browser ,open-in-browser))
+         (call-interactively 'git-link))))
 
   (defun kdz/git-link--tag ()
     "Get the latest tag for constructing a git-link URL."
