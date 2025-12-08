@@ -49,4 +49,7 @@
   :ensure (eglot-header-line :host github :repo "soerlemans/eglot-header-line")
   :after eglot
   :hook (eglot-managed-mode . eglot-header-line-mode))
+
+(use-package mason :config (mason-ensure))
+
 (provide 'packages.d/tools/eglot)
