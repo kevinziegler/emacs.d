@@ -45,4 +45,8 @@
   :if (executable-find "emacs-lsp-booster")
   :custom (eglot-booster-io-only t))
 
+(use-package eglot-header-line
+  :ensure (eglot-header-line :host github :repo "soerlemans/eglot-header-line")
+  :after eglot
+  :hook (eglot-managed-mode . eglot-header-line-mode))
 (provide 'packages.d/tools/eglot)
