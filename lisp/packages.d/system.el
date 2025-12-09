@@ -47,7 +47,7 @@
     "yO" `("Open file at remote (@ Commit)" . ,(kdz/git-link t   t))
     "yy" `("File + Line Number"             . ,(kdz/git-link nil nil))
     "yY" `("File + Line Number (@ Commit)"  . ,(kdz/git-link t   nil)))
-  :config
+  :init
   (defmacro kdz/git-link (use-commit open-in-browser)
     "Create a function to copy/open git links with options for link attributes."
     `(lambda ()
@@ -55,7 +55,7 @@
        (let ((git-link-use-commit      ,use-commit)
              (git-link-open-in-browser ,open-in-browser))
          (call-interactively 'git-link))))
-
+  :config
   (defun kdz/git-link--tag ()
     "Get the latest tag for constructing a git-link URL."
     (car (git-link--exec "describe" "--tags" "HEAD")))
