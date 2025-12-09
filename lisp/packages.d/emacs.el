@@ -170,7 +170,8 @@ recursively merge the values.  Otherwise, prefer the value occurring in GRAFT."
   :ensure nil
   :custom
   (comint-prompt-read-only t)
-  (comint-scroll-to-bottom-on-input t))
+  (comint-scroll-to-bottom-on-input t)
+  (comint-scroll-to-bottom-on-output t))
 
 (use-package cus-edit
   :ensure nil
@@ -417,7 +418,9 @@ This is executed *prior* to running on of `project-switch-commands'.")
 
 (use-package window
   :ensure nil
-  :custom (switch-to-buffer-obey-display-actions t)
+  :custom
+  (switch-to-buffer-obey-display-actions t)
+  (switch-to-buffer-in-dedicated-window 'pop)
   :general
   (kdz/leader-window-def "=" '("Balance Windows" . balance-windows))
   (kdz/leader-buffer-def
