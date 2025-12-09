@@ -99,11 +99,38 @@
   (defconst kdz-magit-delta-delta-extra-args
     '("--features='side-by-side line-numbers decorations'" "--side-by-side"))
 
+  (defun kdz/magit-delta-set-extra-options (&rest _)
+    (setopt magit-delta-delta-args
+            (seq-uniq (append kdz-magit-delta-delta-args-default
+                              kdz-magit-delta-delta-extra-args) )))
+  (defun kdz/magit-delta-set-default-options (&rest _)
+    (setopt magit-delta-delta-args kdz-magit-delta-delta-args-default))
+
+  (defun kdz/magit-delta-stage-advice (magit-stage-fn &rest  args)
+    (let ((current-delta-args magit-delta-delta-args)
+          (defaults-set (eq magit-delta-delta-args
+                            kdz-magit-delta-delta-args-default)))
+
+      ;; Need to refresh git stage to get usable patch
+      (when (not defaults-set)
+        (kdz/magit-delta-set-default-options)
+        (magit-refresh))
+
+      (let ((ret (apply magit-stage-fn args)))
+        (setopt magit-delta-delta-args current-delta-args)
+
+        ;; One more refresh to restore the initial view
+        (when (not defaults-set) (magit-refresh))
+        ret)))
+
+  (advice-add 'magit-stage :around #'kdz/magit-delta-stage-advice)
+  (advice-add 'magit-unstage :around #'kdz/magit-delta-stage-advice)
+
   (defun kdz/magit-delta-toggle-appearance ()
     (interactive)
     (if (eq kdz-magit-delta-delta-args-default magit-delta-delta-args)
-        (setopt magit-delta-delta-args (append magit-delta-delta-args
-                                               kdz-magit-delta-delta-extra-args))
-      (setopt magit-delta-delta-args kdz-magit-delta-delta-args-default))))
+        (kdz/magit-delta-set-extra-options)
+      (kdz/magit-delta-set-default-options))
+    (magit-refresh)))
 
 (provide 'packages.d/system)
