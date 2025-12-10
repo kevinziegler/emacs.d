@@ -77,7 +77,9 @@
   :general (kdz/leader-toggle-def "C" '("Show/Hide comments" . nocomments-mode)))
 
 (use-package flyover
-  :ensure (flyover :host github :repo "konrad1977/flyover" :branch "main"))
+  :ensure (flyover :host github :repo "konrad1977/flyover" :branch "main")
+  :custom
+  (flyover-virtual-line-icon "╰──"))
 
 (use-package scopeline
   :custom (scopeline-main-lines 10)
