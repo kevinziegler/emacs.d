@@ -142,24 +142,28 @@ string name programmatically")
 
   (defun kdz/nerd-icons-family-for-name (icon-name)
     "Return the font family for ICON-NAME"
-    (intern (concat (kdz/nerd-icons-prefix-for-name icon-name) "-family")))
+    (funcall (intern (concat (kdz/nerd-icons-prefix-for-name icon-name)
+                             "-family"))))
 
-  (defun kdz/iconify-string (icon string)
-    (format "%s %s" (kdz/nerd-icons-dwim icon) string))
+  (defun kdz/nerd-icons-properties-for (icon-name)
+    "Make a list of default text properties for ICON-NAME.
+
+This list is meant to be used as a base when calling #'propertize for the icon
+referenced by ICON-NAME."
+    (let* ((face-family-props
+            `(:family ,(kdz/nerd-icons-family-for-name name) :height 1.2)))
+      (list 'face face-family-props
+            'font-lock-face face-family-props
+            'display '(raise 0))))
 
   (defun kdz/nerd-icons-dwim (name)
     "Get a nerd-icons icon with name, regardless of icon set"
     (funcall (kdz/nerd-icons-function-for-name name) name))
 
   (defun kdz/propertize-nerd-icon (name &optional properties)
-    (let* ((face-family-fn (kdz/nerd-icons-family-for-name name))
-           (face-family (funcall face-family-fn))
-           (face-family-props (list :family face-family :height 1.2))
-           (base-properties (list 'face face-family-props
-                                  'font-lock-face face-family-props
-                                  'display '(raise 0)))
-           (evaluated-properties (kdz/plist-merge base-properties properties)))
-      (apply #'propertize `(,(kdz/nerd-icons-dwim name) ,@evaluated-properties)))))
+    (apply #'propertize
+           `(,(kdz/nerd-icons-dwim name)
+             ,@(kdz/plist-merge (kdz/nerd-icons-properties-for name) properties)))))
 
 (use-package nerd-icons-dired
   :after (dired nerd-icons)
