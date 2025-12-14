@@ -82,14 +82,15 @@ arguments are passed through directly to their `alist-get' counterparts."
     (alist-get key alist default remove (or testfn #'equal)))
 
   (defun kdz/plist-merge (base graft)
-    "Perform a shallow merge of plist BASE with another plist GRAFT.
+    "Perform a deep merge of a plist BASE with another plist GRAFT.
 
-Keys contained in both BASE and GRAFT will prefer the values in GRAFT."
+If a key occurs in both BASE and GRAFT, and both values are themselves plists,
+recursively merge the values.  Otherwise, prefer the value occurring in GRAFT."
     (map-merge-with 'plist
-                    (lambda (base-plist-plist graft-plist)
-                      (if (and (listp base-plist-plist) (listp graft-plist))
-                          (map-merge 'plist base-plist-plist graft-plist)
-                        graft-plist))
+                    (lambda (child-base child-graft)
+                      (if (and (plistp child-base) (plistp child-graft))
+                          (kdz/plist-merge-deep child-base child-graft)
+                        child-graft))
                     base
                     graft))
 
