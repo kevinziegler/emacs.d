@@ -61,7 +61,7 @@
   :general (kdz/leader-git-def "t" '("Time Machine" . git-timemachine)))
 
 (use-package magit
-  :after transient
+  :after (transient nerd-icons)
   :custom
   (magit-repository-directories '(("~/dev" . 2) ("~/.dotfiles" . 0)))
   (magit-format-file-function #'magit-format-file-nerd-icons)
@@ -80,8 +80,10 @@
 
   (defun kdz/magit-header ()
     (setq-local header-line-format
-                '(:eval (concat  (propertize "Git: " 'face `(:weight bold))
-                                 (project-root (project-current)))))))
+                '(:eval (concat (kdz/propertize-nerd-icon "nf-md-git"
+                                                          '(face (:weight bold)))
+                                " "
+                                (project-root (project-current)))))))
 
 (use-package magit-delta
   :if (executable-find "delta")
