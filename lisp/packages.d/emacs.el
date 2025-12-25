@@ -89,7 +89,7 @@ recursively merge the values.  Otherwise, prefer the value occurring in GRAFT."
     (map-merge-with 'plist
                     (lambda (child-base child-graft)
                       (if (and (plistp child-base) (plistp child-graft))
-                          (kdz/plist-merge-deep child-base child-graft)
+                          (kdz/plist-merge child-base child-graft)
                         child-graft))
                     base
                     graft))
