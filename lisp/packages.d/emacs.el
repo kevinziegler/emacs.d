@@ -191,6 +191,9 @@ defined in that palette from within FACE-SPECS."
 (use-package display-line-numbers
   :ensure nil
   :hook (elpaca-after-init . global-display-line-numbers-mode)
+  :custom
+  (display-line-numbers-widen t)
+  (display-line-numbers-width-start t)
   :general
   (kdz/leader-toggle-def
     "l" '("Show/hide line numbers"         . display-line-numbers-mode)
