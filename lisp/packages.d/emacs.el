@@ -1,5 +1,33 @@
 (use-package emacs
   :ensure nil
+  :custom
+  (user-full-name "Kevin Ziegler")
+  ;; files.el
+  (backup-by-copying t)
+  (cursor-in-non-selected-windows nil)
+  (delete-old-versions t)
+  (kept-new-versions 5)
+  (kept-old-versions 3)
+  (version-control t)
+
+  ;; startup.el
+  (fancy-splash-image (expand-file-name "logo.png" user-emacs-directory))
+
+  ;; From C-Sources
+  (coding-system-for-read 'utf-8)
+  (coding-system-for-write 'utf-8)
+  (default-process-coding-system '(utf-8-unix . utf-8-unix))
+  (delete-by-moving-to-trash t)
+  (echo-keystrokes 0.25)
+  (fill-column 80)
+  (frame-inhibit-implied-resize t)
+  (indicate-buffer-boundaries 'left)
+  (inhibit-compacting-font-caches t)
+  (locale-coding-system 'utf-8)
+  (ring-bell-function 'ignore)
+  (use-short-answers t)
+  (x-stretch-cursor t)
+  (x-underline-at-descent-line nil)
   :general
   (kdz/leader-code-eval-def
     "b" '("Evaluate Buffer"      . eval-buffer)
@@ -37,36 +65,7 @@
     (make-directory backup-dir t)
     (setf backup-directory-alist `((".*" . ,backup-dir))))
 
-  ;; files.el
-  (setopt backup-by-copying t
-          cursor-in-non-selected-windows nil
-          delete-old-versions t
-          kept-new-versions 5
-          kept-old-versions 3
-          version-control t)
-
-  ;; C-sources
-  (setopt coding-system-for-read 'utf-8
-          coding-system-for-write 'utf-8
-          default-process-coding-system '(utf-8-unix . utf-8-unix)
-          delete-by-moving-to-trash t
-          echo-keystrokes 0.25
-          fill-column 80
-          frame-inhibit-implied-resize t
-          indicate-buffer-boundaries 'left
-          inhibit-compacting-font-caches t
-          locale-coding-system 'utf-8
-          ring-bell-function 'ignore
-          ;; show-trailing-whitespace t
-          use-short-answers t
-          x-stretch-cursor t
-          x-underline-at-descent-line nil)
-
-  ;; startup.el
-  (setopt fancy-splash-image (expand-file-name "logo.png" user-emacs-directory))
-
-
-  (setq-default history-length 1000
+  (setq-default history-length           1000
                 prescient-history-length 1000)
 
   (defvar kdz-frame-side-offset 0.07
