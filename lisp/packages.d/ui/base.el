@@ -151,7 +151,7 @@ string name programmatically")
 This list is meant to be used as a base when calling #'propertize for the icon
 referenced by ICON-NAME."
     (let* ((face-family-props
-            `(:family ,(kdz/nerd-icons-family-for-name name) :height 1.2)))
+            `(:family ,(kdz/nerd-icons-family-for-name icon-name) :height 1.2)))
       (list 'face face-family-props
             'font-lock-face face-family-props
             'display '(raise 0))))
