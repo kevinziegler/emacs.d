@@ -209,16 +209,16 @@ defined in that palette from within FACE-SPECS."
 	      (if (eq display-line-numbers 'relative) t 'relative))
       (message "Line numbers are currently disabled!")))
 
-  (dolist (mode '(dashboard-mode-hook
-                  dired-mode
-                  dirvish-directory-view-mode
+  (dolist (hook '(dashboard-mode-hook
+                  dired-mode-hook
+                  dirvish-directory-view-mode-hook
                   eshell-mode-hook
                   helpful-mode-hook
                   org-mode-hook
                   term-mode-hook
                   treemacs-mode-hook
                   xref--xref-buffer-mode-hook))
-    (add-hook mode (lambda () (display-line-numbers-mode -1)))))
+    (add-hook hook (lambda () (display-line-numbers-mode -1)))))
 
 (use-package ediff
   :ensure nil
