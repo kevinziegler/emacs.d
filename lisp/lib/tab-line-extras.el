@@ -59,9 +59,10 @@
          (selected-p (if buffer-p
                          (eq tab (window-buffer))
                        (cdr (assq 'selected tab))))
-         (name (if buffer-p
-                   (funcall tab-line-tab-name-function tab tabs)
-                 (cdr (assq 'name tab))))
+         (name (string-replace "%" "%%"
+                               (if buffer-p
+                                   (funcall tab-line-tab-name-function tab tabs)
+                                 (cdr (assq 'name tab))) ))
          (icon (when buffer-p (kdz/tab-line-icon-name-for-buffer tab)))
          (face (if selected-p
                    (if (mode-line-window-selected-p)
@@ -71,20 +72,21 @@
     (dolist (fn tab-line-tab-face-functions)
       (setf face (funcall fn tab tabs face buffer-p selected-p)))
 
-    (defun propertize-tab-line-string (string)
-      (propertize string 'face face 'follow-link 'ignore))
-
-    (apply 'propertize
-           (concat (propertize-tab-line-string "[ ")
-                   (when icon (kdz/propertize-nerd-icon icon `(face ,face)))
-                   (when icon (propertize-tab-line-string " "))
-                   (propertize-tab-line-string (string-replace "%" "%%" name))
-                   (propertize-tab-line-string " ]"))
-           `(tab ,tab ,@(if selected-p '(selected t))))))
+    (format (propertize "[ %s%s%s ]"
+                        'face        face
+                        'follow-link 'ignore
+                        'tab         tab
+                        'selected    selected-p)
+            (if icon
+                (kdz/propertize-nerd-icon icon `(face (,@face :height 1.1)))
+              "")
+            (if icon " " "")
+            name)))
 
 (defun kdz/tab-line-tab-face-inactive (tab _tabs face _buffer-p selected-p)
-  (let ((inherited (if selected-p 'tab-line-tab-current 'tab-line-tab-inactive)))
-    (setf face `(:inherit (,inherited ,face))))
+  (setf face (if selected-p
+                 `(:weight bold ,@face)
+               '(:inherit tab-line-tab-inactive)))
   face)
 
 (defun kdz/window-move-dwim (tab-switch-fn window-switch-fn)

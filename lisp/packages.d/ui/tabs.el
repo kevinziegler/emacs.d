@@ -82,6 +82,6 @@ the tab-bar.")
   :hook ((window-state-change . kdz/tab-line-ensure-in-side-window))
   :config
   (require 'lib/tab-line-extras)
-  (add-to-list 'tab-line-tab-face-functions #'kdz/tab-line-tab-face-inactive))
+  (add-to-list 'tab-line-tab-face-functions #'kdz/tab-line-tab-face-inactive t))
 
 (provide 'packages.d/ui/tabs)

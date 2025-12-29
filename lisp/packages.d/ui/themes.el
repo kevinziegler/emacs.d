@@ -105,15 +105,14 @@
                                       :background ,(color 'bg-main))))
      '(tab-line                   ((t :inherit tab-bar)))
      '(tab-line-tab               ((t :inherit tab-bar-tab)))
-     `(tab-line-tab-inactive      ((t :inherit tab-bar-tab
+     `(tab-line-tab-inactive      ((t :inherit tab-line
                                       :foreground ,(color 'fg-dim)
                                       :background ,(color 'bg-main))))
      ;; TODO Figure out how to tweak tab-line-tab-special face for current vs. inactive
      `(tab-line-tab-special       ((t :inherit tab-line
-                                      :weight bold
                                       :foreground ,(color 'cyan-intense)
                                       :background ,(color 'bg-main))))
-     `(tab-line-tab-current       ((t :inherit tab-bar-tab
+     `(tab-line-tab-current       ((t :inherit tab-line-tab
                                       :weight bold
                                       :foreground ,(color 'fg-main)))))))
 
