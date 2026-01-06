@@ -68,16 +68,16 @@
      '(tab-line-tab-current  ((t :inherit tab-bar-tab))))))
 
 (use-package modus-themes
-  :hook ((elpaca-after-init . (lambda () (load-theme 'modus-operandi-tritanopia :no-confirm)))
-         (kdz-load-theme    . kdz/modus-operandi-tritanopia-customizations))
+  :hook ((elpaca-after-init . (lambda () (load-theme 'modus-operandi :no-confirm)))
+         (kdz-load-theme    . kdz/modus-operandi-customizations))
   :init
   (setopt modus-themes-bold-constructs t
           modus-themes-italic-constructs t)
   :config
-  (defun kdz/modus-operandi-tritanopia-customizations ()
+  (defun kdz/modus-operandi-customizations ()
     (kdz/customize-with-palette
-     'modus-operandi-tritanopia
-     'modus-operandi-tritanopia-palette
+     'modus-operandi
+     'modus-operandi-palette
      `(aw-leading-char-face       ((t :foreground ,(color 'red) :height 3.0)))
      `(child-frame-border         ((t :background ,(color 'border)
                                       :foreground ,(color 'border))))
