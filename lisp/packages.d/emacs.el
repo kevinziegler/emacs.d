@@ -341,7 +341,6 @@ defined in that palette from within FACE-SPECS."
   (proced-filter 'user))
 
 (use-package project
-  :ensure nil
   :custom (project-list-file (kdz/user-directory ".local" "projects"))
   :general
   (kdz/leader-def
