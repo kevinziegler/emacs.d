@@ -150,6 +150,7 @@ recursively merge the values.  Otherwise, prefer the value occurring in GRAFT."
           (center-y (/ (- (display-pixel-height) (frame-pixel-height)) 2)))
       (set-frame-position nil center-x center-y))))
 
+(use-package flymake :defer t)
 (use-package align
   :ensure nil
   :general (kdz/leader-edit-def "a" '("Align by Regexp" . align-regexp)))
