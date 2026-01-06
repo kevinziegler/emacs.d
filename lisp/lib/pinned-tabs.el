@@ -70,6 +70,34 @@ A pinned tab is one whose name appears as an entry in `kdz-tab-bar-tab-icons'."
             (when icon (kdz/propertize-nerd-icon icon `(face (:inherit ,tab-face))))
             (when (and is-current icon) " ")
             (when (or (not icon) is-current) (propertize name 'face tab-face))
+            (kdz/tab-bar-tab-git-segment tab tab-face)
             (propertize " ]" 'face tab-face))))
+
+(defun kdz/git-repo-name-for (dir)
+  (when-let* ((file-directory-p (expand-file-name ".git" dir))
+              (remote-url
+               (shell-command-to-string
+                (format "git -C %s config --get remote.origin.url " dir))))
+    (f-base remote-url)))
+
+(defun kdz/git-branch-name-for (dir)
+  (when (file-directory-p (expand-file-name ".git" dir))
+    (s-trim (shell-command-to-string (format "git -C %s rev-parse --abbrev-ref HEAD"
+                                             dir)))))
+
+(defun kdz/otpp-tab-git-branch (tab)
+  (when-let ((tab-root (alist-get 'otpp-root-dir tab)))
+    (kdz/git-branch-name-for tab-root)))
+
+(defun kdz/otpp-tab-git-repo (tab)
+  (when-let ((tab-root (alist-get 'otpp-root-dir tab)))
+    (kdz/git-branch-name-for tab-root)))
+
+(defun kdz/tab-bar-tab-git-segment (tab tab-face)
+  (when-let ((branch-name (kdz/otpp-tab-git-branch tab)))
+    (concat ":"
+            ;; (kdz/propertize-nerd-icon "nf-md-source_branch"
+            ;;                           `(face (:inherit ,tab-face)))
+            branch-name)))
 
 (provide 'lib/pinned-tabs)
