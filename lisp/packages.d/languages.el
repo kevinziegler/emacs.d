@@ -58,7 +58,12 @@
          ("\\.ya?ml\\'"    . yaml-ts-mode)
          ("\\go.mode\\'"   . go-mod-ts-mode)))
 
-(use-package treesit-auto :config (global-treesit-auto-mode))
+(use-package treesit-auto
+  :custom
+  (treesit-auto-install 'prompt)
+  (treesit-font-lock-level 4)
+  :hook (elpaca-after-init . global-treesit-auto-mode)
+  :config (treesit-auto-add-to-auto-mode-alist 'all))
 
 (use-package ielm
   :ensure nil
