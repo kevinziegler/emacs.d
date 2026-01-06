@@ -12,12 +12,11 @@
   (setq-default
    eglot-workspace-configuration
    '(:basedpyright
-     (:typeCheckingMode "recommended")
-     :basedpyright.analysis
-     (:diagnosticSeverityOverrides
-      (:reportUnusedCallResult "none")
-      :inlayHints (:callArgumentNames :json-false)
-      :diagnosticMode "openFilesOnly")))
+     ( :typeCheckingMode "recommended"
+       :analysis (:diagnosticSeverityOverrides
+                  (:reportUnusedCallResult "none")
+                  :inlayHints (:callArgumentNames :json-false)
+                  :diagnosticMode "openFilesOnly"))))
 
   (defun kdz/eglot-ensure-maybe ()
     (when (seq-contains-p
