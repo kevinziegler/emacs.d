@@ -226,6 +226,9 @@ referenced by ICON-NAME."
   (doom-modeline-persp-icon nil)
   (doom-modeline-persp-name nil)
   (doom-modeline-buffer-encoding nil)
+  (doom-modeline-buffer-file-name-style 'relative-to-project)
+  (doom-modeline-vcs-icon t)
+  (doom-modeline-vcs-display-function nil)
   :config
   (defvar kdz-modeline-buffer-name-maps '(("*IList*" . "Symbols")))
 
