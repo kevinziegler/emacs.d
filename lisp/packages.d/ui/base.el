@@ -1,7 +1,6 @@
 (use-package avy)
 (use-package colorful-mode)
 (use-package flycheck :custom (flycheck-checker-error-threshold 10000))
-(use-package git-gutter-fringe :hook (elpaca-after-init . global-git-gutter-mode))
 (use-package hide-mode-line :hook ((reb-mode . hide-mode-line-mode)))
 (use-package perfect-margin)
 (use-package project-rootfile :config (add-to-list 'project-rootfile-list ".project"))
@@ -54,6 +53,14 @@
 (use-package file-info
   :custom (file-info-headline-underline-symbol ?━)
   :general (kdz/leader-file-def "i" '("Show Info" . file-info-show)))
+
+(use-package git-gutter-fringe
+  :custom
+  (git-gutter:added-sign    "┃")
+  (git-gutter:modified-sign "┃")
+  (git-gutter:deleted-sign  "⎽")
+  :hook
+  (elpaca-after-init . global-git-gutter-mode))
 
 (use-package highlight-indent-guides
   :general (kdz/leader-toggle-def "i" '("Indent guides" . highlight-indent-guides-mode)))
