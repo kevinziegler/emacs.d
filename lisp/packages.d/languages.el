@@ -23,19 +23,17 @@
   (autoload 'lua-mode "lua-mode" "Lua editing mode." t))
 
 (use-package markdown-mode
-  ;; :mode (("\\.md\\'"       . markdown-mode))
-  :config
-  (setq markdown-enable-wiki-links t
-        markdown-fontify-code-blocks-natively t
-        markdown-gfm-uppercase-checkbox t
-        markdown-gfm-use-electric-backquote t
-        markdown-italic-underscore t))
+  :custom
+  (markdown-enable-wiki-links t)
+  (markdown-fontify-code-blocks-natively t)
+  (markdown-gfm-uppercase-checkbox t)
+  (markdown-gfm-use-electric-backquote t)
+  (markdown-italic-underscore t))
 
 (use-package plantuml-mode
   :mode (("\\.plantuml\\'" . plantuml-mode)
 	 ("\\.pu?ml\\'"    . plantuml-mode))
-  :config
-  (setq plantuml-default-exec-mode 'executable))
+  :custom (plantuml-default-exec-mode 'executable))
 
 (use-package web-mode
   :mode (("\\.html?\\'" . web-mode) ("\\.hbs\\'"   . web-mode))
