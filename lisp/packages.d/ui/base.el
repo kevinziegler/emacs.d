@@ -15,6 +15,11 @@
   :general (kdz/leader-window-def "w" '("Select Window" . ace-window))
   :hook (elpaca-after-init . ace-window-posframe-mode))
 
+(use-package breadcrumb
+  :custom
+  (breadcrumb-imenu-crumb-separator " ❱ ")
+  :hook (elpaca-after-init . breadcrumb-mode))
+
 (use-package minimal-dashboard
   :ensure
   (minimal-dashboard :host github :repo "dheerajshenoy/minimal-dashboard.el")
