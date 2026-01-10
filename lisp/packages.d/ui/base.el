@@ -19,7 +19,7 @@
   :ensure
   (minimal-dashboard :host github :repo "dheerajshenoy/minimal-dashboard.el")
   :preface
-  (setq minimal-dashboard-image-path ""
+  (setq minimal-dashboard-image-path nil
         initial-buffer-choice #'minimal-dashboard)
   :custom
   (minimal-dashboard-buffer-name "*dashboard*")
