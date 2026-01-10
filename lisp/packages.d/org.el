@@ -1,14 +1,37 @@
 (use-package org
   :ensure (:wait t)
+  :custom
+  (org-auto-align-tags nil)
+  (org-babel-results-keyword "results")
+  (org-cycle-separator-lines 0)
+  (org-edit-src-content-indentation 0)
+  (org-ellipsis " ⋯")
+  (org-fold-catch-invisible-edits 'show-and-error)
+  (org-fold-core-style 'overlays)
+  (org-footnote-section nil)
+  (org-fontify-quote-and-verse-blocks t)
+  (org-hidden-keywords '(title))
+  (org-hide-emphasis-markers t)
+  (org-html-doctype "html5")
+  (org-html-html5-fancy t)
+  (org-image-actual-width nil)
+  (org-insert-heading-respect-content t)
+  (org-list-allow-alphabetical t)
+  (org-list-demote-modify-bullet '(("-" . "+") ("+" . "1.") ("1." . "-")))
+  (org-log-done 'time)
+  (org-log-into-drawer t)
+  (org-M-RET-may-split-line '((default . nil)))
+  (org-pretty-entities t)
+  (org-return-follows-link t)
+  (org-special-ctrl-a/e t)
+  (org-tags-column 0)
+  (org-use-property-inheritance t)
+
   :hook ((org-mode . visual-line-mode)
          (org-mode . visual-wrap-prefix-mode)
          (org-mode . kdz/org-mode-set-electric-pair-predicate))
   :general
-  (general-def
-    :states 'insert
-    :keymaps 'org-mode-map
-    "s-RET" 'kdz/org-return-dwim)
-
+  (general-def :states 'insert :keymaps 'org-mode-map "s-RET" 'kdz/org-return-dwim)
   (kdz/leader-file-def "l" '("Store Link" . org-store-link))
 
   :general-config
@@ -46,31 +69,6 @@
 
   :config
   (require 'lib/org-spacing)
-  (setopt org-auto-align-tags nil
-          org-babel-results-keyword "results"
-          org-cycle-separator-lines 0
-          org-edit-src-content-indentation 0
-          org-ellipsis " ⋯"
-          org-fold-catch-invisible-edits 'show-and-error
-          org-fold-core-style 'overlays
-          org-footnote-section nil
-          org-fontify-quote-and-verse-blocks t
-          org-hidden-keywords '(title)
-          org-hide-emphasis-markers t
-          org-html-doctype "html5"
-          org-html-html5-fancy t
-          org-image-actual-width nil
-          org-insert-heading-respect-content t
-          org-list-allow-alphabetical t
-          org-list-demote-modify-bullet '(("-" . "+") ("+" . "1.") ("1." . "-"))
-          org-log-done 'time
-          org-log-into-drawer t
-          org-M-RET-may-split-line '((default . nil))
-          org-pretty-entities t
-          org-return-follows-link t
-          org-special-ctrl-a/e t
-          org-tags-column 0
-          org-use-property-inheritance t)
 
   (add-to-list 'display-buffer-alist
                '(kdz/notes-file-p display-buffer-in-tab (tab-name . "Notes")))
