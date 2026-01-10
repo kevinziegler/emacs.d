@@ -361,12 +361,23 @@ referenced by ICON-NAME."
 
 (use-package casual
   :after (calc calendar)
+  :defer t
   :general
   (kdz/mode-leader-def :keymaps 'calc-mode-map "m" '("Menu" . casual-calc-tmenu))
   (kdz/mode-leader-def :keymaps 'calc-alg-map "m" '("Menu" . casual-calc-tmenu))
   (kdz/mode-leader-def :keymaps 'calendar-mode-map "m" '("Menu" . casual-calendar))
   (kdz/mode-leader-def :keymaps 'ediff-mode-map "m" '("Menu" . casual-ediff-tmenu))
 
+  (Man-mode-map "n" #'casual-lib-browse-forward-paragraph
+                "p" #'casual-lib-browse-backward-paragraph
+                "[" #'Man-previous-section
+                "]" #'Man-next-section
+                "j" #'next-line
+                "k" #'previous-line
+                "K" #'Man-kill
+                "o" #'casual-man-occur-options)
+  (reb-mode-map "C-o" #'casual-re-builder-tmenu)
+  (reb-lisp-mode-map "C-o" #'casual-re-builder-tmenu)
   :config
   ;; TODO These are overidden by evil-mode keybindings.  Move to general ]
   ;;      configurations?
@@ -374,21 +385,10 @@ referenced by ICON-NAME."
   ;; (keymap-set calc-alg-map "C-o" #'casual-calc-tmenu)
   ;; (keymap-set calendar-mode-map "C-o" #'casual-calendar)
 
-  (casual-ediff-install) ; run this to enable Casual Ediff
   ;; (add-hook 'ediff-keymap-setup-hook
   ;;           (lambda ()
   ;;             (keymap-set ediff-mode-map "C-o" #'casual-ediff-tmenu)))
-
-  (keymap-set Man-mode-map "n" #'casual-lib-browse-forward-paragraph)
-  (keymap-set Man-mode-map "p" #'casual-lib-browse-backward-paragraph)
-  (keymap-set Man-mode-map "[" #'Man-previous-section)
-  (keymap-set Man-mode-map "]" #'Man-next-section)
-  (keymap-set Man-mode-map "j" #'next-line)
-  (keymap-set Man-mode-map "k" #'previous-line)
-  (keymap-set Man-mode-map "K" #'Man-kill)
-  (keymap-set Man-mode-map "o" #'casual-man-occur-options)
-
-  (keymap-set reb-mode-map "C-o" #'casual-re-builder-tmenu)
-  (keymap-set reb-lisp-mode-map "C-o" #'casual-re-builder-tmenu))
+  ;; run this to enable Casual Ediff
+  (casual-ediff-install))
 
 (provide 'packages.d/ui/base)
