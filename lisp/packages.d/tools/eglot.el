@@ -1,5 +1,5 @@
 (use-package eglot
-  :ensure nil
+  :defer t
   :custom
   (eglot-autoshutdown t)
   (eglot-events-buffer-config '(:size 0))
@@ -25,9 +25,9 @@
       (eglot-ensure))))
 
 ;; TODO Make a helper to look for symbol at point by default
-(use-package consult-eglot)
-(use-package consult-eglot-embark)
-(use-package flycheck-eglot)
+(use-package consult-eglot :defer t)
+(use-package consult-eglot-embark :defer t)
+(use-package flycheck-eglot :defer t)
 
 (use-package sideline-eglot
   :after sideline

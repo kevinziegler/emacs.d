@@ -275,6 +275,7 @@ defined in that palette from within FACE-SPECS."
 
 (use-package eldoc
   :ensure nil
+  :defer t
   :after evil
   :config
   (eldoc-add-command
