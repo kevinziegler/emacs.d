@@ -85,7 +85,10 @@
   (general-def
     :keymaps 'imenu-list-major-mode-map
     "s-<return>" 'imenu-list-goto-entry)
-  (kdz/leader-code-lookup-def "l" '("Symbols List" . imenu-list)))
+  (kdz/leader-code-lookup-def "l" '("Symbols List" . imenu-list))
+  :custom
+  (imenu-list-focus-after-activiation t)
+  (imenu-list-mode-line-format nil))
 
 (use-package pretty-hydra
   :after hydra
