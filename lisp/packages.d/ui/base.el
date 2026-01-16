@@ -5,7 +5,6 @@
 (use-package perfect-margin)
 (use-package project-rootfile :config (add-to-list 'project-rootfile-list ".project"))
 (use-package solaire-mode :hook (elpaca-after-init . solaire-global-mode))
-(use-package svg-tag-mode)
 (use-package treemacs-nerd-icons :after treemacs :config (treemacs-load-theme "nerd-icons"))
 (use-package treemacs-tab-bar :after treemacs :config (treemacs-set-scope-type 'Tabs))
 (use-package treemacs-evil :after (treemacs evil))
