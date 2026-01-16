@@ -275,7 +275,6 @@ defined in that palette from within FACE-SPECS."
     (set-window-configuration kdz-ediff-last-windows)))
 
 (use-package eldoc
-  :ensure nil
   :defer t
   :after evil
   :config
