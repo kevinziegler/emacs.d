@@ -36,6 +36,7 @@
     (with-current-buffer minimal-dashboard-buffer-name (kill-buffer-and-window))))
 
 (use-package elfeed
+  :defer t
   :custom
   (elfeed-search-feed-face ":foreground #ffffff :weight bold")
   (elfeed-feeds '(("https://planet.emacslife.com/atom.xml" devtools emacs)
@@ -58,8 +59,7 @@
   (git-gutter:added-sign    "┃")
   (git-gutter:modified-sign "┃")
   (git-gutter:deleted-sign  "⎽")
-  :hook
-  (elpaca-after-init . global-git-gutter-mode))
+  :hook (elpaca-after-init . global-git-gutter-mode))
 
 (use-package highlight-indent-guides
   :general (kdz/leader-toggle-def "i" '("Indent guides" . highlight-indent-guides-mode)))
@@ -71,6 +71,7 @@
   (add-to-list 'hl-todo-keyword-faces '("STUB"  .  "#7cb8bb")))
 
 (use-package hydra
+  :defer t
   :custom
   (hydra-hint-display-type 'posframe)
   (hydra-posframe-show-params (list :poshandler posframe-poshandler-frame-center
