@@ -9,14 +9,8 @@
   (kdz/leader-toggle-def "h" '("Inlay hints" . eglot-inlay-hints-mode))
   (kdz/leader-code-def "a" '("Code Actions" . eglot-code-actions))
   :config
-  (setq-default
-   eglot-workspace-configuration
-   '(:basedpyright
-     ( :typeCheckingMode "recommended"
-       :analysis (:diagnosticSeverityOverrides
-                  (:reportUnusedCallResult "none")
-                  :inlayHints (:callArgumentNames :json-false)
-                  :diagnosticMode "openFilesOnly"))))
+  (add-to-list 'eglot-server-programs '((python-mode python-ts-mode) "ty" "server"))
+  (advice-add 'eglot-completion-at-point :around #'cape-wrap-buster)
 
   (defun kdz/eglot-ensure-maybe ()
     (when (seq-contains-p
