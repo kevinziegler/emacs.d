@@ -254,6 +254,7 @@ defined in that palette from within FACE-SPECS."
                   org-mode-hook
                   term-mode-hook
                   treemacs-mode-hook
+                  imenu-list-major-mode-hook
                   xref--xref-buffer-mode-hook))
     (add-hook hook (lambda () (display-line-numbers-mode -1)))))
 
