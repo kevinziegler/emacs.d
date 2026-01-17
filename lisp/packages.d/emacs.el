@@ -274,12 +274,14 @@ defined in that palette from within FACE-SPECS."
   (defun kdz/restore-pre-ediff-winconfig ()
     (set-window-configuration kdz-ediff-last-windows)))
 
-(use-package eldoc
-  :defer t
-  :after evil
-  :config
-  (eldoc-add-command
-   #'evil-normal-state #'evil-insert #'evil-change #'evil-delete #'evil-replace))
+;; Eldoc config needs weird hack; moved to bootstrap.el
+;; (use-package eldoc
+;;   :defer t
+;;   :after evil
+;;   :config
+;;   (eldoc-add-command
+;;    #'evil-normal-state #'evil-insert #'evil-change #'evil-delete #'evil-replace)
+;;   (global-eldoc-mode))
 
 (use-package eshell
   :ensure nil

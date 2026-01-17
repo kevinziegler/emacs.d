@@ -42,6 +42,18 @@
   (elpaca-use-package-mode)
   (setq elpaca-use-package-by-default t))
 
+;; Eldoc needs some weird loading hacks to not raise warnings
+(unload-feature 'eldoc t)
+(setq custom-delayed-init-variables '())
+(defvar global-eldoc-mode nil)
+
+(elpaca eldoc
+  (require 'eldoc)
+  (global-eldoc-mode)
+  (eldoc-add-command
+   #'evil-normal-state #'evil-insert #'evil-change #'evil-delete #'evil-replace)
+  (global-eldoc-mode))
+
 (elpaca-wait)
 
 ;; Set up `general' here so the `:general' keyword is available for use in
