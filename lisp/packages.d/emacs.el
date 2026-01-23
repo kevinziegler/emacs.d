@@ -2,6 +2,7 @@
   :ensure nil
   :custom
   (user-full-name "Kevin Ziegler")
+  (list-faces-sample-text "abc ABC 123")
   ;; files.el
   (backup-by-copying t)
   (cursor-in-non-selected-windows nil)
@@ -52,8 +53,6 @@
   (setq read-extended-command-predicate #'command-completion-default-include-p
         tab-always-indent 'complete)
 
-  (setopt user-full-name "Kevin Ziegler")
-
   (let ((auto-save-dir (kdz/user-directory ".local" "auto-save"))
         (backup-dir (kdz/user-directory ".local" "backups")))
 
@@ -64,9 +63,6 @@
 
     (make-directory backup-dir t)
     (setf backup-directory-alist `((".*" . ,backup-dir))))
-
-  ;; startup.el
-  (setopt fancy-splash-image (expand-file-name "logo.png" user-emacs-directory))
 
   (setq-default history-length 1000
                 prescient-history-length 1000)
