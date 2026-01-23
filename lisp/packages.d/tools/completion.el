@@ -15,10 +15,6 @@
   :hook ((elpaca-after-init . global-corfu-mode)
          (global-corfu-mode . corfu-popupinfo-mode)))
 
-(use-package nerd-icons-corfu
-  :after corfu
-  :init (add-to-list 'corfu-margin-formatters #'nerd-icons-corfu-formatter))
-
 (use-package hotfuzz :config (add-to-list 'completion-styles 'hotfuzz))
 
 (use-package consult
@@ -169,10 +165,5 @@
   :after consult-gh
   :if (executable-find "gh")
   :hook (elpaca-after-init . consult-gh-embark-mode))
-
-(use-package nerd-icons-completion
-  :after (marginalia nerd-icons)
-  :hook ((elpaca-after-init . nerd-icons-completion-mode)
-         (marginalia-mode . nerd-icons-completion-marginalia-setup)))
 
 (provide 'packages.d/tools/completion)
