@@ -10,6 +10,8 @@
   (kdz/leader-code-def "a" '("Code Actions" . eglot-code-actions))
   :config
   (add-to-list 'eglot-server-programs '((python-mode python-ts-mode) "ty" "server"))
+  (add-to-list 'eglot-server-programs `((yaml-mode yaml-ts-mode) . ,(eglot-alternatives '(("yaml-language-server")
+                                                                                          ("helm_ls" "serve")))))
   (advice-add 'eglot-completion-at-point :around #'cape-wrap-buster)
 
   (defun kdz/eglot-ensure-maybe ()
