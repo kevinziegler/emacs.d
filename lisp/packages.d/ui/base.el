@@ -11,6 +11,8 @@
 
 (use-package ace-window
   :general (kdz/leader-window-def "w" '("Select Window" . ace-window))
+  :after avy
+  :custom (aw-keys avy-keys)
   :hook (elpaca-after-init . ace-window-posframe-mode))
 
 (use-package breadcrumb
