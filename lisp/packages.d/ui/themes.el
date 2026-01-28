@@ -72,13 +72,16 @@
          (kdz-load-theme    . kdz/modus-operandi-customizations))
   :init
   (setopt modus-themes-bold-constructs t
+          modus-themes-prompts t
           modus-themes-italic-constructs t)
   :config
   (defun kdz/modus-operandi-customizations ()
     (kdz/customize-with-palette
      'modus-operandi
      'modus-operandi-palette
-     `(aw-leading-char-face       ((t :foreground ,(color 'red) :height 3.0)))
+     `(aw-leading-char-face       ((t :foreground ,(color 'cyan-intense)
+                                      :background ,(color 'bg-active)
+                                      :height 2.5)))
      `(child-frame-border         ((t :background ,(color 'border)
                                       :foreground ,(color 'border))))
      `(flyover-marker             ((t :foreground ,(color 'bg-cyan-intense))))
@@ -96,6 +99,13 @@
                                       :background ,(color 'bg-main))))
      `(git-gutter-fr:modified     ((t :foreground ,(color 'bg-changed-fringe)
                                       :background ,(color 'bg-main))))
+     `(header-line                ((t :inherit modus-themes-ui-variable-pitch
+                                      :box (:line-width 3 :color ,(color 'bg-dim))
+                                      :background ,(color 'bg-dim))))
+     `(mode-line                  ((t :background ,(color 'bg-ochre)
+                                      :box (:line-width 6 :color ,(color 'bg-ochre)))))
+     `(mode-line-active           ((t :background ,(color 'bg-ochre)
+                                      :box (:line-width 6 :color ,(color 'bg-ochre)))))
      `(window-divider             ((t :foreground ,(color 'border))))
      `(window-divider-first-pixel ((t :foreground ,(color 'border))))
      `(tab-bar                   ,(kdz/tab-bar-face-spec-base (color 'bg-main)
@@ -108,7 +118,6 @@
      `(tab-line-tab-inactive      ((t :inherit tab-line
                                       :foreground ,(color 'fg-dim)
                                       :background ,(color 'bg-main))))
-     ;; TODO Figure out how to tweak tab-line-tab-special face for current vs. inactive
      `(tab-line-tab-special       ((t :inherit tab-line
                                       :foreground ,(color 'cyan-intense)
                                       :background ,(color 'bg-main))))
