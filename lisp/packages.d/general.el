@@ -66,7 +66,7 @@
     "g"    (cons "Git"             kdz-git-actions-map)
     "h"    (cons "Help & Info"     kdz-help-actions-map)
     "i"    (cons "Insert"          kdz-insert-actions-map)
-    "i"    (cons "Jump"            kdz-jump-actions-map)
+    "j"    (cons "Jump"            kdz-jump-actions-map)
     "o"    (cons "Open"            kdz-open-actions-map)
     "s"    (cons "Search"          kdz-search-actions-map)
     "t"    (cons "Toggle"          kdz-toggle-actions-map)
