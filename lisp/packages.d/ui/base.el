@@ -300,6 +300,7 @@
   :hook (eglot-managed-mode . eldoc-box-hover-mode)
   :custom
   (eldoc-box-only-multi-line t)
+  (eldoc-box-offset '(16 16 40))
   (eldoc-box-position-function eldoc-box--default-at-point-position-function))
 
 (use-package helpful
