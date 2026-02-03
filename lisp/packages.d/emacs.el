@@ -466,7 +466,19 @@ This is executed *prior* to running on of `project-switch-commands'.")
     "r" '("Lookup References" . xref-find-references))
   :custom
   (xref-prompt-for-identifier nil)
-  (xref-search-program 'ripgrep))
+  (xref-search-program 'ripgrep)
+  :config
+  (defun kdz/xref-make-unique-buffer (orig-fn &rest args)
+    (let* ((symbol (symbol-at-point))
+           (project (if (project-current)
+                        (format " [%s]" (project-name (project-current)))
+                      ""))
+           (xref-buffer-name (format "*xref: %s%s*" symbol project)))
+      (apply orig-fn args)
+      (with-current-buffer xref-buffer-name
+        (setq-local xref-searched-symbol symbol))))
+
+  (advice-add 'xref-find-references :around #'kdz/xref-make-unique-buffer))
 
 (use-package apropos          :ensure nil :custom (appropos-do-all t))
 (use-package dired            :ensure nil :custom (insert-directory-program "gls"))
