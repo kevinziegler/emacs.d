@@ -72,7 +72,7 @@
          (kdz-load-theme    . kdz/modus-operandi-customizations))
   :init
   (setopt modus-themes-bold-constructs t
-          modus-themes-prompts t
+          modus-themes-prompts '(bold)
           modus-themes-italic-constructs t)
   :config
   (defun kdz/modus-operandi-customizations ()
