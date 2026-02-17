@@ -61,17 +61,24 @@ A pinned tab is one whose name appears as an entry in `kdz-tab-bar-tab-icons'."
         (t (message "Expected a numeric index, received: %s" index))))
 
 (defun kdz/tab-bar-tab-name-format (tab i)
-  (let* ((name       (alist-get 'name tab))
-         (is-current (eq (car tab) 'current-tab))
-         (icon       (cdr (assoc (alist-get 'name tab) kdz-tab-bar-tab-icons)))
-         (index      (when tab-bar-tab-hints (format "%d " i)))
-         (tab-face   (funcall tab-bar-tab-face-function tab)))
-    (concat (propertize (concat "[ " index) 'face tab-face)
-            (when icon (kdz/propertize-nerd-icon icon `(face (:inherit ,tab-face))))
-            (when (and is-current icon) " ")
-            (when (or (not icon) is-current) (propertize name 'face tab-face))
-            (kdz/tab-bar-tab-git-segment tab tab-face)
-            (propertize " ]" 'face tab-face))))
+  (let* ((tab-face   (funcall tab-bar-tab-face-function tab)))
+    (s-replace "  " " "
+               (format (propertize  "[ %d %s %s%s ]" 'face tab-face)
+                       i
+                       (kdz/tab-bar-tab-icon-segment tab tab-face)
+                       (kdz/tab-bar-tab-name-segment tab tab-face)
+                       (kdz/tab-bar-tab-git-segment  tab tab-face)))))
+
+(defun kdz/tab-bar-tab-icon-segment (tab tab-face)
+  (if-let* ((tab-name (alist-get 'name tab))
+            (icon (cdr (assoc tab-name kdz-tab-bar-tab-icons))))
+      (kdz/propertize-nerd-icon icon `(face (:inherit ,tab-face)))
+    ""))
+
+(defun kdz/tab-bar-tab-name-segment (tab tab-face)
+  (if (and (not (eq (car tab) 'current-tab)) (kdz/tab-bar-pinned-tab-p tab))
+      ""
+    (alist-get 'name tab)))
 
 (defun kdz/git-repo-name-for (dir)
   (when-let* ((file-directory-p (expand-file-name ".git" dir))
@@ -94,10 +101,8 @@ A pinned tab is one whose name appears as an entry in `kdz-tab-bar-tab-icons'."
     (kdz/git-branch-name-for tab-root)))
 
 (defun kdz/tab-bar-tab-git-segment (tab tab-face)
-  (when-let ((branch-name (kdz/otpp-tab-git-branch tab)))
-    (concat ":"
-            ;; (kdz/propertize-nerd-icon "nf-md-source_branch"
-            ;;                           `(face (:inherit ,tab-face)))
-            branch-name)))
+  (if-let ((branch-name (kdz/otpp-tab-git-branch tab)))
+      (concat ":" (propertize branch-name 'face 'tab-bar))
+    ""))
 
 (provide 'lib/pinned-tabs)
