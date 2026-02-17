@@ -152,3 +152,49 @@ Similarly, deduct the size of the window from the frame when closing the side wi
 - https://www.reddit.com/r/emacs/comments/1kwt90h/a_collection_of_macos_emacs_tips_ive_accumulated/
 - https://xenodium.com/awesome-emacs-on-macos
 - 
+
+* Tab Bar Name Format
+#+begin_example
+[ <index> <icon> <name> [:<context> ]]
+#+end_example
+- Index :: Hotkey mapping
+- Icon :: Annotates the  'type' for a tab (Repository, Worktree, Pinned (special), Named)
+- Name :: Human-readable name for the tab
+- Context :: Additional optional identifying information for the tab
+
+** Alternative (more generic) name format:
+#+begin_example
+[ [<prefix>] <icon> <name>[:<context>] [[<suffix>]] ]
+#+end_example
+- Prefix would service use case for 'index'
+- 'suffix' carries information to differentiate 
+**** Example Cases
+Git repository (Non-worktree):
+#+begin_example
+[ 1 <icon> <directory name>:<branch> ]
+#+end_example
+- ~nf-md-source_repository~
+- Inactive: Truncate branch name
+
+Git worktree:
+#+begin_example
+[ 1 <icon> <repository name>:<branch> ]
+#+end_example
+- ~nf-md-source_repository_multiple~
+- Inactive: Truncate branch name
+
+Pinned Tab 
+#+begin_example
+1 <icon>  <pinned tab name>
+#+end_example
+
+"Named" tab:
+#+begin_example
+1 <icon>  <tab name> (<buffer count>)
+#+end_example
+- "nf-md-group"
+
+** Semantic Attributes
+- Color
+- Font Weight
+- Italics
