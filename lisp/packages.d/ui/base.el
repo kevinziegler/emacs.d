@@ -272,11 +272,11 @@
 
 (use-package sideline-blame
   :after sideline
-  :config (add-to-list 'sideline-backends-right sideline-blame))
+  :config (add-to-list 'sideline-backends-right 'sideline-blame))
 
 (use-package sideline-flycheck
   :after (sideline flycheck)
-  :config (add-to-list 'sideline-backends-right sideline-flycheck))
+  :config (add-to-list 'sideline-backends-right 'sideline-flycheck))
 
 (use-package ibuffer-project
   :hook (ibuffer . kdz/ibuffer-tune-sort-and-filter)
