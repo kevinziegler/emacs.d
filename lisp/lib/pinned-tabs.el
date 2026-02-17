@@ -56,7 +56,7 @@ A pinned tab is one whose name appears as an entry in `kdz-tab-bar-tab-icons'."
     The INDEX refers to the value displayed in the tab-bar's tab hint, and is then
     mapped to the correct sequential index in tab-bar-tabs"
   (interactive "P")
-  (cond ((null index) (progn (message "No prefix arg!") (call-interactively 'tab-switch) ))
+  (cond ((null index) (call-interactively 'tab-switch))
         ((numberp index) (kdz/tab-bar-switch-to-index index))
         (t (message "Expected a numeric index, received: %s" index))))
 
