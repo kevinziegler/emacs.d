@@ -43,10 +43,8 @@
 
 (use-package mason
   :custom (mason-dir (kdz/user-directory ".local/mason"))
-  :config (mason-ensure))
+  :init (mason-ensure))
 
-(use-package jsonrpc
-  :custom
-  (jsonrpc-default-request-timeout 20))
+(use-package jsonrpc :custom (jsonrpc-default-request-timeout 20))
 
 (provide 'packages.d/tools/eglot)
