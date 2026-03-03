@@ -11,7 +11,7 @@
   :config
   (add-to-list 'eglot-server-programs '((python-mode python-ts-mode) "ty" "server"))
   (add-to-list 'eglot-server-programs '((kotlin-mode kotlin-ts-mode) "kotlin-lsp" "--stdio"))
-  (add-to-list 'eglot-server-programs `((yaml-mode yaml-ts-mode) . ,(eglot-alternatives '(("yaml-language-server")
+  (add-to-list 'eglot-server-programs `((yaml-mode yaml-ts-mode) . ,(eglot-alternatives '(("yaml-language-server" "--stdio")
                                                                                           ("helm_ls" "serve")))))
   (advice-add 'eglot-completion-at-point :around #'cape-wrap-buster)
 
