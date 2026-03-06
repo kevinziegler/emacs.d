@@ -177,8 +177,6 @@ recursively merge the values.  Otherwise, prefer the value occurring in GRAFT."
 
 (use-package custom
   :ensure nil
-  :init
-  (defvar kdz-load-theme-hook nil "Hook to run actions after calling `load-theme'")
   :config
   (defmacro kdz/customize-with-palette (theme palette &rest face-specs)
     "Set custom FACE-SPECS for THEME with access to colors from PALETTE.
@@ -195,9 +193,7 @@ defined in that palette from within FACE-SPECS."
                          (t (error "Expected function or alist, but received neither."))))))
        (when (custom-theme-enabled-p ,theme)
          (let ((custom--inhibit-theme-enable nil))
-           (custom-theme-set-faces ,theme ,@face-specs)))))
-
-  (advice-add 'load-theme :after (lambda (&rest _) (run-hooks 'kdz-load-theme-hook))))
+           (custom-theme-set-faces ,theme ,@face-specs))))))
 
 (use-package display-fill-column-indicator
   :ensure nil
