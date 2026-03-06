@@ -17,6 +17,7 @@
   ;; From C-Sources
   (coding-system-for-read 'utf-8)
   (coding-system-for-write 'utf-8)
+  (completion-ignore-case t)
   (default-process-coding-system '(utf-8-unix . utf-8-unix))
   (delete-by-moving-to-trash t)
   (echo-keystrokes 0.25)
