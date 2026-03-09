@@ -106,8 +106,22 @@
            (remq #'embark-which-key-indicator embark-indicators)))
       (apply fn args)))
 
+  (defun kdz/embark-store-minibuffer-input (orig-fn &rest args)
+    "Store the current minibuffer input as a local variable for BUFFER
+
+This is meant to support parsing this data later for display purposes, such as
+setting a custom tab-line display name for the buffer."
+    (let ((minibuffer-input (when (minibufferp) (minibuffer-contents-no-properties)))
+          (buffer (apply orig-fn args)))
+      (with-current-buffer buffer
+        (setq-local kdz-embark-minibuffer-input minibuffer-input))
+      buffer))
+
+
   (advice-add #'embark-completing-read-prompter
-              :around #'embark-hide-which-key-indicator))
+              :around #'embark-hide-which-key-indicator)
+  (advice-add #'embark--collect
+              :around #'kdz/embark-store-minibuffer-input))
 
 (use-package embark-consult
   :after marginalia
