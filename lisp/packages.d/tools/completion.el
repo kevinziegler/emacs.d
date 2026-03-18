@@ -138,6 +138,7 @@ setting a custom tab-line display name for the buffer."
 
 (use-package vertico
   :init (vertico-mode)
+  :custom (vertico-count 20)
   :general
   (general-def
     :keymaps 'vertico-map
