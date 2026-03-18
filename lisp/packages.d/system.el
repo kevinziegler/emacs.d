@@ -127,4 +127,6 @@
       (kdz/magit-delta-set-default-options))
     (magit-refresh)))
 
+(use-package vterm)
+
 (provide 'packages.d/system)
