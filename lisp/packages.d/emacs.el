@@ -3,6 +3,7 @@
   :custom
   (user-full-name "Kevin Ziegler")
   (list-faces-sample-text "abc ABC 123")
+  (history-delete-duplicates t)
   ;; files.el
   (backup-by-copying t)
   (cursor-in-non-selected-windows nil)
