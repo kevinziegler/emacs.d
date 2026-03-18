@@ -377,7 +377,9 @@ This is executed *prior* to running on of `project-switch-commands'.")
 
 (use-package saveplace
   :ensure nil
-  :custom (save-place-file (kdz/user-directory ".local" "places"))
+  :custom
+  (save-place-file (kdz/user-directory ".local" "places"))
+  (save-place-forget-unreadable-files t)
   :hook (elpaca-after-init . save-place-mode))
 
 (use-package simple
