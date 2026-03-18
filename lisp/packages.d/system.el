@@ -36,7 +36,12 @@
         ("S" "Difftastic show" difftastic-magit-show)])))
 
 (use-package exec-path-from-shell
-  :config (when (memq window-system '(mac ns x)) (exec-path-from-shell-initialize)))
+  :config
+  (setopt exec-path-from-shell-variables
+          (append exec-path-from-shell-variables
+                  (list "INFOPATH" "ANTHROPIC_API_KEY" "ANTHROPIC_BASE_URL")))
+
+  (when (memq window-system '(mac ns x)) (exec-path-from-shell-initialize)))
 
 (use-package git-link
   :general
