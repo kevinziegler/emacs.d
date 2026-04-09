@@ -49,6 +49,19 @@
   (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
   (set-charset-priority 'unicode)
 
+  ;; If you don’t edit right-to-left languages (Arabic, Hebrew, etc.), Emacs
+  ;; is doing a bunch of work on every redisplay cycle for nothing. These
+  ;; settings tell Emacs to assume left-to-right text everywhere and skip the
+  ;; bidirectional parenthesis algorithm:
+  (setq-default bidi-display-reordering 'left-to-right
+                bidi-paragraph-direction 'left-to-right)
+  (setq bidi-inhibit-bpa t)
+
+  ;; Emacs normally fontifies (syntax-highlights) text even while you’re
+  ;; actively typing. This can cause micro-stutters, especially in tree-sitter
+  ;; modes or large buffers. One setting fixes it:
+  (setq redisplay-skip-fontification-on-input t)
+
   ;; Emacs 28: Hide commands in M-x which do not apply to the current
   ;;           mode.  Corfu commands are hidden, since they are not
   ;;           supposed to be used via M-x.
