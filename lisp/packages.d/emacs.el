@@ -435,6 +435,7 @@ This is executed *prior* to running on of `project-switch-commands'.")
   :custom
   (switch-to-buffer-obey-display-actions t)
   (switch-to-buffer-in-dedicated-window 'pop)
+  (window-combination-resize t)
   :general
   (kdz/leader-window-def "=" '("Balance Windows" . balance-windows))
   (kdz/leader-buffer-def
