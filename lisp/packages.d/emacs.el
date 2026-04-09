@@ -309,6 +309,8 @@ defined in that palette from within FACE-SPECS."
   :ensure nil
   :general (kdz/leader-help-def "M" '("Describe Mode" . describe-mode)))
 
+(use-package ibuffer :ensure nil :bind ([remap list-buffers] . ibuffer))
+
 (use-package man
   :ensure nil
   :general (kdz/leader-help-def "m" '("Lookup Manpage" . man)))
