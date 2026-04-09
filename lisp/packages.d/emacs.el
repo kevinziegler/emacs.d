@@ -31,6 +31,12 @@
   (use-short-answers t)
   (x-stretch-cursor t)
   (x-underline-at-descent-line nil)
+
+  ;; Misc
+  (kill-do-not-save-duplicates t)
+  (savehist-additional-variables  '(search-ring regexp-search-ring kill-ring))
+  (read-process-output-max (* 4 1024 1024))
+
   :general
   (kdz/leader-code-eval-def
     "b" '("Evaluate Buffer"      . eval-buffer)
