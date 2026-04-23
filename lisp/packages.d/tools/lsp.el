@@ -1,6 +1,6 @@
 (use-package lsp-mode
   :init
-  (setq read-process-output-max (* 1024 1024)
+  (setq read-process-output-max (* 4 1024 1024)
         lsp-headerline-breadcrumb-icons-enable nil
         lsp-headerline-arrow "❱"
         lsp-session-file (kdz/user-directory ".local/lsp-session-v1"))
