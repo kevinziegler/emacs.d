@@ -9,12 +9,12 @@
 (use-package magit-filenotify :hook (after-save . magit-after-save-refresh-status))
 
 (use-package transient
+  :preface
+  (defun kdz/transient-path (file) (kdz/user-directory ".local" "transient" file))
   :custom
   (transient-history-file (kdz/transient-path "history.el"))
   (transient-levels-file  (kdz/transient-path "levels.el"))
-  (transient-values-file  (kdz/transient-path "values.el"))
-  :init
-  (defun kdz/transient-path (file) (kdz/user-directory ".local" "transient" file)))
+  (transient-values-file  (kdz/transient-path "values.el")))
 
 (use-package crux
   :general

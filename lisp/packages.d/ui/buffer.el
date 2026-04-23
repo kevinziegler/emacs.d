@@ -19,6 +19,7 @@
   :general (kdz/leader-edit-def "e" '("Expand Region" . er/expand-region)))
 
 (use-package separedit
+  :after (emacs helpful vterm)
   :general
   (kdz/leader-edit-def "b" '("Edit block in separate buffer" . separedit)))
 
