@@ -197,7 +197,12 @@ recursively merge the values.  Otherwise, prefer the value occurring in GRAFT."
 
 (use-package custom
   :ensure nil
+  :hook (elpaca-after-init . kdz/custom-load-custom)
   :config
+  (defun kdz/custom-load-custom ()
+    (when (file-exists-p custom-file)
+      (load custom-file nil t)))
+
   (defmacro kdz/customize-with-palette (theme palette &rest face-specs)
     "Set custom FACE-SPECS for THEME with access to colors from PALETTE.
 
