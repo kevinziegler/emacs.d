@@ -127,6 +127,23 @@
       (kdz/magit-delta-set-default-options))
     (magit-refresh)))
 
+(use-package forge
+  :after magit
+  :custom
+  (forge-github-token-scopes '(repo user))
+  :config
+
+  ;; Reuse the gh CLI token
+  (defun my/ghub-token-from-gh-cli (host username package &optional nocreate forge)
+    "Get token from gh CLI for HOST."
+    (when (and host (string-match-p "github\\.example\\.corp" (format "%s" host)))
+      (let ((token (string-trim (shell-command-to-string
+                                 "gh auth token --hostname github.example.corp"))))
+        (message "Using gh CLI token for %s" host)
+        token)))
+
+  (advice-add 'ghub--token :before-until #'my/ghub-token-from-gh-cli))
+
 (use-package vterm)
 
 (provide 'packages.d/system)
