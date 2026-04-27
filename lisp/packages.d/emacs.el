@@ -360,7 +360,9 @@ defined in that palette from within FACE-SPECS."
   (proced-auto-update-flag 'visible)
   (proced-enable-color-flag t)
   (proced-auto-update-interval 5)
-  (proced-descend t)
+  (proced-descent t)
+  (proced-tree-flag t)
+  (proced-format 'medium)
   (proced-filter 'user))
 
 (use-package project
