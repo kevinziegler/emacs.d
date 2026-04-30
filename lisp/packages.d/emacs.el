@@ -88,6 +88,12 @@
   (setq-default history-length 1000
                 prescient-history-length 1000)
 
+  (add-hook 'savehist-save-hook
+            (lambda ()
+              (setq kill-ring
+                    (mapcar #'substring-no-properties
+                            (cl-remove-if-not #'stringp kill-ring)))))
+
   (defvar kdz-config-file-paths '("~/.bash_profile"
                                   "~/.bashrc"
                                   "~/.config/gh/config.yml"
