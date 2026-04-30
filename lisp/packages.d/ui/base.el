@@ -352,4 +352,36 @@
   ;; run this to enable Casual Ediff
   (casual-ediff-install))
 
+(use-package which-key-posframe
+  :custom
+  (which-key-posframe-poshandler 'kdz/posframe-poshandler-frame-bottom-center-offset)
+  :config
+  ;; Stand-in until the following issue is merged:
+  ;; https://github.com/yanghaoxie/which-key-posframe/pull/21
+  ;;k
+  ;; Note that my version *also* tweaks the width parameter
+  (defun kdz/fixup--which-key-posframe--show-buffer (act-popup-dim)
+    "Override which-key-posframe parameters to ensure content is visible"
+    (when (posframe-workable-p)
+      (save-window-excursion
+        (posframe-show
+         which-key--buffer
+         :font which-key-posframe-font
+         :position (point)
+         :poshandler which-key-posframe-poshandler
+         :background-color (face-attribute 'which-key-posframe :background nil t)
+         :foreground-color (face-attribute 'which-key-posframe :foreground nil t)
+         :height (ceiling (* 1.25 (car act-popup-dim)))
+         :width (ceiling (* 1.1 (cdr act-popup-dim)))
+         :internal-border-width which-key-posframe-border-width
+         :internal-border-color (face-attribute 'which-key-posframe-border
+                                                :background nil
+                                                t)
+         :override-parameters which-key-posframe-parameters))))
+
+  (advice-add #'which-key-posframe--show-buffer
+              :override
+              #'kdz/fixup--which-key-posframe--show-buffer)
+
+  (which-key-posframe-mode 1))
 (provide 'packages.d/ui/base)
