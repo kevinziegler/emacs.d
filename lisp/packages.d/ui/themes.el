@@ -73,11 +73,13 @@
           modus-themes-prompts '(bold)
           modus-themes-italic-constructs t)
   :config
-  (defun kdz/modus-operandi-customizations (theme)
-    (when (eq theme 'modus-operandi)
+  (defun kdz/modus-customizations (theme)
+    (message "Hi there Kevin! - Before cond")
+    (when (string-prefix-p "modus-" (symbol-name theme))
+      (message "Hi there Kevin!")
       (kdz/customize-with-palette
-       'modus-operandi
-       'modus-operandi-palette
+       theme
+       (intern (concat (symbol-name theme) "-palette"))
        `(aw-leading-char-face       ((t :foreground ,(color 'cyan-intense)
                                         :background ,(color 'bg-active)
                                         :height 2.5)))
@@ -123,6 +125,6 @@
        `(tab-line-tab-current       ((t :inherit tab-line-tab
                                         :weight bold
                                         :foreground ,(color 'fg-main))))) ))
-  (add-hook 'enable-theme-functions 'kdz/modus-operandi-customizations))
+  (add-hook 'enable-theme-functions 'kdz/modus-customizations))
 
 (provide 'packages.d/ui/themes)
