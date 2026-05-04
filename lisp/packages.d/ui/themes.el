@@ -30,7 +30,28 @@
   (kaolin-themes-distinct-company-scrollbar t)
   (kaolin-themes-italic t)
   (kaolin-themes-italic-comments t)
-  (kaolin-themes-underline-wave nil))
+  (kaolin-themes-underline-wave nil)
+  :config
+  (defun kdz/kaolin-dark-theme-custom-faces (theme)
+    (when (eq theme 'kaolin-dark)
+      (message "In guard handler")
+      (kdz/customize-with-palette
+       'kaolin-dark
+       'kaolin-palette
+       `(tab-bar                   ,(kdz/tab-bar-face-spec-base (color 'black0)
+                                                                (color 'auquamarine0)))
+       `(tab-bar-tab                ((t :foreground ,(color 'aquamarine0) :weight bold)))
+       `(tab-bar-tab-inactive       ((t :inherit tab-bar
+                                        :background ,(color 'black0))))
+       '(tab-line                   ((t :inherit tab-bar)))
+       '(tab-line-tab               ((t :inherit tab-bar-tab)))
+       `(tab-line-tab-inactive      ((t :inherit tab-line
+                                        :foreground ,(color 'white0)
+                                        :background ,(color 'black0))))
+       `(tab-line-tab-special       ((t :inherit tab-line
+                                        :foreground ,(color 'white1)
+                                        :background ,(color 'black0)))))))
+  (add-hook 'enable-theme-functions 'kdz/kaolin-dark-theme-custom-faces))
 
 (use-package stimmung-themes
   :config
@@ -74,9 +95,7 @@
           modus-themes-italic-constructs t)
   :config
   (defun kdz/modus-customizations (theme)
-    (message "Hi there Kevin! - Before cond")
     (when (string-prefix-p "modus-" (symbol-name theme))
-      (message "Hi there Kevin!")
       (kdz/customize-with-palette
        theme
        (intern (concat (symbol-name theme) "-palette"))
