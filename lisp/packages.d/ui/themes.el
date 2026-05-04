@@ -146,4 +146,8 @@
                                         :foreground ,(color 'fg-main))))) ))
   (add-hook 'enable-theme-functions 'kdz/modus-customizations))
 
+(use-package modus-flexoki
+  :ensure (:host github :repo "dpassen/modus-flexoki" :branch "main")
+  :hook (elpaca-after-init . (lambda () (load-theme 'modus-flexoki-light :no-confirm))))
+
 (provide 'packages.d/ui/themes)
