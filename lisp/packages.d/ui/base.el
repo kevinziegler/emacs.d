@@ -347,6 +347,7 @@
 (use-package which-key-posframe
   :custom
   (which-key-posframe-poshandler 'kdz/posframe-poshandler-frame-bottom-center-offset)
+  (which-key-posframe-parameters '((left-fringe . 8) (right-fringe . 8)))
   :config
   ;; Stand-in until the following issue is merged:
   ;; https://github.com/yanghaoxie/which-key-posframe/pull/21
