@@ -112,7 +112,7 @@
     "List of system configuration files not associated with a project.")
 
   (defun kdz/known-config-file-p (buffer &rest _)
-    (when-let ((filename (buffer-file-name (get-buffer buffer))))
+    (when-let* ((filename (buffer-file-name (get-buffer buffer))))
       (seq-contains-p (mapcar #'expand-file-name kdz-config-file-paths)
                       (expand-file-name filename)
                       'equal)))
