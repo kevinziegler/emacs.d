@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t -*-
 (defvar elpaca-installer-version 0.12)
 (defvar elpaca-directory (kdz/user-directory ".local" "elpaca"))
 (defvar elpaca-builds-directory (expand-file-name "builds/" elpaca-directory))

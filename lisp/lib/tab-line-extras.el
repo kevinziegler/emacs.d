@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t -*-
 (defvar kdz-tab-line-mode-icon-alist
   '((inferior-emacs-lisp-mode . "nf-custom-emacs")
     (inferior-python-mode     . "nf-md-language_python")

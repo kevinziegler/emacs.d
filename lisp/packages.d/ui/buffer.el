@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t -*-
 ;;;; In-Buffer UI Enhancments - Editing behaviors, formating, etc
 (use-package anzu :hook (elpaca-after-init . global-anzu-mode))
 (use-package apheleia :hook (elpaca-after-init . apheleia-global-mode))

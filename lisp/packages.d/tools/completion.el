@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t -*-
 (use-package auto-complete
   :custom (ac-comphist-file (kdz/user-directory ".local" "ac-comphist.dat")))
 

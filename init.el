@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t -*-
 (add-to-list 'load-path (kdz/user-directory "lisp"))
 
 (require 'packages.d/bootstrap)

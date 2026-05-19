@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t -*-
 (use-package tab-bar
   :after (custom nerd-icons)
   :ensure nil

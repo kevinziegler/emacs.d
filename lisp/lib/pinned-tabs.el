@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t -*-
 (defvar kdz-tab-bar-tab-icons '(("Home"          . "nf-md-home")
                                 ("Packages"      . "nf-md-package")
                                 ("Scratchpad"    . "nf-md-note")

@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t -*-
 (defun kdz/brew-prefix ()
   "Get the path of `brew --prefix' for the system."
   (if (executable-find "brew")

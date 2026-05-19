@@ -1,6 +1,4 @@
-(use-package copilot)
-(use-package copilot-chat)
-
+;;; -*- lexical-binding: t -*-
 (use-package aidermacs
   :custom
   (aidermacs-default-chage-mode 'architect)

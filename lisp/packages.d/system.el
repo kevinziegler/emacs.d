@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t -*-
 (use-package abridge-diff :after magit :hook (elpaca-after-init . abridge-diff-mode))
 (use-package deflate :ensure (:host github :repo "skuro/deflate" :branch "main"))
 (use-package dirvish :hook (elpaca-after-init . dirvish-override-dired-mode))

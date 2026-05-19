@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t -*-
 (use-package catppuccin-theme
   :after custom
   :custom (catppuccin-flavor 'mocha)

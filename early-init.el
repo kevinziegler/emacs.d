@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t -*-
 (setq package-enable-at-startup nil
       byte-compile-warnings '(not obsolete)
       warning-suppress-log-types '((comp) (bytecomp))

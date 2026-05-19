@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t -*-
 (defvar tap--preview-length 90
   "Max length to show for previewing a thing-at-point")
 (defvar tap--preview-truncate "..."

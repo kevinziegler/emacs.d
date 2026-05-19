@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t -*-
 (use-package avy)
 (use-package colorful-mode)
 (use-package flycheck :custom (flycheck-checker-error-threshold 10000))

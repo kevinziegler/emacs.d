@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t -*-
 (defvar kdz-window-resize-step-default 5)
 (defvar kdz-window-resize-step--current 5)
 (defvar kdz-window-resize-fill-column-margin 5)

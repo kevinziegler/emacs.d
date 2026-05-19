@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t -*- 
 (use-package dotenv-mode     :mode (("\\.env\\..*\\'" . dotenv-mode)))
 (use-package scad-mode       :mode (("\\.scad\\'"     . scad-mode)))
 (use-package restclient      :mode (("\\.http\\'"     . restclient-mode)))
