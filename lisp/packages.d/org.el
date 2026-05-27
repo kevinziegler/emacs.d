@@ -856,4 +856,34 @@ Also adds support for a `:sync' parameter to override `:async'."
                  :template ("* %^{Description} :random:"
                             ,@kdz-doct-entry-default-properties))))))
 
+(use-package grove
+  :after evil
+  :ensure t
+  :custom
+  (grove-directory "~/grove")
+  (grove-tree-icons t)
+  :general
+  (general-define-key
+   :states '(normal insert visual motion emacs)
+   :keymaps 'grove-tree-mode-map
+   "TAB" 'grove-tree--toggle-expand
+   "RET" 'grove-tree--open-file)
+  :init
+  (defun kdz/grove-open-in-tab (&rest _)
+    (tab-bar-switch-to-tab "Grove"))
+
+  (defun kdz/grove-buffer-p (buffer &rest _)
+    "Determine if a file should be consider a 'notebook' item"
+    (let ((buffer-string-name (if (bufferp buffer)
+                                  (buffer-name buffer)
+                                buffer)))
+      (or (s-starts-with? "*grove" buffer-string-name)
+          (s-starts-with? (expand-file-name grove-directory)
+                          (buffer-file-name (get-buffer buffer))) )))
+
+  (add-to-list 'display-buffer-alist
+               '(kdz/grove-buffer-p display-buffer-in-tab (tab-name . "Grove")))
+
+  (advice-add 'grove-open :before #'kdz/grove-open-in-tab))
+
 (provide 'packages.d/org)
