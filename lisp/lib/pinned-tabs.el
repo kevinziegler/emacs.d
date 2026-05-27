@@ -102,8 +102,10 @@ A pinned tab is one whose name appears as an entry in `kdz-tab-bar-tab-icons'."
     (kdz/git-branch-name-for tab-root)))
 
 (defun kdz/tab-bar-tab-git-segment (tab tab-face)
-  (if-let ((branch-name (kdz/otpp-tab-git-branch tab)))
-      (concat ":" (propertize branch-name 'face 'tab-bar))
-    ""))
+  ""
+  ;; (if-let ((branch-name (kdz/otpp-tab-git-branch tab)))
+  ;;     (concat ":" (propertize branch-name 'face 'tab-bar))
+  ;;   "")
+  )
 
 (provide 'lib/pinned-tabs)
