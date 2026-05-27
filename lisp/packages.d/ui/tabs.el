@@ -69,7 +69,7 @@ the tab-bar.")
 
   (defun kdz/tab-bar-initialize-tab-state ()
     (tab-bar-select-tab-by-name "Home")
-    (tab-bar-close-tab-by-name "*default*")))
+    (tab-bar-close-other-tabs)))
 
 (use-package tab-line
   :after (custom nerd-icons)
