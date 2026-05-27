@@ -129,7 +129,7 @@
     (magit-refresh)))
 
 (use-package forge
-  :after magit
+  :after (magit markdown-mode)
   :custom
   (forge-github-token-scopes '(repo user))
   :config
