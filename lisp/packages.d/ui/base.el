@@ -90,6 +90,7 @@
     "s-<return>" 'imenu-list-goto-entry)
   (kdz/leader-code-lookup-def "l" '("Symbols List" . imenu-list))
   :custom
+  (imenu-auto-rescan t)
   (imenu-list-focus-after-activiation t)
   (imenu-list-mode-line-format nil))
 
