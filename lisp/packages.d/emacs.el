@@ -230,8 +230,21 @@ defined in that palette from within FACE-SPECS."
          (let ((custom--inhibit-theme-enable nil))
            (custom-theme-set-faces ,theme ,@face-specs))))))
 
+(use-package dired
+  :ensure nil
+  :custom
+  (insert-directory-program "gls")
+  (dired-kill-when-opening-new-dired-buffer t)
+  (dired-auto-revert-buffer #'dired-directory-changed-p)
+  (dired-recursive-copies 'always)
+  (dired-recursive-deletes 'always)
+  (dired-create-destination-dirs 'ask)
+  (dired-create-destination-dirs-on-trailing-dirsep t)
+  (wdired-create-parent-directories t))
+
 (use-package display-fill-column-indicator
   :ensure nil
+  :after (markdown-mode)
   :hook (elpaca-after-init . global-display-fill-column-indicator-mode)
   :general
   (kdz/leader-toggle-def "c"
@@ -520,7 +533,6 @@ This is executed *prior* to running on of `project-switch-commands'.")
   (advice-add 'xref-find-references :around #'kdz/xref-make-unique-buffer))
 
 (use-package apropos          :ensure nil :custom (appropos-do-all t))
-(use-package dired            :ensure nil :custom (insert-directory-program "gls"))
 (use-package hl-line          :ensure nil :hook (elpaca-after-init . global-hl-line-mode))
 (use-package mule-util        :ensure nil :custom (truncate-string-ellipsis "…"))
 (use-package so-long          :ensure nil :hook (elpaca-after-init . global-so-long-mode))
