@@ -1,6 +1,7 @@
 ;;; -*- lexical-binding: t -*-
 (use-package emacs
   :ensure nil
+  :hook (elpaca-after-init . global-completion-preview-mode)
   :custom
   (user-full-name "Kevin Ziegler")
   (list-faces-sample-text "abc ABC 123")
@@ -19,7 +20,9 @@
   ;; From C-Sources
   (coding-system-for-read 'utf-8)
   (coding-system-for-write 'utf-8)
+  (completion-eager-display t)
   (completion-ignore-case t)
+  (completions-group t)
   (default-process-coding-system '(utf-8-unix . utf-8-unix))
   (delete-by-moving-to-trash t)
   (echo-keystrokes 0.25)
