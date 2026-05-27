@@ -105,6 +105,7 @@
                                         :height 2.5)))
        `(child-frame-border         ((t :background ,(color 'border)
                                         :foreground ,(color 'border))))
+       `(eldoc-box-border           ((t :background ,(color 'fg-main))))
        `(flyover-marker             ((t :foreground ,(color 'bg-cyan-intense))))
        `(fill-column-indicator      ((t :background ,(color 'bg-main)
                                         :foreground ,(color 'border))))
@@ -127,8 +128,9 @@
                                         :box (:line-width 6 :color ,(color 'bg-ochre)))))
        `(mode-line-active           ((t :background ,(color 'bg-ochre)
                                         :box (:line-width 6 :color ,(color 'bg-ochre)))))
-       `(window-divider             ((t :foreground ,(color 'border))))
-       `(window-divider-first-pixel ((t :foreground ,(color 'border))))
+       `(window-divider             ((t :foreground ,(color 'fg-main))))
+       `(window-divider-first-pixel ((t :foreground ,(color 'fg-main))))
+       `(window-divider-last-pixel  ((t :foreground ,(color 'fg-main))))
        `(tab-bar                   ,(kdz/tab-bar-face-spec-base (color 'bg-main)
                                                                 (color 'fg-main)))
        `(tab-bar-tab                ((t :foreground ,(color 'fg-main) :weight bold)))
@@ -146,11 +148,15 @@
                                         :background ,(color 'bg-main))))
        `(tab-line-tab-current       ((t :inherit tab-line-tab
                                         :weight bold
-                                        :foreground ,(color 'fg-main))))) ))
+                                        :foreground ,(color 'fg-main)))))))
   (add-hook 'enable-theme-functions 'kdz/modus-customizations))
 
 (use-package modus-flexoki
   :ensure (:host github :repo "dpassen/modus-flexoki" :branch "main")
   :hook (elpaca-after-init . (lambda () (load-theme 'modus-flexoki-light :no-confirm))))
+
+;; (use-package modus-catppuccin
+;;   :ensure (:host gitlab :repo "magus/modus-catppuccin" :branch "main")
+;;   :hook (elpaca-after-init . (lambda () (load-theme 'catpuccin-mocha :no-confirm))))
 
 (provide 'packages.d/ui/themes)
