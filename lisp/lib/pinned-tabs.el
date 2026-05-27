@@ -94,11 +94,11 @@ A pinned tab is one whose name appears as an entry in `kdz-tab-bar-tab-icons'."
                                              dir)))))
 
 (defun kdz/otpp-tab-git-branch (tab)
-  (when-let ((tab-root (alist-get 'otpp-root-dir tab)))
+  (when-let* ((tab-root (alist-get 'otpp-root-dir tab)))
     (kdz/git-branch-name-for tab-root)))
 
 (defun kdz/otpp-tab-git-repo (tab)
-  (when-let ((tab-root (alist-get 'otpp-root-dir tab)))
+  (when-let* ((tab-root (alist-get 'otpp-root-dir tab)))
     (kdz/git-branch-name-for tab-root)))
 
 (defun kdz/tab-bar-tab-git-segment (tab tab-face)
