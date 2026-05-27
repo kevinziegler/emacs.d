@@ -27,3 +27,8 @@
   (when (not (file-exists-p local-config))
     (copy-file local-template local-config))
   (require 'config-local local-config))
+
+(defun kdz/elpaca-hooks-fixup ()
+  (interactive)
+  (elpaca-process-queues)
+  (run-hooks 'elpaca-after-init-hook))
