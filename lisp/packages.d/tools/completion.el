@@ -182,4 +182,9 @@ setting a custom tab-line display name for the buffer."
   :if (executable-find "gh")
   :hook (elpaca-after-init . consult-gh-embark-mode))
 
+(use-package fussy
+  :config
+  (fussy-eglot-setup)
+  (fussy-company-setup))
+
 (provide 'packages.d/tools/completion)
