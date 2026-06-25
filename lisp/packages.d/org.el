@@ -35,6 +35,7 @@
   :general
   (general-def :states 'insert :keymaps 'org-mode-map "s-RET" 'kdz/org-return-dwim)
   (kdz/leader-file-def "l" '("Store Link" . org-store-link))
+  (kdz/leader-open-def "n" '("Notes" . kdz/notes))
 
   :general-config
   (kdz/mode-leader-def
