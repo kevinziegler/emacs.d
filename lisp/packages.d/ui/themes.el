@@ -96,7 +96,8 @@
           modus-themes-italic-constructs t)
   :config
   (defun kdz/modus-customizations (theme)
-    (when (string-prefix-p "modus-" (symbol-name theme))
+    (when (or (string-prefix-p "modus-" (symbol-name theme))
+              (string-prefix-p "ef-" (symbol-name theme)))
       (kdz/customize-with-palette
        theme
        (intern (concat (symbol-name theme) "-palette"))
@@ -158,5 +159,7 @@
 ;; (use-package modus-catppuccin
 ;;   :ensure (:host gitlab :repo "magus/modus-catppuccin" :branch "main")
 ;;   :hook (elpaca-after-init . (lambda () (load-theme 'catpuccin-mocha :no-confirm))))
+
+(use-package ef-themes)
 
 (provide 'packages.d/ui/themes)
