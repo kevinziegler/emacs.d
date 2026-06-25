@@ -60,9 +60,18 @@
     "ne" '("Narrow to current element"      . org-narrow-to-element)
     "nb" '("Narrow to current block"        . org-narrow-to-block)
 
-    "s"   (cons "Scheduling" (make-sparse-keymap))
-    "ss" '("Schedule Entry"                 . org-schedule)
-    "sd" '("Set Deadline for Entry"         . org-deadline)
+    "s"    (cons "Subtree Operations" (make-sparse-keymap))
+    "sh"  '("Promote subtree" . org-promote-subtree)
+    "sl"  '("Demote subtree" . org-demote-subtree)
+    "sj"  '("Move Subtree Down" . org-move-subtree-down)
+    "sk"  '("Move Subtree Down" . org-move-subtree-up)
+    "sd"  '("Cut subtree" . org-cut-subtree)
+    "sy"  '("Copy subtree" . org-copy-subtree)
+    "sa"  '("Archive subtree" . org-archive-subtree)
+
+    "S"   (cons "Scheduling" (make-sparse-keymap))
+    "Ss" '("Schedule Entry"                 . org-schedule)
+    "Sd" '("Set Deadline for Entry"         . org-deadline)
 
     "t"   (cons "Toggle" (make-sparse-keymap))
     "tn" '("Numbered Headings"              . org-num-mode)
