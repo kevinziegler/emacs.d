@@ -57,18 +57,6 @@
   :custom (editorconfig-trim-whitespaces-mode 'ws-butler-mode)
   :hook   (elpaca-after-init . editorconfig-mode))
 
-(use-package markdown-xwidget
-  :after markdown-mode
-  :ensure (markdown-xwidget
-           :host github
-           :repo "cfclrk/markdown-xwidget"
-           :files (:defaults "resources"))
-  :custom
-  (markdown-xwidget-command          "pandoc")
-  (markdown-xwidget-github-theme     "light")
-  (markdown-xwidget-mermaid-theme    "default")
-  (markdown-xwidget-code-block-theme "default"))
-
 ;; TODO This needs tree-sitter to work
 ;; TODO This pulls from quelpa; how do I set that up with straight?
 ;; (use-package turbo-log

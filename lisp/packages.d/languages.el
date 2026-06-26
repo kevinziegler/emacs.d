@@ -31,6 +31,18 @@
   (markdown-gfm-use-electric-backquote t)
   (markdown-italic-underscore t))
 
+(use-package markdown-xwidget
+  :after markdown-mode
+  :ensure (markdown-xwidget
+           :host github
+           :repo "cfclrk/markdown-xwidget"
+           :files (:defaults "resources"))
+  :custom
+  (markdown-xwidget-command          "pandoc")
+  (markdown-xwidget-github-theme     "light")
+  (markdown-xwidget-mermaid-theme    "default")
+  (markdown-xwidget-code-block-theme "default"))
+
 (use-package plantuml-mode
   :mode (("\\.plantuml\\'" . plantuml-mode)
 	 ("\\.pu?ml\\'"    . plantuml-mode))
