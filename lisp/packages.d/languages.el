@@ -17,6 +17,19 @@
 (use-package inf-ruby)
 (use-package nodejs-repl)
 
+(use-package elisp-refs
+  :ensure t
+  :commands (elisp-refs-function
+             elisp-refs-macro
+             elisp-refs-variable
+             elisp-refs-special
+             elisp-refs-symbol))
+
+(use-package highlight-defined
+  :ensure t
+  :commands highlight-defined-mode
+  :hook (lisp-data-mode . highlight-defined-mode))
+
 (use-package lua-mode
   :mode (("\\.lua\\'" . lua-mode))
   :interpreter (("lua" . lua-mode))
