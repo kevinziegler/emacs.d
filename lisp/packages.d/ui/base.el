@@ -237,7 +237,8 @@
   (kdz/leader-open-def "t" '("Project File Tree" . treemacs))
   :config
   (treemacs-git-mode 0)
-  (treemacs-hide-gitignored-files-mode 1))
+  (treemacs-hide-gitignored-files-mode 1)
+  (treemacs-project-follow-mode t))
 
 (use-package vertico-posframe
   :after (posframe vertico)
