@@ -540,5 +540,6 @@ This is executed *prior* to running on of `project-switch-commands'.")
 (use-package uniquify         :ensure nil :custom (uniquify-buffer-name-style 'post-forward))
 (use-package use-package-core :ensure nil :custom (use-package-enable-imenu-support t))
 (use-package vc-hooks         :ensure nil :custom (vc-follow-symlinks t))
+(use-package which-func       :ensure nil :hook (elpaca-after-init . which-function-mode))
 
 (provide 'packages.d/emacs)
