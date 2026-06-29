@@ -104,8 +104,7 @@
   (kdz/window-move-dwim 'tab-line-switch-to-next-tab 'evil-window-right))
 
 (defun kdz/tab-line-ensure-in-side-window (&rest args)
-  (when (and (or (eq 'right  (window-parameter nil 'window-side))
-                 (eq 'bottom (window-parameter nil 'window-side)))
+  (when (and (eq 'bottom (window-parameter nil 'window-side))
              (not tab-line-mode))
     (tab-line-mode 1)))
 
