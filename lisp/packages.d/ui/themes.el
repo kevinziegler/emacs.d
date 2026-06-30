@@ -97,6 +97,7 @@
   :config
   (defun kdz/modus-customizations (theme)
     (when (or (string-prefix-p "modus-" (symbol-name theme))
+              (string-prefix-p "doric-" (symbol-name theme))
               (string-prefix-p "ef-" (symbol-name theme)))
       (kdz/customize-with-palette
        theme
@@ -160,6 +161,8 @@
 ;;   :ensure (:host gitlab :repo "magus/modus-catppuccin" :branch "main")
 ;;   :hook (elpaca-after-init . (lambda () (load-theme 'catpuccin-mocha :no-confirm))))
 
+
+(use-package doric-themes)
 (use-package ef-themes)
 
 (provide 'packages.d/ui/themes)
