@@ -2,7 +2,7 @@
 (use-package nerd-icons
   :after emacs
   :config
-  (require lib/nerd-icons-extras))
+  (require 'lib/nerd-icons-extras))
 
 (use-package nerd-icons-completion
   :after (marginalia nerd-icons)
