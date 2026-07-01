@@ -10,12 +10,10 @@
 (use-package magit-filenotify :hook (after-save . magit-after-save-refresh-status))
 
 (use-package transient
-  :preface
-  (defun kdz/transient-path (file) (kdz/user-directory ".local" "transient" file))
   :custom
-  (transient-history-file (kdz/transient-path "history.el"))
-  (transient-levels-file  (kdz/transient-path "levels.el"))
-  (transient-values-file  (kdz/transient-path "values.el")))
+  (transient-history-file (kdz/user-directory ".local" "transient" "history.el"))
+  (transient-history-file (kdz/user-directory ".local" "transient" "levels.el"))
+  (transient-history-file (kdz/user-directory ".local" "transient" "values.el")))
 
 (use-package crux
   :general
@@ -98,6 +96,7 @@
     (setopt magit-delta-delta-args
             (seq-uniq (append kdz-magit-delta-delta-args-default
                               kdz-magit-delta-delta-extra-args) )))
+
   (defun kdz/magit-delta-set-default-options (&rest _)
     (setopt magit-delta-delta-args kdz-magit-delta-delta-args-default))
 
