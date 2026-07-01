@@ -66,6 +66,7 @@
        `(header-line                ((t :inherit modus-themes-ui-variable-pitch
                                         :box (:line-width 3 :color ,(color 'bg-dim))
                                         :background ,(color 'bg-dim))))
+       `(minibuffer-prompt          ((t :box (:line-width 10 :color ,(color 'bg-main)))))
        `(mode-line                  ((t :background ,(color 'bg-ochre)
                                         :box (:line-width 6 :color ,(color 'bg-ochre)))))
        `(mode-line-active           ((t :background ,(color 'bg-ochre)
