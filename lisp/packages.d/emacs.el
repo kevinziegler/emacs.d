@@ -32,6 +32,9 @@
   (inhibit-compacting-font-caches t)
   (locale-coding-system 'utf-8)
   (ring-bell-function 'ignore)
+  (undo-limit 67108864) ; 64mb.
+  (undo-strong-limit 100663296) ; 96mb.
+  (undo-outer-limit 1006632960) ; 960mb.
   (use-short-answers t)
   (x-stretch-cursor t)
   (x-underline-at-descent-line nil)
