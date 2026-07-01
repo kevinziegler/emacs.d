@@ -96,12 +96,21 @@
 
 (use-package modus-flexoki
   :ensure (:host github :repo "dpassen/modus-flexoki" :branch "main")
-  :hook (elpaca-after-init . (lambda () (load-theme 'modus-flexoki-light :no-confirm))))
+  ;;:hook (elpaca-after-init . (lambda () (load-theme 'modus-flexoki-light :no-confirm)))
+  )
+
+(use-package modus-nordic-night-theme
+  :ensure (:host codeberg :repo "ashton314/modus-nordic-night")
+  :config
+  ;; Use this instead for the slightly lighter theme
+  ;; (load-theme 'modus-nordic-night t)
+  ;; (load-theme 'modus-nordic-midnight t)
+  )
 
 ;; (use-package modus-catppuccin
 ;;   :ensure (:host gitlab :repo "magus/modus-catppuccin" :branch "main")
-;;   :hook (elpaca-after-init . (lambda () (load-theme 'catpuccin-mocha :no-confirm))))
-
+;;   ;; :hook (elpaca-after-init . (lambda () (load-theme 'catpuccin-mocha :no-confirm)))
+;;   )
 
 (use-package doric-themes)
 (use-package ef-themes)
