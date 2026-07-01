@@ -300,11 +300,13 @@ appropriate.  In tables, insert a new row or end the table."
    '((awk . t)
      (sed . t)
      (lua . t)
+     (jq . t)
      (js . t)
      (plantuml . t)
      (python . t)
      (sql . t)
      (sqlite . t)
+     (shell . t)
      (emacs-lisp .t)))
 
 
