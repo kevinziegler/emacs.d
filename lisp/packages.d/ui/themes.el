@@ -1,30 +1,4 @@
 ;;; -*- lexical-binding: t -*-
-(use-package catppuccin-theme
-  :after custom
-  :custom (catppuccin-flavor 'mocha)
-  :config
-  (defun kdz/catppuccin-theme-custom-faces (theme)
-    (when (eq theme 'catppuccin)
-      (kdz/customize-with-palette
-       'catppuccin
-       'catppuccin-color
-       `(highlight             ((t :foreground ,(color 'base)
-                                   :background ,(color 'flamingo))))
-       `(lazy-highlight        ((t :foreground ,(color 'base)
-                                   :background ,(color 'flamingo))))
-       `(completions-highlight ((t :background ,(color 'surface1))))
-       `(vertico-current       ((t :background ,(color 'surface1))))
-       `(minibuffer-prompt     ((t :weight bold :foreground ,(color 'sapphire))))
-       `(tab-bar              ,(kdz/tab-bar-face-spec-base
-                                (face-background 'tab-bar-tab nil t)
-                                (face-foreground 'tab-bar-tab nil t)))
-       `(tab-bar-tab           ((t :weight bold)))
-       '(tab-bar-tab-inactive  ((t :inherit tab-bar)))
-       '(tab-line              ((t :inherit tab-bar)))
-       '(tab-line-tab          ((t :inherit tab-bar-tab)))
-       '(tab-line-tab-current  ((t :inherit tab-bar-tab)))) ))
-  (add-hook 'enable-theme-functions 'kdz/catppuccin-theme-custom-faces))
-
 (use-package kaolin-themes
   :custom
   (kaolin-themes-bold t)
@@ -53,40 +27,6 @@
                                         :foreground ,(color 'white1)
                                         :background ,(color 'black0)))))))
   (add-hook 'enable-theme-functions 'kdz/kaolin-dark-theme-custom-faces))
-
-(use-package stimmung-themes
-  :config
-  (defun kdz/stimmung-theme-custom-faces ()
-    (kdz/customize-with-palette
-     'stimmung-themes-light
-     nil
-     '(git-gutter:added      ((t :foreground "systemGreenColor")))
-     '(git-gutter:deleted    ((t :foreground "systemRedColor")))
-     '(git-gutter:added      ((t :foreground "systemYellowColor")))
-     '(git-gutter-fr:added   ((t :foreground "systemGreenColor")))
-     '(git-gutter-fr:deleted ((t :foreground "systemRedColor")))
-     '(git-gutter-fr:added   ((t :foreground "systemYellowColor")))
-     `(tab-bar              ,(kdz/tab-bar-face-spec-base "White" "Black"))
-     '(tab-bar-tab           ((t :foreground "Black" :weight bold)))
-     '(tab-bar-tab-inactive  ((t :inherit tab-bar)))
-     '(tab-line              ((t :inherit tab-bar)))
-     '(tab-line-tab          ((t :inherit tab-bar-tab)))
-     '(tab-line-tab-current  ((t :inherit tab-bar-tab))))
-    (kdz/customize-with-palette
-     'stimmung-themes-dark
-     nil
-     '(git-gutter:added      ((t :foreground "systemGreenColor")))
-     '(git-gutter:deleted    ((t :foreground "systemRedColor")))
-     '(git-gutter:added      ((t :foreground "systemYellowColor")))
-     '(git-gutter-fr:added   ((t :foreground "systemGreenColor")))
-     '(git-gutter-fr:deleted ((t :foreground "systemRedColor")))
-     '(git-gutter-fr:added   ((t :foreground "systemYellowColor")))
-     `(tab-bar              ,(kdz/tab-bar-face-spec-base "Black" "White"))
-     '(tab-bar-tab           ((t :foreground "White" :weight bold)))
-     '(tab-bar-tab-inactive  ((t :inherit tab-bar)))
-     '(tab-line              ((t :inherit tab-bar)))
-     '(tab-line-tab          ((t :inherit tab-bar-tab)))
-     '(tab-line-tab-current  ((t :inherit tab-bar-tab))))))
 
 (use-package modus-themes
   :hook ((elpaca-after-init . (lambda () (load-theme 'modus-operandi :no-confirm))))
@@ -133,8 +73,8 @@
        `(window-divider             ((t :foreground ,(color 'fg-main))))
        `(window-divider-first-pixel ((t :foreground ,(color 'fg-main))))
        `(window-divider-last-pixel  ((t :foreground ,(color 'fg-main))))
-       `(tab-bar                   ,(kdz/tab-bar-face-spec-base (color 'bg-main)
-                                                                (color 'fg-main)))
+       `(tab-bar                    ((t :box (:line-width 10 :color ,(color 'bg-main))
+                                        :underline (:color ,(color 'fg-main) :position -10))))
        `(tab-bar-tab                ((t :foreground ,(color 'fg-main) :weight bold)))
        `(tab-bar-tab-inactive       ((t :inherit tab-bar
                                         :background ,(color 'bg-main))))

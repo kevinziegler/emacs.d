@@ -26,21 +26,6 @@
 
   (defun kdz/tab-move-left () (interactive) (tab-move -1))
 
-  (defvar kdz--tab-bar-box-width 10
-    "Sizing of box to draw around tab-bar faces.
-
-This is used to generate face specs when making theme customizations related to
-the tab-bar.")
-
-  (defun kdz/tab-bar-face-spec-base (background underline-color &rest specs)
-    "Generate a face-spec for the tab-bar with preferred appearance."
-    `((t :box       ,(list :line-width kdz--tab-bar-box-width
-                           :color      background
-                           :style      'flat-button)
-         :underline ,(list :color      underline-color
-                           :position   (* -1 kdz--tab-bar-box-width))
-         ,@specs)))
-
   (defvar kdz-blank-buffer-text  "Nothing to see here."
     "Filler text to use in *blank* buffer")
 
