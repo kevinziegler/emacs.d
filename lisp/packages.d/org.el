@@ -362,8 +362,10 @@ appropriate.  In tables, insert a new row or end the table."
          (org-mode . kdz/org-appear-respect-evil-state))
   :custom
   (org-appear-trigger 'manual)
+  (org-appear-autoentities t)
   (org-appear-autolinks t)
   (org-appear-autokeywords t)
+  (org-appear-automarkers t)
   (org-appear-manual-linger t)
   :config
   (defun kdz/org-appear-respect-evil-state ()
