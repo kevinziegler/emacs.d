@@ -241,7 +241,7 @@
   :hook (elpaca-after-init . vertico-posframe-mode)
   :custom
   (vertico-posframe-poshandler #'kdz/posframe-poshandler-frame-top-center-offset)
-  (vertico-posframe-parameters '((left-fringe . 8) (right-fringe . 8))))
+  (vertico-posframe-parameters '((left-fringe . 12) (right-fringe . 12)))
 
 (use-package spacious-padding
   :custom
