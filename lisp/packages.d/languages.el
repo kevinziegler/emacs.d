@@ -4,7 +4,7 @@
 (use-package restclient      :mode (("\\.http\\'"     . restclient-mode)))
 (use-package awk-ts-mode     :mode (("\\.awk\\'"      . awk-ts-mode)))
 (use-package scala-ts-mode   :mode (("\\.scala\\'"    . scala-ts-mode)))
-(use-package jq-ts-mode      :mode (("\\.jq\\'"       . jq-ts-mode)))
+(use-package jq-mode         :mode (("\\.jq\\'"       . jq-mode)))
 (use-package kotlin-ts-mode  :mode (("\\.kt\\'"       . kotlin-ts-mode)))
 (use-package graphql-mode    :mode (("\\.graphql\\'"  . graphql-mode)
                                     ( "\\.gql\\'"     . graphql-mode)))
