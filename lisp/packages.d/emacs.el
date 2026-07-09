@@ -356,7 +356,9 @@ defined in that palette from within FACE-SPECS."
   :ensure nil
   :custom
   (completion-cycle-threshold 1)
-  (completions-detailed t))
+  (completions-detailed t)
+  ;; Don't allow the cursor into the minibuffer prompt
+  (minibuffer-prompt-properties '(read-only t cursor-intangible t face minibuffer-prompt)))
 
 (use-package mouse
   :ensure nil
