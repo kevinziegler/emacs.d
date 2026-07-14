@@ -3,16 +3,24 @@
   :custom (ac-comphist-file (kdz/user-directory ".local" "ac-comphist.dat")))
 
 (use-package cape
-  :init
-  (add-hook 'completion-at-point-functions #'cape-dabbrev)
-  (add-hook 'completion-at-point-functions #'cape-keyword)
-  (add-hook 'completion-at-point-functions #'cape-file)
-  (add-hook 'completion-at-point-functions #'cape-elisp-block))
+  :demand 1
+  :config
+  (add-hook 'completion-at-point-functions #'cape-dabbrev 20)
+  (add-hook 'completion-at-point-functions #'cape-keyword 20)
+  (add-hook 'completion-at-point-functions #'cape-file 20)
+  (add-hook 'completion-at-point-functions #'cape-elisp-block 20))
 
 (use-package company)
 
 (use-package corfu
-  :custom (corfu-auto t)
+  :custom
+  (corfu-auto t)
+  (corfu-cycle t)
+  (corfu-min-width 20)
+  (corfu-on-exact-match 'insert)
+  (corfu-quit-no-match t)
+  (corfu-quit-at-boundary t)
+  (corfu-popupinfo-delay '(0.75 . 0.5))
   :hook ((elpaca-after-init . global-corfu-mode)
          (global-corfu-mode . corfu-popupinfo-mode)))
 
