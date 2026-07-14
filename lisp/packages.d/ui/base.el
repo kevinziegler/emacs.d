@@ -285,6 +285,10 @@
 (use-package eldoc-box
   :general
   (kdz/leader-toggle-def "d" '("Documentation Popups" . eldoc-box-hover-mode))
+  (general-define-key
+   :keymaps 'prog-mode-map
+   "M-s-j" 'eldoc-box-scroll-up
+   "M-s-k" 'eldoc-box-scroll-down)
   :hook (eglot-managed-mode . eldoc-box-hover-mode)
   :custom
   (eldoc-box-only-multi-line t)
