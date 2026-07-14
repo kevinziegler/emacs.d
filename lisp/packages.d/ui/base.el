@@ -346,4 +346,9 @@
               #'kdz/fixup--which-key-posframe--show-buffer)
 
   (which-key-posframe-mode 1))
+
+(use-package lin
+  :custom (lin-face 'lin-blue)
+  :hook (elpaca-after-init . lin-global-mode))
+
 (provide 'packages.d/ui/base)
