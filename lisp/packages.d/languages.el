@@ -44,9 +44,18 @@
   (markdown-xwidget-code-block-theme "default"))
 
 (use-package plantuml-mode
+  :after cape
   :mode (("\\.plantuml\\'" . plantuml-mode)
 	 ("\\.pu?ml\\'"    . plantuml-mode))
-  :custom (plantuml-default-exec-mode 'executable))
+  :hook (plantuml-mode . kdz/disable-plantuml-completions)
+  :custom (plantuml-default-exec-mode 'executable)
+
+  :config
+  (add-to-list 'cape-keyword-list
+               `(plantuml-mode ,@(hash-table-keys plantuml-kwdList)))
+
+  (defun kdz/disable-plantuml-completions ()
+    (setq-local completion-at-point-functions (list t))))
 
 (use-package web-mode
   :mode (("\\.html?\\'" . web-mode) ("\\.hbs\\'"   . web-mode))
