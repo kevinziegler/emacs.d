@@ -44,7 +44,7 @@
   (markdown-xwidget-code-block-theme "default"))
 
 (use-package plantuml-mode
-  :after cape
+  :after (cape cape-keyword)
   :mode (("\\.plantuml\\'" . plantuml-mode)
 	 ("\\.pu?ml\\'"    . plantuml-mode))
   :hook (plantuml-mode . kdz/disable-plantuml-completions)
