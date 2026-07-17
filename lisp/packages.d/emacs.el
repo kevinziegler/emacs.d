@@ -360,12 +360,6 @@ defined in that palette from within FACE-SPECS."
   ;; Don't allow the cursor into the minibuffer prompt
   (minibuffer-prompt-properties '(read-only t cursor-intangible t face minibuffer-prompt)))
 
-(use-package mouse
-  :ensure nil
-  :custom (mouse-yank-at-point t)
-  :general (kdz/leader-window-def "T" '("Tear off Window" . tear-off-window))
-  :config (when (display-graphic-p) (context-menu-mode)))
-
 (use-package mule
   :ensure nil
   :config
@@ -480,7 +474,8 @@ This is executed *prior* to running on of `project-switch-commands'.")
   :general
   (kdz/leader-window-def
     "=" '("Balance Windows"           . balance-windows)
-    "o" '("(Prefix) Other Window"     . other-window-prefix))
+    "o" '("(Prefix) Other Window"     . other-window-prefix)
+    "T" '("Tear off Window"           . tear-off-window))
   (kdz/leader-buffer-def
     "B" '("Switch to Buffer (Global)" . switch-to-buffer)
     "n" '("Next Buffer"               . next-buffer)
