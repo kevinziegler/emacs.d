@@ -478,7 +478,9 @@ This is executed *prior* to running on of `project-switch-commands'.")
   (switch-to-buffer-in-dedicated-window 'pop)
   (window-combination-resize t)
   :general
-  (kdz/leader-window-def "=" '("Balance Windows" . balance-windows))
+  (kdz/leader-window-def
+    "=" '("Balance Windows"           . balance-windows)
+    "o" '("(Prefix) Other Window"     . other-window-prefix))
   (kdz/leader-buffer-def
     "B" '("Switch to Buffer (Global)" . switch-to-buffer)
     "n" '("Next Buffer"               . next-buffer)
