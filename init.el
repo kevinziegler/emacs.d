@@ -19,6 +19,7 @@
 (require 'packages.d/ui/tabs)
 (require 'packages.d/ui/themes)
 
+(require 'lib/gif)
 (require 'lib/system)
 (require 'lib/window-resize)
 
