@@ -20,10 +20,22 @@
     "L"   '("Move Tab Right"         . tab-move)
     "d"   '("Close Workspace"        . tab-bar-close-tab)
     "n"   '("Create Named Workspace" . kdz/create-named-tab))
+
+  (general-define-key
+   :keymaps 'tab-bar-map
+   :defer t
+   "<mouse-1>" nil
+   "<mouse-2>" nil
+   "<mouse-3>" nil
+   "<down-mouse-1>" nil
+   "<drag-mouse-1>" nil
+   "<wheel-down>" nil
+   "<wheel-up>" nil
+   "<double-mouse-1>" nil)
+
   :hook ((elpaca-after-init   . kdz/tab-bar-initialize-tab-state))
   :config
   (require 'lib/pinned-tabs)
-
   (defun kdz/tab-move-left () (interactive) (tab-move -1))
 
   (defvar kdz-blank-buffer-text  "Nothing to see here."
