@@ -66,11 +66,6 @@
 (use-package nocomments-mode
   :general (kdz/leader-toggle-def "C" '("Show/Hide comments" . nocomments-mode)))
 
-(use-package flyover
-  :ensure (flyover :host github :repo "konrad1977/flyover" :branch "main")
-  :custom
-  (flyover-virtual-line-icon "╰──"))
-
 (use-package scopeline
   :custom (scopeline-main-lines 10)
   :general (kdz/leader-toggle-def "b" '("Block indicators" . scopeline-mode)))
