@@ -1,5 +1,6 @@
 ;;; -*- lexical-binding: t -*-
 (use-package org
+  :after (which-function)
   :ensure (:wait t)
   :custom
   (org-auto-align-tags nil)
@@ -84,6 +85,21 @@
 
   (add-to-list 'display-buffer-alist
                '(kdz/notes-file-p display-buffer-in-tab (tab-name . "Notes")))
+
+  (defun kdz/truncate-to (max-length ellipsis word)
+    (concat (substring word 0 max-length) ellipsis))
+
+  (defun kdz/org-which-function ()
+    (when (eq major-mode 'org-mode)
+      (let* ((segments (org-get-outline-path t))
+             (last-index (1- (length segments))))
+        (mapconcat (lambda (segment)
+                     (if (= (seq-position segments segment) last-index)
+                         segment
+                       (kdz/truncate-to 10 "…" segment)))
+                   segments " » "))))
+
+  (add-to-list 'which-func-functions #'kdz/org-which-function t)
 
   (defun kdz/notes-file-p (buffer &rest _)
     "Determine if a file should be consider a 'notebook' item"
