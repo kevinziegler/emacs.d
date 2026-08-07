@@ -56,3 +56,5 @@
          (url (alist-get key kdz-quick-gifs nil nil #'equal)))
     (kill-new url)
     (message "Copied GIF link: %s" url)))
+
+(provide 'lib/gif)
