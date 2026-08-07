@@ -422,7 +422,12 @@ This is executed *prior* to running on of `project-switch-commands'.")
 (use-package savehist
   :ensure nil
   :custom (savehist-file (kdz/user-directory ".local" "history"))
-  :hook (elpaca-after-init . savehist-mode))
+  :hook ((elpaca-after-init . savehist-mode)
+         (savehist-mode     . kdz/savehist-kill-ring))
+  :config
+  (defun kdz/savehist-kill-ring ()
+    (setq kill-ring (mapcar #'substring-no-properties
+                            (cl-remove-if-not #'stringp kill-ring)))))
 
 (use-package saveplace
   :ensure nil
