@@ -251,10 +251,8 @@ defined in that palette from within FACE-SPECS."
   :general
   (kdz/leader-toggle-def "c"
     '("Show/hide fill column" . display-fill-column-indicator-mode))
-
   (kdz/leader-toggle-global-def "c"
     '("Show/hide fill column" . global-display-fill-column-indicator-mode))
-
   :custom
   (display-fill-column-indicator-character ?\u2502)
   :config
@@ -346,6 +344,8 @@ defined in that palette from within FACE-SPECS."
   :general (kdz/leader-help-def "M" '("Describe Mode" . describe-mode)))
 
 (use-package ibuffer :ensure nil :bind ([remap list-buffers] . ibuffer))
+
+(use-package locate :ensure nil :custom (locate-command "mdfind"))
 
 (use-package man
   :ensure nil
