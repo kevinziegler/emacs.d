@@ -1,7 +1,10 @@
 ;;; -*- lexical-binding: t -*-
 (use-package avy)
 (use-package colorful-mode)
-(use-package flycheck :custom (flycheck-checker-error-threshold 10000))
+(use-package flycheck
+  :custom (flycheck-checker-error-threshold 10000)
+  :hook (elpaca-after-init . global-flycheck-eglot-mode))
+
 (use-package hide-mode-line :hook ((reb-mode . hide-mode-line-mode)))
 (use-package perfect-margin)
 (use-package project-rootfile :config (add-to-list 'project-rootfile-list ".project"))

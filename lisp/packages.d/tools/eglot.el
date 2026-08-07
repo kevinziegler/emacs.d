@@ -25,7 +25,6 @@
 ;; TODO Make a helper to look for symbol at point by default
 (use-package consult-eglot :defer t)
 (use-package consult-eglot-embark :defer t)
-(use-package flycheck-eglot :defer t)
 
 (use-package sideline-eglot
   :after sideline
