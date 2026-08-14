@@ -280,7 +280,9 @@
 (use-package otpp
   :after project
   :hook ((elpaca-after-init . otpp-mode)
-         (elpaca-after-init . otpp-override-mode)))
+         (elpaca-after-init . otpp-override-mode))
+  :custom
+  (switch-to-prev-buffer-skip #'otpp-skip-external-buffers))
 
 (use-package keycast
   :general (kdz/leader-toggle-def "k" '("Keycast Display" . keycast-tab-bar-mode)))
