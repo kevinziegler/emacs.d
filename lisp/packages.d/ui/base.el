@@ -286,9 +286,6 @@
   :custom
   (switch-to-prev-buffer-skip #'otpp-skip-external-buffers))
 
-(use-package keycast
-  :general (kdz/leader-toggle-def "k" '("Keycast Display" . keycast-tab-bar-mode)))
-
 (use-package eldoc-box
   :general
   (kdz/leader-toggle-def "d" '("Documentation Popups" . eldoc-box-hover-mode))

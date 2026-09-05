@@ -6,7 +6,6 @@
 (use-package gcmh    :demand t :hook (elpaca-after-init . gcmh-mode))
 (use-package git-modes :mode (("/.dockerignore\\'" . gitignore-mode )))
 (use-package list-environment :general (kdz/leader-help-def "e" '("ENV Variables" . list-environment)))
-(use-package logview)
 (use-package magit-filenotify :hook (after-save . magit-after-save-refresh-status))
 
 (use-package transient

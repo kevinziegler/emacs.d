@@ -57,12 +57,6 @@
   :custom (editorconfig-trim-whitespaces-mode 'ws-butler-mode)
   :hook   (elpaca-after-init . editorconfig-mode))
 
-;; TODO This needs tree-sitter to work
-;; TODO This pulls from quelpa; how do I set that up with straight?
-;; (use-package turbo-log
-;;   :config
-;;   (setq turbo-log-msg-format-template "\"KDZ-LOG: %s\""))
-
 (use-package nocomments-mode
   :general (kdz/leader-toggle-def "C" '("Show/Hide comments" . nocomments-mode)))
 
