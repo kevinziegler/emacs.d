@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 (defvar kdz-nerd-icons-mapped-prefixes
   '(("iec"     . nerd-icons-ipsicon)
     ("seti"    . nerd-icons-sucicon)

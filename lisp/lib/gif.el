@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 (defvar kdz-quick-gifs
   '(("I have no idea what I'm doing dog - Space Station" . "https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExd2NuOW11cmp4bmthd2dhdmlrdmVzcGY0d3g5MG9uMDhzcXJuZjh3cyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/SRx5tBBrTQOBi/giphy.gif")
     ("Jim Carey - It's alive" . "https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExcjd4MHNtN3ZucnJhdG51OGVxa3hpYzFmODZrOWYwdzJieWdzc2FzMCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/UqUJhrD0om73q/giphy.gif")
