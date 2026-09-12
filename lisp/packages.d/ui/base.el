@@ -29,13 +29,7 @@
   :custom
   (minimal-dashboard-buffer-name "*dashboard*")
   (minimal-dashboard-enable-resize-handling t)
-  (minimal-dashboard-text "Welcome.")
-  :config
-  ;; TODO Figure out why the dashboard buffer gets killed (or buried)
-  ;;      immediately after launching `project-find-file' (instead of running
-  ;;      `kdz/kill-dashboard' after finishing the selection process)
-  (defun kdz/kill-dashboard ()
-    (with-current-buffer minimal-dashboard-buffer-name (kill-buffer-and-window))))
+  (minimal-dashboard-text "Welcome."))
 
 (use-package elfeed
   :defer t
