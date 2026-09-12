@@ -10,7 +10,7 @@
   (tab-bar-new-tab-to 'rightmost)
   (tab-bar-format '(kdz/tab-bar-format-workspaces
                     tab-bar-format-align-right
-                    kdz/tab-bar-format-pinned-tabs))
+                    kdz/tab-bar-format-system-tabs))
   :general
   (kdz/leader-tab-def
     "TAB" '("Select Workspace"       . kdz/tab-switch-index-or-select)
@@ -35,7 +35,10 @@
 
   :hook ((elpaca-after-init   . kdz/tab-bar-initialize-tab-state))
   :config
-  (require 'lib/pinned-tabs)
+  ;; (require 'lib/pinned-tabs)
+  (require 'lib/tab-bar-partitions)
+  (require 'lib/tab-bar-names)
+
   (defun kdz/tab-move-left () (interactive) (tab-move -1))
 
   (defvar kdz-blank-buffer-text  "Nothing to see here."
