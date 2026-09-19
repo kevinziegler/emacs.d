@@ -248,7 +248,6 @@ defined in that palette from within FACE-SPECS."
 
 (use-package display-fill-column-indicator
   :ensure nil
-  :after (markdown-mode)
   :hook (elpaca-after-init . global-display-fill-column-indicator-mode)
   :general
   (kdz/leader-toggle-def "c"
