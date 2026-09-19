@@ -2,7 +2,6 @@
 ;;;; In-Buffer UI Enhancments - Editing behaviors, formating, etc
 (use-package anzu :hook (elpaca-after-init . global-anzu-mode))
 (use-package apheleia :hook (elpaca-after-init . apheleia-global-mode))
-(use-package browse-at-remote) ;; TODO Set up keybindings
 (use-package sticky-scroll-mode)
 (use-package undo-fu :custom (evil-undo-system 'undo-fu))
 (use-package vundo :general (kdz/leader-buffer-def "h" '("Undo History" . vundo)))
