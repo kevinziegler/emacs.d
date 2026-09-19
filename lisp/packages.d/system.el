@@ -118,6 +118,7 @@
 
   (advice-add 'magit-stage :around #'kdz/magit-delta-stage-advice)
   (advice-add 'magit-unstage :around #'kdz/magit-delta-stage-advice)
+  (advice-add 'magit-discard :around #'kdz/magit-delta-stage-advice)
 
   (defun kdz/magit-delta-toggle-appearance ()
     (interactive)
