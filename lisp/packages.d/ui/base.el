@@ -58,7 +58,8 @@
   :hook (elpaca-after-init . global-git-gutter-mode))
 
 (use-package highlight-indent-guides
-  :general (kdz/leader-toggle-def "i" '("Indent guides" . highlight-indent-guides-mode)))
+  :general
+  (kdz/leader-toggle-def "i" '("Indent guides" . highlight-indent-guides-mode)))
 
 (use-package hl-todo
   :hook ((elpaca-after-init . global-hl-todo-mode))
@@ -86,6 +87,37 @@
   (imenu-auto-rescan t)
   (imenu-list-focus-after-activiation t)
   (imenu-list-mode-line-format nil))
+
+(use-package nerd-icons
+  :after emacs
+  :config
+  (require 'lib/nerd-icons-extras))
+
+(use-package nerd-icons-completion
+  :after (marginalia nerd-icons)
+  :hook ((elpaca-after-init . nerd-icons-completion-mode)
+         (marginalia-mode . nerd-icons-completion-marginalia-setup)))
+
+(use-package nerd-icons-corfu
+  :after corfu
+  :init (add-to-list 'corfu-margin-formatters #'nerd-icons-corfu-formatter))
+
+(use-package nerd-icons-dired
+  :after (dired nerd-icons)
+  :hook (dired-mode . nerd-icons-dired-mode))
+
+(use-package nerd-icons-grep
+  :custom
+  (grep-use-headings t)
+  :init
+  (nerd-icons-grep-mode))
+
+(use-package nerd-icons-ibuffer
+  :hook (ibuffer-mode . nerd-icons-ibuffer-mode)
+  :custom (nerd-icons-ibuffer-icon t))
+
+(use-package nerd-icons-xref
+  :hook (elpaca-after-init . nerd-icons-xref-mode))
 
 (use-package pretty-hydra
   :after hydra

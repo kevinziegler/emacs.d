@@ -15,7 +15,6 @@
 (require 'packages.d/tools/llm)
 
 (require 'packages.d/ui/base)
-(require 'packages.d/ui/icons)
 (require 'packages.d/ui/tabs)
 (require 'packages.d/ui/themes)
 
