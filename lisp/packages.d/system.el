@@ -11,8 +11,8 @@
 (use-package transient
   :custom
   (transient-history-file (kdz/user-directory ".local" "transient" "history.el"))
-  (transient-history-file (kdz/user-directory ".local" "transient" "levels.el"))
-  (transient-history-file (kdz/user-directory ".local" "transient" "values.el")))
+  (transient-levels-file  (kdz/user-directory ".local" "transient" "levels.el"))
+  (transient-values-file  (kdz/user-directory ".local" "transient" "values.el")))
 
 (use-package crux
   :general
