@@ -80,6 +80,8 @@
 
 (use-package treesit
   :ensure nil
+  :custom
+  (treesit-font-lock-level 3)
   :mode (("Dockerfile"     . dockerfile-ts-mode)
          ("\\.[tj]sx?\\'"  . tsx-ts-mode)
          ("\\.bash\\'"     . bash-ts-mode)
@@ -96,7 +98,6 @@
 (use-package treesit-auto
   :custom
   (treesit-auto-install 'prompt)
-  (treesit-font-lock-level 4)
   :hook (elpaca-after-init . global-treesit-auto-mode)
   :config (treesit-auto-add-to-auto-mode-alist 'all))
 

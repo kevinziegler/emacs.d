@@ -28,6 +28,11 @@
 
 (use-package consult
   :after nerd-icons
+  :custom
+  (consult-async-refresh-delay 0.01)
+  (consult-async-input-debounce 0.1)
+  (consult-async-input-throttle 0.01)
+  (consult-async-min-input 1)
   :general
   (kdz/leader-search-def
     "*" '("Search for selection"              . kdz/consult-ripgrep-selected)

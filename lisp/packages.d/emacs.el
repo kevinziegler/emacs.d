@@ -26,19 +26,21 @@
   (default-process-coding-system '(utf-8-unix . utf-8-unix))
   (delete-by-moving-to-trash t)
   (echo-keystrokes 0.25)
+  (fast-but-imprecise-scrolling t)
   (fill-column 80)
+  (font-lock-maximum-decoration '((t . 2)))
   (frame-inhibit-implied-resize t)
   (indicate-buffer-boundaries 'left)
   (inhibit-compacting-font-caches t)
   (locale-coding-system 'utf-8)
   (ring-bell-function 'ignore)
+  (show-paren-delay 0.05)
   (undo-limit 67108864) ; 64mb.
   (undo-strong-limit 100663296) ; 96mb.
   (undo-outer-limit 1006632960) ; 960mb.
   (use-short-answers t)
   (x-stretch-cursor t)
   (x-underline-at-descent-line nil)
-
   ;; Misc
   (kill-do-not-save-duplicates t)
   (savehist-additional-variables  '(search-ring regexp-search-ring kill-ring))
