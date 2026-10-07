@@ -4,11 +4,12 @@
   :custom
   (eglot-autoshutdown t)
   (eglot-events-buffer-config '(:size 0))
+  (eglot-max-file-watches 5000)
   :hook ((prog-mode . kdz/eglot-ensure-maybe)
          (eglot-mode . sideline-mode))
   :general
-  (kdz/leader-toggle-def "h" '("Inlay hints" . eglot-inlay-hints-mode))
-  (kdz/leader-code-def "a" '("Code Actions" . eglot-code-actions))
+  (kdz/leader-toggle-def "h" '("Inlay hints"  . eglot-inlay-hints-mode))
+  (kdz/leader-code-def   "a" '("Code Actions" . eglot-code-actions))
   :config
   (add-to-list 'eglot-server-programs '((python-mode python-ts-mode) "ty" "server"))
   (add-to-list 'eglot-server-programs '((kotlin-mode kotlin-ts-mode) "kotlin-lsp" "--stdio"))
@@ -16,6 +17,7 @@
                                                                                         ("helm_ls" "serve")))))
   (advice-add 'eglot-completion-at-point :around #'cape-wrap-buster)
 
+  (setq eglot-events-buffer-config nil)
   (defun kdz/eglot-ensure-maybe ()
     (when (seq-contains-p
            (-flatten (mapcar #'car eglot-server-programs))
