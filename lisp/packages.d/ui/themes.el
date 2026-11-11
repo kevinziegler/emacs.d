@@ -29,7 +29,7 @@
   (add-hook 'enable-theme-functions 'kdz/kaolin-dark-theme-custom-faces))
 
 (use-package modus-themes
-  :hook ((elpaca-after-init . (lambda () (load-theme 'modus-operandi :no-confirm))))
+  ;; :hook ((elpaca-after-init . (lambda () (load-theme 'modus-operandi :no-confirm))))
   :init
   (setopt modus-themes-bold-constructs t
           modus-themes-prompts '(bold)
@@ -78,7 +78,8 @@
        `(window-divider-first-pixel ((t :foreground ,(color 'fg-main))))
        `(window-divider-last-pixel  ((t :foreground ,(color 'fg-main))))
        `(tab-bar                    ((t :box (:line-width 10 :color ,(color 'bg-main))
-                                        :underline (:color ,(color 'fg-main) :position -10))))
+                                        :underline (:color ,(color 'fg-main) :position -10)
+                                        :background ,(color 'bg-main))))
        `(tab-bar-tab                ((t :foreground ,(color 'fg-main) :weight bold)))
        `(tab-bar-tab-inactive       ((t :inherit tab-bar
                                         :background ,(color 'bg-main))))
@@ -117,5 +118,12 @@
 
 (use-package doric-themes)
 (use-package ef-themes)
+
+(use-package foxglove-themes
+  :ensure (foxglove-themes
+           :host gitlab
+           :repo "vegasharmon/foxglove-themes"
+           :branch "master")
+  :hook (elpaca-after-init . (lambda () (load-theme 'foxglove :no-confirm))))
 
 (provide 'packages.d/ui/themes)
