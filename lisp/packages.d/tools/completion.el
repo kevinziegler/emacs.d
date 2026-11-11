@@ -69,6 +69,8 @@
             (failed   ,(kdz/nerd-icon-as-char "nf-md-progress_alert") consult-async-failed-nf)
             (killed   ,(kdz/nerd-icon-as-char "nf-md-progress_close") consult-async-failed-nf)))
 
+  (consult-customize consult-ripgrep :preview-key "M-.")
+
   (defun kdz/consult-ripgrep-selected (start end)
     (interactive "r")
     (consult-ripgrep nil (when (use-region-p) (buffer-substring start end)))))
