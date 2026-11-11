@@ -35,10 +35,13 @@
           modus-themes-prompts '(bold)
           modus-themes-italic-constructs t)
   :config
+  (defun kdz/modus-theme-by-prefix-p (theme)
+    (any (lambda (prefix) (string-prefix-p prefix (symbol-name theme)))
+         '("modus-" "doric-" "ef-" "foxglove")))
+
   (defun kdz/modus-customizations (theme)
-    (when (or (string-prefix-p "modus-" (symbol-name theme))
-              (string-prefix-p "doric-" (symbol-name theme))
-              (string-prefix-p "ef-" (symbol-name theme)))
+    (when (or (modus-themes-known-p theme)
+              (kdz/modus-theme-by-prefix-p theme))
       (kdz/customize-with-palette
        theme
        (intern (concat (symbol-name theme) "-palette"))
