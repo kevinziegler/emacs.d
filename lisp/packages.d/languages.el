@@ -99,6 +99,9 @@
   :ensure nil
   :after nerd-icons
   :hook (elpaca-after-init . kdz/ielm-fancy-prompt)
+  :general
+  (:keymaps 'inferior-emacs-lisp-mode-map
+            (kbd "s-<return>") 'ielm-return)
   :config
   (defun kdz/ielm-fancy-prompt ()
     (let ((chevron (kdz/propertize-nerd-icon "nf-md-chevron_right_box")))
